@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardHandler : MonoBehaviour
 {
-    public float timePerCard = 2f;
-    public GameObject[] cardObjs = new GameObject[4];
+    [SerializeField] float timePerCard = 2f;
+    [SerializeField] GameObject[] cardObjs = new GameObject[4];
+    [Header("UI")]
+    [SerializeField] Image[] cardCycle = new Image[4];
 
     ICard[] cards;
 
@@ -19,9 +22,19 @@ public class CardHandler : MonoBehaviour
         cards = new ICard[cardObjs.Length];
         for (int i = 0; i < cardObjs.Length; i++)
         {
-            if (cardObjs[i].GetComponent<ICard>() != null)
+            if (cardObjs[i] != null)
                 cards[i] = cardObjs[i].GetComponent<ICard>();
+
         }
+
+        Debug.Log("Is here");
+
+        for (int i = 0; i < cardCycle.Length; i++)
+        {
+            if (cards[i].GetSprite() != null)
+                cardCycle[i].sprite = cards[i].GetSprite();
+        }
+
     }
 
     // Update is called once per frame

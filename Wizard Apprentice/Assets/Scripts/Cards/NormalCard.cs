@@ -5,14 +5,21 @@ using UnityEngine;
 
 public class NormalCard : MonoBehaviour, ICard
 {
-    public GameObject projectile;
-    public float shootCooldown = 0.25f;
+    [SerializeField] Sprite image;
+    [SerializeField] GameObject projectile;
+    [SerializeField] Transform Spawnpoint;
+    [SerializeField] float shootCooldown = 0.25f;
 
     float timer;
 
     public void Effect()
     {
-        Instantiate(projectile, Vector3.zero, projectile.transform.rotation);
+        Instantiate(projectile, Spawnpoint.position, projectile.transform.rotation);
+    }
+
+    public Sprite GetSprite()
+    {
+        return image;
     }
 
     public void ResetCard()
