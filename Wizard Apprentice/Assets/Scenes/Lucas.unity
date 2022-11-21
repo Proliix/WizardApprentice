@@ -392,7 +392,7 @@ MonoBehaviour:
   cardObjs:
   - {fileID: 815816027}
   - {fileID: 1883787494}
-  - {fileID: 1883787494}
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!4 &1438629716
 Transform:

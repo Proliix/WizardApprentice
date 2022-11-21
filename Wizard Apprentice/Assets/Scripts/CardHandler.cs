@@ -19,20 +19,20 @@ public class CardHandler : MonoBehaviour
         cards = new ICard[cardObjs.Length];
         for (int i = 0; i < cardObjs.Length; i++)
         {
-            cards[i] = cardObjs[i].GetComponent<ICard>();
+            if (cardObjs[i].GetComponent<ICard>() != null)
+                cards[i] = cardObjs[i].GetComponent<ICard>();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Card index: " + cardIndex);
         timer += Time.deltaTime;
 
         if (cards[cardIndex] != null)
             cards[cardIndex].UpdateCard();
         else
-            Debug.LogError("ONE OF THE CARDS IS NULL");
+            Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
 
         if (timer >= timePerCard + 0.05f)
         {
@@ -46,7 +46,6 @@ public class CardHandler : MonoBehaviour
             else
                 cardIndex = 0;
 
-            
         }
     }
 }
