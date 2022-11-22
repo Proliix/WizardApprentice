@@ -6,25 +6,82 @@ public class EnemyMovement : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private Vector2 movement;
-    [SerializeField] Transform player;
-    [SerializeField] float moveSpeed = 5f;
-    Vector3 direction; 
+    [SerializeField] private Transform target;
+    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float dashMoveSpeed = 10f;
+    [SerializeField] float timer;
+    [SerializeField] float chaseTimer = 14000;
+    [SerializeField] float waitTimer = 7000;
+   // [SerializeField] float chargeTime;
+    [SerializeField] float chargeTimeLeft;
+    [SerializeField] bool isDashing;
 
 
-    // Start is called before the first frame update
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            target = other.transform;
+        }   
+    }
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 direction = player.position - transform.position;
-        direction.Normalize();
-        movement = direction;
+        timer = waitTimer;
     }
 
    
 
+    private void Update()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+        //calculates speed towards the player 
+        float step = moveSpeed * Time.deltaTime;
+        
+
+        timer+= Time.deltaTime;
+        
+
+        //moves the enemy towards the player when the timer is between wait timer and chase timer 
+        if (target != null && timer < 0 && timer > waitTimer)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        }
+        else
+        {
+            StartCoroutine(DashAttack());
+        }
+
+        if (timer < waitTimer)
+        {
+            timer+= Time.deltaTime; 
+        }
+
+        if (timer >= 0)
+        {
+            timer = 0;
+        }
+    }
+
+   
+     IEnumerator DashAttack()
+    {
+        isDashing = true;
+        Vector2 playerPosition = target.position;
+        yield return new WaitForSeconds(0);
+        float timeDashed = 0;
+        while (timeDashed < 1)
+        {
+            float dashStep = dashMoveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, playerPosition, dashStep);
+            timeDashed += Time.deltaTime;
+            yield return null;
+            
+        }
+        isDashing = false;
+    }
 }
