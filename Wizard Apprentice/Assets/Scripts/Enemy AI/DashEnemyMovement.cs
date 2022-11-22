@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1Movement : MonoBehaviour
+public class DashEnemyMovement : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private Vector2 movement;
@@ -28,7 +28,34 @@ public class Enemy1Movement : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        StartCoroutine(DashAttack());
+    }
+
+   
+
+    IEnumerator DashAttack()
+    {
+        //Randomized time enemy waits inbetween dashes, to avoid them clumping 
+        yield return new WaitForSeconds(Random.Range(0.3f, 2.7f));
+
+        //Calculates direction and lenght of dash
+        Vector2 dashDirection = target.position - transform.position;
         
+        
+        float timeDashed = 0;
+        
+        //TimeDashed = how long a single dash is in seconds 
+        while (timeDashed < 0.7f)
+        {
+            float dashStep = dashMoveSpeed * Time.deltaTime;
+          
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + (Vector3)dashDirection.normalized * 100, dashStep);
+            timeDashed += Time.deltaTime;
+            
+            yield return null;  
+        }
+        //Loops the dashes 
+        StartCoroutine(DashAttack());
     }
 
 
@@ -67,28 +94,8 @@ public class Enemy1Movement : MonoBehaviour
     //        timer = 0;
     //    }
     //}
-
-
-    private void Update()
-    {
-        StartCoroutine(DashAttack());
-    }
-
-    IEnumerator DashAttack()
-    {
-        
-        Vector2 playerPosition = target.position;
-        
-        yield return new WaitForSeconds(1);
-        float timeDashed = 0;
-        while (timeDashed < 1)
-        {
-            float dashStep = dashMoveSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, playerPosition, dashStep + 2);
-            timeDashed += Time.deltaTime;
-            yield return null;
-
-        }
-       
-    }
 }
+
+
+
+
