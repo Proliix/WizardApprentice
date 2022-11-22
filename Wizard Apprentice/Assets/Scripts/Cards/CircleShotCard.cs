@@ -12,7 +12,7 @@ public class CircleShotCard : MonoBehaviour,ICard
 
     BulletHandler bulletHandler;
     GameObject player;
-    float timer;
+    float timer = 10;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class CircleShotCard : MonoBehaviour,ICard
 
     public void ResetCard()
     {
-        timer = 0;
+        timer = 10;
     }
 
     public void UpdateCard()

@@ -30,6 +30,25 @@ public class CardHandler : MonoBehaviour
 
         animators[0].SetBool("IsActive", true);
 
+        UpdateInterface();
+
+    }
+
+    public void ReplaceCard(GameObject card, int index)
+    {
+        if (card.GetComponent<ICard>() == null)
+        {
+            Debug.LogError("Replace card does not have a ICard script. Obj name: " + card.name);
+        }
+        else
+        {
+            cardObjs[index] = card;
+            UpdateInterface();
+        }
+    }
+
+    void UpdateInterface()
+    {
         for (int i = 0; i < cardObjs.Length; i++)
         {
             if (cardObjs[i] != null)
@@ -37,20 +56,18 @@ public class CardHandler : MonoBehaviour
 
         }
 
-        Debug.Log("Is here");
-
         for (int i = 0; i < cardCycle.Length; i++)
         {
             if (cards[i] != null)
                 if (cards[i].GetSprite() != null)
                     cardCycle[i].sprite = cards[i].GetSprite();
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
+
         timer += Time.deltaTime;
 
         if (cards[cardIndex] != null)

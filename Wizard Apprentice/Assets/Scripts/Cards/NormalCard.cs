@@ -11,7 +11,7 @@ public class NormalCard : MonoBehaviour, ICard
     [SerializeField] float shootCooldown = 0.25f;
 
     BulletHandler bulletHandler;
-    float timer;
+    float timer = 10;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class NormalCard : MonoBehaviour, ICard
 
     public void ResetCard()
     {
-        timer = 0;
+        timer = 10;
     }
 
     public void UpdateCard()
