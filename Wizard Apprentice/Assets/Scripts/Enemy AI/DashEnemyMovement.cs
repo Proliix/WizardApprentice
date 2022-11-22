@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class DashEnemyMovement : MonoBehaviour
 {
+
+    SpriteRenderer enemyFlip;
     private Rigidbody2D rb2d;
     private Vector2 movement;
     [SerializeField] private Transform target;
-    [SerializeField] float moveSpeed = 3f;
     [SerializeField] float dashMoveSpeed = 10f;
-    [SerializeField] float timer;
-    [SerializeField] float chaseTimer = 14000;
-    [SerializeField] float waitTimer = 7000;
     // [SerializeField] float chargeTime;
     [SerializeField] float chargeTimeLeft;
-    
 
+    //Find our SpriteRenderer  
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -28,15 +27,17 @@ public class DashEnemyMovement : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        enemyFlip = GetComponent<SpriteRenderer>();
+
         StartCoroutine(DashAttack());
+
     }
 
-   
 
     IEnumerator DashAttack()
     {
         //Randomized time enemy waits inbetween dashes, to avoid them clumping 
-        yield return new WaitForSeconds(Random.Range(0.3f, 2.7f));
+        yield return new WaitForSeconds(Random.Range(0.3f, 1.2f));
 
         //Calculates direction and lenght of dash
         Vector2 dashDirection = target.position - transform.position;
@@ -47,6 +48,22 @@ public class DashEnemyMovement : MonoBehaviour
         //TimeDashed = how long a single dash is in seconds 
         while (timeDashed < 0.7f)
         {
+
+            //Makes the enemy look in the player direction 
+            if (Vector3.Distance(rb2d.transform.position, target.position) >= 0)
+            {
+                Vector3 direction = (target.position - rb2d.transform.position).normalized;
+
+                if (direction.x >= 0)
+                {
+                    enemyFlip.flipX = false;
+                }
+                else
+                {
+                    enemyFlip.flipX = true;
+                }
+            }
+
             float dashStep = dashMoveSpeed * Time.deltaTime;
           
             transform.position = Vector3.MoveTowards(transform.position, transform.position + (Vector3)dashDirection.normalized * 100, dashStep);
@@ -57,7 +74,6 @@ public class DashEnemyMovement : MonoBehaviour
         //Loops the dashes 
         StartCoroutine(DashAttack());
     }
-
 
 
     //private void Update()
