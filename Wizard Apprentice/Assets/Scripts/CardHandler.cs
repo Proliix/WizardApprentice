@@ -12,6 +12,7 @@ public class CardHandler : MonoBehaviour
 
     ICard[] cards;
 
+    Animator[] animators;
     float timer = 0;
     int cardIndex;
 
@@ -20,6 +21,15 @@ public class CardHandler : MonoBehaviour
     void Start()
     {
         cards = new ICard[cardObjs.Length];
+        animators = new Animator[cardCycle.Length];
+
+        for (int i = 0; i < cardCycle.Length; i++)
+        {
+            animators[i] = cardCycle[i].gameObject.GetComponent<Animator>();
+        }
+
+        animators[0].SetBool("IsActive", true);
+
         for (int i = 0; i < cardObjs.Length; i++)
         {
             if (cardObjs[i] != null)
@@ -31,8 +41,9 @@ public class CardHandler : MonoBehaviour
 
         for (int i = 0; i < cardCycle.Length; i++)
         {
-            if (cards[i].GetSprite() != null)
-                cardCycle[i].sprite = cards[i].GetSprite();
+            if (cards[i] != null)
+                if (cards[i].GetSprite() != null)
+                    cardCycle[i].sprite = cards[i].GetSprite();
         }
 
     }
@@ -59,6 +70,17 @@ public class CardHandler : MonoBehaviour
             else
                 cardIndex = 0;
 
+            for (int i = 0; i < animators.Length; i++)
+            {
+                if (i == cardIndex)
+                {
+                    animators[cardIndex].SetBool("IsActive", true);
+                }
+                else
+                {
+                    animators[i].SetBool("IsActive", false);
+                }
+            }
         }
     }
 }
