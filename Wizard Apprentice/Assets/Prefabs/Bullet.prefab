@@ -98,8 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5d7341108f2f343a4c2a2c4e8a9973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooter: {fileID: 0}
+  moveAwayFromShoter: 0
+  poolIndex: 0
   bulletSpeed: 8
-  bulletLifeTime: 7.5
+  bulletLifetime: 3.5
 --- !u!50 &-1594475458436723860
 Rigidbody2D:
   serializedVersion: 4
