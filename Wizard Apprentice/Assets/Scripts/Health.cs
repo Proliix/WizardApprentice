@@ -5,10 +5,23 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] int maxHP = 3;
-    [SerializeField] int hp = 3;
+    [SerializeField] int hp = 1;
     [SerializeField] float hitCooldown = 1f;
 
+
     bool canBeHit = true;
+
+    public void AddHealth(int healAmmount)
+    {
+        if((hp + healAmmount) > maxHP)
+        {
+            hp = maxHP;
+        }
+        else
+        {
+            hp += healAmmount;
+        }
+    }
 
     public void RemoveHealth()
     {
