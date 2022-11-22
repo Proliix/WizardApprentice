@@ -5,19 +5,32 @@ using UnityEngine;
 
 public class NormalCard : MonoBehaviour, ICard
 {
-    public GameObject projectile;
-    public float shootCooldown = 0.25f;
+    [SerializeField] Sprite image;
+    [SerializeField] GameObject projectile;
+    [SerializeField] Transform Spawnpoint;
+    [SerializeField] float shootCooldown = 0.25f;
 
+    BulletHandler bulletHandler;
     float timer;
+
+    private void Start()
+    {
+       bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+    }
 
     public void Effect()
     {
-        Instantiate(projectile, Vector3.zero, projectile.transform.rotation);
+        bulletHandler.GetBullet(Spawnpoint.position, Spawnpoint.gameObject, true,false);
+    }
+
+    public Sprite GetSprite()
+    {
+        return image;
     }
 
     public void ResetCard()
     {
-        
+        timer = 0;
     }
 
     public void UpdateCard()

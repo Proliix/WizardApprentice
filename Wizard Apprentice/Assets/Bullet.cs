@@ -4,32 +4,63 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    
+    public GameObject shooter;
+    public bool moveAwayFromShoter;
+    public int poolIndex;
+
     [SerializeField] float bulletSpeed = 8;
-    [SerializeField] float bulletLifetime = 7.5f;
-    [SerializeField] GameObject player; 
+    [SerializeField] float bulletLifetime = 5f;
 
-    // Start is called before the first frame update
-    void Start()
+    float timer = 0;
+    Vector3 dir;
+    BulletHandler bulletHandler;
+
+    private void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+    }
 
-        //Use our rigidbody to move our bullet 
-        transform.up = transform.position - player.transform.position;
-
-        //Destroy bullet after X seconds
-        Destroy(gameObject, bulletLifetime);
+    public void UpdateDirection()
+    {
+        if (moveAwayFromShoter)
+        {
+            dir = transform.position - shooter.transform.position;
+        }
+        else
+        {
+            dir = transform.up;
+        }
 
     }
+
+    public void ResetTimer()
+    {
+        timer = 0;
+    }
+
     private void Update()
     {
-        transform.up = transform.position - player.transform.position;
-        GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
+        timer += Time.deltaTime;
 
+        if (shooter != null)
+        {
+            GetComponent<Rigidbody2D>().velocity = dir * bulletSpeed;
+        }
+        else
+        {
+            Debug.LogError("Shooter is not defined in " + this.name);
+        }
+
+        if(timer > bulletLifetime)
+        {
+            bulletHandler.ResetBullet(poolIndex);
+            ResetTimer();
+        }
+    
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      
+
     }
 }

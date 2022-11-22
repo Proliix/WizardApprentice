@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class HealCard : MonoBehaviour, ICard
 {
-    public GameObject player;
+    [SerializeField] Sprite image;
+    [SerializeField] GameObject player;
 
     bool playerIsHealed = false;
 
     public void Effect()
     {
         Debug.Log("Player is Healed");
+    }
+
+    public Sprite GetSprite()
+    {
+        return image;
     }
 
     public void ResetCard()
@@ -20,7 +26,6 @@ public class HealCard : MonoBehaviour, ICard
 
     public void UpdateCard()
     {
-        Debug.Log("Is here");
         if (playerIsHealed == false)
         {
             playerIsHealed = true;
