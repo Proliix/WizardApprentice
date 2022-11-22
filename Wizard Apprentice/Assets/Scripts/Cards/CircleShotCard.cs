@@ -1,26 +1,27 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalCard : MonoBehaviour, ICard
+public class CircleShotCard : MonoBehaviour,ICard
 {
+
     [SerializeField] Sprite image;
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform Spawnpoint;
-    [SerializeField] float shootCooldown = 0.25f;
+    [SerializeField] int projectileAmmount = 6;
+    [SerializeField] float shootCooldown = 0.5f;
 
     BulletHandler bulletHandler;
+    GameObject player;
     float timer = 10;
 
     private void Start()
     {
-       bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+        bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+        player = GameObject.FindWithTag("Player");
     }
-
     public void Effect()
     {
-        bulletHandler.GetBullet(Spawnpoint.position, Spawnpoint.gameObject, true,false);
+        bulletHandler.GetCircleShot(projectileAmmount,player,true);
     }
 
     public Sprite GetSprite()
@@ -37,7 +38,7 @@ public class NormalCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if(timer >= shootCooldown)
+        if (timer >= shootCooldown)
         {
             timer = 0;
             Effect();

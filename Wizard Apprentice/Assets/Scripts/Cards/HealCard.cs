@@ -6,12 +6,19 @@ public class HealCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
     [SerializeField] GameObject player;
+    [SerializeField] int healAmmount = 1;
 
     bool playerIsHealed = false;
+    Health health;
+
+    private void Start()
+    {
+        health = GameObject.FindWithTag("Player").GetComponent<Health>();
+    }
 
     public void Effect()
     {
-        Debug.Log("Player is Healed");
+        health.AddHealth(healAmmount);
     }
 
     public Sprite GetSprite()

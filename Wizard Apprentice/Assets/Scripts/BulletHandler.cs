@@ -36,10 +36,32 @@ public class BulletHandler : MonoBehaviour
         poolMember.transform.position = position;
         Bullet bullet = poolMember.GetComponent<Bullet>();
         bullet.shooter = shooter;
+        bullet.isPlayerBullet = isPlayer;
         bullet.moveAwayFromShoter = moveAwayFromShooter;
+        bullet.UpdateColor();
         bullet.UpdateDirection();
         bullet.ResetTimer();
         poolMember.SetActive(true);
+    }
+
+    public void GetCircleShot(int size, GameObject shooter, bool isPlayer)
+    {
+        if (size <= 0)
+            Debug.LogError("INVALID SIZE IN CIRCLESHOTFUNCTION MADE BY " + shooter.name);
+        else
+        {
+            for (float deg = 0; deg < 360; deg += 360f / size)
+            {
+                float vertical = Mathf.Sin(Mathf.Deg2Rad * (deg + 90));
+                float horizontal = Mathf.Cos(Mathf.Deg2Rad * (deg + 90));
+
+                Vector3 spawnDir = new Vector3(horizontal, vertical, 0);
+
+                Vector3 spawnPos = shooter.transform.position + spawnDir;
+
+                GetBullet(spawnPos, shooter, isPlayer, true);
+            }
+        }
     }
 
     public void GetBullet(Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter)
