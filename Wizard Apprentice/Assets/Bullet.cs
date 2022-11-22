@@ -40,9 +40,9 @@ public class Bullet : MonoBehaviour
 
     public void UpdateColor()
     {
-        if(spriteRenderer == null)
+        if (spriteRenderer == null)
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-       
+
 
         Color newColor = isPlayerBullet ? PlayerColor : EnemyColor;
         spriteRenderer.color = newColor;
@@ -67,29 +67,20 @@ public class Bullet : MonoBehaviour
             Debug.LogError("Shooter is not defined in " + this.name);
         }
 
-        if(timer > bulletLifetime)
+        if (timer > bulletLifetime)
         {
             bulletHandler.ResetBullet(poolIndex);
             ResetTimer();
         }
-    
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(isPlayerBullet)
+        if (collision.gameObject.GetComponent<Health>() != null)
         {
-            if(collision.CompareTag("Enemy"))
-            {
-                // DO DAMAGE
-            }
-        }
-        else
-        {
-            if(collision.CompareTag("Player"))
-            {
-                ///Do damage
-            }
+            if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
+                collision.gameObject.GetComponent<Health>().RemoveHealth();
         }
     }
 }
