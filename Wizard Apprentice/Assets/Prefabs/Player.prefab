@@ -127,6 +127,8 @@ MonoBehaviour:
   healthRemoveSpeed: 0.01
   usesHealthBar: 1
   healthbar: {fileID: 0}
+  hitTransparancy: 0.5
+  flashSpeed: 0.05
 --- !u!50 &6565921895385548057
 Rigidbody2D:
   serializedVersion: 4

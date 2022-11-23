@@ -93,6 +93,11 @@ public class Bullet : MonoBehaviour
                 bulletHandler.ResetBullet(poolIndex);
                 ResetTimer();
             }
+            else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
+            {
+                bulletHandler.ResetBullet(poolIndex);
+                ResetTimer();
+            }
         }
     }
 }
