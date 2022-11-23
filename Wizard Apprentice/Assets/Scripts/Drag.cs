@@ -93,7 +93,9 @@ public class Drag : MonoBehaviour
             if (inventory.cardHolders[unitIndex].cardObject != null)
             {
                 transform.position = inventory.cardHolders[unitIndex].transform.position;
+                inventory.ReplaceCard(inventory.cardHolders[unitIndex].gameObject,this.gameObject);
                 inventory.cardHolders[unitIndex].cardObject.transform.position = lastObjectAttachedTo.transform.position;
+                inventory.ReplaceCard(lastObjectAttachedTo, inventory.cardHolders[unitIndex].GetComponent<CardHolder>().cardObject);
                 lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = inventory.cardHolders[unitIndex].cardObject;
                 lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Drag>().lastObjectAttachedTo = lastObjectAttachedTo;
                 lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
