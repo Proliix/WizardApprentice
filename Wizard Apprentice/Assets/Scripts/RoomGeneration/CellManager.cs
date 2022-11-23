@@ -23,6 +23,37 @@ public class CellManager : MonoBehaviour
         wallsCreated = new List<GameObject>();
     }
 
+    public void GenerateRoom()
+    {
+        if(cellHolders == null)
+        {
+            cellHolders = new List<GameObject>();
+        }
+        if(wallsCreated == null)
+        {
+            wallsCreated = new List<GameObject>();
+        }
+        size = new Vector2Int(Random.Range(2,6)*5, Random.Range(2, 6) * 3);
+        GenerateCells();
+
+        while (true)
+        {
+            try
+            {
+                Step();
+            }
+            catch
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    ChangeCellsToMajority();
+                }
+                ColorCells();
+                break;
+            }
+        }
+        GenerateWalls();
+    }
 
     public void GenerateCells()
     {
@@ -46,61 +77,61 @@ public class CellManager : MonoBehaviour
         }
     }
     // Update is called once per frame
-    void Update()
-    {
-        if(prevSize.x != size.x || prevSize.y != size.y)
-        {
-            if (cellHolders.Count != 0)
-            {
-                for (int i = cellHolders.Count - 1; i >= 0; i--)
-                {
-                    Destroy(cellHolders[i]);
-                    cellHolders.RemoveAt(i);
-                }
-            }
-            GenerateCells();
-        }
+    //void Update()
+    //{
+    //    if(prevSize.x != size.x || prevSize.y != size.y)
+    //    {
+    //        if (cellHolders.Count != 0)
+    //        {
+    //            for (int i = cellHolders.Count - 1; i >= 0; i--)
+    //            {
+    //                Destroy(cellHolders[i]);
+    //                cellHolders.RemoveAt(i);
+    //            }
+    //        }
+    //        GenerateCells();
+    //    }
 
-        if(Input.GetKeyDown(KeyCode.P) || Input.GetKey(KeyCode.O))
-        {
-            while(true)
-            {
-                try
-                {
-                    Step();
-                }
-                catch
-                {
-                    for (int j = 0; j < 1; j++)
-                    {
-                        ChangeCellsToMajority();
-                    }
-                    ColorCells();
-                    break;
-                }
-            }
-            GenerateWalls();
-        }
+    //    if(Input.GetKeyDown(KeyCode.P) || Input.GetKey(KeyCode.O))
+    //    {
+    //        while(true)
+    //        {
+    //            try
+    //            {
+    //                Step();
+    //            }
+    //            catch
+    //            {
+    //                for (int j = 0; j < 1; j++)
+    //                {
+    //                    ChangeCellsToMajority();
+    //                }
+    //                ColorCells();
+    //                break;
+    //            }
+    //        }
+    //        GenerateWalls();
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            ChangeCellsToMajority();
-        }
+    //    if (Input.GetKeyDown(KeyCode.I))
+    //    {
+    //        ChangeCellsToMajority();
+    //    }
 
-        prevSize = size;
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (Random.value < 0.5f)
-            {
-                size.x++;
-            }
-            else
-            {
-                size.y++;
-            }
-        }
+    //    prevSize = size;
+    //    if (Input.GetKeyDown(KeyCode.J))
+    //    {
+    //        if (Random.value < 0.5f)
+    //        {
+    //            size.x++;
+    //        }
+    //        else
+    //        {
+    //            size.y++;
+    //        }
+    //    }
 
-    }
+    //}
 
     private void GenerateWalls()
     {

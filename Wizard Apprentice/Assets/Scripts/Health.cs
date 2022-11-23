@@ -61,6 +61,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    public float GetHP()
+    {
+        return hp;
+    }
+
     void SetDead()
     {
         Debug.Log(gameObject.name + " Is Dead");

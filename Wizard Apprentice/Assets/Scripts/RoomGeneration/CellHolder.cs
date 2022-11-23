@@ -33,6 +33,6 @@ public class CellHolder : MonoBehaviour
         cellObject = Instantiate(cell.cellPrefab,this.transform);
         cellObject.transform.position = pos;
         int times = Random.Range(0,4);
-        cellObject.transform.rotation = Quaternion.Euler(0,0,0);
+        cellObject.transform.rotation = Quaternion.Euler(0,0,Random.Range(0,4)*90);
     }
 }
