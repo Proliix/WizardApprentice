@@ -62,7 +62,6 @@ public class Drag : MonoBehaviour
                 unitIndex = i;
             }
         }
-        Debug.Log(largestCover);
         transform.position = inventory.cardHolders[unitIndex].transform.position;
     }
 
@@ -100,8 +99,9 @@ public class Drag : MonoBehaviour
                 lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Drag>().lastObjectAttachedTo = lastObjectAttachedTo;
                 lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
                 inventory.cardHolders[unitIndex].cardObject = this.gameObject;
+                hasSnappedToNew = true;
             }
-            else
+            else if(unitIndex < 4)
             {
                 if(lastObjectAttachedTo != null)
                 {
@@ -110,8 +110,8 @@ public class Drag : MonoBehaviour
                 inventory.cardHolders[unitIndex].cardObject = this.gameObject;
                 transform.position = inventory.cardHolders[unitIndex].transform.position;
                 lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+                hasSnappedToNew = true;
             }
-            hasSnappedToNew = true;
         }
         if(!hasSnappedToNew)
         {

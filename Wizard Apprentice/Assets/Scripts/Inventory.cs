@@ -16,11 +16,11 @@ public class Inventory : MonoBehaviour
 
     public void ReplaceCard(GameObject cardHolder, GameObject cardObject)
     {
-        for(int i = 0; i < cardHolders.Count; i++)
+        for(int i = 0; i < Mathf.Min(cardHolders.Count,4); i++)
         {
             if(cardHolders[i].gameObject == cardHolder)
             {
-                cardHandler.ReplaceCard(cardObject,i);
+                cardHandler.ReplaceCard(cardObject, i);
                 break;
             }
         }
