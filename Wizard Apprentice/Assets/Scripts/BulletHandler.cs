@@ -8,6 +8,7 @@ public class BulletHandler : MonoBehaviour
     [SerializeField] int startSize = 25;
     [SerializeField] GameObject poolParent;
     List<GameObject> projectilePool;
+    
 
 
 
