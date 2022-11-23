@@ -12,13 +12,25 @@ public class Health : MonoBehaviour
     [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] bool usesHealthBar = false;
     [SerializeField] Slider healthbar;
+    [Header("Juice")]
+    [SerializeField] float hitTransparancy = 0.5f;
+    [SerializeField] float flashSpeed = 0.05f;
 
     float currentHealthRemoveSpeed;
+    float currentAlphaSpeed;
+    float tempAlpha = 1f;
+    float targetAlpha = 1f;
+    Color startColor;
+    Color tempColor;
 
+    SpriteRenderer spriteRenderer;
     float healthbarValue;
     bool canBeHit = true;
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        startColor = spriteRenderer.color;
+        tempColor = startColor;
         if (usesHealthBar)
         {
             healthbar.maxValue = maxHP;
@@ -33,6 +45,31 @@ public class Health : MonoBehaviour
         {
             healthbarValue = Mathf.SmoothDamp(healthbarValue, hp, ref currentHealthRemoveSpeed, healthRemoveSpeed, 100, Time.deltaTime);
             healthbar.value = healthbarValue;
+        }
+
+        if (!canBeHit)
+        {
+
+            tempAlpha = Mathf.SmoothDamp(tempAlpha, targetAlpha, ref currentAlphaSpeed, flashSpeed, 100, Time.deltaTime);
+            tempColor.a = tempAlpha;
+            spriteRenderer.color = tempColor;
+
+            if (tempAlpha <= hitTransparancy + 0.05f)
+            {
+                targetAlpha = 1f;
+                Debug.Log("temp alpha : " + tempAlpha + " |  " + gameObject.name);
+            }
+            else if (tempAlpha >= 1f - 0.05f)
+            {
+                targetAlpha = hitTransparancy;
+            }
+
+        }
+        else if (spriteRenderer.color.a != 1 && canBeHit)
+        {
+            tempAlpha = Mathf.SmoothDamp(tempAlpha, 1, ref currentAlphaSpeed, flashSpeed, 100, Time.deltaTime);
+            tempColor.a = tempAlpha;
+            spriteRenderer.color = tempColor;
         }
     }
 
@@ -68,11 +105,13 @@ public class Health : MonoBehaviour
 
     void SetDead()
     {
+        hp = 0;
         Debug.Log(gameObject.name + " Is Dead");
     }
 
     IEnumerator Invicible()
     {
+        targetAlpha = hitTransparancy;
         canBeHit = false;
         yield return new WaitForSeconds(hitCooldown);
         canBeHit = true;
