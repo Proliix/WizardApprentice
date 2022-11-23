@@ -7,6 +7,7 @@ public class CardHolder : MonoBehaviour
 {
     public Vector2 size;
     public GameObject cardObject;
+    public int index;
 
     private void Start()
     {

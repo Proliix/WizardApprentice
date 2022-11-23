@@ -14,7 +14,7 @@ public class CardHandler : MonoBehaviour
 
     Animator[] animators;
     float timer = 0;
-    int cardIndex;
+    public int cardIndex;
 
 
     // Start is called before the first frame update

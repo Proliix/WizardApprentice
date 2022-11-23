@@ -178,7 +178,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
-  projectile: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   Spawnpoint: {fileID: 1099786842}
   shootCooldown: 0.25
 --- !u!114 &9300397
@@ -2096,7 +2095,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
-  projectile: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   Spawnpoint: {fileID: 1099786842}
   shootCooldown: 0.2
 --- !u!1 &1875256246
@@ -2329,7 +2327,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
-  projectile: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   Spawnpoint: {fileID: 1099786842}
   shootCooldown: 0.25
 --- !u!114 &1886243913
@@ -2346,7 +2343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1663777699}
   inventory: {fileID: 1663777696}
-  lastObjectAttachedTo: {fileID: 13497106}
+  lastObjectAttachedTo: {fileID: 1698003698}
 --- !u!114 &1886243914
 MonoBehaviour:
   m_ObjectHideFlags: 0
