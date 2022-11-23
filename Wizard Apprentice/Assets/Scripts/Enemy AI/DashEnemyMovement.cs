@@ -8,26 +8,18 @@ public class DashEnemyMovement : MonoBehaviour
     SpriteRenderer enemyFlip;
     private Rigidbody2D rb2d;
     private Vector2 movement;
-    [SerializeField] private Transform target;
     [SerializeField] float dashMoveSpeed = 10f;
     // [SerializeField] float chargeTime;
     [SerializeField] float chargeTimeLeft;
 
-    //Find our SpriteRenderer  
-    
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            target = other.transform;
-        }
-    }
+    private Transform target;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         enemyFlip = GetComponent<SpriteRenderer>();
+
+        target = GameObject.FindWithTag("Player").transform;
 
         StartCoroutine(DashAttack());
 
@@ -41,10 +33,10 @@ public class DashEnemyMovement : MonoBehaviour
 
         //Calculates direction and lenght of dash
         Vector2 dashDirection = target.position - transform.position;
-        
-        
+
+
         float timeDashed = 0;
-        
+
         //TimeDashed = how long a single dash is in seconds 
         while (timeDashed < 0.7f)
         {
@@ -65,11 +57,11 @@ public class DashEnemyMovement : MonoBehaviour
             }
 
             float dashStep = dashMoveSpeed * Time.deltaTime;
-          
+
             transform.position = Vector3.MoveTowards(transform.position, transform.position + (Vector3)dashDirection.normalized * 100, dashStep);
             timeDashed += Time.deltaTime;
-            
-            yield return null;  
+
+            yield return null;
         }
         //Loops the dashes 
         StartCoroutine(DashAttack());

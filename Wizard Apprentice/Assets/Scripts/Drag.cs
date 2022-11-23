@@ -62,7 +62,6 @@ public class Drag : MonoBehaviour
                 unitIndex = i;
             }
         }
-        Debug.Log(largestCover);
         transform.position = inventory.cardHolders[unitIndex].transform.position;
     }
 
@@ -90,26 +89,32 @@ public class Drag : MonoBehaviour
             //Set other position to old
             //Set old object to other
             //Set new objcet to me
-            if (inventory.cardHolders[unitIndex].cardObject != null)
+            if (unitIndex != inventory.cardHandler.cardIndex && lastObjectAttachedTo.GetComponent<CardHolder>().index != inventory.cardHandler.cardIndex)
             {
-                transform.position = inventory.cardHolders[unitIndex].transform.position;
-                inventory.cardHolders[unitIndex].cardObject.transform.position = lastObjectAttachedTo.transform.position;
-                lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = inventory.cardHolders[unitIndex].cardObject;
-                lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Drag>().lastObjectAttachedTo = lastObjectAttachedTo;
-                lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
-                inventory.cardHolders[unitIndex].cardObject = this.gameObject;
-            }
-            else
-            {
-                if(lastObjectAttachedTo != null)
+                if (inventory.cardHolders[unitIndex].cardObject != null)
                 {
-                    lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
+                    transform.position = inventory.cardHolders[unitIndex].transform.position;
+                    inventory.ReplaceCard(inventory.cardHolders[unitIndex].gameObject, this.gameObject);
+                    inventory.cardHolders[unitIndex].cardObject.transform.position = lastObjectAttachedTo.transform.position;
+                    inventory.ReplaceCard(lastObjectAttachedTo, inventory.cardHolders[unitIndex].GetComponent<CardHolder>().cardObject);
+                    lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = inventory.cardHolders[unitIndex].cardObject;
+                    lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Drag>().lastObjectAttachedTo = lastObjectAttachedTo;
+                    lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+                    inventory.cardHolders[unitIndex].cardObject = this.gameObject;
+                    hasSnappedToNew = true;
                 }
-                inventory.cardHolders[unitIndex].cardObject = this.gameObject;
-                transform.position = inventory.cardHolders[unitIndex].transform.position;
-                lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+                else if (unitIndex < 4)
+                {
+                    if (lastObjectAttachedTo != null)
+                    {
+                        lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
+                    }
+                    inventory.cardHolders[unitIndex].cardObject = this.gameObject;
+                    transform.position = inventory.cardHolders[unitIndex].transform.position;
+                    lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+                    hasSnappedToNew = true;
+                }
             }
-            hasSnappedToNew = true;
         }
         if(!hasSnappedToNew)
         {

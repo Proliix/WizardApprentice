@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class CardHandler : MonoBehaviour
 {
     [SerializeField] float timePerCard = 2f;
-    [SerializeField] GameObject[] cardObjs = new GameObject[4];
+    public GameObject[] cardObjs = new GameObject[4];
     [Header("UI")]
-    [SerializeField] Image[] cardCycle = new Image[4];
+    public Image[] cardCycle = new Image[4];
 
     ICard[] cards;
 
     Animator[] animators;
     float timer = 0;
-    int cardIndex;
+    public int cardIndex;
 
 
     // Start is called before the first frame update
@@ -27,9 +27,7 @@ public class CardHandler : MonoBehaviour
         {
             animators[i] = cardCycle[i].gameObject.GetComponent<Animator>();
         }
-
         animators[0].SetBool("IsActive", true);
-
         UpdateInterface();
 
     }
@@ -52,7 +50,11 @@ public class CardHandler : MonoBehaviour
         for (int i = 0; i < cardObjs.Length; i++)
         {
             if (cardObjs[i] != null)
+            {
                 cards[i] = cardObjs[i].GetComponent<ICard>();
+                cardCycle[i] = cardObjs[i].GetComponent<Image>();
+                animators[i] = cardCycle[i].gameObject.GetComponent<Animator>();
+            }
 
         }
 
@@ -62,6 +64,8 @@ public class CardHandler : MonoBehaviour
                 if (cards[i].GetSprite() != null)
                     cardCycle[i].sprite = cards[i].GetSprite();
         }
+
+        
     }
 
     // Update is called once per frame
