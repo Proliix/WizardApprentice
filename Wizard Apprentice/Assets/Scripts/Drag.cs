@@ -9,7 +9,7 @@ public class Drag : MonoBehaviour
     [SerializeField] Canvas canvas;
     Vector2 offset;
     [SerializeField] Inventory inventory;
-    GameObject lastObjectAttachedTo;
+    public GameObject lastObjectAttachedTo;
     private void Start()
     {
         inventory = canvas.GetComponent<Inventory>();
@@ -86,8 +86,29 @@ public class Drag : MonoBehaviour
         }
         if (largestCover > 0)
         {
-            transform.position = inventory.cardHolders[unitIndex].transform.position;
-            lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+            //Set my position to new
+            //Set other position to old
+            //Set old object to other
+            //Set new objcet to me
+            if (inventory.cardHolders[unitIndex].cardObject != null)
+            {
+                transform.position = inventory.cardHolders[unitIndex].transform.position;
+                inventory.cardHolders[unitIndex].cardObject.transform.position = lastObjectAttachedTo.transform.position;
+                lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = inventory.cardHolders[unitIndex].cardObject;
+                lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Drag>().lastObjectAttachedTo = lastObjectAttachedTo;
+                lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+                inventory.cardHolders[unitIndex].cardObject = this.gameObject;
+            }
+            else
+            {
+                if(lastObjectAttachedTo != null)
+                {
+                    lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
+                }
+                inventory.cardHolders[unitIndex].cardObject = this.gameObject;
+                transform.position = inventory.cardHolders[unitIndex].transform.position;
+                lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
+            }
             hasSnappedToNew = true;
         }
         if(!hasSnappedToNew)
