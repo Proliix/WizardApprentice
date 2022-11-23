@@ -57,7 +57,6 @@ public class Health : MonoBehaviour
             if (tempAlpha <= hitTransparancy + 0.05f)
             {
                 targetAlpha = 1f;
-                Debug.Log("temp alpha : " + tempAlpha + " |  " + gameObject.name);
             }
             else if (tempAlpha >= 1f - 0.05f)
             {

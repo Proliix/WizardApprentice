@@ -1240,10 +1240,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2075493951, guid: d6085ebdb70018649aa9f73c47694fac, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6974568388284677400, guid: d6085ebdb70018649aa9f73c47694fac, type: 3}
       propertyPath: m_Name
       value: DashingEnemy
@@ -1295,24 +1291,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: d6085ebdb70018649aa9f73c47694fac, type: 3}
---- !u!1 &1053801236 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2075493949, guid: d6085ebdb70018649aa9f73c47694fac, type: 3}
-  m_PrefabInstance: {fileID: 1053801235}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1053801237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053801236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d8a53f48112c3348a7d34f814dabccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
 --- !u!1 &1080438226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,14 +1688,6 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 273055154}
-    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: flashSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: hitTransparancy
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_RootOrder
       value: 2

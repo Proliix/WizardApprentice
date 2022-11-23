@@ -9,7 +9,7 @@ public class DashEnemyMovement : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 movement;
     [SerializeField] float dashMoveSpeed = 10f;
-    // [SerializeField] float chargeTime;
+    //[SerializeField] float chargeTime;
     [SerializeField] float chargeTimeLeft;
 
     private Transform target;
