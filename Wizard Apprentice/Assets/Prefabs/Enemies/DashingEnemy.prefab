@@ -42,7 +42,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.011986578, y: 0.69343424}
@@ -83,7 +83,7 @@ Transform:
   m_Children:
   - {fileID: 2075493950}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6974568388284677404
 SpriteRenderer:
@@ -187,6 +187,11 @@ MonoBehaviour:
   maxHP: 3
   hp: 3
   hitCooldown: 1
+  healthRemoveSpeed: 0.005
+  usesHealthBar: 0
+  healthbar: {fileID: 0}
+  hitTransparancy: 0.5
+  flashSpeed: 0.05
 --- !u!70 &1941885606
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

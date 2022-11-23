@@ -23,7 +23,7 @@ public class CellManager : MonoBehaviour
         wallsCreated = new List<GameObject>();
     }
 
-    public void GenerateRoom()
+    public void GenerateRoom(Vector2Int size)
     {
         if(cellHolders == null)
         {
@@ -33,7 +33,7 @@ public class CellManager : MonoBehaviour
         {
             wallsCreated = new List<GameObject>();
         }
-        size = new Vector2Int(Random.Range(2,6)*5, Random.Range(2, 6) * 3);
+        this.size = size;
         GenerateCells();
 
         while (true)
