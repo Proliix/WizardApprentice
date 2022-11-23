@@ -570,9 +570,9 @@ MonoBehaviour:
   cellHolderPrefab: {fileID: 1667069557402929521, guid: db8f6ed02215cfa4db2f130629bb91d6, type: 3}
   cells:
   - {fileID: 11400000, guid: d7aaf704a55b18f4295fce9f8147774e, type: 2}
-  - {fileID: 11400000, guid: 3217c04141539074782d9818ad92065e, type: 2}
   - {fileID: 11400000, guid: 50bfc6c86bad8ce4199bb8535c290e0b, type: 2}
   - {fileID: 11400000, guid: 0529ac54dc57f7a439ee8128070eb629, type: 2}
+  - {fileID: 11400000, guid: 3217c04141539074782d9818ad92065e, type: 2}
   walls:
   - {fileID: 6091883994914424813, guid: 30687da0323a1ac46962df6258de2289, type: 3}
   - {fileID: 1785103151348670154, guid: be79a219241f94145b71dbda7d240f55, type: 3}

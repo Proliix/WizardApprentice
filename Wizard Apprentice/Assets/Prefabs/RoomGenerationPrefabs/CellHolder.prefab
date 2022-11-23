@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
-  cellObject: {fileID: 3268167869348043124, guid: d927633679e03ba418bdecac2be24bd8, type: 3}
+  cellObject: {fileID: 0}
   cellHolderTextPrefab: {fileID: 0}

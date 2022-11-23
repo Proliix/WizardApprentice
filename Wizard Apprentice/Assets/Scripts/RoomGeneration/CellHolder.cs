@@ -26,7 +26,10 @@ public class CellHolder : MonoBehaviour
     public void SpawnCell(Vector2 pos, Cell cell)
     {
         position = pos;
-        Destroy(cellObject);
+        if(cellObject != null)
+        {
+            Destroy(cellObject);
+        }
         cellObject = Instantiate(cell.cellPrefab,this.transform);
         cellObject.transform.position = pos;
         int times = Random.Range(0,4);
