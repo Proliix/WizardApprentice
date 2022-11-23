@@ -6,12 +6,15 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] GameObject cardHolderPrefab;
-    [SerializeField] CardHandler cardHandler;
+    public CardHandler cardHandler;
     public List<CardHolder> cardHolders = new List<CardHolder>();
 
     void Start()
     {
-
+        for(int i = 0; i < cardHolders.Count; i++)
+        {
+            cardHolders[i].index = i;
+        }
     }
 
     public void ReplaceCard(GameObject cardHolder, GameObject cardObject)
