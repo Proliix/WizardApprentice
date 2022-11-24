@@ -15,15 +15,13 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            target = other.transform;
-        }   
+         
     }
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     private void Update()
