@@ -7,14 +7,15 @@ public class RoomManager : MonoBehaviour
     [SerializeField] CellManager cellManager;
     [SerializeField] GameObject playerObject;
     [SerializeField] List<GameObject> possibleEnemies;
+    [SerializeField] List<Room> possibleRooms;
     public Vector2Int roomSize;
     List<GameObject> enemyObjects;
     // Start is called before the first frame update
     void Start()
     {
         enemyObjects = new List<GameObject>();
-        LoadRoom();
-        SpawnEnemies();
+
+        LoadRandomRoom();
     }
 
     // Update is called once per frame
@@ -23,11 +24,17 @@ public class RoomManager : MonoBehaviour
         
     }
 
-    public void LoadRoom()
+    public void LoadPremadeRoom()
+    {
+
+    }
+
+    public void LoadRandomRoom()
     {
         roomSize = new Vector2Int(Random.Range(3, 6) * 5, Random.Range(3, 6) * 3);
         cellManager.GenerateRoom(roomSize);
         playerObject.transform.position = new Vector3(2,2,0);
+        SpawnEnemies();
     }
 
     public void SpawnEnemies()
