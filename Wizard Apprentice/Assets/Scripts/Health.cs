@@ -105,7 +105,10 @@ public class Health : MonoBehaviour
     void SetDead()
     {
         hp = 0;
-        Debug.Log(gameObject.name + " Is Dead");
+        if (gameObject.CompareTag("Player"))
+            Debug.Log(gameObject.name + " Is Dead");
+        else
+            Destroy(gameObject);
     }
 
     IEnumerator Invicible()
