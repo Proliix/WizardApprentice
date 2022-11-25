@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class BulletHandler : MonoBehaviour
 {
+    [Header("Normal Bullets")]
     [SerializeField] GameObject normalProjectile;
-    [SerializeField] int startSize = 25;
-    [SerializeField] GameObject poolParent;
+    [SerializeField] int startSizeNormal = 25;
+    [Header("Special Bullets")]
+    [SerializeField] GameObject specialProjectile;
+    [SerializeField] int startSizeSpecial = 10;
+
     List<GameObject> projectilePool;
-    
+    List<GameObject> specialProjectilePool;
+
+    GameObject poolParentNormal;
+    GameObject poolParentSpecial;
 
 
 
@@ -16,20 +23,35 @@ public class BulletHandler : MonoBehaviour
     void Start()
     {
         projectilePool = new List<GameObject>();
+        specialProjectilePool = new List<GameObject>();
 
-        for (int i = 0; i < startSize; i++)
+        poolParentNormal = new GameObject();
+        poolParentNormal.name = "Normal Projectile Pool";
+
+        poolParentSpecial = new GameObject();
+        poolParentSpecial.name = "Special Projectile Pool";
+
+        for (int i = 0; i < startSizeNormal; i++)
         {
-            projectilePool.Add(Instantiate(normalProjectile, poolParent.transform.position, normalProjectile.transform.rotation, poolParent.transform));
+            projectilePool.Add(Instantiate(normalProjectile, poolParentNormal.transform.position, normalProjectile.transform.rotation, poolParentNormal.transform));
             projectilePool[i].SetActive(false);
             projectilePool[i].GetComponent<Bullet>().poolIndex = i;
             projectilePool[i].name = "Bullet: " + i;
+        }
+
+        for (int i = 0; i < startSizeSpecial; i++)
+        {
+            specialProjectilePool.Add(Instantiate(specialProjectile, poolParentSpecial.transform.position, specialProjectile.transform.rotation, poolParentSpecial.transform));
+            specialProjectilePool[i].SetActive(false);
+            //Add ProjectileScript
+            specialProjectilePool[i].name = "Special Bullet: " + i;
         }
     }
 
     public void ResetBullet(int index)
     {
         projectilePool[index].SetActive(false);
-        projectilePool[index].transform.position = poolParent.transform.position;
+        projectilePool[index].transform.position = poolParentNormal.transform.position;
     }
 
     void SetUpBullet(GameObject poolMember, Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter)
@@ -45,13 +67,17 @@ public class BulletHandler : MonoBehaviour
         poolMember.SetActive(true);
     }
 
-    public void GetCircleShot(int size, GameObject shooter, bool isPlayer)
+
+    /// <summary>
+    /// Spawns a circle of bullets around the shooter that has Ammount of bullets.
+    /// </summary>
+    public void GetCircleShot(int ammount, GameObject shooter, bool isPlayer)
     {
-        if (size <= 0)
+        if (ammount <= 0)
             Debug.LogError("INVALID SIZE IN CIRCLESHOTFUNCTION MADE BY " + shooter.name);
         else
         {
-            for (float deg = 0; deg < 360; deg += 360f / size)
+            for (float deg = 0; deg < 360; deg += 360f / ammount)
             {
                 float vertical = Mathf.Sin(Mathf.Deg2Rad * (deg + 90));
                 float horizontal = Mathf.Cos(Mathf.Deg2Rad * (deg + 90));
@@ -65,6 +91,9 @@ public class BulletHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns a bullet at positions. If move away form shooter is true it will change direction depending on where it spawned compared to the shooter
+    /// </summary>
     public void GetBullet(Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter)
     {
         bool hasSpawned = false;
@@ -84,7 +113,7 @@ public class BulletHandler : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 int index = currentCount + i;
-                projectilePool.Add(Instantiate(normalProjectile, poolParent.transform.position, normalProjectile.transform.rotation, poolParent.transform));
+                projectilePool.Add(Instantiate(normalProjectile, poolParentNormal.transform.position, normalProjectile.transform.rotation, poolParentNormal.transform));
                 projectilePool[index].SetActive(false);
                 projectilePool[index].GetComponent<Bullet>().poolIndex = index;
                 projectilePool[index].name = "Bullet: " + index;
