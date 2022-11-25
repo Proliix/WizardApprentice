@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class ZombieAI : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     [SerializeField] private Transform target;
     [Header("Enemy AI Movespeed variables")]
     [SerializeField] float moveSpeed = 3f;
-    [SerializeField] float moveSpeedIncreasePerSecond = 1;
+    [SerializeField] float moveSpeedIncreasePerSecond = 0.5f;
     [SerializeField] float timerCountsSeconds;
     [SerializeField] float runTime = 5;
-    [SerializeField] float moveSpeedOnReset = 4.5f;
+    [SerializeField] float moveSpeedOnReset = 4;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-         
+
     }
 
     void Start()
@@ -39,9 +39,7 @@ public class EnemyMovement : MonoBehaviour
             timerCountsSeconds = 0;
             moveSpeed = moveSpeedOnReset;
         }
-
     }
-
 
     void MoveEnemy()
     {

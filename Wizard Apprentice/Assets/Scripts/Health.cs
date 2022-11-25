@@ -111,6 +111,11 @@ public class Health : MonoBehaviour
         return hp;
     }
 
+    public float GetMaxHP()
+    {
+        return maxHP;
+    }
+
     void SetDead()
     {
         hp = 0;

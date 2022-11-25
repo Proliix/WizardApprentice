@@ -22,7 +22,6 @@ public class ShootingEnemyAI : MonoBehaviour
     {
         timer += Time.deltaTime;
         
-
         if (timer <= 2)
         {
             //Calculates random direction enemy will move in
@@ -44,7 +43,6 @@ public class ShootingEnemyAI : MonoBehaviour
 
         }
     }
-
     public Vector2 RandomDirection()
     {
             switch (Random.Range(0, 4))

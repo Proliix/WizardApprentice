@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2075493950}
   - component: {fileID: 2075493951}
   - component: {fileID: 1053801237}
+  - component: {fileID: 2619286309572622141}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2075493949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.1, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,8 +47,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011986578, y: 0.69343424}
-  m_Size: {x: 13.892265, y: 5.7663774}
+  m_Offset: {x: -0.8125092, y: -0.34923998}
+  m_Size: {x: 12.243353, y: 3.6811552}
   m_Direction: 1
 --- !u!114 &1053801237
 MonoBehaviour:
@@ -62,6 +63,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!70 &2619286309572622141
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075493949}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.8010436, y: 2.5125608}
+  m_Size: {x: 8.9583025, y: 2.3728201}
+  m_Direction: 1
 --- !u!1 &6974568388284677400
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     //Player Reference 
      Rigidbody2D rb2d;
-    
 
     //Current movement
     Vector2 movement = new Vector2();
     Animator animator;
+
+    [SerializeField] Health health;
 
     //Player Movement speed 
     [SerializeField] float moveSpeed = 10;
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         //Find our Rigidbody2D 
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
         activeSpeed = moveSpeed;
 
     }
@@ -61,20 +63,17 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
-
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
         activeSpeed = dashingSpeed;
-
+        health.SetInvicible(dashingTime);
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
         activeSpeed = moveSpeed;
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true; 
     }
-
-   
 
 }
