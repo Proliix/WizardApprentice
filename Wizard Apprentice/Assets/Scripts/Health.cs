@@ -8,11 +8,13 @@ public class Health : MonoBehaviour
     [SerializeField] float maxHP = 100;
     [SerializeField] float hp = 100;
     [SerializeField] float hitCooldown = 1f;
+    [SerializeField] bool hasHitCooldown = false;
     [Header("UI")]
     [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] bool usesHealthBar = false;
     [SerializeField] Slider healthbar;
     [Header("Juice")]
+    [SerializeField] float hitEffectTime = 0.5f;
     [SerializeField] float hitTransparancy = 0.5f;
     [SerializeField] float flashSpeed = 0.05f;
 
@@ -22,12 +24,15 @@ public class Health : MonoBehaviour
     float targetAlpha = 1f;
     Color startColor;
     Color tempColor;
+    bool hitEffectActve = false;
+
 
     SpriteRenderer spriteRenderer;
     float healthbarValue;
     bool canBeHit = true;
     private void Start()
     {
+        hp = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
         startColor = spriteRenderer.color;
         tempColor = startColor;
@@ -47,9 +52,8 @@ public class Health : MonoBehaviour
             healthbar.value = healthbarValue;
         }
 
-        if (!canBeHit)
+        if (hitEffectActve)
         {
-
             tempAlpha = Mathf.SmoothDamp(tempAlpha, targetAlpha, ref currentAlphaSpeed, flashSpeed, 100, Time.deltaTime);
             tempColor.a = tempAlpha;
             spriteRenderer.color = tempColor;
@@ -64,7 +68,7 @@ public class Health : MonoBehaviour
             }
 
         }
-        else if (spriteRenderer.color.a != 1 && canBeHit)
+        else if (spriteRenderer.color.a != 1 && !hitEffectActve)
         {
             tempAlpha = Mathf.SmoothDamp(tempAlpha, 1, ref currentAlphaSpeed, flashSpeed, 100, Time.deltaTime);
             tempColor.a = tempAlpha;
@@ -91,7 +95,12 @@ public class Health : MonoBehaviour
         {
             hp -= value;
             if (hp > 0)
-                StartCoroutine(Invicible());
+            {
+                if (hasHitCooldown)
+                    SetInvicible(hitCooldown);
+
+                StartCoroutine(Hiteffect());
+            }
             else
                 SetDead();
         }
@@ -114,11 +123,22 @@ public class Health : MonoBehaviour
         }
     }
 
-    IEnumerator Invicible()
+    public void SetInvicible(float time)
+    {
+        StartCoroutine(Invicible(time));
+    }
+
+    IEnumerator Hiteffect()
     {
         targetAlpha = hitTransparancy;
+        hitEffectActve = true;
+        yield return new WaitForSeconds(hitEffectTime);
+        hitEffectActve = false;
+    }
+    IEnumerator Invicible(float cooldown)
+    {
         canBeHit = false;
-        yield return new WaitForSeconds(hitCooldown);
+        yield return new WaitForSeconds(cooldown);
         canBeHit = true;
     }
 }
