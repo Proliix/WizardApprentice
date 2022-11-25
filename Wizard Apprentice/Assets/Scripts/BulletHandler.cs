@@ -67,17 +67,27 @@ public class BulletHandler : MonoBehaviour
         poolMember.SetActive(true);
     }
 
+    void SetupSpecialBullet(GameObject poolMember, Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false)
+    {
+        poolMember.transform.position = position;
+        SpecialProjectile specialBullet = poolMember.GetComponent<SpecialProjectile>();
+        specialBullet.bulletState = newBulletState;
+        specialBullet.Shooter = newShooter;
+        specialBullet.Image = bulletImage;
+        specialBullet.currentIcard = icard;
+        specialBullet.isMovingAway = moveAwayFromTarget;
+    }
 
     /// <summary>
-    /// Spawns a circle of bullets around the shooter that has Ammount of bullets.
+    /// Spawns a circle of bullets around the shooter that has Amount of bullets.
     /// </summary>
-    public void GetCircleShot(int ammount, GameObject shooter, bool isPlayer)
+    public void GetCircleShot(int amount, GameObject shooter, bool isPlayer)
     {
-        if (ammount <= 0)
+        if (amount <= 0)
             Debug.LogError("INVALID SIZE IN CIRCLESHOTFUNCTION MADE BY " + shooter.name);
         else
         {
-            for (float deg = 0; deg < 360; deg += 360f / ammount)
+            for (float deg = 0; deg < 360; deg += 360f / amount)
             {
                 float vertical = Mathf.Sin(Mathf.Deg2Rad * (deg + 90));
                 float horizontal = Mathf.Cos(Mathf.Deg2Rad * (deg + 90));
@@ -125,4 +135,46 @@ public class BulletHandler : MonoBehaviour
         }
 
     }
+
+
+    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false)
+    {
+        bool hasSpawned = false;
+        GameObject newBullet = specialProjectilePool[0];
+        for (int i = 0; i < specialProjectilePool.Count; i++)
+        {
+            if (specialProjectilePool[i].activeSelf == false)
+            {
+                SetupSpecialBullet(specialProjectilePool[i], position, newShooter, bulletImage, newBulletState, icard, moveAwayFromTarget);
+                newBullet = specialProjectilePool[i];
+                hasSpawned = true;
+                break;
+            }
+        }
+
+        if (!hasSpawned)
+        {
+            int currentCount = projectilePool.Count;
+            for (int i = 0; i < 5; i++)
+            {
+                int index = currentCount + i;
+                specialProjectilePool.Add(Instantiate(normalProjectile, poolParentNormal.transform.position, normalProjectile.transform.rotation, poolParentNormal.transform));
+                specialProjectilePool[index].SetActive(false);
+                specialProjectilePool[index].GetComponent<Bullet>().poolIndex = index;
+                specialProjectilePool[index].name = "Bullet: " + index;
+                if (i == 0)
+                {
+                    SetupSpecialBullet(specialProjectilePool[currentCount + i], position, newShooter, bulletImage, newBulletState, icard, moveAwayFromTarget);
+                    newBullet = specialProjectilePool[currentCount + i];
+                }
+
+            }
+
+        }
+
+        return newBullet;
+    }
+
+
+
 }
