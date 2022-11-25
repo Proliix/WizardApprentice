@@ -67,7 +67,7 @@ public class BulletHandler : MonoBehaviour
         poolMember.SetActive(true);
     }
 
-    void SetupSpecialBullet(GameObject poolMember, Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false)
+    void SetupSpecialBullet(GameObject poolMember, Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false,float resetTime = 0f)
     {
         poolMember.transform.position = position;
         SpecialProjectile specialBullet = poolMember.GetComponent<SpecialProjectile>();
@@ -137,7 +137,7 @@ public class BulletHandler : MonoBehaviour
     }
 
 
-    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false)
+    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false,float resetTime = 0f)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];

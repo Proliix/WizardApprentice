@@ -13,17 +13,20 @@ public class SpecialProjectile : MonoBehaviour
     [SerializeField] float bulletSpeed;
     [SerializeField] float bulletLifetime = 5f;
     [Header("Timed Shot")]
-    [SerializeField] float timeToExplode = 1.5f;
+    public float timeToExplode = 1.5f;
+    [Header("Static Shot")]
+    public float staticEffectCooldown = 0.5f;
 
     //bool is used to make the bullet change direction away form the shooter
     public bool isMovingAway;
 
     Vector3 dir;
     SpriteRenderer spriteRenderer;
-    float timerToExplode = 0;
+    float effectTimer = 0;
     float timer = 0;
     Rigidbody2D rb2d;
     BulletHandler bulletHandler;
+    float startLifeTime = 0;
 
     public ICard currentIcard;
 
@@ -33,6 +36,7 @@ public class SpecialProjectile : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         dir = transform.up;
+        startLifeTime = bulletLifetime;
     }
 
     #region Updates for projectiles
@@ -50,8 +54,8 @@ public class SpecialProjectile : MonoBehaviour
     void TimedShot()
     {
         NormalShot();
-        timerToExplode += Time.deltaTime;
-        if (timerToExplode >= timeToExplode)
+        effectTimer += Time.deltaTime;
+        if (effectTimer >= timeToExplode)
         {
             timeToExplode = -10;
             if (currentIcard != null)
@@ -61,13 +65,19 @@ public class SpecialProjectile : MonoBehaviour
         }
     }
 
+    void StaticShot()
+    {
+        effectTimer += Time.deltaTime;
+    }
+
     #endregion
 
     public void ResetBullet()
     {
         bulletHandler.ResetBullet(poolIndex);
-        timerToExplode = 0;
+        effectTimer = 0;
         timer = 0;
+        bulletLifetime = startLifeTime;
     }
 
     // Update is called once per frame
@@ -75,20 +85,21 @@ public class SpecialProjectile : MonoBehaviour
     {
         timer += Time.deltaTime;
         //the update functions for the  bullets
-        if (bulletState != SpecialBulletState.Static)
+
+        switch (bulletState)
         {
-            switch (bulletState)
-            {
-                case SpecialBulletState.Timed:
-                    TimedShot();
-                    break;
-                case SpecialBulletState.Rotating:
-                    RotatingShot();
-                    break;
-                default:
-                    NormalShot();
-                    break;
-            }
+            case SpecialBulletState.Timed:
+                TimedShot();
+                break;
+            case SpecialBulletState.Rotating:
+                RotatingShot();
+                break;
+            case SpecialBulletState.Static:
+                StaticShot();
+                break;
+            default:
+                NormalShot();
+                break;
         }
 
         if (timer > bulletLifetime)
@@ -104,7 +115,7 @@ public class SpecialProjectile : MonoBehaviour
             {
                 if (bulletState == SpecialBulletState.Timed)
                 {
-                    timerToExplode += timeToExplode;
+                    effectTimer += timeToExplode;
                 }
 
                 collision.gameObject.GetComponent<Health>().RemoveHealth();

@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float bulletLifetime = 5f;
 
     SpriteRenderer spriteRenderer;
+    Rigidbody2D rb2d;
     float timer = 0;
     Vector3 dir;
     BulletHandler bulletHandler;
@@ -23,6 +24,7 @@ public class Bullet : MonoBehaviour
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     public void UpdateDirection()
@@ -58,14 +60,7 @@ public class Bullet : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (shooter != null)
-        {
-            GetComponent<Rigidbody2D>().velocity = dir.normalized * bulletSpeed;
-        }
-        else
-        {
-            Debug.LogError("Shooter is not defined in " + this.name);
-        }
+        rb2d.velocity = dir.normalized * bulletSpeed;
 
         if (timer > bulletLifetime)
         {
@@ -75,14 +70,6 @@ public class Bullet : MonoBehaviour
 
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.GetComponent<Health>() != null)
-    //    {
-    //        if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
-    //            collision.gameObject.GetComponent<Health>().RemoveHealth();
-    //    }
-    //}
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Health>() != null)
