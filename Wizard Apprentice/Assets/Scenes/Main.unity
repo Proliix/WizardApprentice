@@ -1352,7 +1352,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.07450981, g: 0.08627451, b: 0.11764706, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1369,7 +1369,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2255,6 +2255,7 @@ GameObject:
   - component: {fileID: 1438629718}
   - component: {fileID: 1438629720}
   - component: {fileID: 1438629719}
+  - component: {fileID: 1438629721}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -2383,7 +2384,31 @@ MonoBehaviour:
   playerObject: {fileID: 1929210249}
   possibleEnemies:
   - {fileID: 6974568388284677400, guid: d6085ebdb70018649aa9f73c47694fac, type: 3}
+  possibleRooms:
+  - {fileID: 11400000, guid: 2f6fa322cf817204fb32eb5992334a88, type: 2}
+  - {fileID: 11400000, guid: 643c19fc546131b409781a9c6eef2fbb, type: 2}
+  - {fileID: 11400000, guid: 2fbaeaff8875cc04c892cacfb1577a80, type: 2}
+  - {fileID: 11400000, guid: 958037a8c5e472644b2a8244c6a2542f, type: 2}
+  - {fileID: 11400000, guid: f29118ec819b3124f82176e15631a1b7, type: 2}
+  - {fileID: 11400000, guid: 434ea1c03590ee94a944917397cbdb3c, type: 2}
+  - {fileID: 11400000, guid: a8cd84b49298f8946a2a46f2901b0b0d, type: 2}
   roomSize: {x: 0, y: 0}
+  exitDoorPrefab: {fileID: 226080780411628952, guid: 0d334158a641f2e4cb770ccb1683f9d0, type: 3}
+  roomParent: {fileID: 3714845512778590098, guid: cfe613bd22b976f428533e8536cf7c1d, type: 3}
+  enemyManager: {fileID: 1438629721}
+--- !u!114 &1438629721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438629714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1543c5e77d00849a1e6d1b14798a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObjects: []
 --- !u!4 &1459532332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2972845709103323633, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}

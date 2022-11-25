@@ -15,6 +15,7 @@ public class CellManager : MonoBehaviour
     public List<GameObject> topOfWalls;
     public List<GameObject> sideWalls;
     List<GameObject> wallsCreated;
+    Transform roomParent;
     int iterations;
     // Start is called before the first frame update
     void Start()
@@ -23,15 +24,24 @@ public class CellManager : MonoBehaviour
         wallsCreated = new List<GameObject>();
     }
 
-    public void GenerateRoom(Vector2Int size)
+    public void GenerateRoom(Vector2Int size, Transform cellParent)
     {
+        roomParent = cellParent;
         if(cellHolders == null)
         {
             cellHolders = new List<GameObject>();
         }
+        else
+        {
+            cellHolders.Clear();
+        }
         if(wallsCreated == null)
         {
             wallsCreated = new List<GameObject>();
+        }
+        else
+        {
+            wallsCreated.Clear();
         }
         this.size = size;
         GenerateCells();
@@ -68,7 +78,7 @@ public class CellManager : MonoBehaviour
                 {
                     listOfAllCells.Add(cells[k].cellID);
                 }
-                GameObject cellHolder = Instantiate(cellHolderPrefab);
+                GameObject cellHolder = Instantiate(cellHolderPrefab, roomParent);
                 cellHolder.GetComponent<CellHolder>().SpawnCellHolder(new Vector2(j, i),i*size.x + j);
                 cellHolder.GetComponent<CellHolder>().SpawnCell(new Vector2(j, i), cells[Random.Range(0, cells.Count)]);
                 cellHolders.Add(cellHolder);
@@ -146,31 +156,31 @@ public class CellManager : MonoBehaviour
         float scale = 5;
         for(float i = 0; i < size.x; i+= scale)
         {
-            GameObject mainWall = Instantiate(walls[Random.Range(0, walls.Count)]);
+            GameObject mainWall = Instantiate(walls[Random.Range(0, walls.Count)], roomParent);
             mainWall.transform.position = new Vector3((i-0.5f) + (scale / 2),(size.y-0.5f)+ 0.25f*scale);
             wallsCreated.Add(mainWall);
-            GameObject topOfWall1 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)]);
+            GameObject topOfWall1 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)], roomParent);
             topOfWall1.transform.position = new Vector3((i-0.5f)+ 0.25f*scale, size.y+0.125f*scale + 2,-0.01f);
             wallsCreated.Add(topOfWall1);
-            GameObject topOfWall2 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)]);
+            GameObject topOfWall2 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)], roomParent);
             topOfWall2.transform.position = new Vector3((i - 0.5f) + 0.25f * scale + scale/2, size.y+0.125f*scale + 2,-0.01f);
             wallsCreated.Add(topOfWall2);
         }
         for (float i = 0; i < size.y + scale/2; i+= scale / 2)
         {
-            GameObject sideWall = Instantiate(sideWalls[Random.Range(0, sideWalls.Count)]);
+            GameObject sideWall = Instantiate(sideWalls[Random.Range(0, sideWalls.Count)], roomParent);
             sideWall.transform.position = new Vector3(-1,i+0.75f,-0.01f);
             wallsCreated.Add(sideWall);
-            GameObject sideWall2 = Instantiate(sideWalls[Random.Range(0, sideWalls.Count)]);
+            GameObject sideWall2 = Instantiate(sideWalls[Random.Range(0, sideWalls.Count)], roomParent);
             sideWall2.transform.position = new Vector3(size.x, i+0.75f, -0.01f);
             wallsCreated.Add(sideWall2);
         }
         for (float i = 0; i < size.x; i += scale)
         {
-            GameObject topOfWall1 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)]);
+            GameObject topOfWall1 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)], roomParent);
             topOfWall1.transform.position = new Vector3((i - 0.5f) + 0.25f * scale, -1f, -0.01f);
             wallsCreated.Add(topOfWall1);
-            GameObject topOfWall2 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)]);
+            GameObject topOfWall2 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)], roomParent);
             topOfWall2.transform.position = new Vector3((i - 0.5f) + 0.25f * scale + scale / 2, -1f, -0.01f);
             wallsCreated.Add(topOfWall2);
         }

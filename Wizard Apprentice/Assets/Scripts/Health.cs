@@ -108,7 +108,10 @@ public class Health : MonoBehaviour
         if (gameObject.CompareTag("Player"))
             Debug.Log(gameObject.name + " Is Dead");
         else
+        {
             Destroy(gameObject);
+            GameObject.FindWithTag("GameController").GetComponent<RoomManager>().RemoveEnemy(this.gameObject);
+        }
     }
 
     IEnumerator Invicible()
