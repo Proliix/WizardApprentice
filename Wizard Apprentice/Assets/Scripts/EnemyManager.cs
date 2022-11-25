@@ -44,26 +44,12 @@ public class EnemyManager : MonoBehaviour
 
     public List<GameObject> GetEnemiesWithinRange(Vector3 point, float range)
     {
-        float closestDistance = 99999;
-        List<int> distances = new List<int>();
+        List<GameObject> objectToReturn = new List<GameObject>();
         for (int i = 0; i < enemyObjects.Count; i++)
         {
-            if (Vector3.Distance(enemyObjects[i].transform.position, point) < closestDistance)
+            if (Vector3.Distance(enemyObjects[i].transform.position, point) < range)
             {
-                distances.Add(Mathf.RoundToInt(Vector3.Distance(enemyObjects[i].transform.position, point) * 1000) * 1000 + i);
-            }
-        }
-        distances.Sort();
-        List<GameObject> objectToReturn = new List<GameObject>();
-        for (int i = 0; i < distances.Count; i++)
-        {
-            if (distances[i] / 1000 < range)
-            {
-                objectToReturn.Add(enemyObjects[distances[i] % 1000]);
-            }
-            else
-            {
-                break;
+                objectToReturn.Add(enemyObjects[i]);
             }
         }
         return objectToReturn;
