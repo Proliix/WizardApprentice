@@ -39,13 +39,13 @@ public class BulletHandler : MonoBehaviour
             projectilePool[i].name = "Bullet: " + i;
         }
 
-        for (int i = 0; i < startSizeSpecial; i++)
-        {
-            specialProjectilePool.Add(Instantiate(specialProjectile, poolParentSpecial.transform.position, specialProjectile.transform.rotation, poolParentSpecial.transform));
-            specialProjectilePool[i].SetActive(false);
-            //Add ProjectileScript
-            specialProjectilePool[i].name = "Special Bullet: " + i;
-        }
+        //for (int i = 0; i < startSizeSpecial; i++)
+        //{
+        //    specialProjectilePool.Add(Instantiate(specialProjectile, poolParentSpecial.transform.position, specialProjectile.transform.rotation, poolParentSpecial.transform));
+        //    specialProjectilePool[i].SetActive(false);
+        //    //Add ProjectileScript
+        //    specialProjectilePool[i].name = "Special Bullet: " + i;
+        //}
     }
 
     public void ResetBullet(int index)
