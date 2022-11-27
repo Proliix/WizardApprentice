@@ -7,15 +7,11 @@ public class SpecialProjectile : MonoBehaviour
 {
     public SpecialBulletState bulletState;
     public int poolIndex;
-    public Sprite Image;
     public GameObject Shooter;
     public bool isPlayerBullet;
     [SerializeField] float bulletSpeed;
-    [SerializeField] float bulletLifetime = 5f;
-    [Header("Timed Shot")]
-    public float timeToExplode = 1.5f;
-    [Header("Static Shot")]
-    public float staticEffectCooldown = 0.5f;
+    public float bulletLifetime = 5f;
+    public float effectCooldown = 1.5f;
 
     //bool is used to make the bullet change direction away form the shooter
     public bool isMovingAway;
@@ -55,9 +51,9 @@ public class SpecialProjectile : MonoBehaviour
     {
         NormalShot();
         effectTimer += Time.deltaTime;
-        if (effectTimer >= timeToExplode)
+        if (effectTimer >= effectCooldown)
         {
-            timeToExplode = -10;
+            effectCooldown = -10;
             if (currentIcard != null)
                 currentIcard.Effect();
             else
@@ -68,13 +64,18 @@ public class SpecialProjectile : MonoBehaviour
     void StaticShot()
     {
         effectTimer += Time.deltaTime;
+        if (effectTimer >= effectCooldown)
+        {
+            currentIcard.Effect();
+            effectTimer = 0;
+        }
     }
 
     #endregion
 
     public void ResetBullet()
     {
-        bulletHandler.ResetBullet(poolIndex);
+        bulletHandler.ResetSpecialBullet(poolIndex);
         effectTimer = 0;
         timer = 0;
         bulletLifetime = startLifeTime;
@@ -115,7 +116,7 @@ public class SpecialProjectile : MonoBehaviour
             {
                 if (bulletState == SpecialBulletState.Timed)
                 {
-                    effectTimer += timeToExplode;
+                    effectTimer += effectCooldown;
                 }
 
                 collision.gameObject.GetComponent<Health>().RemoveHealth();
