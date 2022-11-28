@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SpecialBulletState { Normal, Static, Timed, Rotating, bouncy }
+public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing }
 
 public class SpecialProjectile : MonoBehaviour
 {
@@ -23,6 +23,8 @@ public class SpecialProjectile : MonoBehaviour
     Rigidbody2D rb2d;
     BulletHandler bulletHandler;
     float startLifeTime = 0;
+
+    GameObject homingTarget;
 
     public ICard currentIcard;
 
@@ -61,6 +63,11 @@ public class SpecialProjectile : MonoBehaviour
         }
     }
 
+    void HomingShot()
+    {
+
+    }
+
     void StaticShot()
     {
         effectTimer += Time.deltaTime;
@@ -97,6 +104,9 @@ public class SpecialProjectile : MonoBehaviour
                 break;
             case SpecialBulletState.Static:
                 StaticShot();
+                break;
+            case SpecialBulletState.Homing:
+                HomingShot();
                 break;
             default:
                 NormalShot();

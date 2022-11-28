@@ -40,6 +40,13 @@ public class Bullet : MonoBehaviour
 
     }
 
+    public void UpdateDirection(Vector3 newDir)
+    {
+
+        dir = newDir;
+
+    }
+
     public void UpdateColor()
     {
         if (spriteRenderer == null)

@@ -40,7 +40,7 @@ public class NormalCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if(timer >= shootCooldown)
+        if (timer >= shootCooldown)
         {
             timer = 0;
             Effect();
