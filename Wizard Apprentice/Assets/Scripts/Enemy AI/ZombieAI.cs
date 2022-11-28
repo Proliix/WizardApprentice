@@ -43,16 +43,22 @@ public class ZombieAI : MonoBehaviour
 
     void MoveEnemy()
     {
-        //calculates speed towards the player 
-        float step = moveSpeed * Time.deltaTime;
 
-        //moves the enemy towards the player
-        transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+
+        ////calculates speed towards the player 
+        //float step = moveSpeed * Time.deltaTime;
+
+        ////moves the enemy towards the player
+        //transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+
+        rb2d.AddForce(dir.normalized * moveSpeed, ForceMode2D.Force);
+        rb2d.velocity = new Vector3(Mathf.Clamp(rb2d.velocity.x, -moveSpeed, moveSpeed), Mathf.Clamp(rb2d.velocity.y, -moveSpeed, moveSpeed), 0);
+
     }
 
-
- 
-
-
-
 }
+
+
+
+
