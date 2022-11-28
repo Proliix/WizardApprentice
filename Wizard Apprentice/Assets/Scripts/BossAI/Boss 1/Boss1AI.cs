@@ -10,13 +10,16 @@ public class Boss1AI : MonoBehaviour
     [SerializeField] Health health;
     [Header("Boss Variables")]
     [SerializeField] float timer;
+
     [SerializeField] bool hasTriggeredBasic = false;
     [SerializeField] float basicsUntilSpecial = 10;
     [SerializeField] float currentBasics;
-    [SerializeField] float timeUntilBossStart = 3;
     [SerializeField] float attackSpeedBasic = 0.5f;
-    [SerializeField] private float bossHP;
-    [SerializeField] private float bossMaxHP;
+
+    [SerializeField] float timeUntilBossStart = 3;
+
+    [SerializeField] private float HP;
+    [SerializeField] private float maxHP;
     [Header("Phases")]
     [SerializeField] bool phase1;
     [SerializeField] bool phase2;
@@ -27,6 +30,7 @@ public class Boss1AI : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         health = GetComponent<Health>();
+
         timer = -timeUntilBossStart;
         attackSpeedBasic = 0.5f;
         phase1 = true;
@@ -35,8 +39,8 @@ public class Boss1AI : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        bossHP = health.GetHP();
-        bossMaxHP = health.GetMaxHP();
+        HP = health.GetHP();
+        maxHP = health.GetMaxHP();
 
         if (currentBasics >= basicsUntilSpecial && timer >= attackSpeedBasic)
         {
@@ -52,7 +56,7 @@ public class Boss1AI : MonoBehaviour
 
 
         //Start phase 2
-        if (bossHP < bossMaxHP * 0.666f && phase1)
+        if (HP < maxHP * 0.666f && phase1)
         {
             phase1 = false;
             phase2 = true;
@@ -60,7 +64,7 @@ public class Boss1AI : MonoBehaviour
         }
 
         //Start phase 3
-        if (bossHP < bossMaxHP * 0.333f && phase2)
+        if (HP < maxHP * 0.333f && phase2)
         {
             attackSpeedBasic = 0.25f;
             phase2 = false;
