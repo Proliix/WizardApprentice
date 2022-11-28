@@ -854,11 +854,6 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: -400}
   m_SizeDelta: {x: 100, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &460615297 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7793156288878276018, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-  m_PrefabInstance: {fileID: 1555657199}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &468435917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,18 +1694,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2645551619851752075, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: amount
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2645551619851752075, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: testObj
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2645551619851752075, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: bulletSpawn
-      value: 
-      objectReference: {fileID: 460615297}
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
