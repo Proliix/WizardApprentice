@@ -26,7 +26,6 @@ public class Health : MonoBehaviour
     Color startColor;
     Color tempColor;
     bool hitEffectActve = false;
-    bool isDead = false;
 
 
     SpriteRenderer spriteRenderer;
@@ -125,14 +124,17 @@ public class Health : MonoBehaviour
 
     public bool GetIsDead()
     {
-        return isDead;
+        bool deadState = false;
+
+        if (hp <= 0)
+            deadState = true;
+
+        return deadState;
     }
 
     void SetDead()
     {
         hp = 0;
-
-        isDead = true;
 
         if (gameObject.CompareTag("Player"))
             Debug.Log(gameObject.name + " Is Dead");
