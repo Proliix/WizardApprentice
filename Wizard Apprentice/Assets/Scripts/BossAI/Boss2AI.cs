@@ -28,7 +28,7 @@ public class Boss2AI : MonoBehaviour
 
     void Update()
     {
-        transform.RotateAround(target.transform.position, Vector3.back, 90 * Time.deltaTime);
+        transform.RotateAround(target.transform.position, Vector3.forward, 90 * Time.deltaTime);
         bulletHandler.GetBullet(target.transform.position, gameObject, false, true);
     }
 }
