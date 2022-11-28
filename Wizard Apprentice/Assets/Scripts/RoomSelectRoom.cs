@@ -12,6 +12,12 @@ public class RoomSelectRoom
     public List<RoomSelectRoom> sameLayer;
     public Vector2 position;
     public Sprite image;
+    public int roomType; 
+    //0 = Boss room
+    //1 = Normal room
+    //2 = Miniboss room
+    //3 = Treasure room
+    //4 = Mystery room
 
     public RoomSelectRoom()
     {
