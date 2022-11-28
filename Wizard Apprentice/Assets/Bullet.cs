@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     public Color PlayerColor;
     public Color EnemyColor;
 
-    [SerializeField] float bulletSpeed = 8;
+    public float bulletSpeed = 8;
     [SerializeField] float bulletLifetime = 5f;
 
     SpriteRenderer spriteRenderer;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6167718040923600017}
   - component: {fileID: 2199920279753785107}
   - component: {fileID: 3205804017517233318}
+  - component: {fileID: -3318233835324077276}
   m_Layer: 0
   m_Name: SpecialBullet
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2199920279753785107
 SpriteRenderer:
@@ -99,10 +100,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletState: 0
   poolIndex: 0
-  Image: {fileID: 21300000, guid: 5505550a6fec1d445b223c7c20c76f68, type: 3}
   Shooter: {fileID: 0}
   isPlayerBullet: 0
   bulletSpeed: 0
   bulletLifetime: 5
   effectCooldown: 1.5
   isMovingAway: 0
+--- !u!58 &-3318233835324077276
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227880843289009281}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.26

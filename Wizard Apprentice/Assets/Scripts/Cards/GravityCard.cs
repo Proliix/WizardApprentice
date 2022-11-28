@@ -9,6 +9,7 @@ public class GravityCard : MonoBehaviour, ICard
     [SerializeField] float effectRange = 2f;
     [SerializeField] float effectCooldown = 0.5f;
     [SerializeField] float lifeTime = 4f;
+    [SerializeField] float force = 2f;
 
 
 
@@ -33,7 +34,9 @@ public class GravityCard : MonoBehaviour, ICard
             if (enemiesWithingRange[i].GetComponent<Rigidbody2D>() != null)
             {
                 Vector2 dir = gravityBullet.transform.position - enemiesWithingRange[i].transform.position;
-                enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir);
+                //enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity += dir.normalized * force;
+                enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
+                Debug.Log("Gravity card effect Triggered");
             }
         }
     }

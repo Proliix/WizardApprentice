@@ -205,7 +205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b079989b8a1d3124da3640849df42090, type: 3}
-  Spawnpoint: {fileID: 1555657200}
   shootCooldown: 0.5
   shootPosDeviation: 0.25
 --- !u!95 &192820276
@@ -631,7 +630,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
-  Spawnpoint: {fileID: 1555657200}
   shootCooldown: 0.2
 --- !u!1 &406984803
 GameObject:
@@ -856,6 +854,11 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: -400}
   m_SizeDelta: {x: 100, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &460615297 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7793156288878276018, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+  m_PrefabInstance: {fileID: 1555657199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &468435917
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +914,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
-  Spawnpoint: {fileID: 1555657200}
   shootCooldown: 0.25
 --- !u!114 &468435920
 MonoBehaviour:
@@ -1537,7 +1539,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b079989b8a1d3124da3640849df42090, type: 3}
-  Spawnpoint: {fileID: 1555657200}
   shootCooldown: 0.5
   shootPosDeviation: 0.25
 --- !u!1 &1200666643
@@ -1698,6 +1699,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2645551619851752075, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: amount
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645551619851752075, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: testObj
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645551619851752075, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: bulletSpawn
+      value: 
+      objectReference: {fileID: 460615297}
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
@@ -1753,11 +1766,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
---- !u!4 &1555657200 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2972845709103323633, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-  m_PrefabInstance: {fileID: 1555657199}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1555657201 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6565921895385548070, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
@@ -2401,10 +2409,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
-  Bulletimage: {fileID: 21300000, guid: 56ebade7dbd96f2448ade35c17535a66, type: 3}
+  Bulletimage: {fileID: 21300000, guid: f82ab99d77d72ec4cba67caa2a15a256, type: 3}
   effectRange: 2
   effectCooldown: 0.5
   lifeTime: 4
+  force: 2
 --- !u!95 &1812407444
 Animator:
   serializedVersion: 4
@@ -2439,7 +2448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1920260233}
   inventory: {fileID: 1092260162}
-  lastObjectAttachedTo: {fileID: 2055704626}
+  lastObjectAttachedTo: {fileID: 1595572132}
 --- !u!114 &1812407446
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -110,24 +110,27 @@ public class SpecialProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Health>() != null)
+        if (bulletState != SpecialBulletState.Static)
         {
-            if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
+            if (collision.gameObject.GetComponent<Health>() != null)
             {
-                if (bulletState == SpecialBulletState.Timed)
+                if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
                 {
-                    effectTimer += effectCooldown;
-                }
+                    if (bulletState == SpecialBulletState.Timed)
+                    {
+                        effectTimer += effectCooldown;
+                    }
 
-                collision.gameObject.GetComponent<Health>().RemoveHealth();
+                    collision.gameObject.GetComponent<Health>().RemoveHealth();
+                    bulletHandler.ResetBullet(poolIndex);
+                    ResetBullet();
+                }
+            }
+            else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
+            {
                 bulletHandler.ResetBullet(poolIndex);
                 ResetBullet();
             }
-        }
-        else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
-        {
-            bulletHandler.ResetBullet(poolIndex);
-            ResetBullet();
         }
     }
 }

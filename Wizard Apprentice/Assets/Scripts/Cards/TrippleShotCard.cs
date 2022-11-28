@@ -2,28 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrippleShotCard : MonoBehaviour,ICard
+public class TrippleShotCard : MonoBehaviour, ICard
 {
 
     [SerializeField] Sprite image;
-    [SerializeField] Transform Spawnpoint;
     [SerializeField] float shootCooldown = 0.25f;
     [SerializeField] float shootPosDeviation = 0.25f;
 
     BulletHandler bulletHandler;
     GameObject player;
+    Transform spawnpoint;
     float timer = 10;
 
     private void Start()
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
+        spawnpoint = player.GetComponent<PlayerAiming>().bulletSpawn.transform;
     }
     public void Effect()
     {
-        bulletHandler.GetBullet(Spawnpoint.position, player, true, false);
-        bulletHandler.GetBullet(Spawnpoint.position + (Vector3.right * shootPosDeviation), player, true, true);
-        bulletHandler.GetBullet(Spawnpoint.position - (Vector3.right * shootPosDeviation), player, true, true);
+        bulletHandler.GetBullet(spawnpoint, player, true, false);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation));
+        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation));
     }
 
     public Sprite GetSprite()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6565921895385548058}
   - component: {fileID: 6565921895385548059}
   - component: {fileID: 5924314082677940546}
+  - component: {fileID: 2645551619851752075}
   - component: {fileID: 6565921895385548057}
   - component: {fileID: 704973196}
   - component: {fileID: 744666675558159521}
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89b619e5f4f3344b0c862057d20577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   moveSpeed: 7
   dashingSpeed: 20
   activeSpeed: 0
@@ -124,11 +126,25 @@ MonoBehaviour:
   maxHP: 100
   hp: 100
   hitCooldown: 1
+  hasHitCooldown: 0
   healthRemoveSpeed: 0.01
   usesHealthBar: 1
   healthbar: {fileID: 0}
+  hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+--- !u!114 &2645551619851752075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6565921895385548070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93095ad828163564c9d88c24cb568954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &6565921895385548057
 Rigidbody2D:
   serializedVersion: 4

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleShotCard : MonoBehaviour,ICard
+public class CircleShotCard : MonoBehaviour, ICard
 {
 
     [SerializeField] Sprite image;
@@ -20,7 +20,7 @@ public class CircleShotCard : MonoBehaviour,ICard
     }
     public void Effect()
     {
-        bulletHandler.GetCircleShot(projectileAmmount,player,true);
+        bulletHandler.GetCircleShot(projectileAmmount, player, true);
     }
 
     public Sprite GetSprite()

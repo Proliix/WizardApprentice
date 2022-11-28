@@ -6,10 +6,10 @@ using UnityEngine;
 public class NormalCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
-    [SerializeField] Transform Spawnpoint;
     [SerializeField] float shootCooldown = 0.25f;
 
     BulletHandler bulletHandler;
+    Transform spawnpoint;
     GameObject player;
     float timer = 10;
 
@@ -17,11 +17,13 @@ public class NormalCard : MonoBehaviour, ICard
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
+
+        spawnpoint = player.GetComponent<PlayerAiming>().bulletSpawn.transform;
     }
 
     public void Effect()
     {
-        bulletHandler.GetBullet(Spawnpoint.position, player, true,false);
+        bulletHandler.GetBullet(spawnpoint, player, true,false);
     }
 
     public Sprite GetSprite()
