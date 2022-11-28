@@ -76,15 +76,19 @@ public class Bullet : MonoBehaviour
         {
             if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
             {
-                collision.gameObject.GetComponent<Health>().RemoveHealth();
-                bulletHandler.ResetBullet(poolIndex);
-                ResetTimer();
+                if (collision.gameObject.GetComponent<Health>().GetCanBeHit() == true)
+                {
+                    collision.gameObject.GetComponent<Health>().RemoveHealth();
+                    bulletHandler.ResetBullet(poolIndex);
+                    ResetTimer();
+                }
             }
-            else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
-            {
-                bulletHandler.ResetBullet(poolIndex);
-                ResetTimer();
-            }
+        }
+
+        if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
+        {
+            bulletHandler.ResetBullet(poolIndex);
+            ResetTimer();
         }
     }
 }

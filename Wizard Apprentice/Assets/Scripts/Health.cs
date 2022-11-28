@@ -111,6 +111,11 @@ public class Health : MonoBehaviour
         return hp;
     }
 
+    public bool GetCanBeHit()
+    {
+        return canBeHit;
+    }
+
     public float GetMaxHP()
     {
         return maxHP;
