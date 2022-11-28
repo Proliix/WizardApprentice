@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7003783273683215015}
   - component: {fileID: 7003783273683215014}
   - component: {fileID: -1525776438178176267}
+  - component: {fileID: 6266075657787194518}
   - component: {fileID: 8619137093778537769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ZombieEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -34,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 1206780839672617292}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7003783273683215015
 SpriteRenderer:
@@ -125,9 +126,30 @@ MonoBehaviour:
   healthRemoveSpeed: 0.005
   usesHealthBar: 0
   healthbar: {fileID: 0}
-  hitEffectTime: 0.5
+  hitEffectTime: 0.25
   hitTransparancy: 0.5
   flashSpeed: 0.05
+--- !u!50 &6266075657787194518
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7003783273683215013}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!70 &8619137093778537769
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -155,7 +177,8 @@ GameObject:
   - component: {fileID: 1206780839672617292}
   - component: {fileID: 3986557164779534882}
   - component: {fileID: 5290594772058125042}
-  m_Layer: 6
+  - component: {fileID: 4324980982614620905}
+  m_Layer: 0
   m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +210,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -203,9 +226,22 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.3}
   serializedVersion: 2
   m_Radius: 0.2
+--- !u!114 &4324980982614620905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154893192985256861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a53f48112c3348a7d34f814dabccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
