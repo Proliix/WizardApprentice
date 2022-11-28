@@ -9,7 +9,11 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     [SerializeField] Sprite normalRoomImage;
     [SerializeField] GameObject roomIconPrefab;
     [SerializeField] Transform roomSelectParent;
+    [SerializeField] int maxRoomsPerLayers;
+    [SerializeField] int minRoomsPerLayers;
+    [SerializeField] int allowedChangePerLayer;
     List<RoomSelectRoom> allRooms;
+    List<List<RoomSelectRoom>> roomsByLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     public void GenerateRoomLayout()
     {
         allRooms = new List<RoomSelectRoom>();
+        roomsByLayer = new List<List<RoomSelectRoom>>();
         RoomSelectRoom bossRoom = new RoomSelectRoom(0,0,null,null,null,new Vector2(0,400), bossRoomImage);
         allRooms.Add(bossRoom);
         int firstLayerAmount = Random.Range(1, 4);
@@ -43,6 +48,39 @@ public class RoomSelectScreenGenerator : MonoBehaviour
             GameObject roomIcon = Instantiate(roomIconPrefab, roomSelectParent);
             roomIcon.transform.localPosition = new Vector3(allRooms[i].position.x, allRooms[i].position.y, 0);
             roomIcon.GetComponent<Image>().sprite = allRooms[i].image;
+        }
+    }
+
+    public void GenerateLayer()
+    {
+        List<RoomSelectRoom> roomsInThisLayer = new List<RoomSelectRoom>();
+
+        //Select Number of rooms in layer
+        int amountRoomsInThisLayer = 1;
+        if(roomsByLayer.Count > 0)
+        {
+            amountRoomsInThisLayer = Mathf.Clamp(Random.Range(roomsByLayer[roomsByLayer.Count - 1].Count - allowedChangePerLayer, roomsByLayer[roomsByLayer.Count - 1].Count + allowedChangePerLayer + 1), minRoomsPerLayers, maxRoomsPerLayers);
+        }
+
+        //Initialize rooms
+        for(int i = 0; i < amountRoomsInThisLayer; i++)
+        {
+            RoomSelectRoom room = new RoomSelectRoom();
+            roomsInThisLayer.Add(room);
+        }
+
+        //Set first outgoing
+        if (roomsByLayer.Count > 0)
+        {
+            for (int i = 0; i < amountRoomsInThisLayer; i++)
+            {
+                int iterations = 0;
+                while(iterations < 100)
+                {
+                    iterations++;
+                }
+                //roomsInThisLayer[i].outgoingRooms = 
+            }
         }
     }
 }
