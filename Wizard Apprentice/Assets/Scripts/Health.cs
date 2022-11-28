@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] float maxHP = 100;
     [SerializeField] float hp = 100;
     [SerializeField] float hitCooldown = 1f;
+    [SerializeField] bool removeSelf = true;
     [SerializeField] bool hasHitCooldown = false;
     [Header("UI")]
     [SerializeField] float healthRemoveSpeed = 0.005f;
@@ -25,6 +26,7 @@ public class Health : MonoBehaviour
     Color startColor;
     Color tempColor;
     bool hitEffectActve = false;
+    bool isDead = false;
 
 
     SpriteRenderer spriteRenderer;
@@ -121,14 +123,24 @@ public class Health : MonoBehaviour
         return maxHP;
     }
 
+    public bool GetIsDead()
+    {
+        return isDead;
+    }
+
     void SetDead()
     {
         hp = 0;
+
+        isDead = true;
+
         if (gameObject.CompareTag("Player"))
             Debug.Log(gameObject.name + " Is Dead");
         else
         {
-            Destroy(gameObject);
+            if (removeSelf)
+                Destroy(gameObject);
+
             GameObject.FindWithTag("GameController").GetComponent<RoomManager>().RemoveEnemy(this.gameObject);
         }
     }
