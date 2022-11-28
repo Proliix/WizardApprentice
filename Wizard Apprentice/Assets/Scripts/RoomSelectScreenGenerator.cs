@@ -106,6 +106,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                 }
             }
         }
+
         //Update incomming in layer above
         if (roomsByLayer.Count > 0)
         {
@@ -157,6 +158,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                 }
             }
         }
+
         //Update roomsByLayer
         roomsByLayer.Add(roomsInThisLayer);
 
