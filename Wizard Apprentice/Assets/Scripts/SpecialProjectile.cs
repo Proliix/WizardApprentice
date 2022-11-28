@@ -74,11 +74,13 @@ public class SpecialProjectile : MonoBehaviour
             hasShot = true;
         }
 
-        if(homingTarget != null)
+        if (homingTarget != null)
         {
-
+            dir = transform.position - homingTarget.transform.position;
         }
 
+
+        rb2d.velocity = dir.normalized * bulletSpeed;
     }
 
     void StaticShot()
