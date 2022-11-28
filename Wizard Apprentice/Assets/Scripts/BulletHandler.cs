@@ -53,11 +53,33 @@ public class BulletHandler : MonoBehaviour
         projectilePool[index].SetActive(false);
         projectilePool[index].transform.position = poolParentNormal.transform.position;
     }
-
+    
     public void ResetSpecialBullet(int index)
     {
         specialProjectilePool[index].SetActive(false);
         specialProjectilePool[index].transform.position = poolParentSpecial.transform.position;
+    }
+
+    public void ResetAll()
+    {
+        for (int i = 0; i < specialProjectilePool.Count; i++)
+        {
+            if(specialProjectilePool[i].activeSelf == true)
+            {
+                specialProjectilePool[i].SetActive(false);
+                specialProjectilePool[i].transform.position = poolParentSpecial.transform.position;
+            }
+        }
+
+        for (int i = 0; i < projectilePool.Count; i++)
+        {
+            if (projectilePool[i].activeSelf == true)
+            {
+                projectilePool[i].SetActive(false);
+                projectilePool[i].transform.position = poolParentNormal.transform.position;
+            }
+        }
+
     }
 
     void SetUpBullet(GameObject poolMember, Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter)
