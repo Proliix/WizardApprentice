@@ -97,13 +97,12 @@ public class BulletHandler : MonoBehaviour
         poolMember.SetActive(true);
     }
 
-    void SetUpBullet(GameObject poolMember, Vector3 position, Vector3 direction, GameObject shooter, bool isPlayer, float size, float speed)
+    void SetUpBullet(GameObject poolMember, Vector3 position, Vector3 direction, bool isPlayer, float size, float speed)
     {
         poolMember.transform.position = position;
         poolMember.transform.localScale = Vector3.one * size;
         Bullet bullet = poolMember.GetComponent<Bullet>();
         bullet.bulletSpeed = speed;
-        bullet.shooter = shooter;
         bullet.isPlayerBullet = isPlayer;
         bullet.UpdateColor();
         bullet.UpdateDirection(direction);
@@ -233,16 +232,16 @@ public class BulletHandler : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns a bullet at position. If move in the direction
+    /// Spawns a bullet at position. It will move in the given direction
     /// </summary>
-    public void GetBullet(Vector3 position, Vector3 direction, GameObject shooter, bool isPlayer, float size = 0.5f, float speed = 8f)
+    public void GetBullet(Vector3 position, Vector3 direction, bool isPlayer, float size = 0.5f, float speed = 8f)
     {
         bool hasSpawned = false;
         for (int i = 0; i < projectilePool.Count; i++)
         {
             if (projectilePool[i].activeSelf == false)
             {
-                SetUpBullet(projectilePool[i], position, direction, shooter, isPlayer, size, speed);
+                SetUpBullet(projectilePool[i], position, direction, isPlayer, size, speed);
                 hasSpawned = true;
                 break;
             }
@@ -260,7 +259,7 @@ public class BulletHandler : MonoBehaviour
                 projectilePool[index].name = "Bullet: " + index;
                 if (i == 0)
                 {
-                    SetUpBullet(projectilePool[currentCount + i], position, direction, shooter, isPlayer, size, speed);
+                    SetUpBullet(projectilePool[currentCount + i], position, direction, isPlayer, size, speed);
                 }
             }
         }
