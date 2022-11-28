@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 2972845709103323633}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6565921895385548058
 SpriteRenderer:
@@ -126,6 +126,7 @@ MonoBehaviour:
   maxHP: 100
   hp: 100
   hitCooldown: 1
+  removeSelf: 1
   hasHitCooldown: 0
   healthRemoveSpeed: 0.01
   usesHealthBar: 1
@@ -145,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93095ad828163564c9d88c24cb568954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSpawn: {fileID: 7793156288878276018}
+  amount: 0.5
 --- !u!50 &6565921895385548057
 Rigidbody2D:
   serializedVersion: 4
