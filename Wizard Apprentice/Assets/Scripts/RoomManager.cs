@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    [SerializeField] RoomSelectScreenGenerator roomSelectScreenGenerator;
     [SerializeField] CellManager cellManager;
     [SerializeField] GameObject playerObject;
     [SerializeField] List<GameObject> possibleEnemies;
@@ -58,7 +59,9 @@ public class RoomManager : MonoBehaviour
         if(enemyObjects.Count <= 0)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
-            LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
+            roomSelectScreenGenerator.roomSelectObject.SetActive(true);
+            Debug.Log("Turned on roomselect object");
+            //LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
         }
         else
         {
@@ -89,10 +92,16 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-
     public void RemoveEnemy(GameObject enemyObject)
     {
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
+    }
+
+    public void LoadNewRoom(int roomType)
+    {
+        LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
+        Debug.Log("Turning off room select object");
+        roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }
 }
