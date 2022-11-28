@@ -446,7 +446,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bcd623ac98caee042b39ad5d4af13f1d, type: 3}
-  projectile: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   projectileAmmount: 15
   shootCooldown: 0.5
 --- !u!1 &155354434
@@ -1105,6 +1104,10 @@ MonoBehaviour:
   bossRoomImage: {fileID: 21300000, guid: dc6437d56248c094fbbc9cbe03aa07ac, type: 3}
   normalRoomImage: {fileID: 21300000, guid: 31e350e51bfdece4da0e80747ce13b43, type: 3}
   roomIconPrefab: {fileID: 8852811572161902115, guid: 37c8740ea16a2b74cbe7edd2d3424551, type: 3}
+  roomSelectParent: {fileID: 732674753}
+  maxRoomsPerLayers: 0
+  minRoomsPerLayers: 0
+  allowedChangePerLayer: 0
 --- !u!114 &732674750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,8 +2315,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalProjectile: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
-  startSize: 25
-  poolParent: {fileID: 241025840}
+  startSizeNormal: 25
+  specialProjectile: {fileID: 0}
+  startSizeSpecial: 10
 --- !u!4 &1717051112
 Transform:
   m_ObjectHideFlags: 0
@@ -2736,7 +2740,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bcd623ac98caee042b39ad5d4af13f1d, type: 3}
-  projectile: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   projectileAmmount: 6
   shootCooldown: 0.5
 --- !u!114 &1931864713

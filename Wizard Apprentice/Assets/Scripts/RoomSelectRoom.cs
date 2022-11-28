@@ -13,6 +13,11 @@ public class RoomSelectRoom
     public Vector2 position;
     public Sprite image;
 
+    public RoomSelectRoom()
+    {
+
+    }
+
     public RoomSelectRoom(int roomId, int roomLayer, List<RoomSelectRoom> incommingRooms, List<RoomSelectRoom> outgoingRooms, List<RoomSelectRoom> sameLayer, Vector2 position, Sprite image)
     {
         this.roomId = roomId;

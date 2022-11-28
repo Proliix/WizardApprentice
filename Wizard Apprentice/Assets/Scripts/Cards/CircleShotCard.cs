@@ -6,7 +6,6 @@ public class CircleShotCard : MonoBehaviour,ICard
 {
 
     [SerializeField] Sprite image;
-    [SerializeField] GameObject projectile;
     [SerializeField] int projectileAmmount = 6;
     [SerializeField] float shootCooldown = 0.5f;
 

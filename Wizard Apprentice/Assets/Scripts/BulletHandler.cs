@@ -39,19 +39,25 @@ public class BulletHandler : MonoBehaviour
             projectilePool[i].name = "Bullet: " + i;
         }
 
-        //for (int i = 0; i < startSizeSpecial; i++)
-        //{
-        //    specialProjectilePool.Add(Instantiate(specialProjectile, poolParentSpecial.transform.position, specialProjectile.transform.rotation, poolParentSpecial.transform));
-        //    specialProjectilePool[i].SetActive(false);
-        //    //Add ProjectileScript
-        //    specialProjectilePool[i].name = "Special Bullet: " + i;
-        //}
+        for (int i = 0; i < startSizeSpecial; i++)
+        {
+            specialProjectilePool.Add(Instantiate(specialProjectile, poolParentSpecial.transform.position, specialProjectile.transform.rotation, poolParentSpecial.transform));
+            specialProjectilePool[i].SetActive(false);
+            specialProjectilePool[i].GetComponent<SpecialProjectile>().poolIndex = i;
+            specialProjectilePool[i].name = "Special Bullet: " + i;
+        }
     }
 
     public void ResetBullet(int index)
     {
         projectilePool[index].SetActive(false);
         projectilePool[index].transform.position = poolParentNormal.transform.position;
+    }
+
+    public void ResetSpecialBullet(int index)
+    {
+        specialProjectilePool[index].SetActive(false);
+        specialProjectilePool[index].transform.position = poolParentSpecial.transform.position;
     }
 
     void SetUpBullet(GameObject poolMember, Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter)
@@ -67,15 +73,19 @@ public class BulletHandler : MonoBehaviour
         poolMember.SetActive(true);
     }
 
-    void SetupSpecialBullet(GameObject poolMember, Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false)
+    void SetupSpecialBullet(GameObject poolMember, Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, float effectCooldown, float lifetime = 3f, bool moveAwayFromTarget = false)
     {
         poolMember.transform.position = position;
+        poolMember.GetComponent<SpriteRenderer>().sprite = bulletImage;
         SpecialProjectile specialBullet = poolMember.GetComponent<SpecialProjectile>();
         specialBullet.bulletState = newBulletState;
         specialBullet.Shooter = newShooter;
-        specialBullet.Image = bulletImage;
         specialBullet.currentIcard = icard;
         specialBullet.isMovingAway = moveAwayFromTarget;
+        specialBullet.isPlayerBullet = isPlayer;
+        specialBullet.effectCooldown = effectCooldown;
+        specialBullet.bulletLifetime = lifetime;
+        poolMember.SetActive(true);
     }
 
     /// <summary>
@@ -137,7 +147,7 @@ public class BulletHandler : MonoBehaviour
     }
 
 
-    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, bool moveAwayFromTarget = false)
+    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, float effectCooldown, float lifeTime = 2.5f, bool moveAwayFromTarget = false)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];
@@ -145,7 +155,7 @@ public class BulletHandler : MonoBehaviour
         {
             if (specialProjectilePool[i].activeSelf == false)
             {
-                SetupSpecialBullet(specialProjectilePool[i], position, newShooter, bulletImage, newBulletState, icard, moveAwayFromTarget);
+                SetupSpecialBullet(specialProjectilePool[i], position, newShooter, bulletImage, newBulletState, icard, isPlayer, effectCooldown, lifeTime, moveAwayFromTarget);
                 newBullet = specialProjectilePool[i];
                 hasSpawned = true;
                 break;
@@ -164,7 +174,7 @@ public class BulletHandler : MonoBehaviour
                 specialProjectilePool[index].name = "Bullet: " + index;
                 if (i == 0)
                 {
-                    SetupSpecialBullet(specialProjectilePool[currentCount + i], position, newShooter, bulletImage, newBulletState, icard, moveAwayFromTarget);
+                    SetupSpecialBullet(specialProjectilePool[currentCount + i], position, newShooter, bulletImage, newBulletState, icard, isPlayer, effectCooldown, lifeTime, moveAwayFromTarget);
                     newBullet = specialProjectilePool[currentCount + i];
                 }
 
