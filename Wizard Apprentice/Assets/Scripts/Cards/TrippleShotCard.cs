@@ -8,6 +8,9 @@ public class TrippleShotCard : MonoBehaviour, ICard
     [SerializeField] Sprite image;
     [SerializeField] float shootCooldown = 0.25f;
     [SerializeField] float shootPosDeviation = 0.25f;
+    [SerializeField] float damage = 10f;
+    [SerializeField] float size = 0.5f;
+    [SerializeField] float speed = 8f;
 
     BulletHandler bulletHandler;
     GameObject player;
@@ -22,9 +25,9 @@ public class TrippleShotCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
-        bulletHandler.GetBullet(spawnpoint, player, true, false);
-        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation));
-        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation));
+        bulletHandler.GetBullet(spawnpoint, player, true, false,damage,size,speed);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation),damage,size,speed);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation), damage, size, speed);
     }
 
     public Sprite GetSprite()
