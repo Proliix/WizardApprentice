@@ -16,12 +16,14 @@ public class SpecialProjectile : MonoBehaviour
     //bool is used to make the bullet change direction away form the shooter
     public bool isMovingAway;
 
+    bool hasShot = false;
     Vector3 dir;
     SpriteRenderer spriteRenderer;
     float effectTimer = 0;
     float timer = 0;
     Rigidbody2D rb2d;
     BulletHandler bulletHandler;
+    EnemyManager enemyManager;
     float startLifeTime = 0;
 
     GameObject homingTarget;
@@ -31,6 +33,7 @@ public class SpecialProjectile : MonoBehaviour
     private void Start()
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         dir = transform.up;
@@ -65,6 +68,16 @@ public class SpecialProjectile : MonoBehaviour
 
     void HomingShot()
     {
+        if (!hasShot)
+        {
+            homingTarget = enemyManager.GetClosestEnemy(gameObject.transform.position);
+            hasShot = true;
+        }
+
+        if(homingTarget != null)
+        {
+
+        }
 
     }
 
@@ -84,6 +97,7 @@ public class SpecialProjectile : MonoBehaviour
     {
         bulletHandler.ResetSpecialBullet(poolIndex);
         effectTimer = 0;
+        hasShot = false;
         timer = 0;
         bulletLifetime = startLifeTime;
     }
