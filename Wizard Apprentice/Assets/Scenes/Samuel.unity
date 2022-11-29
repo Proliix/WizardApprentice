@@ -387,7 +387,7 @@ MonoBehaviour:
   roomSelectObject: {fileID: 269747979}
   scrollSmoothness: 5
   scrollSpeed: 100
-  minMaxY: {x: -540, y: 540}
+  minMaxY: {x: -1080, y: 1080}
 --- !u!1 &304581854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,6 +2161,7 @@ MonoBehaviour:
   effectCooldown: 0.5
   lifeTime: 4
   force: 5
+  stunDuration: 0.15
 --- !u!95 &1483058392
 Animator:
   serializedVersion: 4
@@ -2527,9 +2528,7 @@ MonoBehaviour:
   possibleBossRooms:
   - {fileID: 11400000, guid: f29118ec819b3124f82176e15631a1b7, type: 2}
   possibleNormalRooms:
-  - {fileID: 11400000, guid: 2f6fa322cf817204fb32eb5992334a88, type: 2}
-  - {fileID: 11400000, guid: 643c19fc546131b409781a9c6eef2fbb, type: 2}
-  - {fileID: 11400000, guid: 958037a8c5e472644b2a8244c6a2542f, type: 2}
+  - {fileID: 11400000, guid: e43c061293f9d9440952dcb9c752cc7d, type: 2}
   normalRoomsPoolAmount: 40
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 2fbaeaff8875cc04c892cacfb1577a80, type: 2}
