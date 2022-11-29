@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         canDash = false;
         isDashing = true;
         activeSpeed = dashingSpeed;
-        health.SetInvicible(dashingTime);
+        health.SetInvicible(dashingTime+0.2f);
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
         activeSpeed = moveSpeed;
