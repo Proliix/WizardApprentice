@@ -9,9 +9,11 @@ public class SpecialProjectile : MonoBehaviour
     public int poolIndex;
     public GameObject Shooter;
     public bool isPlayerBullet;
+    public float damage = 10f;
     public float bulletSpeed = 8;
     public float bulletLifetime = 5f;
     public float effectCooldown = 1.5f;
+    public float effectSize = 1;
 
     //bool is used to make the bullet change direction away form the shooter
     public bool isMovingAway;
@@ -26,12 +28,16 @@ public class SpecialProjectile : MonoBehaviour
     EnemyManager enemyManager;
     float startLifeTime = 0;
 
+    Transform parent;
     GameObject homingTarget;
+
+    Vector3 relativeDistance = Vector3.zero;
 
     public ICard currentIcard;
 
     private void Start()
     {
+        parent = transform.parent;
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -49,7 +55,16 @@ public class SpecialProjectile : MonoBehaviour
 
     void RotatingShot()
     {
-        transform.RotateAround(Shooter.transform.position, transform.up, bulletSpeed * Time.deltaTime);
+        if (relativeDistance == Vector3.zero)
+            relativeDistance = transform.position - Shooter.transform.position;
+
+        transform.position = Shooter.transform.position + relativeDistance;
+
+        transform.position = Shooter.transform.position + (transform.position - Shooter.transform.position).normalized * effectSize;
+
+        transform.RotateAround(Shooter.transform.position, Vector3.forward, (bulletSpeed * 10) * Time.deltaTime);
+
+        relativeDistance = transform.position - Shooter.transform.position;
     }
 
     void TimedShot()
@@ -109,6 +124,8 @@ public class SpecialProjectile : MonoBehaviour
         homingTarget = null;
         timer = 0;
         bulletLifetime = startLifeTime;
+        transform.parent = parent;
+        relativeDistance = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -154,15 +171,21 @@ public class SpecialProjectile : MonoBehaviour
                         effectTimer += effectCooldown;
                     }
 
-                    collision.gameObject.GetComponent<Health>().RemoveHealth();
-                    bulletHandler.ResetBullet(poolIndex);
-                    ResetBullet();
+                    collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
+                    if (bulletState != SpecialBulletState.Rotating)
+                    {
+                        bulletHandler.ResetBullet(poolIndex);
+                        ResetBullet();
+                    }
                 }
             }
             else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
             {
-                bulletHandler.ResetBullet(poolIndex);
-                ResetBullet();
+                if (bulletState != SpecialBulletState.Rotating)
+                {
+                    bulletHandler.ResetBullet(poolIndex);
+                    ResetBullet();
+                }
             }
         }
     }

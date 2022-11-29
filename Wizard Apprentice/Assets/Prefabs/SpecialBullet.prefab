@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3318233835324077276}
   m_Layer: 0
   m_Name: SpecialBullet
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,9 +103,11 @@ MonoBehaviour:
   poolIndex: 0
   Shooter: {fileID: 0}
   isPlayerBullet: 0
+  damage: 10
   bulletSpeed: 8
   bulletLifetime: 5
   effectCooldown: 1.5
+  effectSize: 1
   isMovingAway: 0
 --- !u!50 &8456437400300121766
 Rigidbody2D:
@@ -127,7 +129,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &-3318233835324077276
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class HomingCard : MonoBehaviour, ICard
 
     public void Effect()
     {
-        bulletHandler.GetSpecialBullet(spawnpoint, gameObject, Bulletimage, SpecialBulletState.Homing, this, true, effectCooldown, Vector3.zero);
+        bulletHandler.GetSpecialBullet(spawnpoint, gameObject, Bulletimage, SpecialBulletState.Homing, this, true, Vector3.zero);
     }
 
     public Sprite GetSprite()

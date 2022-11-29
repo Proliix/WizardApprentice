@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8a53f48112c3348a7d34f814dabccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 10
 --- !u!70 &2619286309572622141
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -218,9 +218,12 @@ MonoBehaviour:
   maxHP: 50
   hp: 50
   hitCooldown: 1
+  removeSelf: 1
+  hasHitCooldown: 0
   healthRemoveSpeed: 0.005
   usesHealthBar: 0
   healthbar: {fileID: 0}
+  hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
 --- !u!70 &1941885606
