@@ -35,7 +35,7 @@ public class EnemyManager : MonoBehaviour
         }
         distances.Sort();
         List<GameObject> objectToReturn = new List<GameObject>();
-        for(int i = 0; i < amountToGet; i++)
+        for(int i = 0; i < Mathf.Min(amountToGet,enemyObjects.Count); i++)
         {
             objectToReturn.Add(enemyObjects[distances[i] % 1000]);
         }
