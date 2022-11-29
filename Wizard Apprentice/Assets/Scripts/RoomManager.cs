@@ -56,10 +56,11 @@ public class RoomManager : MonoBehaviour
 
     public void PlayerWalkThroughDoor()
     {
-        if(enemyObjects.Count <= 0)
+        if(enemyObjects.Count <= 1000)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
             roomSelectScreenGenerator.roomSelectObject.SetActive(true);
+            roomSelectScreenGenerator.Open();
             Debug.Log("Turned on roomselect object");
             //LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
         }

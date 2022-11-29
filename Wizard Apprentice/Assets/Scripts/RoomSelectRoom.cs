@@ -9,7 +9,8 @@ public class RoomSelectRoom
     public int roomLayer;
     public List<RoomSelectRoom> incommingRooms;
     public List<RoomSelectRoom> outgoingRooms;
-    public List<RoomSelectRoom> sameLayer;
+    public List<GameObject> outgoingLineObjects;
+    public GameObject roomIconObject;
     public Vector2 position;
     public Sprite image;
     public int roomType; 
@@ -24,13 +25,12 @@ public class RoomSelectRoom
 
     }
 
-    public RoomSelectRoom(int roomId, int roomLayer, List<RoomSelectRoom> incommingRooms, List<RoomSelectRoom> outgoingRooms, List<RoomSelectRoom> sameLayer, Vector2 position, Sprite image)
+    public RoomSelectRoom(int roomId, int roomLayer, List<RoomSelectRoom> incommingRooms, List<RoomSelectRoom> outgoingRooms, Vector2 position, Sprite image)
     {
         this.roomId = roomId;
         this.roomLayer = roomLayer;
         this.incommingRooms = incommingRooms;
         this.outgoingRooms = outgoingRooms;
-        this.sameLayer = sameLayer;
         this.position = position;
         this.image = image;
     }

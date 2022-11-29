@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class RoomSelectScreenGenerator : MonoBehaviour
 {
     public GameObject roomSelectObject;
+    [SerializeField] GameObject playerPositionObject;
+    [SerializeField] RoomSelectController roomSelectController;
     [SerializeField] RoomManager roomManager;
     [SerializeField] Sprite bossRoomImage;
     [SerializeField] Sprite normalRoomImage;
@@ -15,6 +17,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     [SerializeField] GameObject linePrefab;
     [SerializeField] Transform roomSelectParent;
     [SerializeField] Transform lineParent;
+    [SerializeField] Transform roomParent;
     [SerializeField] int numberOfLayers;
     [SerializeField] int maxRoomsPerLayers;
     [SerializeField] int minRoomsPerLayers;
@@ -26,6 +29,9 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     [SerializeField] Vector2 iconDistances;
     List<RoomSelectRoom> allRooms;
     List<List<RoomSelectRoom>> roomsByLayer;
+
+
+    RoomSelectRoom playersCurrentRoom;
 
     List<GameObject> objectsCreated;
 
@@ -55,17 +61,6 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     {
         allRooms = new List<RoomSelectRoom>();
         roomsByLayer = new List<List<RoomSelectRoom>>();
-        RoomSelectRoom bossRoom = new RoomSelectRoom(0,0,null,null,null,new Vector2(0,400), bossRoomImage);
-        allRooms.Add(bossRoom);
-        int firstLayerAmount = Random.Range(1, 4);
-        List<RoomSelectRoom> firstLayerList = new List<RoomSelectRoom>();
-        for(int i = 0; i < firstLayerAmount; i++)
-        {
-            RoomSelectRoom room = new RoomSelectRoom(allRooms.Count, 1, null, new List<RoomSelectRoom>() { bossRoom }, null, new Vector2(i * 100 + -100, 300), normalRoomImage);
-            allRooms.Add(room);
-            firstLayerList.Add(room);
-        }
-        bossRoom.incommingRooms = firstLayerList;
     }
 
     public void GenerateLayer()
@@ -86,6 +81,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
             roomsInThisLayer.Add(room);
             room.incommingRooms = new List<RoomSelectRoom>();
             room.outgoingRooms = new List<RoomSelectRoom>();
+            room.outgoingLineObjects = new List<GameObject>();
         }
 
         //Set first outgoing
@@ -174,12 +170,30 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         rooms.Add(room);
         room.incommingRooms = new List<RoomSelectRoom>();
         room.outgoingRooms = new List<RoomSelectRoom>();
+        room.outgoingLineObjects = new List<GameObject>();
         for(int i = 0; i < roomsByLayer[roomsByLayer.Count-1].Count; i++)
         {
             room.outgoingRooms.Add(roomsByLayer[roomsByLayer.Count - 1][i]);
             roomsByLayer[roomsByLayer.Count - 1][i].incommingRooms.Add(room);
         }
         roomsByLayer.Add(rooms);
+        SetPlayerRoom(room);
+    }
+
+    public void Open()
+    {
+        roomSelectController.SetPosition(playersCurrentRoom.position.y);
+        playerPositionObject.transform.localPosition = playersCurrentRoom.position + new Vector2(0,15);
+        playersCurrentRoom.roomIconObject.SetActive(false);
+        for(int i = 0; i < playersCurrentRoom.outgoingLineObjects.Count; i++)
+        {
+            playersCurrentRoom.outgoingLineObjects[i].GetComponent<Image>().color = Color.yellow;
+        }
+    }
+
+    public void SetPlayerRoom(RoomSelectRoom playerRoom)
+    {
+        playersCurrentRoom = playerRoom;
     }
 
     public void GenerateLookOfScreen()
@@ -192,12 +206,13 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                 if (roomsByLayer[i][j].outgoingRooms.Count > 0)
                 {
                     int roomType = Random.Range(0, roomIconPrefabs.Count);
-                    roomIcon = Instantiate(roomIconPrefabs[roomType], roomSelectParent);
+                    roomIcon = Instantiate(roomIconPrefabs[roomType], roomParent);
+                    roomsByLayer[i][j].roomIconObject = roomIcon;
                     roomsByLayer[i][j].roomType = roomType + 1;
                 }
                 else
                 {
-                    roomIcon = Instantiate(bossRoomIconPrefab, roomSelectParent);
+                    roomIcon = Instantiate(bossRoomIconPrefab, roomParent);
                     roomsByLayer[i][j].roomType = 0;
                 }
                 Vector2Int temp = new Vector2Int(i,j);
@@ -218,13 +233,13 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
                 for (int k = 0; k < roomsByLayer[i][j].outgoingRooms.Count; k++)
                 {
-                    DrawLine(position, (roomsByLayer[i][j].outgoingRooms[k].position));
+                    roomsByLayer[i][j].outgoingLineObjects.Add(DrawLine(position, (roomsByLayer[i][j].outgoingRooms[k].position)));
                 }
             }
         }
     }
 
-    public void DrawLine(Vector2 startPos, Vector2 endPos)
+    public GameObject DrawLine(Vector2 startPos, Vector2 endPos)
     {
         GameObject line = Instantiate(linePrefab, lineParent);
         Vector2 pos = (startPos + endPos) / 2;
@@ -234,8 +249,9 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         if (theta < 0.0)
             theta += Mathf.PI * 2;
         line.transform.localRotation = Quaternion.Euler(0, 0, (Mathf.Rad2Deg * theta - 90) * -1);
-        line.transform.localScale = new Vector3(0.03f,(startPos-endPos).magnitude / 100f,1f);
+        line.GetComponent<RectTransform>().sizeDelta = new Vector2(100,(startPos-endPos).magnitude / line.transform.localScale.y);
         objectsCreated.Add(line);
+        return line;
         
     }
 
@@ -250,7 +266,21 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
     public void OnClickedRoomIcon(Vector2Int id)
     {
-        Debug.Log("Loading room");
-        roomManager.LoadNewRoom(roomsByLayer[id.x][id.y].roomType);
+        for(int i = 0; i < playersCurrentRoom.outgoingRooms.Count; i++)
+        {
+            if(roomsByLayer[id.x][id.y] == playersCurrentRoom.outgoingRooms[i])
+            {
+                Debug.Log("Loading room");
+                roomManager.LoadNewRoom(roomsByLayer[id.x][id.y].roomType);
+                playersCurrentRoom.roomIconObject.SetActive(true);
+                for (int j = 0; j < playersCurrentRoom.outgoingLineObjects.Count; j++)
+                {
+                    playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = Color.white;
+                }
+                playersCurrentRoom = roomsByLayer[id.x][id.y];
+                return;
+            }
+        }
+        Debug.Log("You clicked on a room that was inaccessible!");
     }
 }
