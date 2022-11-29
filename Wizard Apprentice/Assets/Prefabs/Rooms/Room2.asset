@@ -15,3 +15,4 @@ MonoBehaviour:
   roomPrefab: {fileID: 2274545501124088365, guid: 0390177c1724d1e4b8a6eb4951951513, type: 3}
   roomSize: {x: 10, y: 12}
   roomDifficulty: 1
+  generateRandomRoom: 1

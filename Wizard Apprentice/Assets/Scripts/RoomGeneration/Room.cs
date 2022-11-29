@@ -8,4 +8,5 @@ public class Room : ScriptableObject
     public GameObject roomPrefab;
     public Vector2Int roomSize;
     public int roomDifficulty;
+    public bool generateRandomRoom;
 }

@@ -18,6 +18,19 @@ public class RoomManager : MonoBehaviour
     GameObject currentRoomParent;
     [SerializeField] EnemyManager enemyManager;
 
+    [SerializeField] List<Room> possibleBossRooms;
+    [SerializeField] List<Room> possibleNormalRooms;
+    public int normalRoomsPoolAmount;
+    [SerializeField] List<Room> possibleMinibossRooms;
+    public int miniBossRoomsPoolAmount;
+    [SerializeField] List<Room> possibleTreasureRooms;
+    public int treasureRoomsPoolAmount;
+    [SerializeField] List<Room> possibleMysteryRooms;
+    public int mysteryRoomsPoolAmount;
+
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -101,7 +114,27 @@ public class RoomManager : MonoBehaviour
 
     public void LoadNewRoom(int roomType)
     {
-        LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
+        switch(roomType)
+        {
+            case 0:
+                LoadPremadeRoom(possibleBossRooms[Random.Range(0, possibleBossRooms.Count)]);
+                break;
+            case 1:
+                LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
+                break;
+            case 2:
+                LoadPremadeRoom(possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)]);
+                break;
+            case 3:
+                LoadPremadeRoom(possibleTreasureRooms[Random.Range(0, possibleTreasureRooms.Count)]);
+                break;
+            case 4:
+                LoadPremadeRoom(possibleMysteryRooms[Random.Range(0, possibleMysteryRooms.Count)]);
+                break;
+            default:
+                LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
+                break;
+        }
         Debug.Log("Turning off room select object");
         roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }

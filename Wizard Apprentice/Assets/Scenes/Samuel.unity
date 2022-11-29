@@ -2524,6 +2524,22 @@ MonoBehaviour:
   exitDoorPrefab: {fileID: 226080780411628952, guid: 0d334158a641f2e4cb770ccb1683f9d0, type: 3}
   roomParent: {fileID: 3714845512778590098, guid: cfe613bd22b976f428533e8536cf7c1d, type: 3}
   enemyManager: {fileID: 1572242042}
+  possibleBossRooms:
+  - {fileID: 11400000, guid: f29118ec819b3124f82176e15631a1b7, type: 2}
+  possibleNormalRooms:
+  - {fileID: 11400000, guid: 2f6fa322cf817204fb32eb5992334a88, type: 2}
+  - {fileID: 11400000, guid: 643c19fc546131b409781a9c6eef2fbb, type: 2}
+  - {fileID: 11400000, guid: 958037a8c5e472644b2a8244c6a2542f, type: 2}
+  normalRoomsPoolAmount: 40
+  possibleMinibossRooms:
+  - {fileID: 11400000, guid: 2fbaeaff8875cc04c892cacfb1577a80, type: 2}
+  miniBossRoomsPoolAmount: 5
+  possibleTreasureRooms:
+  - {fileID: 11400000, guid: 434ea1c03590ee94a944917397cbdb3c, type: 2}
+  treasureRoomsPoolAmount: 3
+  possibleMysteryRooms:
+  - {fileID: 11400000, guid: a8cd84b49298f8946a2a46f2901b0b0d, type: 2}
+  mysteryRoomsPoolAmount: 3
 --- !u!114 &1572242045
 MonoBehaviour:
   m_ObjectHideFlags: 0

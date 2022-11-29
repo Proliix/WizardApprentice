@@ -30,6 +30,15 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     List<RoomSelectRoom> allRooms;
     List<List<RoomSelectRoom>> roomsByLayer;
 
+    int totalPool;
+    int normalPool;
+    int minibossPool;
+    int treasurePool;
+    int mysteryPool;
+    public enum RoomTypes
+    {
+        BossRoom, NormalRoom, MinibossRoom, TreasureRoom, MysteryRoom
+    }
 
     RoomSelectRoom playersCurrentRoom;
 
@@ -196,6 +205,52 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         playersCurrentRoom = playerRoom;
     }
 
+    public void GeneratePoolAmounts()
+    {
+        normalPool = roomManager.normalRoomsPoolAmount;
+        minibossPool = roomManager.miniBossRoomsPoolAmount;
+        treasurePool = roomManager.treasureRoomsPoolAmount;
+        mysteryPool = roomManager.mysteryRoomsPoolAmount;
+        totalPool = normalPool+minibossPool+treasurePool+mysteryPool;
+    }
+
+    public int ChooseRoomTypeFromPool()
+    {
+        if(totalPool <= 0)
+        {
+            GeneratePoolAmounts();
+        }
+        int randValue = Random.Range(0, totalPool);
+        if(randValue < normalPool)
+        {
+            totalPool--;
+            normalPool--;
+            return 1;
+        }
+        else if (randValue < minibossPool+normalPool)
+        {
+            totalPool--;
+            minibossPool--;
+            return 2;
+        }
+        else if (randValue < treasurePool+minibossPool+normalPool)
+        {
+            totalPool--;
+            treasurePool--;
+            return 3;
+        }
+        else if (randValue < mysteryPool+ treasurePool + minibossPool + normalPool)
+        {
+            totalPool--;
+            mysteryPool--;
+            return 4;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+
     public void GenerateLookOfScreen()
     {
         for(int i = 0; i < roomsByLayer.Count; i++)
@@ -205,10 +260,10 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                 GameObject roomIcon;
                 if (roomsByLayer[i][j].outgoingRooms.Count > 0)
                 {
-                    int roomType = Random.Range(0, roomIconPrefabs.Count);
-                    roomIcon = Instantiate(roomIconPrefabs[roomType], roomParent);
+                    int roomType = ChooseRoomTypeFromPool();
+                    roomIcon = Instantiate(roomIconPrefabs[roomType-1], roomParent);
                     roomsByLayer[i][j].roomIconObject = roomIcon;
-                    roomsByLayer[i][j].roomType = roomType + 1;
+                    roomsByLayer[i][j].roomType = roomType;
                 }
                 else
                 {
