@@ -122,6 +122,7 @@ MonoBehaviour:
   maxHP: 100
   hp: 100
   hitCooldown: 1
+  removeSelf: 1
   hasHitCooldown: 0
   healthRemoveSpeed: 0.005
   usesHealthBar: 0
@@ -244,4 +245,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8a53f48112c3348a7d34f814dabccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 10

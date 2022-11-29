@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HurtBox : MonoBehaviour
 {
-    [SerializeField] float damage;
+    [SerializeField] float damage = 10f;
 
     Health playerHealth;
 
@@ -16,11 +16,9 @@ public class HurtBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Has hit something");
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Has hit player should work");
-            playerHealth.RemoveHealth();
+            playerHealth.RemoveHealth(damage);
         }
     }
 }
