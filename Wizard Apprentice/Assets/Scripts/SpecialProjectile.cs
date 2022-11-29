@@ -9,7 +9,7 @@ public class SpecialProjectile : MonoBehaviour
     public int poolIndex;
     public GameObject Shooter;
     public bool isPlayerBullet;
-    [SerializeField] float bulletSpeed;
+    public float bulletSpeed = 8;
     public float bulletLifetime = 5f;
     public float effectCooldown = 1.5f;
 
@@ -70,15 +70,20 @@ public class SpecialProjectile : MonoBehaviour
     {
         if (!hasShot)
         {
+
             homingTarget = enemyManager.GetClosestEnemy(gameObject.transform.position);
             hasShot = true;
         }
 
         if (homingTarget != null)
         {
-            dir = transform.position - homingTarget.transform.position;
+            dir = homingTarget.transform.position - transform.position;
         }
 
+        if (dir == Vector3.zero || dir == null)
+        {
+            dir = transform.up;
+        }
 
         rb2d.velocity = dir.normalized * bulletSpeed;
     }
@@ -100,6 +105,8 @@ public class SpecialProjectile : MonoBehaviour
         bulletHandler.ResetSpecialBullet(poolIndex);
         effectTimer = 0;
         hasShot = false;
+        dir = Vector3.zero;
+        homingTarget = null;
         timer = 0;
         bulletLifetime = startLifeTime;
     }

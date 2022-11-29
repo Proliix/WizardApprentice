@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject shooter;
+    public float damage = 10f;
     public bool moveAwayFromShoter;
     public bool isPlayerBullet;
     public int poolIndex;
@@ -85,7 +86,7 @@ public class Bullet : MonoBehaviour
             {
                 if (collision.gameObject.GetComponent<Health>().GetCanBeHit() == true)
                 {
-                    collision.gameObject.GetComponent<Health>().RemoveHealth();
+                    collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
                     bulletHandler.ResetBullet(poolIndex);
                     ResetTimer();
                 }

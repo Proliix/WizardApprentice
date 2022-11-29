@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6167718040923600017}
   - component: {fileID: 2199920279753785107}
   - component: {fileID: 3205804017517233318}
+  - component: {fileID: 8456437400300121766}
   - component: {fileID: -3318233835324077276}
   m_Layer: 0
   m_Name: SpecialBullet
@@ -102,10 +103,31 @@ MonoBehaviour:
   poolIndex: 0
   Shooter: {fileID: 0}
   isPlayerBullet: 0
-  bulletSpeed: 0
+  bulletSpeed: 8
   bulletLifetime: 5
   effectCooldown: 1.5
   isMovingAway: 0
+--- !u!50 &8456437400300121766
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227880843289009281}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &-3318233835324077276
 CircleCollider2D:
   m_ObjectHideFlags: 0
