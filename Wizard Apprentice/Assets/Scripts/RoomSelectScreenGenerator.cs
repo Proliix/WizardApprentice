@@ -218,7 +218,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                 Vector2Int temp = new Vector2Int(i,j);
                 roomIcon.GetComponent<Button>().onClick.AddListener(delegate { OnClickedRoomIcon(temp); });
                 objectsCreated.Add(roomIcon);
-                Vector2 averagePosOfOutgoing = new Vector2(j * iconDistances.x - (roomsByLayer[i].Count * iconDistances.x*0.5f), i * -iconDistances.y + 400) * preferStayingInSetPosition;
+                Vector2 averagePosOfOutgoing = new Vector2(j * iconDistances.x - ((roomsByLayer[i].Count-1) * iconDistances.x*0.5f), i * -iconDistances.y + 400) * preferStayingInSetPosition;
                 if (roomsByLayer[i][j].outgoingRooms.Count > 0)
                 {
                     for (int k = 0; k < roomsByLayer[i][j].outgoingRooms.Count; k++)

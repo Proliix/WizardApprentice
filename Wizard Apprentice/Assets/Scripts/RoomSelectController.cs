@@ -28,7 +28,7 @@ public class RoomSelectController : MonoBehaviour
     public void SetPosition(float newY)
     {
         builtUpScroll = 0;
-        roomSelectObject.transform.localPosition = new Vector2(0, Mathf.Clamp(newY *-1f, minMaxY.x, minMaxY.y));
+        roomSelectObject.transform.localPosition = new Vector2(0, Mathf.Clamp(2*(newY *-1f), minMaxY.x, minMaxY.y));
 
     }
 }
