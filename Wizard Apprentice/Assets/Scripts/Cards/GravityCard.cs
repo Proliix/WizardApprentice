@@ -10,6 +10,7 @@ public class GravityCard : MonoBehaviour, ICard
     [SerializeField] float effectCooldown = 0.5f;
     [SerializeField] float lifeTime = 4f;
     [SerializeField] float force = 2f;
+    [SerializeField] float stunDuration = 0.15f;
 
 
 
@@ -31,12 +32,16 @@ public class GravityCard : MonoBehaviour, ICard
         enemiesWithingRange = enemyManager.GetEnemiesWithinRange(gravityBullet.transform.position, effectRange);
         for (int i = 0; i < enemiesWithingRange.Count; i++)
         {
-            if (enemiesWithingRange[i].GetComponent<Rigidbody2D>() != null)
+            if (enemiesWithingRange[i].GetComponent<IStunnable>() != null)
             {
-                Vector2 dir = gravityBullet.transform.position - enemiesWithingRange[i].transform.position;
-                //enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity += dir.normalized * force;
-                enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
-                Debug.Log("Gravity card effect Triggered");
+                if (enemiesWithingRange[i].GetComponent<Rigidbody2D>() != null)
+                {
+                    Vector2 dir = gravityBullet.transform.position - enemiesWithingRange[i].transform.position;
+                    enemiesWithingRange[i].GetComponent<IStunnable>().GetStunned(stunDuration);
+                    //enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity += dir.normalized * force;
+                    enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
+                    Debug.Log("Gravity card effect Triggered");
+                }
             }
         }
     }

@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] float maxHP = 100;
     [SerializeField] float hp = 100;
     [SerializeField] float hitCooldown = 1f;
+
     [SerializeField] bool removeSelf = true;
     [SerializeField] bool hasHitCooldown = false;
     [Header("UI")]

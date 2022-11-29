@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeledogAI : MonoBehaviour
+public class SkeledogAI : MonoBehaviour, IStunnable
 {
 
     SpriteRenderer enemyFlip;
@@ -13,6 +13,8 @@ public class SkeledogAI : MonoBehaviour
     [SerializeField] float chargeTimeLeft;
 
     private Transform target;
+    private float stunTime = 0.25f;
+    private bool stunned = false;
 
     void Start()
     {
@@ -28,43 +30,65 @@ public class SkeledogAI : MonoBehaviour
 
     IEnumerator DashAttack()
     {
+        rb2d.velocity = Vector2.zero;
         //Randomized time enemy waits inbetween dashes, to avoid them clumping 
         yield return new WaitForSeconds(Random.Range(0.3f, 1.2f));
-
-        //Calculates direction and lenght of dash
-        Vector2 dashDirection = target.position - transform.position;
-
-
-        float timeDashed = 0;
-
-        //TimeDashed = how long a single dash is in seconds 
-        while (timeDashed < 0.7f)
+        if (!stunned)
         {
 
-            //Makes the enemy look in the player direction 
-            if (Vector3.Distance(rb2d.transform.position, target.position) >= 0)
+
+            //Calculates direction and lenght of dash
+            Vector2 dashDirection = target.position - transform.position;
+
+
+            float timeDashed = 0;
+
+            //TimeDashed = how long a single dash is in seconds 
+            while (timeDashed < 0.7f)
             {
-                Vector3 direction = (target.position - rb2d.transform.position).normalized;
 
-                if (direction.x >= 0)
+                //Makes the enemy look in the player direction 
+                if (Vector3.Distance(rb2d.transform.position, target.position) >= 0)
                 {
-                    enemyFlip.flipX = false;
+                    Vector3 direction = (target.position - rb2d.transform.position).normalized;
+
+                    if (direction.x >= 0)
+                    {
+                        enemyFlip.flipX = false;
+                    }
+                    else
+                    {
+                        enemyFlip.flipX = true;
+                    }
                 }
-                else
-                {
-                    enemyFlip.flipX = true;
-                }
+
+                float dashStep = dashMoveSpeed * Time.deltaTime;
+
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + (Vector3)dashDirection.normalized * 100, dashStep);
+                timeDashed += Time.deltaTime;
+
+                yield return null;
             }
-
-            float dashStep = dashMoveSpeed * Time.deltaTime;
-
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + (Vector3)dashDirection.normalized * 100, dashStep);
-            timeDashed += Time.deltaTime;
-
-            yield return null;
         }
         //Loops the dashes 
         StartCoroutine(DashAttack());
+    }
+
+    public void GetStunned(float stunDuration = 0.25F)
+    {
+        stunTime = stunDuration;
+
+        if (stunned)
+            StopCoroutine(IsStunned());
+
+        StartCoroutine(IsStunned());
+    }
+
+    public IEnumerator IsStunned()
+    {
+        stunned = true;
+        yield return new WaitForSeconds(stunTime);
+        stunned = false;
     }
 
 

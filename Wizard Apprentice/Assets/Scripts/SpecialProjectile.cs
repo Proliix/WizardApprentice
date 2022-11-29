@@ -42,7 +42,6 @@ public class SpecialProjectile : MonoBehaviour
         enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        dir = transform.up;
         startLifeTime = bulletLifetime;
     }
 
@@ -50,6 +49,11 @@ public class SpecialProjectile : MonoBehaviour
 
     void NormalShot()
     {
+        if (dir == null || dir == Vector3.zero)
+        {
+            dir = transform.up;
+        }
+
         rb2d.velocity = dir.normalized * bulletSpeed;
     }
 
@@ -113,6 +117,14 @@ public class SpecialProjectile : MonoBehaviour
         }
     }
 
+    void BouncyShot()
+    {
+        if (rb2d.velocity.x > -0.05f && rb2d.velocity.x < 0.05f && rb2d.velocity.y > -0.05f && rb2d.velocity.y < 0.05f)
+        {
+            NormalShot();
+        }
+        Debug.Log("Is here" + rb2d.velocity);
+    }
     #endregion
 
     public void ResetBullet()
@@ -120,6 +132,7 @@ public class SpecialProjectile : MonoBehaviour
         bulletHandler.ResetSpecialBullet(poolIndex);
         effectTimer = 0;
         hasShot = false;
+        rb2d.velocity = Vector2.zero;
         dir = Vector3.zero;
         homingTarget = null;
         timer = 0;
@@ -148,6 +161,9 @@ public class SpecialProjectile : MonoBehaviour
             case SpecialBulletState.Homing:
                 HomingShot();
                 break;
+            case SpecialBulletState.Bouncy:
+                BouncyShot();
+                break;
             default:
                 NormalShot();
                 break;
@@ -172,19 +188,37 @@ public class SpecialProjectile : MonoBehaviour
                     }
 
                     collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
-                    if (bulletState != SpecialBulletState.Rotating)
+                    if (bulletState != SpecialBulletState.Rotating && bulletState != SpecialBulletState.Bouncy)
                     {
                         bulletHandler.ResetBullet(poolIndex);
                         ResetBullet();
+                    }
+                    else if (bulletState == SpecialBulletState.Bouncy)
+                    {
+                        Vector2 hitInfo = -transform.position.normalized;
+
+                        Vector2 reflection = Vector2.Reflect(rb2d.velocity.normalized, hitInfo);
+                        transform.rotation = Quaternion.FromToRotation(transform.up, reflection) * transform.rotation;
+                        dir = Vector3.zero;
+                        NormalShot();
                     }
                 }
             }
             else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
             {
-                if (bulletState != SpecialBulletState.Rotating)
+                if (bulletState != SpecialBulletState.Rotating && bulletState != SpecialBulletState.Bouncy)
                 {
                     bulletHandler.ResetBullet(poolIndex);
                     ResetBullet();
+                }
+                else if (bulletState == SpecialBulletState.Bouncy)
+                {
+                    Vector2 hitInfo = -transform.position.normalized;
+
+                    Vector2 reflection = Vector2.Reflect(rb2d.velocity.normalized, hitInfo);
+                    transform.rotation = Quaternion.FromToRotation(transform.up, reflection) * transform.rotation;
+                    dir = Vector3.zero;
+                    NormalShot();
                 }
             }
         }
