@@ -6,6 +6,7 @@ public class GravityCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
     [SerializeField] Sprite Bulletimage;
+    [SerializeField] float size = 1.25f;
     [SerializeField] float effectRange = 2f;
     [SerializeField] float effectCooldown = 0.5f;
     [SerializeField] float lifeTime = 4f;
@@ -61,7 +62,7 @@ public class GravityCard : MonoBehaviour, ICard
         if (!hasFired)
         {
             hasFired = true;
-            gravityBullet = bulletHandler.GetSpecialBullet(player.transform.position, gameObject, Bulletimage, SpecialBulletState.Static, this, true, effectCooldown, lifeTime);
+            gravityBullet = bulletHandler.GetSpecialBullet(player.transform.position, gameObject, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", effectCooldown, lifeTime, false, 0, size);
         }
     }
 }

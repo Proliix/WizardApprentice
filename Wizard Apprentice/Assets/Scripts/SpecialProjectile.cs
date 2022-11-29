@@ -32,12 +32,14 @@ public class SpecialProjectile : MonoBehaviour
     GameObject homingTarget;
 
     Vector3 relativeDistance = Vector3.zero;
+    Animator anim;
 
     public ICard currentIcard;
 
-    private void Start()
+    private void Awake()
     {
         parent = transform.parent;
+        anim = gameObject.GetComponent<Animator>();
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -130,6 +132,7 @@ public class SpecialProjectile : MonoBehaviour
     public void ResetBullet()
     {
         bulletHandler.ResetSpecialBullet(poolIndex);
+        ResetAnimations();
         effectTimer = 0;
         hasShot = false;
         rb2d.velocity = Vector2.zero;
@@ -139,6 +142,18 @@ public class SpecialProjectile : MonoBehaviour
         bulletLifetime = startLifeTime;
         transform.parent = parent;
         relativeDistance = Vector3.zero;
+    }
+
+    public void SetAnimationBool(string name, bool value = true)
+    {
+        anim.SetBool(name, value);
+    }
+
+    public void ResetAnimations()
+    {
+        Debug.LogWarning("Reset animations");
+        anim.SetTrigger("Reset");
+        anim.SetBool("Blackhole", false);
     }
 
     // Update is called once per frame
