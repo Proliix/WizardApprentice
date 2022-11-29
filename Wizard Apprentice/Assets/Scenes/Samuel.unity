@@ -387,7 +387,7 @@ MonoBehaviour:
   roomSelectObject: {fileID: 269747979}
   scrollSmoothness: 5
   scrollSpeed: 100
-  minMaxY: {x: -540, y: 540}
+  minMaxY: {x: -1080, y: 1080}
 --- !u!1 &304581854
 GameObject:
   m_ObjectHideFlags: 0
