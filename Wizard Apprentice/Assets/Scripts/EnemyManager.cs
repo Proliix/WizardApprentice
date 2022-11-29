@@ -19,7 +19,14 @@ public class EnemyManager : MonoBehaviour
                 closestIndex = i;
             }
         }
-        return enemyObjects[closestIndex];
+        if(enemyObjects.Count > 0)
+        {
+            return enemyObjects[closestIndex];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public List<GameObject> GetClosestEnemy(Vector3 point, int amountToGet)
@@ -67,7 +74,14 @@ public class EnemyManager : MonoBehaviour
                 lowestIndex = i;
             }
         }
-        return enemyObjects[lowestIndex];
+        if(enemyObjects.Count > 0)
+        {
+            return enemyObjects[lowestIndex];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public GameObject GetEnemyWithHighestHealth()
@@ -82,6 +96,13 @@ public class EnemyManager : MonoBehaviour
                 highestIndex = i;
             }
         }
-        return enemyObjects[highestIndex];
+        if(enemyObjects.Count > 0)
+        {
+            return enemyObjects[highestIndex];
+        }
+        else
+        {
+            return null;
+        }
     }
 }
