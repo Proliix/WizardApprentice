@@ -84,6 +84,7 @@ public class Bullet : MonoBehaviour
         {
             if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
             {
+
                 if (collision.gameObject.GetComponent<Health>().GetCanBeHit() == true)
                 {
                     collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
@@ -93,10 +94,13 @@ public class Bullet : MonoBehaviour
             }
         }
 
-        if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
             bulletHandler.ResetBullet(poolIndex);
             ResetTimer();
         }
     }
+
+    
+
 }
