@@ -17,6 +17,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] GameObject roomParent;
     GameObject currentRoomParent;
     [SerializeField] EnemyManager enemyManager;
+    [SerializeField] BulletHandler bulletHandler;
+    [SerializeField] CardHandler cardHandler;
 
     [SerializeField] List<Room> possibleBossRooms;
     [SerializeField] List<Room> possibleNormalRooms;
@@ -72,6 +74,9 @@ public class RoomManager : MonoBehaviour
         if(enemyObjects.Count <= 1000)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
+            RemoveAllEnemies();
+            bulletHandler.ResetAll();
+            cardHandler.isActive = false;
             roomSelectScreenGenerator.roomSelectObject.SetActive(true);
             roomSelectScreenGenerator.Open();
             Debug.Log("Turned on roomselect object");
@@ -106,14 +111,27 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public void RemoveAllEnemies()
+    {
+        for (int i = enemyObjects.Count-1; i >= 0; i--)
+        {
+            Destroy(enemyObjects[i]);
+            enemyObjects.RemoveAt(i);
+        }
+        enemyObjects.Clear();
+    }
+
     public void RemoveEnemy(GameObject enemyObject)
     {
+        Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
     }
 
     public void LoadNewRoom(int roomType)
     {
+        bulletHandler.ResetAll();
+        cardHandler.isActive = true;
         switch(roomType)
         {
             case 0:

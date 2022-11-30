@@ -1681,6 +1681,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 0b7f2cb4639068d4592da11341f57207, type: 3}
   Bulletimage: {fileID: 21300000, guid: c826fef561b9ec34894da31cad59147a, type: 3}
+  damage: 5
+  size: 0.5
+  speed: 8
   effectCooldown: 0.5
   lifeTime: 4
 --- !u!95 &1151476631
@@ -2157,6 +2160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
   Bulletimage: {fileID: 21300000, guid: 64045465c3ac3f94fbbc2ba78f5f0a20, type: 3}
+  size: 1.25
   effectRange: 3
   effectCooldown: 0.5
   lifeTime: 4
@@ -2411,6 +2415,7 @@ MonoBehaviour:
   - {fileID: 982597656}
   - {fileID: 913656492}
   - {fileID: 2126800984}
+  isActive: 1
   cardCycle:
   - {fileID: 2141177672}
   - {fileID: 982597661}
@@ -2525,8 +2530,10 @@ MonoBehaviour:
   exitDoorPrefab: {fileID: 226080780411628952, guid: 0d334158a641f2e4cb770ccb1683f9d0, type: 3}
   roomParent: {fileID: 3714845512778590098, guid: cfe613bd22b976f428533e8536cf7c1d, type: 3}
   enemyManager: {fileID: 1572242042}
+  bulletHandler: {fileID: 1572242045}
+  cardHandler: {fileID: 1572242040}
   possibleBossRooms:
-  - {fileID: 11400000, guid: f29118ec819b3124f82176e15631a1b7, type: 2}
+  - {fileID: 11400000, guid: cdcfaa60af5e01f418d54753ea3514b0, type: 2}
   possibleNormalRooms:
   - {fileID: 11400000, guid: e43c061293f9d9440952dcb9c752cc7d, type: 2}
   normalRoomsPoolAmount: 40

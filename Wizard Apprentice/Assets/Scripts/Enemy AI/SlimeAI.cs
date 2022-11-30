@@ -14,6 +14,7 @@ public class SlimeAI : MonoBehaviour, IStunnable
     [SerializeField] float maxJumpCooldown;
     [SerializeField] float jumpHeight;
     [SerializeField] AnimationCurve jumpCurve;
+    private GameObject hurtBox;
     Vector2 targetPos;
     Vector2 jumpFromPos;
     float timeUntilNextJump;
@@ -30,6 +31,7 @@ public class SlimeAI : MonoBehaviour, IStunnable
     {
         rb2d = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
+        hurtBox = gameObject.GetComponentInChildren<HurtBox>().gameObject;
     }
 
     private void Update()
@@ -44,6 +46,7 @@ public class SlimeAI : MonoBehaviour, IStunnable
     {
         if(timeUntilNextJump < 0)
         {
+            hurtBox.SetActive(true);
             jumpActive = true;
             timeInJump = 0;
             jumpTime = jumpDistance / jumpSpeed;
@@ -56,6 +59,7 @@ public class SlimeAI : MonoBehaviour, IStunnable
         if (timeInJump > jumpTime)
         {
             jumpActive = false;
+            hurtBox.SetActive(false);
         }
         if (jumpActive)
         {
