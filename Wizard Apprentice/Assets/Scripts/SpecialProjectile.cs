@@ -151,9 +151,8 @@ public class SpecialProjectile : MonoBehaviour
 
     public void ResetAnimations()
     {
-        Debug.LogWarning("Reset animations");
-        anim.SetTrigger("Reset");
         anim.SetBool("Blackhole", false);
+        anim.SetTrigger("Reset");
     }
 
     // Update is called once per frame
