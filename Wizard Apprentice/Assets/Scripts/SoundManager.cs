@@ -38,10 +38,10 @@ public class SoundManager : MonoBehaviour
 
     public void PlayAudio(AudioClip clip, float volume = 1, float maxPitch = 0.8f, float minPitch = 1.2f)
     {
-        effectSource.pitch = pitch;
+        effectSource.pitch = Random.Range(maxPitch, minPitch);
 
         effectSource.PlayOneShot(clip, volume);
-        effectSource.pitch = Random.Range(maxPitch, minPitch);
+        effectSource.pitch = 1;
     }
 }
 
