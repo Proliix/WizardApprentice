@@ -25,9 +25,7 @@ public class CircleShotCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
-        //bulletHandler.GetCircleShot(projectileAmmount + stats.projectileAmount, player, true, damage + stats.damage, bulletSize + stats.projectileSize, speed + stats.projectileSpeed);
-        
-        bulletHandler.GetCircleShot(Random.Range(9, 12), player, false, 1, damage, bulletSize, speed);
+        bulletHandler.GetCircleShot(projectileAmmount + stats.projectileAmount, player, true, damage + stats.damage, bulletSize + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()
