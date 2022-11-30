@@ -14,6 +14,7 @@ public class TrippleShotCard : MonoBehaviour, ICard
 
     BulletHandler bulletHandler;
     GameObject player;
+    PlayerStats stats;
     Transform spawnpoint;
     float timer = 10;
 
@@ -21,13 +22,14 @@ public class TrippleShotCard : MonoBehaviour, ICard
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
         spawnpoint = player.GetComponent<PlayerAiming>().bulletSpawn.transform;
     }
     public void Effect()
     {
-        bulletHandler.GetBullet(spawnpoint, player, true, false,damage,size,speed);
-        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation),damage,size,speed);
-        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation), damage, size, speed);
+        bulletHandler.GetBullet(spawnpoint, player, true, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation), damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation), damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()

@@ -15,19 +15,21 @@ public class NormalCard : MonoBehaviour, ICard
     BulletHandler bulletHandler;
     Transform spawnpoint;
     GameObject player;
+    PlayerStats stats;
     float timer = 10;
 
     private void Start()
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
 
         spawnpoint = player.GetComponent<PlayerAiming>().bulletSpawn.transform;
     }
 
     public void Effect()
     {
-        bulletHandler.GetBullet(spawnpoint, player, true, false, damage, size, speed);
+        bulletHandler.GetBullet(spawnpoint, player, true, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()

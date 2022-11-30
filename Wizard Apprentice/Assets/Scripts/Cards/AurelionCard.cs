@@ -20,16 +20,18 @@ public class AurelionCard : MonoBehaviour, ICard
     float timer = 10;
     BulletHandler bulletHandler;
     GameObject player;
+    PlayerStats stats;
 
     private void Start()
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
     }
 
     public void Effect()
     {
-        for (float deg = 0; deg < 360; deg += 360f / amount)
+        for (float deg = 0; deg < 360; deg += 360f / (amount + stats.projectileAmount))
         {
             float vertical = Mathf.Sin(Mathf.Deg2Rad * (deg + 90));
             float horizontal = Mathf.Cos(Mathf.Deg2Rad * (deg + 90));
@@ -38,7 +40,7 @@ public class AurelionCard : MonoBehaviour, ICard
 
             Vector3 spawnPos = player.transform.position + spawnDir;
 
-            bulletHandler.GetSpecialBullet(spawnPos, player, bulletImage, SpecialBulletState.Rotating, this, true, 0, lifetime, false, damage, size, speed, distance);
+            bulletHandler.GetSpecialBullet(spawnPos, player, bulletImage, SpecialBulletState.Rotating, this, true, 0, lifetime, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed, distance + stats.projectileSize);
         }
 
     }

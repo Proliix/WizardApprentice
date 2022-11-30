@@ -14,16 +14,18 @@ public class CircleShotCard : MonoBehaviour, ICard
 
     BulletHandler bulletHandler;
     GameObject player;
+    PlayerStats stats;
     float timer = 10;
 
     private void Start()
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
     }
     public void Effect()
     {
-        bulletHandler.GetCircleShot(projectileAmmount, player, true, damage, bulletSize, speed);
+        bulletHandler.GetCircleShot(projectileAmmount + stats.projectileAmount, player, true, damage + stats.damage, bulletSize + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()

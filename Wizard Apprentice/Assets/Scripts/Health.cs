@@ -78,16 +78,25 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void AddHealth(int healAmmount)
+    public void AddHealth(float healAmount)
     {
-        if ((hp + healAmmount) > maxHP)
+        if ((hp + healAmount) > maxHP)
         {
             hp = maxHP;
         }
         else
         {
-            hp += healAmmount;
+            hp += healAmount;
         }
+
+    }
+
+    public void AddMaxHealth(float healAmount)
+    {
+        maxHP += healAmount;
+        if (usesHealthBar)
+            healthbar.maxValue = maxHP;
+        AddHealth(healAmount);
 
     }
 
