@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //Player Reference 
+   
     Rigidbody2D rb2d;
-
-    //Current movement
-    Vector2 movement = new Vector2();
     Animator animator;
+    Health health;
 
-    [SerializeField] Health health;
+   
+    Vector2 movement = new Vector2();
+
+
+    //Sound files
+    [SerializeField] AudioClip dashSound;
+
 
     //Player Movement speed 
     [SerializeField] float moveSpeed = 10;
@@ -62,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
-            StartCoroutine(Dash());
+            SoundManager.Instance.PlayAudio(dashSound);
+           // StartCoroutine(Dash());
         }
 
     }
@@ -77,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        
+
         dashes--;
         canDash = false;
         isDashing = true;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Boss1AI : MonoBehaviour
 {
      
-     private Transform target;
      BulletHandler bulletHandler;
     Health health;
 
@@ -13,10 +12,14 @@ public class Boss1AI : MonoBehaviour
 
 
     [Header("Boss Variables")]
-    [SerializeField] bool hasTriggeredBasic = false;
     [SerializeField] float basicsUntilSpecial = 10;
     [SerializeField] float currentBasics;
     [SerializeField] float attackSpeedBasic = 0.5f;
+    [SerializeField] float basicDamage;
+    [SerializeField] float specialDamage;
+    [SerializeField] float basicBulletSize;
+    [SerializeField] float specialBulletSize;
+    [SerializeField] float bulletSpeed;
 
     [SerializeField] float timeUntilBossStart = 3;
 
@@ -31,7 +34,6 @@ public class Boss1AI : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         health = GetComponent<Health>();
 
@@ -51,13 +53,11 @@ public class Boss1AI : MonoBehaviour
             BossAttackSpecial();
             currentBasics = 0;
         }
-        else if (timer >= attackSpeedBasic && hasTriggeredBasic == false)
+        else if (timer >= attackSpeedBasic)
         {
-            hasTriggeredBasic = true;
-            currentBasics++;
+
             BossAttackBasic();
         }
-
 
         //Start phase 2
         if (HP < maxHP * 0.666f && phase1)
@@ -79,16 +79,19 @@ public class Boss1AI : MonoBehaviour
 
    void BossAttackBasic()
     {
-        bulletHandler.GetCircleShot(Random.Range(9,12), gameObject, false);
+        
+        currentBasics++;
+        //bulletHandler.GetCircleShot(Random.Range(9,12), gameObject, false);
+        bulletHandler.GetCircleShot(Random.Range(9, 12), gameObject, false, 1, basicDamage, basicBulletSize, bulletSpeed);
+       
         timer = 0;
-        hasTriggeredBasic = false;
       
     }
 
   void BossAttackSpecial()
     {
         timer = 0;
-        bulletHandler.GetCircleShot(30, gameObject, false);
+        bulletHandler.GetCircleShot(30, gameObject, false, 1, specialDamage, specialBulletSize, bulletSpeed);
 
     }
 
