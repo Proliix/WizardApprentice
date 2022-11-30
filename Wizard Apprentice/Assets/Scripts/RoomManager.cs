@@ -19,6 +19,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] EnemyManager enemyManager;
     [SerializeField] BulletHandler bulletHandler;
     [SerializeField] CardHandler cardHandler;
+    [SerializeField] RewardsHandler rewardsHandler;
 
     [SerializeField] List<Room> possibleBossRooms;
     [SerializeField] List<Room> possibleNormalRooms;
@@ -31,30 +32,30 @@ public class RoomManager : MonoBehaviour
     public int mysteryRoomsPoolAmount;
 
 
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         enemyObjects = new List<GameObject>();
-        LoadPremadeRoom(possibleRooms[Random.Range(0,possibleRooms.Count)]);
+        LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void LoadPremadeRoom(Room room)
     {
-        if(currentRoomParent != null)
+        if (currentRoomParent != null)
         {
             Destroy(currentRoomParent);
         }
         currentRoomParent = Instantiate(roomParent);
         currentRoom = Instantiate(room.roomPrefab, currentRoomParent.transform);
-        currentRoom.transform.position += new Vector3((float)room.roomSize.x /2f, (float)room.roomSize.y / 2f, 0);
+        currentRoom.transform.position += new Vector3((float)room.roomSize.x / 2f, (float)room.roomSize.y / 2f, 0);
         LoadRoomFloor(room.roomSize);
         Transform[] transformsInRoom = currentRoom.GetComponentsInChildren<Transform>();
         for (int i = 0; i < transformsInRoom.Length; i++)
@@ -65,18 +66,19 @@ public class RoomManager : MonoBehaviour
             }
         }
         enemyManager.enemyObjects = enemyObjects;
-        Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x/2, room.roomSize.y,0), Quaternion.identity, currentRoomParent.transform);
-        playerObject.transform.position = new Vector3(room.roomSize.x/2, 1, 0);
+        Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y, 0), Quaternion.identity, currentRoomParent.transform);
+        playerObject.transform.position = new Vector3(room.roomSize.x / 2, 1, 0);
     }
 
     public void PlayerWalkThroughDoor()
     {
-        if(enemyObjects.Count <= 1000)
+        if (enemyObjects.Count <= 1000)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
+            rewardsHandler.GetRewardScreenStats();
             roomSelectScreenGenerator.roomSelectObject.SetActive(true);
             roomSelectScreenGenerator.Open();
             Debug.Log("Turned on roomselect object");
@@ -96,7 +98,7 @@ public class RoomManager : MonoBehaviour
     {
         roomSize = new Vector2Int(Random.Range(3, 6) * 5, Random.Range(3, 6) * 3);
         cellManager.GenerateRoom(roomSize, currentRoomParent.transform);
-        playerObject.transform.position = new Vector3(2,2,0);
+        playerObject.transform.position = new Vector3(2, 2, 0);
         SpawnEnemies();
     }
 
@@ -113,7 +115,7 @@ public class RoomManager : MonoBehaviour
 
     public void RemoveAllEnemies()
     {
-        for (int i = enemyObjects.Count-1; i >= 0; i--)
+        for (int i = enemyObjects.Count - 1; i >= 0; i--)
         {
             Destroy(enemyObjects[i]);
             enemyObjects.RemoveAt(i);
@@ -132,7 +134,7 @@ public class RoomManager : MonoBehaviour
     {
         bulletHandler.ResetAll();
         cardHandler.isActive = true;
-        switch(roomType)
+        switch (roomType)
         {
             case 0:
                 LoadPremadeRoom(possibleBossRooms[Random.Range(0, possibleBossRooms.Count)]);

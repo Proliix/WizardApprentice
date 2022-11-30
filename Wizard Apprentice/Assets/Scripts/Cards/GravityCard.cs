@@ -20,6 +20,7 @@ public class GravityCard : MonoBehaviour, ICard
     EnemyManager enemyManager;
     GameObject gravityBullet;
     GameObject player;
+    PlayerAiming pAim;
     PlayerStats stats;
     List<GameObject> enemiesWithingRange;
 
@@ -28,6 +29,7 @@ public class GravityCard : MonoBehaviour, ICard
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         player = GameObject.FindWithTag("Player");
+        pAim = player.GetComponent<PlayerAiming>();
         stats = player.GetComponent<PlayerStats>();
     }
     public void Effect()
@@ -64,7 +66,7 @@ public class GravityCard : MonoBehaviour, ICard
         if (!hasFired)
         {
             hasFired = true;
-            gravityBullet = bulletHandler.GetSpecialBullet(player.transform.position, gameObject, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
+            gravityBullet = bulletHandler.GetSpecialBullet(pAim.bulletSpawn.transform.position, player, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
         }
     }
 }
