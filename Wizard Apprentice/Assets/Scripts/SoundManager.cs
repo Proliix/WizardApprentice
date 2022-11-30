@@ -23,12 +23,18 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayAudio(AudioClip clip, float volume = 1)
+    public void PlayAudio(AudioClip clip)
+    {
+
+        effectSource.PlayOneShot(clip);
+    }
+
+    public void PlayAudio(AudioClip clip, float volume)
     {
         
         effectSource.PlayOneShot(clip,volume);
     }
-    public void PlayAudio(AudioClip clip, float volume = 1, float pitch = 1)
+    public void PlayAudio(AudioClip clip, float volume, float pitch)
     {
         effectSource.pitch = pitch;
 
@@ -36,7 +42,7 @@ public class SoundManager : MonoBehaviour
         effectSource.pitch = 1;
     }
 
-    public void PlayAudio(AudioClip clip, float volume = 1, float maxPitch = 0.8f, float minPitch = 1.2f)
+    public void PlayAudio(AudioClip clip, float volume, float maxPitch = 0.8f, float minPitch = 1.2f)
     {
         effectSource.pitch = Random.Range(maxPitch, minPitch);
 
