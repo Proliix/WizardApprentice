@@ -7,6 +7,7 @@ public class CardHandler : MonoBehaviour
 {
     [SerializeField] float timePerCard = 2f;
     public GameObject[] cardObjs = new GameObject[4];
+    public bool isActive = true;
     [Header("UI")]
     public Image[] cardCycle = new Image[4];
 
@@ -15,7 +16,7 @@ public class CardHandler : MonoBehaviour
     Animator[] animators;
     float timer = 0;
     public int cardIndex;
-
+    bool hasbeenReset = false;
 
     // Start is called before the first frame update
     void Start()
@@ -65,43 +66,61 @@ public class CardHandler : MonoBehaviour
                     cardCycle[i].sprite = cards[i].GetSprite();
         }
 
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        timer += Time.deltaTime;
-
-        if (cards[cardIndex] != null)
-            cards[cardIndex].UpdateCard();
-        else
-            Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
-
-        if (timer >= timePerCard + 0.05f)
+        if (isActive)
         {
-            timer = 0;
+            if (hasbeenReset)
+            {
+                hasbeenReset = false;
+            }
+            timer += Time.deltaTime;
 
             if (cards[cardIndex] != null)
-                cards[cardIndex].ResetCard();
-
-            if (cardIndex < cardObjs.Length - 1)
-                cardIndex++;
+                cards[cardIndex].UpdateCard();
             else
-                cardIndex = 0;
+                Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
 
-            for (int i = 0; i < animators.Length; i++)
+            if (timer >= timePerCard + 0.05f)
             {
-                if (i == cardIndex)
-                {
-                    animators[cardIndex].SetBool("IsActive", true);
-                }
+                timer = 0;
+
+                if (cards[cardIndex] != null)
+                    cards[cardIndex].ResetCard();
+
+                if (cardIndex < cardObjs.Length - 1)
+                    cardIndex++;
                 else
+                    cardIndex = 0;
+
+                for (int i = 0; i < animators.Length; i++)
                 {
-                    animators[i].SetBool("IsActive", false);
+                    if (i == cardIndex)
+                    {
+                        animators[cardIndex].SetBool("IsActive", true);
+                    }
+                    else
+                    {
+                        animators[i].SetBool("IsActive", false);
+                    }
                 }
             }
         }
+        else if (!hasbeenReset)
+        {
+            hasbeenReset = true;
+            cards[cardIndex].ResetCard();
+            cardIndex = 0;
+            for (int i = 0; i < animators.Length; i++)
+            {
+                animators[i].SetBool("IsActive", false);
+            }
+
+        }
+
     }
 }
