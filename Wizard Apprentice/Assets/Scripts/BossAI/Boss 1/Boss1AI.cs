@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Boss1AI : MonoBehaviour
 {
-    [Header("Find GameObjects")] 
-    [SerializeField] private Transform target;
-    [SerializeField] BulletHandler bulletHandler;
-    [SerializeField] Health health;
-    [Header("Boss Variables")]
+     
+     private Transform target;
+     BulletHandler bulletHandler;
+    Health health;
+
     [SerializeField] float timer;
 
+
+    [Header("Boss Variables")]
     [SerializeField] bool hasTriggeredBasic = false;
     [SerializeField] float basicsUntilSpecial = 10;
     [SerializeField] float currentBasics;
@@ -18,8 +20,10 @@ public class Boss1AI : MonoBehaviour
 
     [SerializeField] float timeUntilBossStart = 3;
 
+    [Header("HP")]
     [SerializeField] private float HP;
     [SerializeField] private float maxHP;
+
     [Header("Phases")]
     [SerializeField] bool phase1;
     [SerializeField] bool phase2;
@@ -32,7 +36,7 @@ public class Boss1AI : MonoBehaviour
         health = GetComponent<Health>();
 
         timer = -timeUntilBossStart;
-        attackSpeedBasic = 0.5f;
+        
         phase1 = true;
     }
 
