@@ -8,6 +8,10 @@ public class Boss2AI2 : MonoBehaviour
     Boss2PiecesAI[] boss2PiecesAI;
     Health health;
     BulletHandler bulletHandler;
+
+    [SerializeField] float patternStartUpDelay;
+    [SerializeField] float randomStartUpDelay;
+
     [Header("HP")]
     [SerializeField] private float HP;
     [SerializeField] private float maxHP;
@@ -25,9 +29,9 @@ public class Boss2AI2 : MonoBehaviour
     [SerializeField] float randomBulletSpeed = 4;
 
     [Header("Timers")]
-    [SerializeField] float timer;
+    [SerializeField] float attackTimer;
     [SerializeField] float patternTimer;
-    [SerializeField] float randomTimer;
+    [SerializeField] float randomAttackTimer;
 
     [Header("Phases")]
     [SerializeField] bool phase1Active;
@@ -51,6 +55,8 @@ public class Boss2AI2 : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         phase1Active = true;
 
+        attackTimer -= patternStartUpDelay;
+        randomAttackTimer -= randomStartUpDelay;
 
         boss2PiecesAI = new Boss2PiecesAI[targets.Length];
         for (int i = 0; i < targets.Length; i++)
@@ -71,9 +77,9 @@ public class Boss2AI2 : MonoBehaviour
         HP = health.GetHP();
         maxHP = health.GetMaxHP();
 
-        timer += Time.deltaTime;
+        attackTimer += Time.deltaTime;
         patternTimer += Time.deltaTime;
-        randomTimer += Time.deltaTime;
+        randomAttackTimer += Time.deltaTime;
 
         if (HP < maxHP * 0.666f && HP > maxHP * 0.333f)
         {
@@ -85,16 +91,16 @@ public class Boss2AI2 : MonoBehaviour
             phase3Active = true;
         }
 
-        if (timer >= attackDelay)
+        if (attackTimer >= attackDelay)
         {
             BasicAttack();
-            timer -= attackDelay;
+            attackTimer -= attackDelay;
         }
 
-        if (randomTimer >= 0.78f)
+        if (randomAttackTimer >= 0.78f)
         {
             RandomAttack();
-            randomTimer -= 0.78f;
+            randomAttackTimer -= 0.78f;
         }
 
         //Attack phases (based on current boss hp)
