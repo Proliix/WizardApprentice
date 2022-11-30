@@ -169,6 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxHP: 100
   hp: 100
   hitCooldown: 1
@@ -510,6 +512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxHP: 1000
   hp: 0
   hitCooldown: 1
@@ -1244,7 +1248,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1845,6 +1849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxHP: 1000
   hp: 0
   hitCooldown: 1
@@ -2581,7 +2587,7 @@ PrefabInstance:
     - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: dashSound
       value: 
-      objectReference: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
+      objectReference: {fileID: 8300000, guid: f76c75fa4d89e6346843243cdedf2e0c, type: 3}
     - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: dashingCooldown
       value: 2
@@ -2691,6 +2697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxHP: 100
   hp: 100
   hitCooldown: 1
@@ -2952,6 +2960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxHP: 100
   hp: 100
   hitCooldown: 1
@@ -3058,7 +3068,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4310,6 +4320,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSound: {fileID: 0}
+  deathSound: {fileID: 0}
   maxHP: 100
   hp: 100
   hitCooldown: 1
