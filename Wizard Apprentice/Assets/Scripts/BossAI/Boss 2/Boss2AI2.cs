@@ -75,7 +75,6 @@ public class Boss2AI2 : MonoBehaviour
         patternTimer += Time.deltaTime;
         randomTimer += Time.deltaTime;
 
-
         if (HP < maxHP * 0.666f && HP > maxHP * 0.333f)
         {
             phase2Active = true;
@@ -118,7 +117,6 @@ public class Boss2AI2 : MonoBehaviour
             {
                 Phase3();
             }
-
 
             patternTimer -= patternDelay;
         }
