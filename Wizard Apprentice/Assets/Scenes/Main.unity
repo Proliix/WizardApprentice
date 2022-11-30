@@ -812,6 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
   Bulletimage: {fileID: 21300000, guid: 64045465c3ac3f94fbbc2ba78f5f0a20, type: 3}
+  animation: {fileID: 7400000, guid: a53171d1c868b74458a80043fb0a8ab9, type: 2}
   effectRange: 3
   effectCooldown: 0.5
   lifeTime: 4

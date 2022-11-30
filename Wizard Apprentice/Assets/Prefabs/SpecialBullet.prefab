@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3205804017517233318}
   - component: {fileID: 8456437400300121766}
   - component: {fileID: -3318233835324077276}
+  - component: {fileID: 4094928250758472341}
   m_Layer: 0
   m_Name: SpecialBullet
   m_TagString: Projectile
@@ -146,3 +147,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.26
+--- !u!95 &4094928250758472341
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2227880843289009281}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: add548dc272e3f04187c8f36c79fad17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
