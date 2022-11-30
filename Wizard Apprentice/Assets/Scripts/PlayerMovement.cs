@@ -67,18 +67,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
             SoundManager.Instance.PlayAudio(dashSound);
-           // StartCoroutine(Dash());
+           StartCoroutine(Dash());
         }
-
+       
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        //if ()
-        //{
-
-        //}
-    }
 
     private IEnumerator Dash()
     {

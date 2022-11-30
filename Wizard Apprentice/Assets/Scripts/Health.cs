@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] AudioClip deathSound;
+    
+
+
     [SerializeField] float maxHP = 100;
     [SerializeField] float hp = 100;
     [SerializeField] float hitCooldown = 1f;
@@ -19,6 +24,9 @@ public class Health : MonoBehaviour
     [SerializeField] float hitEffectTime = 0.5f;
     [SerializeField] float hitTransparancy = 0.5f;
     [SerializeField] float flashSpeed = 0.05f;
+
+
+
 
     float currentHealthRemoveSpeed;
     float currentAlphaSpeed;
@@ -146,6 +154,8 @@ public class Health : MonoBehaviour
     {
         hp = 0;
 
+        SoundManager.Instance.PlayAudio(deathSound);
+
         if (gameObject.CompareTag("Player"))
             Debug.Log(gameObject.name + " Is Dead");
         else
@@ -164,6 +174,8 @@ public class Health : MonoBehaviour
 
     IEnumerator Hiteffect()
     {
+        SoundManager.Instance.PlayAudio(hitSound);
+
         targetAlpha = hitTransparancy;
         hitEffectActve = true;
         yield return new WaitForSeconds(hitEffectTime);
