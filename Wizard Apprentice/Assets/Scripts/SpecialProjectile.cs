@@ -218,7 +218,7 @@ public class SpecialProjectile : MonoBehaviour
                     }
                 }
             }
-            else if (!collision.gameObject.CompareTag("Projectile") && !collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Enemy"))
+            else if (collision.gameObject.CompareTag("Wall"))
             {
                 if (bulletState != SpecialBulletState.Rotating && bulletState != SpecialBulletState.Bouncy)
                 {
