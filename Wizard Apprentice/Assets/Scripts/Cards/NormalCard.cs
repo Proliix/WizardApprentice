@@ -11,6 +11,7 @@ public class NormalCard : MonoBehaviour, ICard
     [SerializeField] float damage = 10f;
     [SerializeField] float size = 0.5f;
     [SerializeField] float speed = 8f;
+    [SerializeField] AudioClip attackSound;
 
     BulletHandler bulletHandler;
     Transform spawnpoint;
@@ -29,6 +30,7 @@ public class NormalCard : MonoBehaviour, ICard
 
     public void Effect()
     {
+        SoundManager.Instance.PlayAudio(attackSound);
         bulletHandler.GetBullet(spawnpoint, player, true, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
     }
 

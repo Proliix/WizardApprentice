@@ -6,6 +6,8 @@ public class TrippleShotCard : MonoBehaviour, ICard
 {
 
     [SerializeField] Sprite image;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] float audioVolume = 1;
     [SerializeField] float shootCooldown = 0.25f;
     [SerializeField] float shootPosDeviation = 0.25f;
     [SerializeField] float damage = 10f;
@@ -27,6 +29,8 @@ public class TrippleShotCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
+        SoundManager.Instance.PlayAudio(attackSound, audioVolume);
+
         bulletHandler.GetBullet(spawnpoint, player, true, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
         bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation), damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
         bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation), damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);

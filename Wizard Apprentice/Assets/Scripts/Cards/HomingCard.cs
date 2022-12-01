@@ -6,6 +6,8 @@ public class HomingCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
     [SerializeField] Sprite Bulletimage;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] float audioVolume = 1;
     [SerializeField] float damage = 5f;
     [SerializeField] float size = 0.5f;
     [SerializeField] float speed = 8f;
@@ -30,6 +32,8 @@ public class HomingCard : MonoBehaviour, ICard
 
     public void Effect()
     {
+        SoundManager.Instance.PlayAudio(attackSound, audioVolume);
+
         bulletHandler.GetSpecialBullet(spawnpoint, gameObject, Bulletimage, SpecialBulletState.Homing, this, true, Vector3.zero,0,lifeTime,false,damage + stats.damage,size + stats.projectileSize,speed + stats.projectileSpeed);
     }
 

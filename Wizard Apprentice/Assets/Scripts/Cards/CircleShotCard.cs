@@ -6,6 +6,8 @@ public class CircleShotCard : MonoBehaviour, ICard
 {
 
     [SerializeField] Sprite image;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] float audioVolume = 1;
     [SerializeField] int projectileAmmount = 6;
     [SerializeField] float shootCooldown = 0.5f;
     [SerializeField] float damage = 10f;
@@ -25,6 +27,8 @@ public class CircleShotCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
+        SoundManager.Instance.PlayAudio(attackSound, audioVolume);
+
         bulletHandler.GetCircleShot(projectileAmmount + stats.projectileAmount, player, true, damage + stats.damage, bulletSize + stats.projectileSize, speed + stats.projectileSpeed);
     }
 

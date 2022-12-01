@@ -123,10 +123,8 @@ public class Boss2AI2 : MonoBehaviour
             {
                 Phase3();
             }
-
             patternTimer -= patternDelay;
         }
-
     }
 
     void BasicAttack()

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb2d;
     Animator animator;
     Health health;
-
+    [SerializeField] DashIndicator dashIndicator;
    
     Vector2 movement = new Vector2();
 
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Find our Rigidbody2D 
         maxDashes = dashes;
+        dashIndicator = GameObject.Find("DashIndicator").GetComponent<DashIndicator>();
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
@@ -61,8 +62,10 @@ public class PlayerMovement : MonoBehaviour
         movement.x = horInput;
         movement.y = verInput;
 
-        //Update our movement 
-        rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
+       
+            MovePlayer();
+        
+
 
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
@@ -75,19 +78,30 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        
 
+        dashIndicator.ChangeDashIndicator();
         dashes--;
         canDash = false;
         isDashing = true;
         activeSpeed = dashingSpeed;
         health.SetInvicible(dashingTime + 0.2f);
+
         yield return new WaitForSeconds(dashingTime);
+
+
         isDashing = false;
         activeSpeed = moveSpeed;
+
         yield return new WaitForSeconds(dashingCooldown - stats.dashCooldown);
+        dashIndicator.ChangeDashIndicator();
         canDash = true;
         dashes++;
+    }
+
+    private void MovePlayer()
+    {
+       
+        rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
     }
 
 }

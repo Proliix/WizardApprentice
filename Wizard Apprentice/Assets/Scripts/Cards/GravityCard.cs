@@ -6,6 +6,8 @@ public class GravityCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
     [SerializeField] Sprite Bulletimage;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] float audioVolume = 1;
     [SerializeField] float size = 1.25f;
     [SerializeField] float effectRange = 2f;
     [SerializeField] float effectCooldown = 0.5f;
@@ -34,6 +36,8 @@ public class GravityCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
+        
+
         enemiesWithingRange = enemyManager.GetEnemiesWithinRange(gravityBullet.transform.position, effectRange + stats.projectileSize);
         for (int i = 0; i < enemiesWithingRange.Count; i++)
         {
@@ -65,6 +69,7 @@ public class GravityCard : MonoBehaviour, ICard
     {
         if (!hasFired)
         {
+            SoundManager.Instance.PlayAudio(attackSound, audioVolume);
             hasFired = true;
             gravityBullet = bulletHandler.GetSpecialBullet(pAim.bulletSpawn.transform.position, player, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
         }

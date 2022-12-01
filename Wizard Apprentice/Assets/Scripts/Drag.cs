@@ -12,7 +12,6 @@ public class Drag : MonoBehaviour
     public GameObject lastObjectAttachedTo;
     private void Start()
     {
-        inventory = canvas.GetComponent<Inventory>();
     }
     public void DragHandler(BaseEventData data)
     {

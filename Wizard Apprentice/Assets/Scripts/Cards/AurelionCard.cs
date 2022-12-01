@@ -6,6 +6,8 @@ public class AurelionCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
     [SerializeField] Sprite bulletImage;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] float audioVolume = 1;
     [SerializeField] float shootCooldown = 0.25f;
     [SerializeField] float distance = 1.25f;
     [SerializeField] float lifetime = 2.25f;
@@ -31,6 +33,7 @@ public class AurelionCard : MonoBehaviour, ICard
 
     public void Effect()
     {
+        SoundManager.Instance.PlayAudio(attackSound, audioVolume);
         for (float deg = 0; deg < 360; deg += 360f / (amount + stats.projectileAmount))
         {
             float vertical = Mathf.Sin(Mathf.Deg2Rad * (deg + 90));
