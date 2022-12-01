@@ -108,7 +108,7 @@ public class RewardsHandler : MonoBehaviour
     #region Stat Rewards
     public void GetRewardScreenStats()
     {
-        if (!rewardScreen.activeSelf || !inventory.IsFull())
+        if (!rewardScreen.activeSelf && !inventory.IsFull())
         {
             rewardScreen.SetActive(true);
             GetRewardScreenCard();
