@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < cardHolders.Count; i++)
+        for (int i = 0; i < cardHolders.Count; i++)
         {
             cardHolders[i].index = i;
         }
@@ -20,9 +20,9 @@ public class Inventory : MonoBehaviour
 
     public void AddCard(GameObject cardObject)
     {
-        if(!IsFull())
+        if (!IsFull())
         {
-            for(int i = 0; i < cardHolders.Count; i++)
+            for (int i = 0; i < cardHolders.Count; i++)
             {
                 if (cardHolders[i].cardObject == null)
                 {
@@ -32,25 +32,29 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+        else
+            Debug.Log("IS FULL");
     }
 
     public bool IsFull()
     {
-        for(int i = 0; i < cardHolders.Count; i++)
+        bool isfull = true;
+        for (int i = 0; i < cardHolders.Count; i++)
         {
             if (cardHolders[i].cardObject == null)
             {
-                return true;
+                isfull = false;
+                break;
             }
         }
-        return false;
+        return isfull;
     }
 
     public void ReplaceCard(GameObject cardHolder, GameObject cardObject)
     {
-        for(int i = 0; i < Mathf.Min(cardHolders.Count,4); i++)
+        for (int i = 0; i < Mathf.Min(cardHolders.Count, 4); i++)
         {
-            if(cardHolders[i].gameObject == cardHolder)
+            if (cardHolders[i].gameObject == cardHolder)
             {
                 cardHandler.ReplaceCard(cardObject, i);
                 break;
