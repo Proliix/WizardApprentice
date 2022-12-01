@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] List<Room> possibleMysteryRooms;
     public int mysteryRoomsPoolAmount;
 
+    private int currentRoomType;
+    private bool canWalkThroughAnyDoor;
 
 
 
@@ -38,13 +41,16 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
         enemyObjects = new List<GameObject>();
-        LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
+        LoadNewRoom(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            canWalkThroughAnyDoor = !canWalkThroughAnyDoor;
+        }
     }
 
     public void LoadPremadeRoom(Room room)
@@ -72,17 +78,22 @@ public class RoomManager : MonoBehaviour
 
     public void PlayerWalkThroughDoor()
     {
-        if (enemyObjects.Count <= 1000)
+        if (enemyObjects.Count <= 0 || canWalkThroughAnyDoor)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
-            rewardsHandler.GetRewardScreenStats();
-            roomSelectScreenGenerator.roomSelectObject.SetActive(true);
-            roomSelectScreenGenerator.Open();
-            Debug.Log("Turned on roomselect object");
-            //LoadPremadeRoom(possibleRooms[Random.Range(0, possibleRooms.Count)]);
+            if (currentRoomType == 0)
+            {
+                SceneManager.LoadScene("Menu");
+            }
+            else
+            {
+                rewardsHandler.GetRewardScreenStats();
+                roomSelectScreenGenerator.roomSelectObject.SetActive(true);
+                roomSelectScreenGenerator.Open();
+            }
         }
         else
         {
@@ -137,21 +148,27 @@ public class RoomManager : MonoBehaviour
         switch (roomType)
         {
             case 0:
+                currentRoomType = 0;
                 LoadPremadeRoom(possibleBossRooms[Random.Range(0, possibleBossRooms.Count)]);
                 break;
             case 1:
+                currentRoomType = 1;
                 LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
                 break;
             case 2:
+                currentRoomType = 2;
                 LoadPremadeRoom(possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)]);
                 break;
             case 3:
+                currentRoomType = 3;
                 LoadPremadeRoom(possibleTreasureRooms[Random.Range(0, possibleTreasureRooms.Count)]);
                 break;
             case 4:
+                currentRoomType = 4;
                 LoadPremadeRoom(possibleMysteryRooms[Random.Range(0, possibleMysteryRooms.Count)]);
                 break;
             default:
+                currentRoomType = 1;
                 LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
                 break;
         }
