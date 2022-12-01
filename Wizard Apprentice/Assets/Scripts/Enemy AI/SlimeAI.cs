@@ -54,7 +54,6 @@ public class SlimeAI : MonoBehaviour, IStunnable
             targetPos = (target.position - transform.position).normalized * jumpDistance;
             targetPos += (Vector2)transform.position;
             timeUntilNextJump = Random.Range(minJumpCooldown,maxJumpCooldown);
-            Debug.Log(targetPos);
         }
         if (timeInJump > jumpTime)
         {
@@ -87,7 +86,9 @@ public class SlimeAI : MonoBehaviour, IStunnable
 
             //rb2d.velocity = dir * moveSpeed;
 
-            rb2d.MovePosition(GetPositionThisFrame()); 
+            Vector2 position = GetPositionThisFrame();
+            transform.position = position;
+            rb2d.MovePosition(position);
         }
 
     }
