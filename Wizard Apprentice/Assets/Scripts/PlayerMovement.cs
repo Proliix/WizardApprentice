@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         movement.y = verInput;
 
         //Update our movement 
-        rb2d.velocity = movement.normalized * activeSpeed;
+        rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
 
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
