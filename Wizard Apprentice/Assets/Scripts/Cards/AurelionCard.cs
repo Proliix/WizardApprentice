@@ -8,7 +8,6 @@ public class AurelionCard : MonoBehaviour, ICard
     [SerializeField] Sprite bulletImage;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
-    [SerializeField] float shootCooldown = 0.25f;
     [SerializeField] float distance = 1.25f;
     [SerializeField] float lifetime = 2.25f;
     [SerializeField] float damage = 10f;
@@ -19,7 +18,7 @@ public class AurelionCard : MonoBehaviour, ICard
     [Tooltip("Shoot pos from player pos")]
     [SerializeField] Vector2 shootPos;
 
-    float timer = 10;
+    bool hasFired = false;
     BulletHandler bulletHandler;
     GameObject player;
     PlayerStats stats;
@@ -50,18 +49,16 @@ public class AurelionCard : MonoBehaviour, ICard
 
     public void UpdateCard()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= shootCooldown)
+        if (!hasFired)
         {
-            timer = 0;
+            hasFired = true;
             Effect();
         }
     }
 
     public void ResetCard()
     {
-        timer = 10;
+        hasFired = false;
     }
     public Sprite GetSprite()
     {

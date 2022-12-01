@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
-  m_Name: Test Reward 1
+  m_Name: Movespeed
   m_EditorClassIdentifier: 
-  Title: PROJECTILE SIEZE
-  EffectText: This is the flavour text
+  Title: New shoes
+  EffectText: Damn new shoes i bet i will be faster
   health: 0
-  movementSpeed: 0
+  movementSpeed: 0.5
   damage: 0
   attackSpeed: 0
-  projectileSize: 10
+  projectileSize: 0
   projectileSpeed: 0
   projectileAmount: 0
   dashCharges: 0
