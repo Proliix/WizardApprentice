@@ -2712,6 +2712,7 @@ MonoBehaviour:
   - {fileID: 724518948}
   - {fileID: 2063130695}
   - {fileID: 851983936}
+  trashCan: {fileID: 0}
 --- !u!114 &1572242040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,6 +2848,7 @@ MonoBehaviour:
   enemyManager: {fileID: 1572242042}
   bulletHandler: {fileID: 1572242045}
   cardHandler: {fileID: 1572242040}
+  rewardsHandler: {fileID: 0}
   possibleBossRooms:
   - {fileID: 11400000, guid: cdcfaa60af5e01f418d54753ea3514b0, type: 2}
   possibleNormalRooms:
@@ -3844,7 +3846,6 @@ GameObject:
   - component: {fileID: 1964696759}
   - component: {fileID: 1964696758}
   - component: {fileID: 1964696757}
-  - component: {fileID: 1964696756}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3852,28 +3853,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1964696756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964696755}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2686e2aa1d09934429f3ca33dbea349f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardHolderPrefab: {fileID: 0}
-  cardHandler: {fileID: 1572242040}
-  cardHolders:
-  - {fileID: 1265756236}
-  - {fileID: 1671680434}
-  - {fileID: 1741316626}
-  - {fileID: 1132682519}
-  - {fileID: 724518948}
-  - {fileID: 2063130695}
-  - {fileID: 851983936}
 --- !u!114 &1964696757
 MonoBehaviour:
   m_ObjectHideFlags: 0

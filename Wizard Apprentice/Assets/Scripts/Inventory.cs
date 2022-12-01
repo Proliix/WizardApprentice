@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddCard(GameObject cardObject)
+    public void AddCard(GameObject cardPrefab)
     {
         if (!IsFull())
         {
@@ -26,6 +26,10 @@ public class Inventory : MonoBehaviour
             {
                 if (cardHolders[i].cardObject == null)
                 {
+                    GameObject cardObject = Instantiate(cardPrefab, cardHolders[i].transform.parent);
+                    cardObject.transform.localPosition = cardHolders[i].transform.localPosition;
+                    cardObject.GetComponent<Drag>().canvas = cardHolders[i].transform.parent.gameObject.GetComponent<Canvas>();
+                    cardObject.GetComponent<Drag>().inventory = this;
                     cardHolders[i].cardObject = cardObject;
                     cardObject.GetComponent<Drag>().lastObjectAttachedTo = cardHolders[i].gameObject;
                     break;
@@ -33,7 +37,9 @@ public class Inventory : MonoBehaviour
             }
         }
         else
+        {
             Debug.Log("IS FULL");
+        }
     }
 
     public bool IsFull()

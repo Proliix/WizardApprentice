@@ -6,9 +6,9 @@ using UnityEngine.UIElements;
 
 public class Drag : MonoBehaviour
 {
-    [SerializeField] Canvas canvas;
+    public Canvas canvas;
     Vector2 offset;
-    [SerializeField] Inventory inventory;
+    public Inventory inventory;
     public GameObject lastObjectAttachedTo;
     private void Start()
     {
