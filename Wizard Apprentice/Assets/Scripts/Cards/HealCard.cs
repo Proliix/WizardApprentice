@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,8 @@ public class HealCard : MonoBehaviour, ICard
     [SerializeField] Sprite image;
     [SerializeField] GameObject player;
     [SerializeField] int healAmmount = 1;
-
+    [SerializeField] AudioClip healSound;
+    [SerializeField] float audioVolume = 0.25f;
     bool playerIsHealed = false;
     Health health;
 
@@ -18,6 +19,7 @@ public class HealCard : MonoBehaviour, ICard
 
     public void Effect()
     {
+        SoundManager.Instance.PlayAudio(healSound, audioVolume);
         health.AddHealth(healAmmount);
     }
 
