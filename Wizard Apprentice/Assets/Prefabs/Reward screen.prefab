@@ -78,8 +78,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+    rgba: 4284174411
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -229,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &565926846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -376,7 +376,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 672009411}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardsHandler, Assembly-CSharp
+        m_MethodName: SelectRewardCard
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &672009409
 Animator:
   serializedVersion: 4
@@ -520,7 +532,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 688104698}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardsHandler, Assembly-CSharp
+        m_MethodName: SelectRewardCard
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &688104696
 Animator:
   serializedVersion: 4
@@ -695,8 +719,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+    rgba: 4284174411
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -833,8 +857,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+    rgba: 4284174411
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1092,7 +1116,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2030623707}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardsHandler, Assembly-CSharp
+        m_MethodName: SelectRewardCard
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &2030623705
 Animator:
   serializedVersion: 4
@@ -1191,7 +1227,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1521,7 +1557,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1658,7 +1694,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1964,7 +2000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8616646530660218123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2282,7 +2318,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2419,7 +2455,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2554,7 +2590,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279766280
-  m_fontColor: {r: 0.03137255, g: 0.050980397, b: 0.09411766, a: 1}
+  m_fontColor: {r: 0.29558563, g: 0.3123603, b: 0.3584906, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
