@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class RoomManager : MonoBehaviour
     public Vector2Int roomSize;
     List<GameObject> enemyObjects;
     [SerializeField] GameObject exitDoorPrefab;
+    [SerializeField] Image openDoorImage;
     GameObject currentRoom;
     [SerializeField] GameObject roomParent;
     GameObject currentRoomParent;
@@ -34,6 +36,7 @@ public class RoomManager : MonoBehaviour
 
     private int currentRoomType;
     private bool canWalkThroughAnyDoor;
+    private GameObject doorObject;
 
 
 
@@ -72,7 +75,7 @@ public class RoomManager : MonoBehaviour
             }
         }
         enemyManager.enemyObjects = enemyObjects;
-        Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y, 0), Quaternion.identity, currentRoomParent.transform);
+        doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y, 0), Quaternion.identity, currentRoomParent.transform);
         playerObject.transform.position = new Vector3(room.roomSize.x / 2, 1, 0);
     }
 
@@ -132,6 +135,7 @@ public class RoomManager : MonoBehaviour
             enemyObjects.RemoveAt(i);
         }
         enemyObjects.Clear();
+        OpenDoor();
     }
 
     public void RemoveEnemy(GameObject enemyObject)
@@ -139,6 +143,15 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
+        if(enemyObjects.Count <= 0)
+        {
+            OpenDoor();
+        }
+    }
+
+    public void OpenDoor()
+    {
+        doorObject.GetComponent<Image>().sprite = openDoorImage.sprite;
     }
 
     public void LoadNewRoom(int roomType)
