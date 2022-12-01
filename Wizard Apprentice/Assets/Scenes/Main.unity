@@ -1525,6 +1525,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853819, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 25854453146c3e24caefd7cb0ac9bf54, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
@@ -3131,6 +3135,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8cd84b49298f8946a2a46f2901b0b0d, type: 2}
   roomSize: {x: 0, y: 0}
   exitDoorPrefab: {fileID: 226080780411628952, guid: 0d334158a641f2e4cb770ccb1683f9d0, type: 3}
+  openDoorImage: {fileID: 21300000, guid: 44c73ff9fbf724f469a4cf78d45ad672, type: 3}
   roomParent: {fileID: 3714845512778590098, guid: cfe613bd22b976f428533e8536cf7c1d, type: 3}
   enemyManager: {fileID: 1786813657}
   bulletHandler: {fileID: 1786813660}

@@ -15,7 +15,7 @@ public class RoomManager : MonoBehaviour
     public Vector2Int roomSize;
     List<GameObject> enemyObjects;
     [SerializeField] GameObject exitDoorPrefab;
-    [SerializeField] Image openDoorImage;
+    [SerializeField] Sprite openDoorImage;
     GameObject currentRoom;
     [SerializeField] GameObject roomParent;
     GameObject currentRoomParent;
@@ -151,7 +151,7 @@ public class RoomManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        doorObject.GetComponent<Image>().sprite = openDoorImage.sprite;
+        doorObject.GetComponentInChildren<SpriteRenderer>().sprite = openDoorImage;
     }
 
     public void LoadNewRoom(int roomType)

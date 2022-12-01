@@ -62,6 +62,11 @@ public class BulletHandler : MonoBehaviour
 
     public void ResetAll()
     {
+        if(specialProjectilePool == null || projectilePool == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < specialProjectilePool.Count; i++)
         {
             if (specialProjectilePool[i].activeSelf == true)
