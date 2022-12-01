@@ -574,6 +574,11 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: -400}
   m_SizeDelta: {x: 120, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &217758759 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+  m_PrefabInstance: {fileID: 509477057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &228542470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,6 +1429,105 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 565926845, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
   m_PrefabInstance: {fileID: 476821359}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &509477057
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1926797694}
+    m_Modifications:
+    - target: {fileID: 6968860360510853816, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_Name
+      value: DashIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -839
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 324
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6968860360510853817, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b0428f9544aaee4db0a3b287353c48c, type: 3}
 --- !u!1 &549722244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,6 +2351,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bcd623ac98caee042b39ad5d4af13f1d, type: 3}
+  attackSound: {fileID: 0}
+  audioVolume: 1
   projectileAmmount: 15
   shootCooldown: 0.5
   damage: 10
@@ -2297,6 +2403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b079989b8a1d3124da3640849df42090, type: 3}
+  attackSound: {fileID: 0}
+  audioVolume: 1
   shootCooldown: 0.5
   shootPosDeviation: 0.25
   damage: 10
@@ -2443,6 +2551,7 @@ MonoBehaviour:
   damage: 10
   size: 0.5
   speed: 8
+  attackSound: {fileID: 0}
 --- !u!1 &1648783164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,6 +2767,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 553983868cbedf34aba0ecc5f0c69320, type: 3}
   player: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   healAmmount: 1
+  healSound: {fileID: 0}
+  audioVolume: 0.25
 --- !u!1 &1722248089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,6 +3017,8 @@ MonoBehaviour:
   - {fileID: 22765467}
   - {fileID: 2140121528}
   isActive: 1
+  cycleFinish: {fileID: 0}
+  audioVolume: 0
   cardCycle:
   - {fileID: 350291408}
   - {fileID: 1078614069}
@@ -3274,6 +3387,7 @@ RectTransform:
   m_Children:
   - {fileID: 1722248090}
   - {fileID: 119382419}
+  - {fileID: 217758759}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

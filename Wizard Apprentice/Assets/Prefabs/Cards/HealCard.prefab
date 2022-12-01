@@ -203,6 +203,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 553983868cbedf34aba0ecc5f0c69320, type: 3}
   player: {fileID: 0}
   healAmmount: 10
+  healSound: {fileID: 8300000, guid: 5de01248bd1ee8a43bfdf22cd440a551, type: 3}
+  audioVolume: 0.25
 --- !u!95 &4496280925129985611
 Animator:
   serializedVersion: 4
