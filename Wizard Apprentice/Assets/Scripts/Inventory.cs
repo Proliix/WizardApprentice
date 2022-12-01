@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject cardHolderPrefab;
     public CardHandler cardHandler;
     public List<CardHolder> cardHolders = new List<CardHolder>();
+    [SerializeField] CardHolder trashCan;
 
     void Start()
     {
@@ -15,6 +16,34 @@ public class Inventory : MonoBehaviour
         {
             cardHolders[i].index = i;
         }
+    }
+
+    public void AddCard(GameObject cardObject)
+    {
+        if(!IsFull())
+        {
+            for(int i = 0; i < cardHolders.Count; i++)
+            {
+                if (cardHolders[i].cardObject == null)
+                {
+                    cardHolders[i].cardObject = cardObject;
+                    cardObject.GetComponent<Drag>().lastObjectAttachedTo = cardHolders[i].gameObject;
+                    break;
+                }
+            }
+        }
+    }
+
+    public bool IsFull()
+    {
+        for(int i = 0; i < cardHolders.Count; i++)
+        {
+            if (cardHolders[i].cardObject == null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void ReplaceCard(GameObject cardHolder, GameObject cardObject)
