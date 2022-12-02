@@ -151,6 +151,8 @@ public class BulletHandler : MonoBehaviour
         SpecialProjectile specialBullet = poolMember.GetComponent<SpecialProjectile>();
         specialBullet.bulletState = newBulletState;
         specialBullet.effectSize = effectSize;
+        specialBullet.damage = damage;
+        specialBullet.bulletSpeed = speed;
         specialBullet.Shooter = newShooter;
         specialBullet.currentIcard = icard;
         specialBullet.isMovingAway = moveAwayFromTarget;
@@ -168,6 +170,8 @@ public class BulletHandler : MonoBehaviour
         poolMember.transform.localScale = Vector3.one * size;
         SpecialProjectile specialBullet = poolMember.GetComponent<SpecialProjectile>();
         specialBullet.bulletState = newBulletState;
+        specialBullet.damage = damage;
+        specialBullet.bulletSpeed = speed;
         specialBullet.effectSize = effectSize;
         specialBullet.Shooter = newShooter;
         specialBullet.currentIcard = icard;

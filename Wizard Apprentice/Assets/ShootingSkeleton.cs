@@ -86,7 +86,7 @@ public class ShootingSkeleton : MonoBehaviour
 
     private void BasicAttack()
     {
-        bulletHandler.GetBullet(gameObject.transform.position, target.transform.position - gameObject.transform.position, false, damage, bulletSize, bulletSpeed);
+        bulletHandler.GetBullet(gameObject.transform.position, (target.transform.position - gameObject.transform.position).normalized, false, damage, bulletSize, bulletSpeed);
 
     }
 
