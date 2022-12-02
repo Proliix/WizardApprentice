@@ -21,6 +21,7 @@ public class Health : MonoBehaviour
     [SerializeField] bool usesHealthBar = false;
     [SerializeField] Slider healthbar;
     [Header("Juice")]
+    [SerializeField] bool hasDeathAnimation = false;
     [SerializeField] float hitEffectTime = 0.5f;
     [SerializeField] float hitTransparancy = 0.5f;
     [SerializeField] float flashSpeed = 0.05f;
@@ -38,10 +39,14 @@ public class Health : MonoBehaviour
 
 
     SpriteRenderer spriteRenderer;
+    Animator anim;
     float healthbarValue;
     bool canBeHit = true;
     private void Start()
     {
+        if (hasDeathAnimation)
+            anim = gameObject.GetComponent<Animator>();
+
         hp = maxHP;
         spriteRenderer = GetComponent<SpriteRenderer>();
         startColor = spriteRenderer.color;
@@ -162,6 +167,9 @@ public class Health : MonoBehaviour
 
         if (gameObject.CompareTag("Player"))
         {
+            if (hasDeathAnimation)
+                anim.SetBool("IsDead", true);
+
             FindObjectOfType<DeathScreenController>().PlayerDeath();
         }
         else
