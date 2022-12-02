@@ -8,7 +8,6 @@ public class CardHandler : MonoBehaviour
     [SerializeField] float timePerCard = 2f;
     public GameObject[] cardObjs = new GameObject[4];
     public bool isActive = true;
-    [SerializeField] AudioClip cycleFinish;
     [SerializeField] float audioVolume;
     [Header("UI")]
     public Image[] cardCycle = new Image[4];
@@ -98,7 +97,6 @@ public class CardHandler : MonoBehaviour
                     cardIndex++;
                 else
                 {
-                    SoundManager.Instance.PlayAudio(cycleFinish, audioVolume);
                     cardIndex = 0;
                 }
 
