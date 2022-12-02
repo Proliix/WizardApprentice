@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashingTime = 0.2f;
     [SerializeField] bool canDash = true;
     [SerializeField] int dashes = 1;
-    [SerializeField] bool isDashing;
+    [SerializeField] public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
     int maxDashes = 1;
