@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream:Wizard Apprentice/Assets/Art/Player assets/Wizard/wizard animation/death animation1.png.meta
 guid: b10688c7ddc09a9469fd78dc7b214063
-=======
-guid: 6e5add145408b874d905c9b310734ec3
->>>>>>> Stashed changes:Wizard Apprentice/Assets/Art/slime/big slime walkc/big slime walkc1.png.meta
-=======
-guid: b10688c7ddc09a9469fd78dc7b214063
->>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -56,11 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
-  spritePixelsToUnits: 32
-=======
   spritePixelsToUnits: 16
->>>>>>> Stashed changes
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
