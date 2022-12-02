@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Horizontal", horInput);
         animator.SetFloat("Vertical", verInput);
+        animator.SetBool("IsDashing", isDashing);
+        animator.SetFloat("DashingDuration", (1 / (dashingTime)));
 
         movement.x = horInput;
         movement.y = verInput;
@@ -85,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         activeSpeed = dashingSpeed;
         health.SetInvicible(dashingTime + 0.2f);
-
         yield return new WaitForSeconds(dashingTime);
 
 
