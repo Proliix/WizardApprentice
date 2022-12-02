@@ -98,7 +98,7 @@ public class SpecialProjectile : MonoBehaviour
 
         if (homingTarget != null)
         {
-            dir = homingTarget.transform.position - transform.position;
+            dir = (Vector2)homingTarget.transform.position - (Vector2)transform.position;
         }
 
         if (dir == Vector3.zero || dir == null)
