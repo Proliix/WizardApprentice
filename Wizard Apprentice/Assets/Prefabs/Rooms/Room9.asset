@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
-  m_Name: Room6
+  m_Name: Room9
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 4919123505051197220, guid: f9d8a4dec1149e1489f213a111b8cec7, type: 3}
-  roomSize: {x: 15, y: 18}
-  roomDifficulty: 2
+  roomPrefab: {fileID: 4866739746280680652, guid: b4a3237573dba67428924d8be9d49c87, type: 3}
+  roomSize: {x: 15, y: 15}
+  roomDifficulty: 1
   generateRandomRoom: 1

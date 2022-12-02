@@ -103,8 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: a6e2f2c7d43e7a84fb32daf00c24d531, type: 3}
-  maxHP: 100
-  hp: 100
+  maxHP: 30
+  hp: 30
   hitCooldown: 1
   removeSelf: 1
   hasHitCooldown: 0
