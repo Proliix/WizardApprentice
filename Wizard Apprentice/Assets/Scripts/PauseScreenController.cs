@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PauseScreenController : MonoBehaviour
 {
     [SerializeField] GameObject pauseScreenObject;
-    float timeScaleBeforePause;
+    float timeScaleBeforePause = 1;
     bool isOpen;
     private void Update()
     {
@@ -35,14 +35,7 @@ public class PauseScreenController : MonoBehaviour
     {
         isOpen = false;
         pauseScreenObject.SetActive(false);
-        if(timeScaleBeforePause != 0)
-        {
-            Time.timeScale = timeScaleBeforePause;
-        }
-        else
-        {
-            ResetTimeScale();
-        }
+        Time.timeScale = timeScaleBeforePause;
     }
     public void MenuButtonClicked()
     {
