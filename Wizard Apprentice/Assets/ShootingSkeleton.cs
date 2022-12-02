@@ -40,6 +40,7 @@ public class ShootingSkeleton : MonoBehaviour
         health = gameObject.GetComponent<Health>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         MoveEnemy();
+        target = GameObject.FindWithTag("Player");
     }
 
     void Update()
