@@ -14,13 +14,6 @@ public class DeathScreenController : MonoBehaviour
     [SerializeField] float slowDownTime;
     [SerializeField] float timeBetweenAnimations;
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            PlayerDeath();
-        }
-    }
     public void PlayerDeath()
     {
         deathScreenObject.SetActive(true);

@@ -4269,13 +4269,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   normalRoomsPoolAmount: 40
   possibleMinibossRooms:
-  - {fileID: 11400000, guid: 2fbaeaff8875cc04c892cacfb1577a80, type: 2}
+  - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
+  - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
+  - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
+  - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
+  - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   miniBossRoomsPoolAmount: 5
   possibleTreasureRooms:
-  - {fileID: 11400000, guid: 434ea1c03590ee94a944917397cbdb3c, type: 2}
+  - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
+  - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
+  - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
+  - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
+  - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   treasureRoomsPoolAmount: 3
   possibleMysteryRooms:
-  - {fileID: 11400000, guid: a8cd84b49298f8946a2a46f2901b0b0d, type: 2}
+  - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
+  - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
+  - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
+  - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
+  - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   mysteryRoomsPoolAmount: 3
 --- !u!114 &1786813660
 MonoBehaviour:
@@ -4506,10 +4518,34 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 704973196, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 1722248092}
+    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: hitCooldown
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: hasDeathAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548058, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548058, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548058, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_RootOrder
       value: 1

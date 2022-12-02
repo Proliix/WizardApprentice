@@ -77,6 +77,8 @@ public class CardHandler : MonoBehaviour
         {
             if (hasbeenReset)
             {
+                cardIndex = 0;
+                animators[cardIndex].SetBool("IsActive", true);
                 hasbeenReset = false;
             }
             timer += Time.deltaTime;
@@ -117,7 +119,8 @@ public class CardHandler : MonoBehaviour
         {
             hasbeenReset = true;
             cards[cardIndex].ResetCard();
-            cardIndex = 0;
+            cardIndex = -1;
+            timer = 0;
             for (int i = 0; i < animators.Length; i++)
             {
                 animators[i].SetBool("IsActive", false);
