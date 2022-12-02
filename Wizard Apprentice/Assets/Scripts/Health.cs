@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] AudioClip hitSound;
     [SerializeField] AudioClip deathSound;
-    
+
 
 
     [SerializeField] float maxHP = 100;
@@ -46,6 +46,10 @@ public class Health : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         startColor = spriteRenderer.color;
         tempColor = startColor;
+
+        if (usesHealthBar)
+            healthbar.gameObject.SetActive(true);
+
         if (usesHealthBar)
         {
             healthbar.maxValue = maxHP;
@@ -164,6 +168,11 @@ public class Health : MonoBehaviour
         {
             if (removeSelf)
                 Destroy(gameObject);
+
+            if (usesHealthBar == true)
+            {
+                healthbar.gameObject.SetActive(false);
+            }
 
             GameObject.FindWithTag("GameController").GetComponent<RoomManager>().RemoveEnemy(this.gameObject);
         }
