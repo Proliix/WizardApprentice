@@ -157,7 +157,9 @@ public class Health : MonoBehaviour
         SoundManager.Instance.PlayAudio(deathSound);
 
         if (gameObject.CompareTag("Player"))
-            Debug.Log(gameObject.name + " Is Dead");
+        {
+            FindObjectOfType<DeathScreenController>().PlayerDeath();
+        }
         else
         {
             if (removeSelf)
