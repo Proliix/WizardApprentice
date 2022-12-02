@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-   
+
     Rigidbody2D rb2d;
     Animator animator;
     Health health;
     [SerializeField] DashIndicator dashIndicator;
-   
+
     Vector2 movement = new Vector2();
 
 
@@ -21,10 +21,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float dashingSpeed;
     [SerializeField] float activeSpeed;
-    [SerializeField] float dashingTime = 0.2f;
+    public float dashingTime = 0.2f;
     [SerializeField] bool canDash = true;
     [SerializeField] int dashes = 1;
-    [SerializeField] public bool isDashing;
+    public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
     int maxDashes = 1;
@@ -62,17 +62,17 @@ public class PlayerMovement : MonoBehaviour
         movement.x = horInput;
         movement.y = verInput;
 
-       
-            MovePlayer();
-        
+
+        MovePlayer();
+
 
 
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
             SoundManager.Instance.PlayAudio(dashSound);
-           StartCoroutine(Dash());
+            StartCoroutine(Dash());
         }
-       
+
     }
 
 
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-       
+
         rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
     }
 
