@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 14baf4c0df8862e488cff1ecc9f64742, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba17290631248d040987996cc22352bf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -220,11 +220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5771a6da3022b48bc047c55e85c388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 14baf4c0df8862e488cff1ecc9f64742, type: 3}
+  image: {fileID: 21300000, guid: ba17290631248d040987996cc22352bf, type: 3}
   bulletImage: {fileID: 21300000, guid: 095cf9fffb07ab046af2c34d4e340d05, type: 3}
   attackSound: {fileID: 8300000, guid: 416f64c858b131f449a876803e1bbf5b, type: 3}
   audioVolume: 1
-  shootCooldown: 5
   distance: 1.25
   lifetime: 4
   damage: 1
