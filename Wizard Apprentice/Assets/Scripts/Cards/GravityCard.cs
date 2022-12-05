@@ -5,6 +5,9 @@ using UnityEngine;
 public class GravityCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] Sprite Bulletimage;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
@@ -73,5 +76,15 @@ public class GravityCard : MonoBehaviour, ICard
             hasFired = true;
             gravityBullet = bulletHandler.GetSpecialBullet(pAim.bulletSpawn.transform.position, player, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
         }
+    }
+
+    public string GetTitle()
+    {
+        return title;
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 }

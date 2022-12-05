@@ -5,6 +5,9 @@ using UnityEngine;
 public class HomingCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] Sprite Bulletimage;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
@@ -58,5 +61,13 @@ public class HomingCard : MonoBehaviour, ICard
         }
     }
 
+    public string GetTitle()
+    {
+        return title;
+    }
 
+    public string GetDescription()
+    {
+        return description;
+    }
 }

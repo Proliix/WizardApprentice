@@ -5,6 +5,9 @@ using UnityEngine;
 public class HealCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] GameObject player;
     [SerializeField] int healAmmount = 1;
     [SerializeField] AudioClip healSound;
@@ -41,5 +44,14 @@ public class HealCard : MonoBehaviour, ICard
             Effect();
         }
     }
+    
+    public string GetTitle()
+    {
+        return title;
+    }
 
+    public string GetDescription()
+    {
+        return description;
+    }
 }

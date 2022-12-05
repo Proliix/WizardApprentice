@@ -5,6 +5,9 @@ using UnityEngine;
 public class AurelionCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] Sprite bulletImage;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
@@ -63,5 +66,15 @@ public class AurelionCard : MonoBehaviour, ICard
     public Sprite GetSprite()
     {
         return image;
+    }
+
+    public string GetTitle()
+    {
+        return title;
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 }

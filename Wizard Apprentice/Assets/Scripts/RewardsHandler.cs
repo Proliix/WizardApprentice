@@ -17,6 +17,9 @@ public class RewardsHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
     [SerializeField] Image[] cardImages = new Image[3];
     [SerializeField] List<GameObject> cards;
+    [SerializeField] GameObject[] descriptionObj = new GameObject[3];
+    [SerializeField] TextMeshProUGUI[] cardTitleObj = new TextMeshProUGUI[3];
+    [SerializeField] TextMeshProUGUI[] cardTextObj = new TextMeshProUGUI[3];
 
 
     private Reward[] activeRewards = new Reward[3];
@@ -34,12 +37,22 @@ public class RewardsHandler : MonoBehaviour
         statScreenParent.SetActive(false);
         cardScreenParent.SetActive(false);
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+
+        for (int i = 0; i < descriptionObj.Length; i++)
+        {
+            descriptionObj[i].SetActive(false);
+        }
     }
+
     #region Card Rewards
     public void GetRewardScreenCard()
     {
         rewardScreen.SetActive(true);
         cardScreenParent.SetActive(true);
+        for (int i = 0; i < descriptionObj.Length; i++)
+        {
+            descriptionObj[i].SetActive(false);
+        }
         int first = -100;
         int seccond = -100;
         for (int i = 0; i < activeCards.Length; i++)
@@ -71,12 +84,18 @@ public class RewardsHandler : MonoBehaviour
         }
         for (int i = 0; i < titles.Length; i++)
         {
-            cardTitles[i].text = activeCards[i].name;
+            cardTitles[i].text = activeCards[i].GetComponent<ICard>().GetTitle();
+            cardTitleObj[i].text = activeCards[i].GetComponent<ICard>().GetTitle();
+            cardTextObj[i].text = activeCards[i].GetComponent<ICard>().GetDescription();
             cardImages[i].sprite = activeCards[i].GetComponent<ICard>().GetSprite();
         }
-
-
     }
+
+    public void ToggleDescriptionObj(int index)
+    {
+        descriptionObj[index].SetActive(!descriptionObj[index].activeSelf);
+    }
+
 
     public void SelectRewardCard(int index)
     {

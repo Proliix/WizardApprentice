@@ -6,6 +6,9 @@ public class TrippleShotCard : MonoBehaviour, ICard
 {
 
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
     [SerializeField] float shootCooldown = 0.25f;
@@ -57,4 +60,13 @@ public class TrippleShotCard : MonoBehaviour, ICard
         }
     }
 
+    public string GetTitle()
+    {
+        return title;
+    }
+
+    public string GetDescription()
+    {
+        return description; 
+    }
 }

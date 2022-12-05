@@ -221,6 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: ba17290631248d040987996cc22352bf, type: 3}
+  title: Orbit spell
+  description: This spell summons projectiles that spin around the user
   bulletImage: {fileID: 21300000, guid: 095cf9fffb07ab046af2c34d4e340d05, type: 3}
   attackSound: {fileID: 8300000, guid: 416f64c858b131f449a876803e1bbf5b, type: 3}
   audioVolume: 1

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public interface ICard
 {
-
     //gets called when a card returns to its normal state
     public void ResetCard();
     //the cards effect
@@ -11,4 +10,8 @@ public interface ICard
     public void UpdateCard();
     //Return the sprite of the card
     public Sprite GetSprite();
+
+    public string GetTitle();
+
+    public string GetDescription();
 }

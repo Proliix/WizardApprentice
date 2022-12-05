@@ -201,6 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
+  title: Forward shot
+  description: Fires projectiles towards the mouse
   shootCooldown: 0.25
   damage: 10
   size: 0.5

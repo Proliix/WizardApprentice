@@ -6,6 +6,9 @@ using UnityEngine;
 public class NormalCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] float shootCooldown = 0.25f;
 
     [SerializeField] float damage = 10f;
@@ -54,5 +57,15 @@ public class NormalCard : MonoBehaviour, ICard
             Effect();
         }
 
+    }
+
+    public string GetTitle()
+    {
+        return title;
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 }

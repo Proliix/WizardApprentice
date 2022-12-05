@@ -6,6 +6,9 @@ public class CircleShotCard : MonoBehaviour, ICard
 {
 
     [SerializeField] Sprite image;
+    [SerializeField] string title;
+    [TextArea(2, 10)]
+    [SerializeField] string description;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
     [SerializeField] int projectileAmmount = 6;
@@ -52,5 +55,15 @@ public class CircleShotCard : MonoBehaviour, ICard
             Effect();
         }
 
+    }
+
+    public string GetTitle()
+    {
+        return title;
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 }
