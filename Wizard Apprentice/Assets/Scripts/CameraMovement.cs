@@ -13,8 +13,14 @@ public class CameraMovement : MonoBehaviour
 
     float time;
     bool shakeActive = false;
-    Vector3 lastPos;
-    Vector3 nextPos;
+    //Vector3 lastPos;
+    //Vector3 nextPos;
+
+    /// <summary>
+    /// The ammount of running screenshake corutines
+    /// </summary>
+    int isRunning = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,40 +31,61 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            shakeActive = true;
+            //shakeActive = true;
             time = shakeDuration;
+            GetScreenShake(shakeDuration, shakeAmount);
         }
     }
 
-    private void FixedUpdate()
+
+    /// <summary>
+    /// Starts screenshake with duration with constrains vector2.one * amount
+    /// </summary>
+    public void GetScreenShake(float duration,float amount)
     {
-
-        if (shakeActive)
-        {
-            time -= Time.deltaTime;
-            if (time > 0)
-            {
-                nextPos = (Mathf.PerlinNoise(time * shakeSpeed, time * shakeSpeed * 2) - 0.5f) * shakeAmount.x * transform.right * curve.Evaluate(1f - time / shakeDuration) +
-                             (Mathf.PerlinNoise(time * shakeSpeed * 2, time * shakeSpeed) - 0.5f) * shakeAmount.y * transform.up * curve.Evaluate(1f - time / shakeDuration);
-
-                gameObject.transform.Translate(nextPos - lastPos);
-                lastPos = nextPos;
-            }
-            else
-            {
-                ResetCam();
-            }
-        }
+        StartCoroutine(Shake(duration, Vector2.one * amount));
     }
 
+    /// <summary>
+    /// Starts screenshake with duration with constrains amount
+    /// </summary>
+    public void GetScreenShake(float duration, Vector2 amount)
+    {
+        StartCoroutine(Shake(duration, amount));
+    }
+
+    IEnumerator Shake(float duration,Vector2 amount)
+    {
+        isRunning++;
+        float elapsed = duration;
+        Vector3 lastPos = Vector3.zero;
+        Vector3 nextPos = Vector3.zero;
+        while (elapsed > 0)
+        {
+            elapsed -= Time.deltaTime;
+            nextPos = (Mathf.PerlinNoise(elapsed * shakeSpeed, elapsed * shakeSpeed * 2) - 0.5f) * amount.x * transform.right * curve.Evaluate(1f - elapsed / duration) +
+                             (Mathf.PerlinNoise(elapsed * shakeSpeed * 2, elapsed * shakeSpeed) - 0.5f) * amount.y * transform.up * curve.Evaluate(1f - elapsed / duration);
+
+            gameObject.transform.Translate(nextPos - lastPos);
+            lastPos = nextPos;
+
+            yield return null;
+        }
+        isRunning--;
+        ResetCam();
+
+
+
+    }
     private void ResetCam()
     {
-        transform.localPosition = new Vector3(0, 0, transform.localPosition.z);
+        if (isRunning <= 0)
+        {
+            transform.localPosition = new Vector3(0, 0, transform.localPosition.z);
+        }
 
-        lastPos = nextPos = Vector3.zero;
+        //lastPos = nextPos = Vector3.zero;
 
         shakeActive = false;
     }
-
-
 }
