@@ -25,6 +25,7 @@ public class Health : MonoBehaviour
     [SerializeField] float hitEffectTime = 0.5f;
     [SerializeField] float hitTransparancy = 0.5f;
     [SerializeField] float flashSpeed = 0.05f;
+    [SerializeField] float playerScreenShakeAmount = 1f;
 
 
 
@@ -121,6 +122,9 @@ public class Health : MonoBehaviour
     {
         if (canBeHit)
         {
+            if (gameObject.CompareTag("Player"))
+                Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown,playerScreenShakeAmount);
+
             hp -= value;
             if (hp > 0)
             {

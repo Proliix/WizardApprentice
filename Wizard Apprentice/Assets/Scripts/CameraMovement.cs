@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     [Header("Screenshake")]
     [SerializeField] float shakeDuration = 1;
-    [SerializeField] float shakeSpeed;
+    [SerializeField] float shakeSpeed = 10;
     [SerializeField] Vector2 shakeAmount = new Vector2(1, 1);
     [SerializeField] AnimationCurve curve = AnimationCurve.EaseInOut(0, 1, 1, 0);
 
@@ -37,6 +37,13 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts screenshake with the default values which is defined on the camera
+    /// </summary>
+    public void GetScreenShake()
+    {
+        StartCoroutine(Shake(shakeDuration, shakeAmount));
+    }
 
     /// <summary>
     /// Starts screenshake with duration with constrains vector2.one * amount
@@ -73,8 +80,6 @@ public class CameraMovement : MonoBehaviour
         }
         isRunning--;
         ResetCam();
-
-
 
     }
     private void ResetCam()
