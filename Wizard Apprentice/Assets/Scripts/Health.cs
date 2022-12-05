@@ -28,12 +28,15 @@ public class Health : MonoBehaviour
     [SerializeField] float playerScreenShakeAmount = 1f;
 
 
-
+    Color hitColor = new Color(0.75f, 0.5f, 0.5f, 0.5f);
 
     float currentHealthRemoveSpeed;
-    float currentAlphaSpeed;
-    float tempAlpha = 1f;
-    float targetAlpha = 1f;
+
+    //These quaternions is r = x g = y b = z a = w
+    Quaternion currentRGBASpeed;
+    Quaternion tempRGBA;
+    Quaternion targetRGBA;
+    
     Color startColor;
     Color tempColor;
     bool hitEffectActve = false;
@@ -52,6 +55,8 @@ public class Health : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         startColor = spriteRenderer.color;
         tempColor = startColor;
+        targetRGBA = new Quaternion(hitColor.r, hitColor.g, hitColor.b, hitTransparancy);
+
 
         if (usesHealthBar)
             healthbar.gameObject.SetActive(true);
@@ -74,26 +79,34 @@ public class Health : MonoBehaviour
 
         if (hitEffectActve)
         {
-            tempAlpha = Mathf.SmoothDamp(tempAlpha, targetAlpha, ref currentAlphaSpeed, flashSpeed, 100, Time.deltaTime);
-            tempColor.a = tempAlpha;
-            spriteRenderer.color = tempColor;
 
-            if (tempAlpha <= hitTransparancy + 0.05f)
+            UpdateColor();
+
+            if (tempRGBA.w <= hitTransparancy + 0.05f)
             {
-                targetAlpha = 1f;
+                targetRGBA = new Quaternion(startColor.r, startColor.g, startColor.b, startColor.a);
             }
-            else if (tempAlpha >= 1f - 0.05f)
+            else if (tempRGBA.w >= 1f - 0.05f)
             {
-                targetAlpha = hitTransparancy;
+                targetRGBA = new Quaternion(hitColor.r, hitColor.g, hitColor.b, hitTransparancy);
             }
 
         }
-        else if (spriteRenderer.color.a != 1 && !hitEffectActve)
+        else if (spriteRenderer.color != startColor && !hitEffectActve)
         {
-            tempAlpha = Mathf.SmoothDamp(tempAlpha, 1, ref currentAlphaSpeed, flashSpeed, 100, Time.deltaTime);
-            tempColor.a = tempAlpha;
-            spriteRenderer.color = tempColor;
+            UpdateColor();
+            targetRGBA = new Quaternion(startColor.r, startColor.g, startColor.b, startColor.a);
         }
+    }
+
+    void UpdateColor()
+    {
+        tempRGBA.x = Mathf.SmoothDamp(tempRGBA.x, targetRGBA.x, ref currentRGBASpeed.x, flashSpeed, 100, Time.deltaTime);
+        tempRGBA.y = Mathf.SmoothDamp(tempRGBA.y, targetRGBA.y, ref currentRGBASpeed.y, flashSpeed, 100, Time.deltaTime);
+        tempRGBA.z = Mathf.SmoothDamp(tempRGBA.z, targetRGBA.z, ref currentRGBASpeed.z, flashSpeed, 100, Time.deltaTime);
+        tempRGBA.w = Mathf.SmoothDamp(tempRGBA.w, targetRGBA.w, ref currentRGBASpeed.w, flashSpeed, 100, Time.deltaTime);
+        tempColor = new Color(tempRGBA.x, tempRGBA.y, tempRGBA.z, tempRGBA.w);
+        spriteRenderer.color = tempColor;
     }
 
     public void AddHealth(float healAmount)
@@ -123,7 +136,7 @@ public class Health : MonoBehaviour
         if (canBeHit)
         {
             if (gameObject.CompareTag("Player"))
-                Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown,playerScreenShakeAmount);
+                Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown, playerScreenShakeAmount);
 
             hp -= value;
             if (hp > 0)
@@ -199,7 +212,7 @@ public class Health : MonoBehaviour
     {
         SoundManager.Instance.PlayAudio(hitSound);
 
-        targetAlpha = hitTransparancy;
+        targetRGBA.w = hitTransparancy;
         hitEffectActve = true;
         yield return new WaitForSeconds(hitEffectTime);
         hitEffectActve = false;
