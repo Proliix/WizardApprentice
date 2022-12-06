@@ -48,7 +48,6 @@ public class CardHandler : MonoBehaviour
         return returnValue;
     }
 
-
     public void ReplaceCard(GameObject card, int index)
     {
         if (card.GetComponent<ICard>() == null)

@@ -1731,7 +1731,7 @@ GameObject:
   - component: {fileID: 511725431}
   - component: {fileID: 511725430}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3789,7 +3789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 1050
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
@@ -4792,7 +4792,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitNumberHolderPrefab: {fileID: 598977237159426611, guid: 4b3411af2c597cf4ca88ab7c1336874c, type: 3}
   worldCanvas: {fileID: 1643237174}
+  damageColor: {r: 1, g: 0.42745098, b: 0.42745098, a: 1}
+  healColor: {r: 0.4458443, g: 1, b: 0.427451, a: 1}
   startAmount: 25
+  offsetMax: {x: 0.25, y: 0.25}
+  offsetMin: {x: 0, y: 0}
 --- !u!1 &1790516759
 GameObject:
   m_ObjectHideFlags: 0

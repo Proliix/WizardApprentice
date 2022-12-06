@@ -7,7 +7,11 @@ public class HitNumberHandler : MonoBehaviour
 {
     [SerializeField] GameObject hitNumberHolderPrefab;
     [SerializeField] GameObject worldCanvas;
+    [SerializeField] Color damageColor = new Color(1, 0.43f, 0.43f,1); 
+    [SerializeField] Color healColor = new Color (0.47f,1,0.43f,1);
     [SerializeField] int startAmount = 25;
+    [SerializeField] Vector2 offsetMax = new Vector2(0.25f, 0.25f);
+    [SerializeField] Vector2 offsetMin = new Vector2(0, 0);
 
     GameObject hitNumberPoolParent;
     List<GameObject> hitNumberPool;
@@ -46,8 +50,9 @@ public class HitNumberHandler : MonoBehaviour
 
         GameObject newHitText = hitNumberPool[index].gameObject;
         newHitText.transform.SetParent(null);
-        newHitText.transform.localPosition = position;
-        hitnumberText[index].text = "" + damage;
+        newHitText.transform.localPosition = position + new Vector3(Random.Range(offsetMin.x, offsetMax.x),Random.Range(offsetMin.y, offsetMax.y),0);
+        hitnumberText[index].color = damage > 0 ? damageColor : healColor;
+        hitnumberText[index].text = "" + (damage > 0 ? damage : -damage);
         return newHitText;
     }
 

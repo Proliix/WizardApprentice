@@ -26,6 +26,8 @@ public class Health : MonoBehaviour
     [SerializeField] float hitTransparancy = 0.5f;
     [SerializeField] float flashSpeed = 0.05f;
     [SerializeField] float playerScreenShakeAmount = 1f;
+    [SerializeField] float damageNumberTime = 1.25f;
+    [SerializeField] float healNumberTime = 1.25f;
 
 
     Color hitColor = new Color(0.75f, 0.5f, 0.5f, 0.5f);
@@ -36,11 +38,12 @@ public class Health : MonoBehaviour
     Quaternion currentRGBASpeed;
     Quaternion tempRGBA;
     Quaternion targetRGBA;
-    
+
     Color startColor;
     Color tempColor;
     bool hitEffectActve = false;
 
+    HitNumberHandler hitNumbers;
 
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -52,6 +55,7 @@ public class Health : MonoBehaviour
             anim = gameObject.GetComponent<Animator>();
 
         hp = maxHP;
+        hitNumbers = GameObject.FindWithTag("GameController").GetComponent<HitNumberHandler>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         startColor = spriteRenderer.color;
         tempColor = startColor;
@@ -118,8 +122,11 @@ public class Health : MonoBehaviour
         else
         {
             hp += healAmount;
+            
         }
 
+        if (hitNumbers != null)
+            hitNumbers.GetHitText(transform.position, -healAmount,healNumberTime);
     }
 
     public void AddMaxHealth(float healAmount)
@@ -148,6 +155,9 @@ public class Health : MonoBehaviour
             }
             else
                 SetDead();
+
+            if (hitNumbers != null)
+                hitNumbers.GetHitText(transform.position, value, damageNumberTime);
         }
     }
 
