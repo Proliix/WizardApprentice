@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public GameObject shooter;
     public float damage = 10f;
+    public float hitNumberTime = 1.25f;
     public bool moveAwayFromShoter;
     public bool isPlayerBullet;
     public int poolIndex;
@@ -20,11 +21,13 @@ public class Bullet : MonoBehaviour
     float timer = 0;
     Vector3 dir;
     BulletHandler bulletHandler;
+    HitNumberHandler hitNumbers;
 
     private void Start()
     {
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        hitNumbers = GameObject.FindWithTag("GameController").GetComponent<HitNumberHandler>();
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -87,6 +90,8 @@ public class Bullet : MonoBehaviour
 
                 if (collision.gameObject.GetComponent<Health>().GetCanBeHit() == true)
                 {
+                    if (hitNumbers != null)
+                        hitNumbers.GetHitText(transform.position + new Vector3(Random.Range(0, 0.25f), Random.Range(0, 0.25f), 0), damage,hitNumberTime);
                     collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
                     bulletHandler.ResetBullet(poolIndex);
                     ResetTimer();
@@ -101,6 +106,6 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    
+
 
 }

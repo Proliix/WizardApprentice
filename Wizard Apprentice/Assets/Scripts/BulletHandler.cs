@@ -415,7 +415,6 @@ public class BulletHandler : MonoBehaviour
 
         if (!hasSpawned)
         {
-            Debug.Log("Is here");
             int currentCount = specialProjectilePool.Count;
             for (int i = 0; i < 5; i++)
             {
@@ -498,7 +497,6 @@ public class BulletHandler : MonoBehaviour
 
         if (!hasSpawned)
         {
-            Debug.Log("Is here");
             int currentCount = specialProjectilePool.Count;
             for (int i = 0; i < 5; i++)
             {
