@@ -34,6 +34,20 @@ public class CardHandler : MonoBehaviour
 
     }
 
+    public ICard CheckInCycle(ICard card)
+    {
+        ICard returnValue = null;
+        for (int i = 0; i < cards.Length; i++)
+        {
+            if (cards[i] == card)
+            {
+                returnValue = card;
+                break;
+            }
+        }
+        return returnValue;
+    }
+
     public void ReplaceCard(GameObject card, int index)
     {
         if (card.GetComponent<ICard>() == null)
