@@ -3819,7 +3819,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 40
+  m_SortingOrder: 1050
   m_TargetDisplay: 0
 --- !u!224 &1643237178
 RectTransform:
@@ -4795,6 +4795,7 @@ MonoBehaviour:
   damageColor: {r: 1, g: 0.42745098, b: 0.42745098, a: 1}
   healColor: {r: 0.4458443, g: 1, b: 0.427451, a: 1}
   startAmount: 25
+  upTime: 1.25
   offsetMax: {x: 0.25, y: 0.25}
   offsetMin: {x: 0, y: 0}
 --- !u!1 &1790516759

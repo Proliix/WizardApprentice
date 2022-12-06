@@ -7,9 +7,10 @@ public class HitNumberHandler : MonoBehaviour
 {
     [SerializeField] GameObject hitNumberHolderPrefab;
     [SerializeField] GameObject worldCanvas;
-    [SerializeField] Color damageColor = new Color(1, 0.43f, 0.43f,1); 
-    [SerializeField] Color healColor = new Color (0.47f,1,0.43f,1);
+    [SerializeField] Color damageColor = new Color(1, 0.43f, 0.43f, 1);
+    [SerializeField] Color healColor = new Color(0.47f, 1, 0.43f, 1);
     [SerializeField] int startAmount = 25;
+    [SerializeField] float upTime = 1.25f;
     [SerializeField] Vector2 offsetMax = new Vector2(0.25f, 0.25f);
     [SerializeField] Vector2 offsetMin = new Vector2(0, 0);
 
@@ -38,7 +39,7 @@ public class HitNumberHandler : MonoBehaviour
     {
         obj.transform.SetParent(worldCanvas.transform);
         obj.SetActive(true);
-        obj.GetComponent<Animator>().SetFloat("AnimSpeed", time);
+        obj.GetComponent<Animator>().SetFloat("AnimSpeed", 1 / time);
         yield return new WaitForSeconds(time);
         obj.SetActive(false);
         obj.transform.SetParent(hitNumberPoolParent.transform);
@@ -50,13 +51,13 @@ public class HitNumberHandler : MonoBehaviour
 
         GameObject newHitText = hitNumberPool[index].gameObject;
         newHitText.transform.SetParent(null);
-        newHitText.transform.localPosition = position + new Vector3(Random.Range(offsetMin.x, offsetMax.x),Random.Range(offsetMin.y, offsetMax.y),0);
+        newHitText.transform.localPosition = position + new Vector3(Random.Range(offsetMin.x, offsetMax.x), Random.Range(offsetMin.y, offsetMax.y), 0);
         hitnumberText[index].color = damage > 0 ? damageColor : healColor;
         hitnumberText[index].text = "" + (damage > 0 ? damage : -damage);
         return newHitText;
     }
 
-    public GameObject GetHitText(Vector3 position, float damage, float uptime = 1)
+    public GameObject GetHitText(Vector3 position, float damage)
     {
         GameObject newHitText = hitNumberPool[0].gameObject;
         bool hasSpawned = false;
@@ -88,7 +89,7 @@ public class HitNumberHandler : MonoBehaviour
 
             }
         }
-        StartCoroutine(ReturnAfterTime(uptime, newHitText));
+        StartCoroutine(ReturnAfterTime(upTime, newHitText));
         return newHitText;
     }
 }

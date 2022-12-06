@@ -26,8 +26,6 @@ public class Health : MonoBehaviour
     [SerializeField] float hitTransparancy = 0.5f;
     [SerializeField] float flashSpeed = 0.05f;
     [SerializeField] float playerScreenShakeAmount = 1f;
-    [SerializeField] float damageNumberTime = 1.25f;
-    [SerializeField] float healNumberTime = 1.25f;
 
 
     Color hitColor = new Color(0.75f, 0.5f, 0.5f, 0.5f);
@@ -122,11 +120,11 @@ public class Health : MonoBehaviour
         else
         {
             hp += healAmount;
-            
+
         }
 
         if (hitNumbers != null)
-            hitNumbers.GetHitText(transform.position, -healAmount,healNumberTime);
+            hitNumbers.GetHitText(transform.position, -healAmount);
     }
 
     public void AddMaxHealth(float healAmount)
@@ -157,7 +155,7 @@ public class Health : MonoBehaviour
                 SetDead();
 
             if (hitNumbers != null)
-                hitNumbers.GetHitText(transform.position, value, damageNumberTime);
+                hitNumbers.GetHitText(transform.position, value);
         }
     }
 
