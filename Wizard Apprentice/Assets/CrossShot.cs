@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XShot : MonoBehaviour, ICard
+public class CrossShot : MonoBehaviour, ICard
 {
 
-    
+
     [SerializeField] Sprite image;
     [SerializeField] string title;
     [TextArea(2, 10)]
@@ -38,8 +38,8 @@ public class XShot : MonoBehaviour, ICard
     {
         SoundManager.Instance.PlayAudio(attackSound);
 
-            bulletHandler.GetCircleShot(4, player, true, damage, size, speed);
-
+       
+        bulletHandler.GetCircleShot(4, player, true, 45, damage, size, speed);
     }
 
     public string GetDescription()
@@ -71,6 +71,6 @@ public class XShot : MonoBehaviour, ICard
             timer -= attackDelay;
         }
     }
-  
+
 
 }

@@ -21,6 +21,13 @@ public class Boss1AI : MonoBehaviour
     [SerializeField] float specialBulletSize;
     [SerializeField] float bulletSpeed;
 
+    [Header("Giga Attack Variables")]
+    [SerializeField] float gigaDamage;
+    [SerializeField] float gigaSize;
+    [SerializeField] float gigaSpeed;
+
+
+
     [SerializeField] float timeUntilBossStart = 3;
 
     [Header("HP")]
@@ -91,8 +98,14 @@ public class Boss1AI : MonoBehaviour
   void BossAttackSpecial()
     {
         timer = 0;
-        bulletHandler.GetCircleShot(30, gameObject, false, 1, specialDamage, specialBulletSize, bulletSpeed);
+        bulletHandler.GetCircleShot(50, gameObject, false, 1, specialDamage, specialBulletSize, bulletSpeed);
 
     }
+
+    void GigaAttack()
+    {
+
+    }
+
 
 }
