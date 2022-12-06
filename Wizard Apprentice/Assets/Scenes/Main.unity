@@ -4797,7 +4797,7 @@ MonoBehaviour:
   startAmount: 25
   upTime: 1.25
   offsetMax: {x: 0.25, y: 0.25}
-  offsetMin: {x: 0, y: 0}
+  offsetMin: {x: -0.25, y: -0.25}
 --- !u!1 &1790516759
 GameObject:
   m_ObjectHideFlags: 0

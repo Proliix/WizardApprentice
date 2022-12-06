@@ -48,6 +48,16 @@ public class BulletHandler : MonoBehaviour
         }
     }
 
+    public void UpdateBullet(GameObject bullet, GameObject Shooter, Vector3 dir, bool isPlayer)
+    {
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.shooter = Shooter;
+        bulletScript.isPlayerBullet = isPlayer;
+        bulletScript.ResetTimer();
+        bulletScript.UpdateColor();
+        bulletScript.UpdateDirection(dir);
+    }
+
     public void ResetBullet(int index)
     {
         projectilePool[index].SetActive(false);
@@ -62,7 +72,7 @@ public class BulletHandler : MonoBehaviour
 
     public void ResetAll()
     {
-        if(specialProjectilePool == null || projectilePool == null)
+        if (specialProjectilePool == null || projectilePool == null)
         {
             return;
         }
