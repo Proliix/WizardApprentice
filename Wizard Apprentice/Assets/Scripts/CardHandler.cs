@@ -39,14 +39,15 @@ public class CardHandler : MonoBehaviour
         ICard returnValue = null;
         for (int i = 0; i < cards.Length; i++)
         {
-            if (cards[i] == card)
+            if (cards[i].GetType() == card.GetType())
             {
-                returnValue = card;
+                returnValue = cards[i];
                 break;
             }
         }
         return returnValue;
     }
+
 
     public void ReplaceCard(GameObject card, int index)
     {

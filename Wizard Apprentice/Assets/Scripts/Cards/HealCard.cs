@@ -1,4 +1,4 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,16 +14,27 @@ public class HealCard : MonoBehaviour, ICard
     [SerializeField] float audioVolume = 0.25f;
     bool playerIsHealed = false;
     Health health;
+    NormalCard testCard = new NormalCard();
+    CardHandler cardHandler;
+
 
     private void Start()
     {
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
+        cardHandler = GameObject.FindWithTag("GameController").GetComponent<CardHandler>();
     }
 
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(healSound, audioVolume);
         health.AddHealth(healAmmount);
+
+        if (cardHandler.CheckInCycle(testCard) != null)
+        {
+            Debug.Log("Is here");
+            testCard = (NormalCard)cardHandler.CheckInCycle(testCard);
+            testCard.Effect();
+        }
     }
 
     public Sprite GetSprite()
@@ -44,7 +55,7 @@ public class HealCard : MonoBehaviour, ICard
             Effect();
         }
     }
-    
+
     public string GetTitle()
     {
         return title;
