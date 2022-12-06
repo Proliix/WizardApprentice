@@ -310,6 +310,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!114 &45670493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +437,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2413505705107542157, guid: 90707af29c007a74ba85bef13e279115, type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629461179361097493, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629461179871687204, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cb0310e9f826e6942a7a521f24336f50, type: 3}
+    - target: {fileID: 4629461179871687204, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629461179871687204, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629461179871687204, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4629461179871687210, guid: 90707af29c007a74ba85bef13e279115, type: 3}
@@ -751,6 +772,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!212 &186239792
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1064,6 +1086,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bcd623ac98caee042b39ad5d4af13f1d, type: 3}
+  title: 
+  description: 
   attackSound: {fileID: 0}
   audioVolume: 1
   projectileAmmount: 15
@@ -1284,6 +1308,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &517345572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517345574}
+  - component: {fileID: 517345573}
+  m_Layer: 0
+  m_Name: XShot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &517345573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517345572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3434f6f27efb1ad4682e108a6a7d1d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  title: 
+  description: 
+  attackSound: {fileID: 0}
+  audioVolume: 1
+--- !u!4 &517345574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517345572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.50046843, y: 0.06328949, z: 0.028797267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &518859124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,6 +1587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
+  title: 
+  description: 
   shootCooldown: 0.2
   damage: 10
   size: 0.5
@@ -1574,6 +1649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 553983868cbedf34aba0ecc5f0c69320, type: 3}
+  title: 
+  description: 
   player: {fileID: 0}
   healAmmount: 10
   healSound: {fileID: 8300000, guid: 5de01248bd1ee8a43bfdf22cd440a551, type: 3}
@@ -2289,6 +2366,38 @@ MonoBehaviour:
   rotationTarget: {fileID: 2096084211}
   RotationSpeed: 110
   canShoot: 0
+--- !u!1 &753653686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 753653687}
+  m_Layer: 0
+  m_Name: Miniboss1Room
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &753653687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753653686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1276835729}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756158857
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,6 +2661,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!1 &769448206
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,6 +2799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b079989b8a1d3124da3640849df42090, type: 3}
+  title: 
+  description: 
   attackSound: {fileID: 0}
   audioVolume: 1
   shootCooldown: 0.5
@@ -2731,6 +2843,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 14baf4c0df8862e488cff1ecc9f64742, type: 3}
+  title: 
+  description: 
   bulletImage: {fileID: 21300000, guid: 095cf9fffb07ab046af2c34d4e340d05, type: 3}
   attackSound: {fileID: 8300000, guid: 416f64c858b131f449a876803e1bbf5b, type: 3}
   audioVolume: 1
@@ -3064,6 +3178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 553983868cbedf34aba0ecc5f0c69320, type: 3}
+  title: 
+  description: 
   player: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   healAmmount: 1
   healSound: {fileID: 0}
@@ -3287,7 +3403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.95
+      value: -3.45
       objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3388,6 +3504,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!114 &1118197214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3688,6 +3805,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!114 &1211916637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3883,6 +4001,161 @@ Transform:
   m_Father: {fileID: 250888496}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1276835728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1276835729}
+  - component: {fileID: 1276835731}
+  - component: {fileID: 1276835730}
+  - component: {fileID: 1276835732}
+  - component: {fileID: 1276835733}
+  m_Layer: 0
+  m_Name: Miniboss 1
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1276835729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276835728}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 753653687}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1276835730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276835728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e3a6bafd0590d418d51fb29569ecd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSize: 1
+  damage: 10
+  bulletSpeed: 7.5
+  numberOfShotsInPattern: 6
+  specialBulletSize: 1
+  specialBulletSpeed: 5
+  specialDamage: 10
+  specialBulletAmount: 9
+  timeBetweenShots: 0.2
+  canMove: 0
+  timer: 0
+  moveDelay: 2
+  target: {fileID: 0}
+--- !u!212 &1276835731
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276835728}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1276835732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276835728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
+  deathSound: {fileID: 8300000, guid: a6e2f2c7d43e7a84fb32daf00c24d531, type: 3}
+  maxHP: 330
+  hp: 330
+  hitCooldown: 1
+  removeSelf: 1
+  hasHitCooldown: 0
+  healthRemoveSpeed: 0.005
+  usesHealthBar: 0
+  healthbar: {fileID: 0}
+  hasDeathAnimation: 0
+  hitEffectTime: 0.5
+  hitTransparancy: 0.5
+  flashSpeed: 0.05
+  playerScreenShakeAmount: 1
+--- !u!58 &1276835733
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276835728}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.56633586
 --- !u!1 &1346599515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3965,6 +4238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
+  title: 
+  description: 
   Bulletimage: {fileID: 21300000, guid: 64045465c3ac3f94fbbc2ba78f5f0a20, type: 3}
   attackSound: {fileID: 8300000, guid: 284b949722b4d8342ba13b4c94ce8bb9, type: 3}
   audioVolume: 1
@@ -4317,6 +4592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bcd623ac98caee042b39ad5d4af13f1d, type: 3}
+  title: 
+  description: 
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   projectileAmmount: 6
@@ -4745,7 +5022,7 @@ Transform:
   m_GameObject: {fileID: 1658743701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 9, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4837,6 +5114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
+  title: 
+  description: 
   shootCooldown: 0.25
   damage: 10
   size: 0.5
@@ -5358,6 +5637,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!114 &1916826974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5460,6 +5740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b079989b8a1d3124da3640849df42090, type: 3}
+  title: 
+  description: 
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   shootCooldown: 0.5
@@ -5713,6 +5995,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!212 &2007521326
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5966,6 +6249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 8bb9ced4da6af0d4c8fdb30b98372be7, type: 3}
+  title: 
+  description: 
   Bulletimage: {fileID: 21300000, guid: 15e47b5a0c99b5649bfa1a842619cb76, type: 3}
   attackSound: {fileID: 8300000, guid: 89dfa83f8451dcb4b8ede002c08c5b96, type: 3}
   audioVolume: 1
