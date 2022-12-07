@@ -56,8 +56,8 @@ public class GravityCard : MonoBehaviour, ICard
                 {
                     Vector2 dir = gravityBullet.transform.position - enemiesWithingRange[i].transform.position;
                     enemiesWithingRange[i].GetComponent<IStunnable>().GetStunned(stunDuration);
-                    //enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity += dir.normalized * force;
-                    enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
+                    enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity += dir.normalized * force;
+                    //enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
                     Debug.Log("Gravity card effect Triggered");
                 }
             }
