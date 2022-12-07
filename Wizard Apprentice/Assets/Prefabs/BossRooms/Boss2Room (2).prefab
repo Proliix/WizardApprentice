@@ -464,15 +464,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda32db0a9885941b72a77baf4a31a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningEnemy: {fileID: 2664954099150742148, guid: 53c223551cf9c57448027fd5ceb9567e, type: 3}
   patternStartUpDelay: 5
   randomStartUpDelay: 2.5
   HP: 0
   maxHP: 0
-  attackDelay: 0.15
+  attackDelay: 0.125
   patternDelay: 1
   pausetime: 0.5
-  bulletSpeed: 3.5
+  bulletSpeed: 5
   rotationSpeed: 80
   randomBulletAmount: 1
   randomBulletSize: 0.751
@@ -480,8 +479,10 @@ MonoBehaviour:
   attackTimer: 0
   patternTimer: 0
   randomAttackTimer: 0
-  spawnEnemyTimer: 0
-  spawnEnemyDelay: 0
+  spawningEnemy: {fileID: 2664954099150742148, guid: 53c223551cf9c57448027fd5ceb9567e, type: 3}
+  spawnEnemyTimer: -3
+  spawnEnemyDelay: 4
+  spawnAmount: 0
   phase1Active: 0
   phase2Active: 0
   phase3Active: 0
