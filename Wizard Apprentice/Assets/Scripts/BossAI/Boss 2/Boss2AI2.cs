@@ -33,6 +33,12 @@ public class Boss2AI2 : MonoBehaviour
     [SerializeField] float patternTimer;
     [SerializeField] float randomAttackTimer;
 
+    [Header("Spawn Variables")]
+    [SerializeField] GameObject spawningEnemy;
+    [SerializeField] float spawnEnemyTimer;
+    [SerializeField] float spawnEnemyDelay;
+    [SerializeField] int spawnAmount;
+
     [Header("Phases")]
     [SerializeField] bool phase1Active;
     [SerializeField] bool phase2Active;
@@ -77,9 +83,17 @@ public class Boss2AI2 : MonoBehaviour
         HP = health.GetHP();
         maxHP = health.GetMaxHP();
 
-        attackTimer += Time.deltaTime;
         patternTimer += Time.deltaTime;
+        attackTimer += Time.deltaTime;
         randomAttackTimer += Time.deltaTime;
+        spawnEnemyTimer += Time.deltaTime;
+
+
+        if (spawnEnemyTimer >= spawnEnemyDelay)
+        {
+            StartCoroutine(SpawnEnemy());
+            spawnEnemyTimer -= spawnEnemyDelay;
+        }
 
         if (HP < maxHP * 0.666f && HP > maxHP * 0.333f)
         {
@@ -144,6 +158,7 @@ public class Boss2AI2 : MonoBehaviour
 
     void Phase1()
     {
+        spawnAmount = 2;
         rotationSpeed = 40;
         StartCoroutine(AttackPattern());
         spriteRenderer.sprite = Phase1Sprite;
@@ -151,6 +166,7 @@ public class Boss2AI2 : MonoBehaviour
 
     void Phase2()
     {
+        spawnAmount = 3;
         rotationSpeed = 65;
         phase1Active = false;
         phase2Active = true;
@@ -161,6 +177,7 @@ public class Boss2AI2 : MonoBehaviour
 
     void Phase3()
     {
+        spawnAmount = 4;
         rotationSpeed = 90;
         StartCoroutine(AttackPattern());
         phase2Active = false;
@@ -192,6 +209,20 @@ public class Boss2AI2 : MonoBehaviour
         yield return null;
     }
 
+
+    IEnumerator SpawnEnemy()
+    {
+        for (int i = 0; i < spawnAmount; i++)
+        {
+        Instantiate(spawningEnemy);
+            yield return new WaitForSeconds(Random.Range(0.25f, 0.5f));
+        }
+        yield return new WaitForSeconds(2f);
+      
+
+        yield return null;
+
+    }
 
 
 

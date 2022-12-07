@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XShot : MonoBehaviour, ICard
+public class CrossShot : MonoBehaviour, ICard
 {
 
-    
+
     [SerializeField] Sprite image;
     [SerializeField] string title;
     [TextArea(2, 10)]
@@ -21,7 +21,10 @@ public class XShot : MonoBehaviour, ICard
     [Header("Attack Variables")]
     float attackDelay = 0.5f;
 
+    XShot xShot;
 
+    bool triedToFind = false;
+    CardHandler cardHandler;
     PlayerStats stats;
     GameObject player;
     BulletHandler bulletHandler;
@@ -29,6 +32,7 @@ public class XShot : MonoBehaviour, ICard
 
     private void Start()
     {
+        cardHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<CardHandler>();
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
@@ -37,9 +41,13 @@ public class XShot : MonoBehaviour, ICard
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(attackSound);
+        bulletHandler.GetCircleShot(4, player, true, 45, damage, size, speed);
 
-            bulletHandler.GetCircleShot(4, player, true, damage, size, speed);
+        if (xShot != null)
+        {
 
+            xShot.Effect();
+        }
     }
 
     public string GetDescription()
@@ -60,10 +68,20 @@ public class XShot : MonoBehaviour, ICard
     public void ResetCard()
     {
         timer = 0;
+        triedToFind = false;
+        xShot = null;
     }
 
     public void UpdateCard()
     {
+        if (!triedToFind)
+        {
+            triedToFind = true;
+            XShot temp = new XShot();
+
+            xShot = (XShot)cardHandler.CheckInCycle(temp);
+        }
+
         timer += Time.deltaTime;
         if (timer >= attackDelay)
         {
@@ -71,6 +89,6 @@ public class XShot : MonoBehaviour, ICard
             timer -= attackDelay;
         }
     }
-  
+
 
 }
