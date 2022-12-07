@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     int maxDashes = 1;
     PlayerStats stats;
+    Vector2 dashMovement;
 
     void Start()
     {
@@ -52,20 +53,25 @@ public class PlayerMovement : MonoBehaviour
             dashes++;
         }
 
-        //get input from player
-        float horInput = Input.GetAxisRaw("Horizontal");
-        float verInput = Input.GetAxisRaw("Vertical");
+        if (!isDashing)
+        {
 
-        animator.SetFloat("Horizontal", horInput);
-        animator.SetFloat("Vertical", verInput);
-        animator.SetBool("IsDashing", isDashing);
-        animator.SetFloat("DashingDuration", (1 / (dashingTime)));
+            //get input from player
+            float horInput = Input.GetAxisRaw("Horizontal");
+            float verInput = Input.GetAxisRaw("Vertical");
 
-        movement.x = horInput;
-        movement.y = verInput;
+            animator.SetFloat("Horizontal", horInput);
+            animator.SetFloat("Vertical", verInput);
+            movement.x = horInput;
+            movement.y = verInput;
+
+            if ((horInput >= 0.1 || horInput <= -0.1) || (verInput >= 0.1 || verInput <= -0.1))
+                dashMovement = movement;
+
+            MovePlayer();
+        }
 
 
-        MovePlayer();
 
 
 
@@ -73,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
         {
             SoundManager.Instance.PlayAudio(dashSound);
             StartCoroutine(Dash());
+
         }
 
     }
@@ -85,13 +92,22 @@ public class PlayerMovement : MonoBehaviour
         dashes--;
         canDash = false;
         isDashing = true;
+
+        animator.SetBool("IsDashing", isDashing);
+        animator.SetFloat("DashingDuration", (1 / (dashingTime)));
+        animator.SetFloat("Horizontal", dashMovement.x);
+        animator.SetFloat("Vertical", dashMovement.y);
+
+
         activeSpeed = dashingSpeed;
+        rb2d.velocity = dashMovement.normalized * (activeSpeed + stats.movementSpeed);
         health.SetInvicible(dashingTime + 0.2f);
         yield return new WaitForSeconds(dashingTime);
 
 
         isDashing = false;
         activeSpeed = moveSpeed;
+        animator.SetBool("IsDashing", isDashing);
 
         yield return new WaitForSeconds(dashingCooldown - stats.dashCooldown);
         dashIndicator.ChangeDashIndicator();
