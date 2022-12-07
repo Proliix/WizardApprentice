@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     int maxDashes = 1;
     PlayerStats stats;
-    Vector2 dashMovement;
+    Vector2 dashMovement = Vector2.right;
 
     void Start()
     {
@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isDashing)
         {
-
             //get input from player
             float horInput = Input.GetAxisRaw("Horizontal");
             float verInput = Input.GetAxisRaw("Vertical");
@@ -70,10 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
             MovePlayer();
         }
-
-
-
-
 
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
@@ -92,6 +87,9 @@ public class PlayerMovement : MonoBehaviour
         dashes--;
         canDash = false;
         isDashing = true;
+
+        if (dashMovement == Vector2.zero)
+            dashMovement = transform.right;
 
         animator.SetBool("IsDashing", isDashing);
         animator.SetFloat("DashingDuration", (1 / (dashingTime)));
