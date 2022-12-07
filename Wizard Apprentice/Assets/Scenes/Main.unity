@@ -5016,6 +5016,14 @@ PrefabInstance:
       propertyPath: hitColour.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: dashingTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: dashingCooldown
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_RootOrder
       value: 1
