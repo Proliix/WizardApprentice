@@ -11,7 +11,7 @@ public class LaserCard : MonoBehaviour, ICard
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
 
-    [SerializeField] Transform target;
+    [SerializeField] Transform player;
     [SerializeField] GameObject laserSprite;
     [SerializeField] GameObject activeLaser;
 
@@ -23,8 +23,7 @@ public class LaserCard : MonoBehaviour, ICard
     private void Start()
     {
       
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
     }
 
@@ -55,17 +54,40 @@ public class LaserCard : MonoBehaviour, ICard
 
     public void UpdateCard()
     {
-        mousePos = Input.mousePosition; 
+     
+
+
         throw new System.NotImplementedException();
+    }
+
+    private void Update()
+    {
+        mainCamera = Camera.main;
+
+        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        Debug.Log(mousePos);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(Attack());
+        }
     }
 
     IEnumerator Attack()
     {
+        yield return new WaitForSeconds(3);
 
         GameObject activeLaser = Instantiate(laserSprite);
-        //activeLaser.transform.position = target.transform + 
+        activeLaser.transform.position = player.transform.position + mousePos;
+        float theta = Mathf.Atan2(mousePos.y - player.transform.position.y, player.transform.position.x - mousePos.x);
+        if (theta < 0.0)
+        {
+            theta += Mathf.PI * 2;
+        }
+        activeLaser.transform.localRotation = Quaternion.Euler(0,0,(Mathf.Rad2Deg * theta - 90) *-1);
 
-
+        Vector2 mouseDirection = (mousePos - player.transform.position).normalized;
         yield return null;
 
     }
