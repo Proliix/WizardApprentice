@@ -19,6 +19,7 @@ public class SpecialProjectile : MonoBehaviour
     public bool isMovingAway;
 
     bool hasShot = false;
+    bool stoppedMoving = false;
     Vector3 dir;
     SpriteRenderer spriteRenderer;
     float effectTimer = 0;
@@ -27,6 +28,9 @@ public class SpecialProjectile : MonoBehaviour
     BulletHandler bulletHandler;
     EnemyManager enemyManager;
     float startLifeTime = 0;
+
+    Vector3 cursorPos;
+    bool hasHitWall = false;
 
     Transform parent;
     GameObject homingTarget;
@@ -91,7 +95,6 @@ public class SpecialProjectile : MonoBehaviour
     {
         if (!hasShot)
         {
-
             homingTarget = enemyManager.GetClosestEnemy(gameObject.transform.position);
             hasShot = true;
         }
@@ -111,11 +114,40 @@ public class SpecialProjectile : MonoBehaviour
 
     void StaticShot()
     {
-        effectTimer += Time.deltaTime;
-        if (effectTimer >= effectCooldown)
+        if (rb2d.velocity == Vector2.zero)
         {
-            currentIcard.Effect();
-            effectTimer = 0;
+
+            if (!hasShot)
+            {
+                hasShot = true;
+                cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+
+            effectTimer += Time.deltaTime;
+
+            if (effectTimer >= effectCooldown)
+            {
+                currentIcard.Effect();
+                effectTimer = 0;
+            }
+        }
+
+        if ((transform.position.x > cursorPos.x - 0.5f && transform.position.x < cursorPos.x + 0.5f &&
+            transform.position.y > cursorPos.y - 0.5f && transform.position.y < cursorPos.y + 0.5f) || hasHitWall)
+        {
+            stoppedMoving =  true;
+
+            if (rb2d.velocity != Vector2.zero)
+                rb2d.velocity = Vector2.zero;
+        }
+        else
+        {
+            if (dir == null || dir == Vector3.zero)
+            {
+                dir = transform.up;
+            }
+
+            rb2d.velocity = dir.normalized * bulletSpeed;
         }
     }
 
@@ -142,6 +174,8 @@ public class SpecialProjectile : MonoBehaviour
         bulletLifetime = startLifeTime;
         transform.parent = parent;
         relativeDistance = Vector3.zero;
+        hasHitWall = false;
+        stoppedMoving = false;
     }
 
     public void SetAnimationBool(string name, bool value = true)
@@ -190,9 +224,10 @@ public class SpecialProjectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (bulletState != SpecialBulletState.Static)
+
+        if (collision.gameObject.GetComponent<Health>() != null)
         {
-            if (collision.gameObject.GetComponent<Health>() != null)
+            if (bulletState != SpecialBulletState.Static)
             {
                 if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
                 {
@@ -218,7 +253,12 @@ public class SpecialProjectile : MonoBehaviour
                     }
                 }
             }
-            else if (collision.gameObject.CompareTag("Wall"))
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+
+            hasHitWall = true;
+            if (bulletState != SpecialBulletState.Static)
             {
                 if (bulletState != SpecialBulletState.Rotating && bulletState != SpecialBulletState.Bouncy)
                 {
@@ -237,4 +277,5 @@ public class SpecialProjectile : MonoBehaviour
             }
         }
     }
+
 }
