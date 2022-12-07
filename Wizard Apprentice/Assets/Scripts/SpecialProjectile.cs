@@ -51,6 +51,11 @@ public class SpecialProjectile : MonoBehaviour
         startLifeTime = bulletLifetime;
     }
 
+    public void UpdateDirection(Vector3 Direction)
+    {
+        dir = Direction;
+    }
+
     #region Updates for projectiles
 
     void NormalShot()
@@ -157,7 +162,6 @@ public class SpecialProjectile : MonoBehaviour
         {
             NormalShot();
         }
-        Debug.Log("Is here" + rb2d.velocity);
     }
     #endregion
 
@@ -231,49 +235,68 @@ public class SpecialProjectile : MonoBehaviour
             {
                 if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
                 {
-                    if (bulletState == SpecialBulletState.Timed)
+
+                    switch(bulletState)
                     {
-                        effectTimer += effectCooldown;
+                        case SpecialBulletState.Timed:
+                            effectTimer += effectCooldown;
+                            break;
+                        case SpecialBulletState.Rotating:
+
+                            break;
+                        case SpecialBulletState.Normal:
+                            bulletHandler.ResetBullet(poolIndex);
+                            ResetBullet();
+                            break;
+                        case SpecialBulletState.Homing:
+                            bulletHandler.ResetBullet(poolIndex);
+                            ResetBullet();
+                            break;
+                        case SpecialBulletState.Bouncy:
+                            Vector2 prevVelocity = rb2d.velocity;
+                            rb2d.velocity = prevVelocity * -1f;
+                            dir = prevVelocity * -1f;
+                            float theta = Mathf.Atan2(dir.y, dir.x);
+                            if (theta < 0.0)
+                                theta += Mathf.PI * 2;
+                            transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * theta - 90) * -1));
+                            NormalShot();
+                            break;
                     }
 
                     collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
-                    if (bulletState != SpecialBulletState.Rotating && bulletState != SpecialBulletState.Bouncy)
-                    {
-                        bulletHandler.ResetBullet(poolIndex);
-                        ResetBullet();
-                    }
-                    else if (bulletState == SpecialBulletState.Bouncy)
-                    {
-                        Vector2 hitInfo = -transform.position.normalized;
-
-                        Vector2 reflection = Vector2.Reflect(rb2d.velocity.normalized, hitInfo);
-                        transform.rotation = Quaternion.FromToRotation(transform.up, reflection) * transform.rotation;
-                        dir = Vector3.zero;
-                        NormalShot();
-                    }
                 }
             }
         }
         else if (collision.gameObject.CompareTag("Wall"))
         {
-
             hasHitWall = true;
-            if (bulletState != SpecialBulletState.Static)
+            switch (bulletState)
             {
-                if (bulletState != SpecialBulletState.Rotating && bulletState != SpecialBulletState.Bouncy)
-                {
+                case SpecialBulletState.Timed:
+
+                    break;
+                case SpecialBulletState.Rotating:
+
+                    break;
+                case SpecialBulletState.Normal:
                     bulletHandler.ResetBullet(poolIndex);
                     ResetBullet();
-                }
-                else if (bulletState == SpecialBulletState.Bouncy)
-                {
-                    Vector2 hitInfo = -transform.position.normalized;
-
-                    Vector2 reflection = Vector2.Reflect(rb2d.velocity.normalized, hitInfo);
-                    transform.rotation = Quaternion.FromToRotation(transform.up, reflection) * transform.rotation;
-                    dir = Vector3.zero;
+                    break;
+                case SpecialBulletState.Homing:
+                    bulletHandler.ResetBullet(poolIndex);
+                    ResetBullet();
+                    break;
+                case SpecialBulletState.Bouncy:
+                    Vector2 prevVelocity = rb2d.velocity;
+                    rb2d.velocity = prevVelocity * -1f;
+                    dir = prevVelocity * -1f;
+                    float theta = Mathf.Atan2(dir.y, dir.x);
+                    if (theta < 0.0)
+                        theta += Mathf.PI * 2;
+                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * theta - 90) * -1));
                     NormalShot();
-                }
+                    break;
             }
         }
     }
