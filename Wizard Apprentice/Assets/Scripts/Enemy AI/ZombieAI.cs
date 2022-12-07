@@ -14,7 +14,6 @@ public class ZombieAI : MonoBehaviour, IStunnable
     [SerializeField] float moveSpeedOnReset = 4;
 
     bool stunned = false;
-    float stunTime = 0.25f;
 
 
 
@@ -26,56 +25,56 @@ public class ZombieAI : MonoBehaviour, IStunnable
 
     private void Update()
     {
-
-        timerCountsSeconds += Time.deltaTime;
-
-        moveSpeed += moveSpeedIncreasePerSecond * Time.deltaTime;
-
-        MoveEnemy();
-
-
-        if (timerCountsSeconds > runTime)
+        if (!stunned)
         {
-            timerCountsSeconds = 0;
-            moveSpeed = moveSpeedOnReset;
+            timerCountsSeconds += Time.deltaTime;
+
+            moveSpeed += moveSpeedIncreasePerSecond * Time.deltaTime;
+
+            MoveEnemy();
+
+
+            if (timerCountsSeconds > runTime)
+            {
+                timerCountsSeconds = 0;
+                moveSpeed = moveSpeedOnReset;
+            }
         }
     }
 
     void MoveEnemy()
     {
-        if (!stunned)
-        {
-            Vector3 dir = (target.transform.position - transform.position).normalized;
 
-            ////calculates speed towards the player 
-            //float step = moveSpeed * Time.deltaTime;
+        Vector3 dir = (target.transform.position - transform.position).normalized;
 
-            ////moves the enemy towards the player
-            //transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        ////calculates speed towards the player 
+        //float step = moveSpeed * Time.deltaTime;
 
-            //rb2d.AddForce(dir.normalized * moveSpeed, ForceMode2D.Force);
-            //rb2d.velocity = new Vector3(Mathf.Clamp(rb2d.velocity.x, -moveSpeed, moveSpeed), Mathf.Clamp(rb2d.velocity.y, -moveSpeed, moveSpeed), 0);
+        ////moves the enemy towards the player
+        //transform.position = Vector2.MoveTowards(transform.position, target.position, step);
 
-            rb2d.velocity = dir * moveSpeed;
-        }
+        //rb2d.AddForce(dir.normalized * moveSpeed, ForceMode2D.Force);
+        //rb2d.velocity = new Vector3(Mathf.Clamp(rb2d.velocity.x, -moveSpeed, moveSpeed), Mathf.Clamp(rb2d.velocity.y, -moveSpeed, moveSpeed), 0);
+
+        rb2d.velocity = dir * moveSpeed;
+
 
     }
 
 
     public void GetStunned(float stunDuration = 0.25F)
     {
-        stunTime = stunDuration;
 
         if (stunned)
-            StopCoroutine(IsStunned());
+            StopCoroutine(IsStunned(stunDuration));
 
-        StartCoroutine(IsStunned());
+        StartCoroutine(IsStunned(stunDuration));
     }
 
-    public IEnumerator IsStunned()
+    public IEnumerator IsStunned(float stunDuration = 0.25F)
     {
         stunned = true;
-        yield return new WaitForSeconds(stunTime);
+        yield return new WaitForSeconds(stunDuration);
         stunned = false;
     }
 

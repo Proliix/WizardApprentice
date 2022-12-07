@@ -13,7 +13,6 @@ public class SkeledogAI : MonoBehaviour, IStunnable
     [SerializeField] float chargeTimeLeft;
 
     private Transform target;
-    private float stunTime = 0.25f;
     private bool stunned = false;
 
     void Start()
@@ -76,18 +75,16 @@ public class SkeledogAI : MonoBehaviour, IStunnable
 
     public void GetStunned(float stunDuration = 0.25F)
     {
-        stunTime = stunDuration;
-
         if (stunned)
-            StopCoroutine(IsStunned());
+            StopCoroutine(IsStunned(stunDuration));
 
-        StartCoroutine(IsStunned());
+        StartCoroutine(IsStunned(stunDuration));
     }
 
-    public IEnumerator IsStunned()
+    public IEnumerator IsStunned(float stunDuration = 0.25F)
     {
         stunned = true;
-        yield return new WaitForSeconds(stunTime);
+        yield return new WaitForSeconds(stunDuration);
         stunned = false;
     }
 

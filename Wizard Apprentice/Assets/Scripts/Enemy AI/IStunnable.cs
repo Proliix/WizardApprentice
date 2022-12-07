@@ -6,6 +6,6 @@ public interface IStunnable
 {
     public void GetStunned(float stunDuration = 0.25f);
 
-    IEnumerator IsStunned();
+    IEnumerator IsStunned(float stunDuration = 0.25f);
 
 }

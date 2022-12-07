@@ -44,6 +44,15 @@ public class RewardsHandler : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            if (!inventory.IsFull())
+                GetRewardScreenCard();
+        }
+    }
+
     #region Card Rewards
     public void GetRewardScreenCard()
     {
@@ -134,6 +143,7 @@ public class RewardsHandler : MonoBehaviour
         }
         else
         {
+            rewardScreen.SetActive(true);
             statScreenParent.SetActive(true);
             int first = -100;
             int seccond = -100;

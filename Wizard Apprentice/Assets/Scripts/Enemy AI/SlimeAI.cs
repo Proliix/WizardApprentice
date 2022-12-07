@@ -23,7 +23,6 @@ public class SlimeAI : MonoBehaviour, IStunnable
     float jumpTime;
 
     bool stunned = false;
-    float stunTime = 0.25f;
 
 
 
@@ -36,15 +35,17 @@ public class SlimeAI : MonoBehaviour, IStunnable
 
     private void Update()
     {
-
-        timeUntilNextJump -= Time.deltaTime;
-        timeInJump += Time.deltaTime;
-        MoveEnemy();
+        if (!stunned)
+        {
+            timeUntilNextJump -= Time.deltaTime;
+            timeInJump += Time.deltaTime;
+            MoveEnemy();
+        }
     }
 
     Vector2 GetPositionThisFrame()
     {
-        if(timeUntilNextJump < 0)
+        if (timeUntilNextJump < 0)
         {
             hurtBox.SetActive(true);
             jumpActive = true;
@@ -53,7 +54,7 @@ public class SlimeAI : MonoBehaviour, IStunnable
             jumpFromPos = transform.position;
             targetPos = (target.position - transform.position).normalized * jumpDistance;
             targetPos += (Vector2)transform.position;
-            timeUntilNextJump = Random.Range(minJumpCooldown,maxJumpCooldown);
+            timeUntilNextJump = Random.Range(minJumpCooldown, maxJumpCooldown);
         }
         if (timeInJump > jumpTime)
         {
@@ -64,29 +65,29 @@ public class SlimeAI : MonoBehaviour, IStunnable
         {
             Vector2 basePos = (targetPos - jumpFromPos) * (timeInJump / jumpTime);
             float addedYPos = jumpCurve.Evaluate(timeInJump / jumpTime) * jumpHeight;
-            return basePos + new Vector2(0,addedYPos) + jumpFromPos;
+            return basePos + new Vector2(0, addedYPos) + jumpFromPos;
         }
         return transform.position;
     }
 
     void MoveEnemy()
     {
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+
+        ////calculates speed towards the player 
+        //float step = moveSpeed * Time.deltaTime;
+
+        ////moves the enemy towards the player
+        //transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+
+        //rb2d.AddForce(dir.normalized * moveSpeed, ForceMode2D.Force);
+        //rb2d.velocity = new Vector3(Mathf.Clamp(rb2d.velocity.x, -moveSpeed, moveSpeed), Mathf.Clamp(rb2d.velocity.y, -moveSpeed, moveSpeed), 0);
+
+        //rb2d.velocity = dir * moveSpeed;
+
+        Vector2 position = GetPositionThisFrame();
         if (!stunned)
         {
-            Vector3 dir = (target.transform.position - transform.position).normalized;
-
-            ////calculates speed towards the player 
-            //float step = moveSpeed * Time.deltaTime;
-
-            ////moves the enemy towards the player
-            //transform.position = Vector2.MoveTowards(transform.position, target.position, step);
-
-            //rb2d.AddForce(dir.normalized * moveSpeed, ForceMode2D.Force);
-            //rb2d.velocity = new Vector3(Mathf.Clamp(rb2d.velocity.x, -moveSpeed, moveSpeed), Mathf.Clamp(rb2d.velocity.y, -moveSpeed, moveSpeed), 0);
-
-            //rb2d.velocity = dir * moveSpeed;
-
-            Vector2 position = GetPositionThisFrame();
             transform.position = position;
             rb2d.MovePosition(position);
         }
@@ -96,21 +97,18 @@ public class SlimeAI : MonoBehaviour, IStunnable
 
     public void GetStunned(float stunDuration = 0.25F)
     {
-        stunTime = stunDuration;
-
         if (stunned)
-            StopCoroutine(IsStunned());
+            StopCoroutine(IsStunned(stunDuration));
 
-        StartCoroutine(IsStunned());
+        StartCoroutine(IsStunned(stunDuration));
     }
 
-    public IEnumerator IsStunned()
+    public IEnumerator IsStunned(float stunDuration = 0.25f)
     {
         stunned = true;
-        yield return new WaitForSeconds(stunTime);
+        yield return new WaitForSeconds(stunDuration);
         stunned = false;
     }
-
 }
 
 

@@ -19,7 +19,7 @@ public class GravityCard : MonoBehaviour, ICard
     [SerializeField] float lifeTime = 4f;
     [SerializeField] float force = 2f;
     [SerializeField] float stunDuration = 0.15f;
-
+    [SerializeField] int dealDamagerPerEffect = 3;
 
     bool hasParticles = false;
     GameObject particleInstance;
@@ -31,6 +31,7 @@ public class GravityCard : MonoBehaviour, ICard
     PlayerAiming pAim;
     PlayerStats stats;
     List<GameObject> enemiesWithingRange;
+    int effectNum = 0;
 
     private void Start()
     {
@@ -42,22 +43,24 @@ public class GravityCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
-
-        if (!particleInstance.activeSelf)
-            particleInstance.SetActive(true);   
+        effectNum++;
+        if (particleInstance != null && !particleInstance.activeSelf)
+            particleInstance.SetActive(true);
 
         enemiesWithingRange = enemyManager.GetEnemiesWithinRange(gravityBullet.transform.position, effectRange + stats.projectileSize);
         for (int i = 0; i < enemiesWithingRange.Count; i++)
         {
-            enemiesWithingRange[i].GetComponent<Health>()?.RemoveHealth(damage);
+            if (effectNum % dealDamagerPerEffect == 0)
+                enemiesWithingRange[i].GetComponent<Health>()?.RemoveHealth(damage);
+
             if (enemiesWithingRange[i].GetComponent<IStunnable>() != null)
             {
                 if (enemiesWithingRange[i].GetComponent<Rigidbody2D>() != null)
                 {
                     Vector2 dir = gravityBullet.transform.position - enemiesWithingRange[i].transform.position;
                     enemiesWithingRange[i].GetComponent<IStunnable>().GetStunned(stunDuration);
-                    enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity += dir.normalized * force;
-                    //enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
+                    enemiesWithingRange[i].GetComponent<Rigidbody2D>().velocity = dir;
+                    enemiesWithingRange[i].GetComponent<Rigidbody2D>().AddForce(dir * force, ForceMode2D.Impulse);
                     Debug.Log("Gravity card effect Triggered");
                 }
             }
@@ -85,9 +88,10 @@ public class GravityCard : MonoBehaviour, ICard
             if (!hasParticles)
             {
                 hasParticles = true;
+                effectNum = 0;
                 particleInstance = Instantiate(particleEffect, gravityBullet.gameObject.transform);
-                Vector3 newScale = (Vector3.one * (size + stats.projectileSize)) - (particleInstance.transform.parent.localScale - Vector3.one);
-                particleInstance.transform.localScale = newScale * 2;
+                Vector3 newScale = ((Vector3.one * effectRange) / 2) - (Vector3.one * 0.1f);
+                particleInstance.transform.localScale = newScale;
                 particleInstance.SetActive(false);
                 Destroy(particleInstance, lifeTime);
             }
@@ -102,5 +106,14 @@ public class GravityCard : MonoBehaviour, ICard
     public string GetDescription()
     {
         return description;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (particleInstance != null)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(gravityBullet.transform.position, effectRange);
+        }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingSkeleton : MonoBehaviour
+public class ShootingSkeleton : MonoBehaviour, IStunnable
 {
 
 
@@ -30,7 +30,7 @@ public class ShootingSkeleton : MonoBehaviour
 
     Health health;
     BulletHandler bulletHandler;
-    
+    bool stunned = false;
 
     void Start()
     {
@@ -57,11 +57,14 @@ public class ShootingSkeleton : MonoBehaviour
             StartCoroutine(AttackPattern());
         }
 
-        if (moveTimer >= moveDelay && isMoving == false)
+        if (!stunned)
         {
-            moveTimer -= moveDelay;
-            rb2d.velocity = new Vector2(0, 0);
-            StartCoroutine(MoveEnemy());
+            if (moveTimer >= moveDelay && isMoving == false)
+            {
+                moveTimer -= moveDelay;
+                rb2d.velocity = new Vector2(0, 0);
+                StartCoroutine(MoveEnemy());
+            }
         }
 
     }
@@ -95,13 +98,29 @@ public class ShootingSkeleton : MonoBehaviour
     {
         for (int i = 0; i < numberOfShotsInPattern; i++)
         {
-        BasicAttack();
-        yield return new WaitForSeconds(timeBetweenShots);
+            BasicAttack();
+            yield return new WaitForSeconds(timeBetweenShots);
 
         }
 
         yield return null;
     }
 
+
+    public void GetStunned(float stunDuration = 0.25F)
+    {
+
+        if (stunned)
+            StopCoroutine(IsStunned(stunDuration));
+
+        StartCoroutine(IsStunned(stunDuration));
+    }
+
+    public IEnumerator IsStunned(float stunDuration = 0.25F)
+    {
+        stunned = true;
+        yield return new WaitForSeconds(stunDuration);
+        stunned = false;
+    }
 
 }
