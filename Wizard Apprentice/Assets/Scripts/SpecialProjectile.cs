@@ -51,6 +51,11 @@ public class SpecialProjectile : MonoBehaviour
         startLifeTime = bulletLifetime;
     }
 
+    public void UpdateDirection(Vector3 Direction)
+    {
+        dir = Direction;
+    }
+
     #region Updates for projectiles
 
     void NormalShot()

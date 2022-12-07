@@ -6,20 +6,23 @@ public class GravityCard : MonoBehaviour, ICard
 {
     [SerializeField] Sprite image;
     [SerializeField] string title;
+    [SerializeField] GameObject particleEffect;
     [TextArea(2, 10)]
     [SerializeField] string description;
+    [SerializeField] float damage = 5;
     [SerializeField] Sprite Bulletimage;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
     [SerializeField] float size = 1.25f;
     [SerializeField] float effectRange = 2f;
-    [SerializeField] float effectCooldown = 0.5f;
+    [SerializeField] float effectCooldown = 0.25f;
     [SerializeField] float lifeTime = 4f;
     [SerializeField] float force = 2f;
     [SerializeField] float stunDuration = 0.15f;
 
 
-
+    bool hasParticles = false;
+    GameObject particleInstance;
     bool hasFired = false;
     BulletHandler bulletHandler;
     EnemyManager enemyManager;
@@ -39,11 +42,14 @@ public class GravityCard : MonoBehaviour, ICard
     }
     public void Effect()
     {
-        
+
+        if (!particleInstance.activeSelf)
+            particleInstance.SetActive(true);   
 
         enemiesWithingRange = enemyManager.GetEnemiesWithinRange(gravityBullet.transform.position, effectRange + stats.projectileSize);
         for (int i = 0; i < enemiesWithingRange.Count; i++)
         {
+            enemiesWithingRange[i].GetComponent<Health>()?.RemoveHealth(damage);
             if (enemiesWithingRange[i].GetComponent<IStunnable>() != null)
             {
                 if (enemiesWithingRange[i].GetComponent<Rigidbody2D>() != null)
@@ -66,6 +72,7 @@ public class GravityCard : MonoBehaviour, ICard
     public void ResetCard()
     {
         hasFired = false;
+        hasParticles = false;
     }
 
     public void UpdateCard()
@@ -74,7 +81,16 @@ public class GravityCard : MonoBehaviour, ICard
         {
             SoundManager.Instance.PlayAudio(attackSound, audioVolume);
             hasFired = true;
-            gravityBullet = bulletHandler.GetSpecialBullet(pAim.bulletSpawn.transform.position, player, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
+            gravityBullet = bulletHandler.GetSpecialBullet(pAim.bulletSpawn.transform, player, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", Vector3.zero, effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
+            if (!hasParticles)
+            {
+                hasParticles = true;
+                particleInstance = Instantiate(particleEffect, gravityBullet.gameObject.transform);
+                Vector3 newScale = (Vector3.one * (size + stats.projectileSize)) - (particleInstance.transform.parent.localScale - Vector3.one);
+                particleInstance.transform.localScale = newScale * 2;
+                particleInstance.SetActive(false);
+                Destroy(particleInstance, lifeTime);
+            }
         }
     }
 
