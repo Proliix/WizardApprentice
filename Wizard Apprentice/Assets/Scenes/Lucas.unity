@@ -168,6 +168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: bcd623ac98caee042b39ad5d4af13f1d, type: 3}
+  title: 
+  description: 
+  attackSound: {fileID: 0}
+  audioVolume: 1
   projectileAmmount: 15
   shootCooldown: 0.5
   damage: 10
@@ -532,10 +536,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2e86ba32e445adb4f9ffaecbe3e7742f, type: 3}
+  title: 
+  description: 
   shootCooldown: 0.2
   damage: 10
   size: 0.5
   speed: 8
+  attackSound: {fileID: 0}
 --- !u!114 &445417713 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3386676453049871728, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
@@ -603,8 +610,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 553983868cbedf34aba0ecc5f0c69320, type: 3}
+  title: 
+  description: 
   player: {fileID: 7409148081127227654, guid: 6e6305cecba754344bb253dcdd1e11a8, type: 3}
   healAmmount: 1
+  healSound: {fileID: 0}
+  audioVolume: 0.25
 --- !u!1 &508495379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1194,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: b079989b8a1d3124da3640849df42090, type: 3}
+  title: 
+  description: 
+  attackSound: {fileID: 0}
+  audioVolume: 1
   shootCooldown: 0.5
   shootPosDeviation: 0.25
   damage: 10
@@ -1780,7 +1795,7 @@ PrefabInstance:
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
-      objectReference: {fileID: 551645241}
+      objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2829,6 +2844,7 @@ MonoBehaviour:
   - {fileID: 264683710}
   - {fileID: 397113318}
   isActive: 1
+  audioVolume: 0
   cardCycle:
   - {fileID: 1191837551}
   - {fileID: 885028018}
@@ -2941,6 +2957,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8cd84b49298f8946a2a46f2901b0b0d, type: 2}
   roomSize: {x: 0, y: 0}
   exitDoorPrefab: {fileID: 226080780411628952, guid: 0d334158a641f2e4cb770ccb1683f9d0, type: 3}
+  openDoorImage: {fileID: 0}
   roomParent: {fileID: 3714845512778590098, guid: cfe613bd22b976f428533e8536cf7c1d, type: 3}
   enemyManager: {fileID: 2140121804}
   bulletHandler: {fileID: 2140121807}
@@ -2949,7 +2966,7 @@ MonoBehaviour:
   possibleBossRooms:
   - {fileID: 11400000, guid: cdcfaa60af5e01f418d54753ea3514b0, type: 2}
   possibleNormalRooms:
-  - {fileID: 11400000, guid: e43c061293f9d9440952dcb9c752cc7d, type: 2}
+  - {fileID: 11400000, guid: 326ee1e0bede5d84aa742c7d1ec92b52, type: 2}
   normalRoomsPoolAmount: 40
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 2fbaeaff8875cc04c892cacfb1577a80, type: 2}
@@ -3036,6 +3053,18 @@ MonoBehaviour:
   - {fileID: 6458547972587393656, guid: 01d41d8148ee8f941a930a4735a6db5e, type: 3}
   - {fileID: 7091902878019880311, guid: 2dfec47b74f78fc42a1efcd283bc20e6, type: 3}
   - {fileID: 1106177584714849619, guid: 2fedc790d35b1604c9c7edb4c5f54966, type: 3}
+  descriptionObj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cardTitleObj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cardTextObj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &1106177585005914805
 PrefabInstance:
   m_ObjectHideFlags: 0

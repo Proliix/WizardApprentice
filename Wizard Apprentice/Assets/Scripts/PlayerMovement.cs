@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash()
     {
 
-        dashIndicator.ChangeDashIndicator();
+        //dashIndicator.ChangeDashIndicator();
         dashes--;
         canDash = false;
         isDashing = true;
@@ -115,7 +115,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-
         rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
     }
 

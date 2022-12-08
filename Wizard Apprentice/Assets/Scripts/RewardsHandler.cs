@@ -26,6 +26,8 @@ public class RewardsHandler : MonoBehaviour
     private GameObject[] activeCards = new GameObject[3];
     private Inventory inventory;
 
+    bool statsAfterCard = false;
+
     PlayerStats stats;
     bool isPressed = false;
 
@@ -44,6 +46,11 @@ public class RewardsHandler : MonoBehaviour
         }
     }
 
+    public bool CanAddCards()
+    {
+        return !inventory.IsFull();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F12))
@@ -54,10 +61,11 @@ public class RewardsHandler : MonoBehaviour
     }
 
     #region Card Rewards
-    public void GetRewardScreenCard()
+    public void GetRewardScreenCard(bool withStats = false)
     {
         rewardScreen.SetActive(true);
         cardScreenParent.SetActive(true);
+        statsAfterCard = withStats;
         for (int i = 0; i < descriptionObj.Length; i++)
         {
             descriptionObj[i].SetActive(false);
@@ -118,8 +126,17 @@ public class RewardsHandler : MonoBehaviour
     private void UpdatePlayerCards(int index)
     {
         inventory.AddCard(activeCards[index]);
+
+
+
+        if (!statsAfterCard)
+            rewardScreen.SetActive(false);
+        else
+            GetRewardScreenStats();
+
+        statsAfterCard = false;
+
         cardScreenParent.SetActive(false);
-        GetRewardScreenStats();
     }
 
     IEnumerator UpdateCardsAfterTime(int index)
@@ -136,40 +153,31 @@ public class RewardsHandler : MonoBehaviour
     #region Stat Rewards
     public void GetRewardScreenStats()
     {
-        if (!rewardScreen.activeSelf && !inventory.IsFull())
+        rewardScreen.SetActive(true);
+        statScreenParent.SetActive(true);
+        int first = -100;
+        int seccond = -100;
+        for (int i = 0; i < activeRewards.Length; i++)
         {
-            rewardScreen.SetActive(true);
-            GetRewardScreenCard();
+
+            int newNum = Random.Range(0, rewards.Count);
+
+            int runs = 0;
+            while ((first == newNum || seccond == newNum) && runs < 20)
+            {
+                newNum = Random.Range(0, rewards.Count);
+                runs++;
+            }
+            seccond = first;
+            first = newNum;
+
+            activeRewards[i] = rewards[newNum];
+
         }
-        else
+        for (int i = 0; i < titles.Length; i++)
         {
-            rewardScreen.SetActive(true);
-            statScreenParent.SetActive(true);
-            int first = -100;
-            int seccond = -100;
-            for (int i = 0; i < activeRewards.Length; i++)
-            {
-
-                int newNum = Random.Range(0, rewards.Count);
-
-                int runs = 0;
-                while ((first == newNum || seccond == newNum) && runs < 20)
-                {
-                    newNum = Random.Range(0, rewards.Count);
-                    runs++;
-                }
-                seccond = first;
-                first = newNum;
-
-                activeRewards[i] = rewards[newNum];
-
-            }
-            for (int i = 0; i < titles.Length; i++)
-            {
-                titles[i].text = activeRewards[i].Title;
-                effectText[i].text = activeRewards[i].EffectText;
-            }
-
+            titles[i].text = activeRewards[i].Title;
+            effectText[i].text = activeRewards[i].EffectText;
         }
     }
 
