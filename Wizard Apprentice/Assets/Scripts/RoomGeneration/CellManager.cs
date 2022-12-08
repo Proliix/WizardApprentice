@@ -8,6 +8,9 @@ public class CellManager : MonoBehaviour
     [SerializeField] Vector2Int size;
     [SerializeField] GameObject cellHolderPrefab;
     [SerializeField] List<Cell> cells;
+    [SerializeField] Sprite slicedTileSprite;
+    [SerializeField] GameObject tileObject;
+    [SerializeField] GameObject colliderObject;
     Vector2Int prevSize;
     List<GameObject> cellHolders;
     List<int>[] allCellsAvailability;
@@ -63,6 +66,45 @@ public class CellManager : MonoBehaviour
             }
         }
         GenerateWalls();
+    }
+
+    public void GenerateRoom(Vector2Int size, Transform cellParent, bool isNewTiles)
+    {
+        roomParent = cellParent;
+        this.size = size;
+        Generate9SliceFloor(size,cellParent);
+        GenerateColliderWalls(size, cellParent);
+    }
+
+    public void Generate9SliceFloor(Vector2Int size, Transform cellParent)
+    {
+        GameObject sliced = Instantiate(tileObject,cellParent);
+        sliced.GetComponent<SpriteRenderer>().sprite = slicedTileSprite;
+        sliced.transform.position = Vector2.zero + size/2;
+        sliced.GetComponent<SpriteRenderer>().size = size;
+    }
+
+    public void GenerateColliderWalls(Vector2Int size, Transform cellParent)
+    {
+        GameObject objcet1 = Instantiate(colliderObject,cellParent);
+        objcet1.transform.position = new Vector3(0,0,0);
+        objcet1.GetComponent<BoxCollider2D>().size = size*2;
+        objcet1.GetComponent<BoxCollider2D>().offset = new Vector2(size.x * -1f + 0.25f, 0);
+
+        GameObject objcet2 = Instantiate(colliderObject, cellParent);
+        objcet2.transform.position = new Vector3(0, 0, 0);
+        objcet2.GetComponent<BoxCollider2D>().size = size * 2;
+        objcet2.GetComponent<BoxCollider2D>().offset = new Vector2(size.x * 2f -1.25f, 0);
+
+        GameObject objcet3 = Instantiate(colliderObject, cellParent);
+        objcet3.transform.position = new Vector3(0, 0, 0);
+        objcet3.GetComponent<BoxCollider2D>().size = size * 2;
+        objcet3.GetComponent<BoxCollider2D>().offset = new Vector2(0, size.y * -1f + 0.25f);
+
+        GameObject objcet4 = Instantiate(colliderObject, cellParent);
+        objcet4.transform.position = new Vector3(0, 0, 0);
+        objcet4.GetComponent<BoxCollider2D>().size = size * 2;
+        objcet4.GetComponent<BoxCollider2D>().offset = new Vector2(0, size.y * 2f - 1.25f);
     }
 
     public void GenerateCells()

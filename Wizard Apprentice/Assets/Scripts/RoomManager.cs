@@ -24,7 +24,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] CardHandler cardHandler;
     [SerializeField] RewardsHandler rewardsHandler;
 
-    [SerializeField] List<Room> possibleBossRooms;
+    [SerializeField] List<Room> possibleBossRoomsByFloor;
     [SerializeField] List<Room> possibleNormalRooms;
     public int normalRoomsPoolAmount;
     [SerializeField] List<Room> possibleMinibossRooms;
@@ -38,7 +38,7 @@ public class RoomManager : MonoBehaviour
     private bool canWalkThroughAnyDoor;
     private GameObject doorObject;
 
-   
+    public int currentFloor;
 
     // Start is called before the first frame update
     void Start()
@@ -78,7 +78,7 @@ public class RoomManager : MonoBehaviour
             }
         }
         enemyManager.enemyObjects = enemyObjects;
-        doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y, 0), Quaternion.identity, currentRoomParent.transform);
+        doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y - 0.5f, 0), Quaternion.identity, currentRoomParent.transform);
         playerObject.transform.position = new Vector3(room.roomSize.x / 2, 1, 0);
     }
 
@@ -90,16 +90,21 @@ public class RoomManager : MonoBehaviour
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
-            if (currentRoomType == 0)
+            switch(currentRoomType)
             {
-                SceneManager.LoadScene("Menu");
+                case 0:
+                    roomSelectScreenGenerator.GenerateAnotherFloor();
+                    rewardsHandler.GetRewardScreenCard(true);
+                    break;
+                case 1:
+                    rewardsHandler.GetRewardScreenStats();
+                    break;
+                case 2:
+                    rewardsHandler.GetRewardScreenCard(true);
+                    break;
             }
-            else
-            {
-                rewardsHandler.GetRewardScreenStats();
-                roomSelectScreenGenerator.roomSelectObject.SetActive(true);
-                roomSelectScreenGenerator.Open();
-            }
+            roomSelectScreenGenerator.roomSelectObject.SetActive(true);
+            roomSelectScreenGenerator.Open();
         }
         else
         {
@@ -108,7 +113,7 @@ public class RoomManager : MonoBehaviour
     }
     public void LoadRoomFloor(Vector2Int size)
     {
-        cellManager.GenerateRoom(size, currentRoomParent.transform);
+        cellManager.GenerateRoom(size, currentRoomParent.transform,true);
     }
 
     public void LoadRandomRoom()
@@ -130,6 +135,11 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public void AddEnemy(GameObject enemyObject)
+    {
+        enemyObjects.Add(enemyObject);
+        enemyManager.enemyObjects = enemyObjects;
+    }
     public void RemoveAllEnemies()
     {
         for (int i = enemyObjects.Count - 1; i >= 0; i--)
@@ -165,7 +175,7 @@ public class RoomManager : MonoBehaviour
         {
             case 0:
                 currentRoomType = 0;
-                LoadPremadeRoom(possibleBossRooms[Random.Range(0, possibleBossRooms.Count)]);
+                LoadPremadeRoom(possibleBossRoomsByFloor[currentFloor % possibleBossRoomsByFloor.Count]);
                 break;
             case 1:
                 currentRoomType = 1;

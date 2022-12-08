@@ -5,8 +5,8 @@ using UnityEngine;
 public class CrossShot : MonoBehaviour, ICard
 {
 
-
     [SerializeField] Sprite image;
+    [SerializeField] Sprite comboImage;
     [SerializeField] string title;
     [TextArea(2, 10)]
     [SerializeField] string description;
@@ -23,31 +23,34 @@ public class CrossShot : MonoBehaviour, ICard
 
     XShot xShot;
 
-    bool triedToFind = false;
-    CardHandler cardHandler;
     PlayerStats stats;
     GameObject player;
+    CardHandler cardHandler;
     BulletHandler bulletHandler;
+    bool triedToFind = false;
+    bool combined;
     float timer;
 
     private void Start()
     {
-        cardHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<CardHandler>();
+
+
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         player = GameObject.FindWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
+        cardHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<CardHandler>();
     }
 
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(attackSound);
-        bulletHandler.GetCircleShot(4, player, true, 45, damage, size, speed);
+        bulletHandler.GetCircleShot(4, player, true, damage, size, speed);
 
         if (xShot != null)
         {
-
             xShot.Effect();
         }
+
     }
 
     public string GetDescription()
@@ -57,7 +60,14 @@ public class CrossShot : MonoBehaviour, ICard
 
     public Sprite GetSprite()
     {
-        return image;
+        Sprite returnValue = image;
+
+        if (combined)
+        {
+            returnValue = comboImage;
+        }
+
+        return returnValue;
     }
 
     public string GetTitle()
@@ -81,7 +91,6 @@ public class CrossShot : MonoBehaviour, ICard
 
             xShot = (XShot)cardHandler.CheckInCycle(temp);
         }
-
         timer += Time.deltaTime;
         if (timer >= attackDelay)
         {
@@ -89,6 +98,5 @@ public class CrossShot : MonoBehaviour, ICard
             timer -= attackDelay;
         }
     }
-
 
 }
