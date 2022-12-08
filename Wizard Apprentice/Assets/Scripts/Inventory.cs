@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject cardHolderPrefab;
     public CardHandler cardHandler;
     public List<CardHolder> cardHolders = new List<CardHolder>();
-    [SerializeField] CardHolder trashCan;
+    public CardHolder trashCan;
 
     void Start()
     {

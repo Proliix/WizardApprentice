@@ -65,7 +65,10 @@ public class RoomManager : MonoBehaviour
         currentRoomParent = Instantiate(roomParent);
         currentRoom = Instantiate(room.roomPrefab, currentRoomParent.transform);
         currentRoom.transform.position += new Vector3((float)room.roomSize.x / 2f, (float)room.roomSize.y / 2f, 0);
-        LoadRoomFloor(room.roomSize);
+        if(room.generateRandomRoom)
+        {
+            LoadRoomFloor(room.roomSize);
+        }
         Transform[] transformsInRoom = currentRoom.GetComponentsInChildren<Transform>();
         for (int i = 0; i < transformsInRoom.Length; i++)
         {

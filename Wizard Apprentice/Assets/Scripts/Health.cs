@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] AudioClip hitSound;
     [SerializeField] AudioClip deathSound;
 
-
+    public delegate void DeathDelegate(GameObject gameObject);
+    public event DeathDelegate deathEvent;
 
     [SerializeField] float maxHP = 100;
     [SerializeField] float hp = 100;
@@ -19,7 +21,7 @@ public class Health : MonoBehaviour
     [Header("UI")]
     [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] bool usesHealthBar = false;
-    [SerializeField] Slider healthbar;
+    [SerializeField] Image healthbar;
     [Header("Juice")]
     [SerializeField] bool hasDeathAnimation = false;
     [SerializeField] float hitEffectTime = 0.5f;
@@ -45,7 +47,7 @@ public class Health : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     Animator anim;
-    float healthbarValue;
+    float healthbarValue = 1f;
     bool canBeHit = true;
     private void Start()
     {
@@ -62,13 +64,6 @@ public class Health : MonoBehaviour
 
         if (usesHealthBar)
             healthbar.gameObject.SetActive(true);
-
-        if (usesHealthBar)
-        {
-            healthbar.maxValue = maxHP;
-            healthbar.minValue = 0;
-            healthbarValue = hp;
-        }
     }
 
     private void Update()
@@ -76,7 +71,7 @@ public class Health : MonoBehaviour
         if (usesHealthBar)
         {
             healthbarValue = Mathf.SmoothDamp(healthbarValue, hp, ref currentHealthRemoveSpeed, healthRemoveSpeed, 100, Time.deltaTime);
-            healthbar.value = healthbarValue;
+            healthbar.fillAmount = (healthbarValue / maxHP);
         }
 
         if (hitEffectActve)
@@ -130,8 +125,6 @@ public class Health : MonoBehaviour
     public void AddMaxHealth(float healAmount)
     {
         maxHP += healAmount;
-        if (usesHealthBar)
-            healthbar.maxValue = maxHP;
         AddHealth(healAmount);
 
     }
@@ -206,7 +199,12 @@ public class Health : MonoBehaviour
             {
                 healthbar.gameObject.SetActive(false);
             }
-
+            Debug.Log("about to call event");
+            if (deathEvent != null)
+            {
+                Debug.Log("event is not null");
+                deathEvent(this.gameObject);
+            }
             GameObject.FindWithTag("GameController").GetComponent<RoomManager>().RemoveEnemy(this.gameObject);
         }
     }

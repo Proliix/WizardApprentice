@@ -10,6 +10,7 @@ public class Drag : MonoBehaviour
     Vector2 offset;
     public Inventory inventory;
     public GameObject lastObjectAttachedTo;
+    float cardHoverScale = 1.25f;
     private void Start()
     {
     }
@@ -24,6 +25,7 @@ public class Drag : MonoBehaviour
         {
             inventory.cardHolders[i].transform.localScale = new Vector3(1f, 1f, 1);
         }
+        inventory.trashCan.transform.localScale = new Vector3(1f,1f,1f);
         int unitIndex = 0;
         float largestCover = -999990;
         for (int i = 0; i < inventory.cardHolders.Count; i++)
@@ -35,9 +37,14 @@ public class Drag : MonoBehaviour
                 unitIndex = i;
             }
         }
-        if (largestCover > 0)
+        float trashCancover = (UnitsHoveringOther(transform.position, new Vector2(transform.GetComponent<RectTransform>().rect.width * transform.localScale.x, transform.GetComponent<RectTransform>().rect.height * transform.localScale.y), inventory.trashCan.transform.position, new Vector2(inventory.trashCan.GetComponent<RectTransform>().rect.width * transform.localScale.x, inventory.trashCan.GetComponent<RectTransform>().rect.height * transform.localScale.y)));
+        if (trashCancover > largestCover)
         {
-            inventory.cardHolders[unitIndex].transform.localScale = new Vector3(1.5f,1.5f,1);
+            inventory.trashCan.transform.localScale = new Vector3(cardHoverScale, cardHoverScale, 1);
+        }
+        else if (largestCover > 0)
+        {
+            inventory.cardHolders[unitIndex].transform.localScale = new Vector3(cardHoverScale,cardHoverScale,1);
         }
     }
 
@@ -74,15 +81,31 @@ public class Drag : MonoBehaviour
         {
             float cover = UnitsHoveringOther(transform.position, new Vector2(transform.GetComponent<RectTransform>().rect.width * transform.localScale.x, transform.GetComponent<RectTransform>().rect.height * transform.localScale.y), inventory.cardHolders[i].transform.position, new Vector2(inventory.cardHolders[i].GetComponent<RectTransform>().rect.width * transform.localScale.x, inventory.cardHolders[i].GetComponent<RectTransform>().rect.height * transform.localScale.y));
             if (cover > largestCover)
-                {
-                    largestCover = cover;
-                    unitIndex = i;
-                }
-
+            {
+                largestCover = cover;
+                unitIndex = i;
+            }
             inventory.cardHolders[i].transform.localScale = new Vector3(1,1,1);
+        }
+        inventory.trashCan.transform.localScale = new Vector3(1f, 1f, 1f);
+        float trashCancover = (UnitsHoveringOther(transform.position, new Vector2(transform.GetComponent<RectTransform>().rect.width * transform.localScale.x, transform.GetComponent<RectTransform>().rect.height * transform.localScale.y), inventory.trashCan.transform.position, new Vector2(inventory.trashCan.GetComponent<RectTransform>().rect.width * transform.localScale.x, inventory.trashCan.GetComponent<RectTransform>().rect.height * transform.localScale.y)));
+        if (trashCancover > largestCover)
+        {
+            for(int i = 0; i < inventory.cardHolders.Count; i++)
+            {
+                if (inventory.cardHolders[i].gameObject == lastObjectAttachedTo)
+                {
+                    if(i >= 4)
+                    {
+                        lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
+                        Destroy(this.gameObject);
+                    }
+                    break;
+                }
+            }
             
         }
-        if (largestCover > 0)
+        else if (largestCover > 0)
         {
             //Set my position to new
             //Set other position to old
@@ -124,7 +147,7 @@ public class Drag : MonoBehaviour
 
     public void PointerEnterHandler(BaseEventData data)
     {
-        transform.localScale = new Vector3(1.5f, 1.5f);
+        transform.localScale = new Vector3(cardHoverScale, cardHoverScale);
     }
 
     public void PointerExitHandler(BaseEventData data)

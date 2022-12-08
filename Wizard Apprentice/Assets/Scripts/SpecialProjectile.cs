@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing }
+public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, HauntedArmorBigArrow, HauntedArmorSplittingArrow }
 
 public class SpecialProjectile : MonoBehaviour
 {
+    public List<float> data;
+
     public SpecialBulletState bulletState;
     public int poolIndex;
     public GameObject Shooter;
@@ -180,6 +182,10 @@ public class SpecialProjectile : MonoBehaviour
         relativeDistance = Vector3.zero;
         hasHitWall = false;
         stoppedMoving = false;
+        if(data != null)
+        {
+            data.Clear();
+        }
     }
 
     public void SetAnimationBool(string name, bool value = true)
@@ -245,21 +251,32 @@ public class SpecialProjectile : MonoBehaviour
 
                             break;
                         case SpecialBulletState.Normal:
-                            bulletHandler.ResetBullet(poolIndex);
                             ResetBullet();
                             break;
                         case SpecialBulletState.Homing:
-                            bulletHandler.ResetBullet(poolIndex);
                             ResetBullet();
                             break;
                         case SpecialBulletState.Bouncy:
-                            Vector2 prevVelocity = rb2d.velocity;
-                            rb2d.velocity = prevVelocity * -1f;
-                            dir = prevVelocity * -1f;
+                            Vector2 prevVelocity = dir;
+                            dir *= -1f;
                             float theta = Mathf.Atan2(dir.y, dir.x);
                             if (theta < 0.0)
                                 theta += Mathf.PI * 2;
                             transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * theta - 90) * -1));
+                            NormalShot();
+                            break;
+                        case SpecialBulletState.HauntedArmorBigArrow:
+                            if (data[0] <= 0)
+                            {
+                                ResetBullet();
+                                break;
+                            }
+                            dir *= -1f;
+                            float angle = Mathf.Atan2(dir.y, dir.x);
+                            if (angle < 0.0)
+                                angle += Mathf.PI * 2;
+                            transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * angle - 90) * -1));
+                            data[0]--;
                             NormalShot();
                             break;
                     }
@@ -280,22 +297,94 @@ public class SpecialProjectile : MonoBehaviour
 
                     break;
                 case SpecialBulletState.Normal:
-                    bulletHandler.ResetBullet(poolIndex);
                     ResetBullet();
                     break;
                 case SpecialBulletState.Homing:
-                    bulletHandler.ResetBullet(poolIndex);
                     ResetBullet();
                     break;
                 case SpecialBulletState.Bouncy:
-                    Vector2 prevVelocity = rb2d.velocity;
-                    rb2d.velocity = prevVelocity * -1f;
-                    dir = prevVelocity * -1f;
+                    Vector2 prevVelocity = dir;
+                    BoxCollider2D collider = collision.GetComponent<BoxCollider2D>();
+                    if (collision.transform.position.y + collider.offset.y + collision.GetComponent<BoxCollider2D>().size.y * -0.5f > rb2d.position.y)
+                    {
+                        dir.y *= -1f;
+                    }
+                    else if (collision.transform.position.y + collider.offset.y + collider.size.y * 0.5f < rb2d.position.y)
+                    {
+                        dir.y *= -1f;
+                    }
+                    else if (collision.transform.position.x + collider.offset.x + collider.size.x * -0.5f > rb2d.position.x)
+                    {
+                        dir.x *= -1f;
+                    }
+                    else if (collision.transform.position.x + collider.offset.x + collider.size.x * 0.5f < rb2d.position.x)
+                    {
+                        dir.x *= -1f;
+                    }
                     float theta = Mathf.Atan2(dir.y, dir.x);
                     if (theta < 0.0)
                         theta += Mathf.PI * 2;
                     transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * theta - 90) * -1));
                     NormalShot();
+                    break;
+                case SpecialBulletState.HauntedArmorBigArrow:
+                    if (data[0] <= 0)
+                    {
+                        ResetBullet();
+                        break;
+                    }
+                    BoxCollider2D HauntedArmorBigArrow_collider = collision.GetComponent<BoxCollider2D>();
+                    if (collision.transform.position.y + HauntedArmorBigArrow_collider.offset.y + HauntedArmorBigArrow_collider.size.y * -0.5f > rb2d.position.y)
+                    {
+                        dir.y *= -1f;
+                    }
+                    else if (collision.transform.position.y + HauntedArmorBigArrow_collider.offset.y + HauntedArmorBigArrow_collider.size.y * 0.5f < rb2d.position.y)
+                    {
+                        dir.y *= -1f;
+                    }
+                    else if (collision.transform.position.x + HauntedArmorBigArrow_collider.offset.x + HauntedArmorBigArrow_collider.size.x * -0.5f > rb2d.position.x)
+                    {
+                        dir.x *= -1f;
+                    }
+                    else if (collision.transform.position.x + HauntedArmorBigArrow_collider.offset.x + HauntedArmorBigArrow_collider.size.x * 0.5f < rb2d.position.x)
+                    {
+                        dir.x *= -1f;
+                    }
+                    float HauntedArmorBigArrow_angle = Mathf.Atan2(dir.y, dir.x);
+                    if (HauntedArmorBigArrow_angle < 0.0)
+                        HauntedArmorBigArrow_angle += Mathf.PI * 2;
+                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * HauntedArmorBigArrow_angle - 90) * -1));
+                    data[0]--;
+                    NormalShot();
+                    break;
+                case SpecialBulletState.HauntedArmorSplittingArrow:
+                    BoxCollider2D HauntedArmorSplittingArrow_collider = collision.GetComponent<BoxCollider2D>();
+                    if (collision.transform.position.y + HauntedArmorSplittingArrow_collider.offset.y + HauntedArmorSplittingArrow_collider.size.y * -0.5f > rb2d.position.y)
+                    {
+                        dir.y *= -1f;
+                    }
+                    else if (collision.transform.position.y + HauntedArmorSplittingArrow_collider.offset.y + HauntedArmorSplittingArrow_collider.size.y * 0.5f < rb2d.position.y)
+                    {
+                        dir.y *= -1f;
+                    }
+                    else if (collision.transform.position.x + HauntedArmorSplittingArrow_collider.offset.x + HauntedArmorSplittingArrow_collider.size.x * -0.5f > rb2d.position.x)
+                    {
+                        dir.x *= -1f;
+                    }
+                    else if (collision.transform.position.x + HauntedArmorSplittingArrow_collider.offset.x + HauntedArmorSplittingArrow_collider.size.x * 0.5f < rb2d.position.x)
+                    {
+                        dir.x *= -1f;
+                    }
+                    float HauntedArmorSplittingArrow_angle = Mathf.Atan2(dir.y, dir.x);
+                    if (HauntedArmorSplittingArrow_angle < 0.0)
+                        HauntedArmorSplittingArrow_angle += Mathf.PI * 2;
+                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * HauntedArmorSplittingArrow_angle - 90) * -1));
+
+                    Vector2 newDir1 = new Vector2(Mathf.Cos((HauntedArmorSplittingArrow_angle + 15 * Mathf.Deg2Rad)), Mathf.Sin(HauntedArmorSplittingArrow_angle + 15 * Mathf.Deg2Rad));
+                    bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized,newDir1.normalized,false,10,0.5f,8);
+                    Vector2 newDir2 = new Vector2(Mathf.Cos((HauntedArmorSplittingArrow_angle - 15 * Mathf.Deg2Rad)), Mathf.Sin(HauntedArmorSplittingArrow_angle - 15 * Mathf.Deg2Rad));
+                    bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized, newDir2.normalized, false, 10, 0.5f, 8);
+                    ResetBullet();
                     break;
             }
         }
