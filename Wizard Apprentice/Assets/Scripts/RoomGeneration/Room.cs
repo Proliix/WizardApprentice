@@ -9,4 +9,5 @@ public class Room : ScriptableObject
     public Vector2Int roomSize;
     public int roomDifficulty;
     public bool generateRandomRoom;
+    public bool roomAlreadyHasDoor;
 }

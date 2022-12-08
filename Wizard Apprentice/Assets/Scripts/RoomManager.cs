@@ -78,7 +78,10 @@ public class RoomManager : MonoBehaviour
             }
         }
         enemyManager.enemyObjects = enemyObjects;
-        doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y - 0.5f, 0), Quaternion.identity, currentRoomParent.transform);
+        if(!room.roomAlreadyHasDoor)
+        {
+            doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y - 0.5f, 0), Quaternion.identity, currentRoomParent.transform);
+        }
         playerObject.transform.position = new Vector3(room.roomSize.x / 2, 1, 0);
     }
 
