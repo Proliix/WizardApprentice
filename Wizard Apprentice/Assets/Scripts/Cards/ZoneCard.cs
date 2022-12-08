@@ -41,7 +41,7 @@ public class ZoneCard : MonoBehaviour, ICard
     public void Effect()
     {
         //SoundManager.Instance.PlayAudio(attackSound);
-        enemies = enemyManager.GetEnemiesWithinRange(player.transform.position, attackRange);   
+        enemies = enemyManager.GetEnemiesWithinRange(player.transform.position, attackRange);
         for (int i = 0; i < enemies.Count; i++)
         {
             enemies[i].GetComponent<Health>()?.RemoveHealth(damage);
@@ -80,6 +80,8 @@ public class ZoneCard : MonoBehaviour, ICard
 
         if (hasActivated == false)
         {
+            Vector3 newScale = ((Vector3.one * attackRange) / 2) + (Vector3.one * 0.1f);
+            zoneObject.transform.localScale = newScale;
             hasActivated = true;
             StartCoroutine(Attack());
 
