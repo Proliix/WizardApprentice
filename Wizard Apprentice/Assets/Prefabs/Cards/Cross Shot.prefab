@@ -220,9 +220,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9199a671ba54284986e2a8c1f242412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  title: 
-  description: 
+  image: {fileID: 21300000, guid: cee28767df6f9764caaa6710d67badeb, type: 3}
+  comboImage: {fileID: 21300000, guid: 14639a0b32b0cb7478e9159672d8f870, type: 3}
+  title: + shot
+  description: 'Shoots projectiles in a + formation
+
+    Has special interaction
+    with x shot'
   attackSound: {fileID: 0}
   audioVolume: 1
   damage: 10

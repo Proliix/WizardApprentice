@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LaserCard : MonoBehaviour, ICard
 {
-    [SerializeField] Camera mainCamera;
     [SerializeField] Sprite image;
     [SerializeField] string title;
     [TextArea(2, 10)]
@@ -12,11 +11,9 @@ public class LaserCard : MonoBehaviour, ICard
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
 
-    [SerializeField] Transform player;
 
     [Header("Laser Variables")]
-    [SerializeField] GameObject laserSprite;
-    [SerializeField] GameObject activeLaser;
+    [SerializeField] GameObject laserSpritePrefab;
     [SerializeField] float laserLength = 4;
     [SerializeField] float laserWith = 0.5f;
     [SerializeField] Vector3 mousePos;
@@ -26,18 +23,20 @@ public class LaserCard : MonoBehaviour, ICard
     [SerializeField] float distanceToTarget;
     [SerializeField] float distance;
 
+     GameObject activeLaser;
+    Transform player;
 
     bool hasActivated = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-     
+
     }
 
     public void Effect()
     {
-        
+
     }
 
     public string GetDescription()
@@ -65,17 +64,15 @@ public class LaserCard : MonoBehaviour, ICard
     {
         if (!hasActivated)
         {
-        hasActivated = true;
-            activeLaser = Instantiate(laserSprite);
+            hasActivated = true;
+            activeLaser = Instantiate(laserSpritePrefab,Vector3.one * 100,laserSpritePrefab.transform.rotation);
         }
     }
 
     private void Update()
     {
-       
-        mainCamera = Camera.main;
 
-        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
     }
 
@@ -85,7 +82,7 @@ public class LaserCard : MonoBehaviour, ICard
 
         laserLength = distanceToTarget;
 
-       
+
         Vector2 mouseDirection = (mousePos - player.transform.position).normalized;
 
         activeLaser.transform.localScale = new Vector2(laserWith, distanceToTarget);
@@ -124,7 +121,7 @@ public class LaserCard : MonoBehaviour, ICard
     {
         if (hasActivated)
         {
-        StartCoroutine(Attack());
+            StartCoroutine(Attack());
         }
 
         TestRayCastCheck2D();

@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 553983868cbedf34aba0ecc5f0c69320, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 980d84096939029428a52e38b87352e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -220,12 +220,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116ef33b0d8b1814ab72e9bcd2a668c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  title: 
-  description: 
+  image: {fileID: 21300000, guid: 980d84096939029428a52e38b87352e7, type: 3}
+  title: Damage zone
+  description: Will damage enemies in a zone around the player
   attackSound: {fileID: 0}
   audioVolume: 1
-  target: {fileID: 0}
+  playerTarget: {fileID: 0}
+  zoneObject: {fileID: 0}
   attackRange: 7
   timer: 0
   damage: 1
