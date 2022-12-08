@@ -90,16 +90,20 @@ public class RoomManager : MonoBehaviour
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
-            if (currentRoomType == 0)
+            switch(currentRoomType)
             {
-                SceneManager.LoadScene("Menu");
+                case 0:
+                    SceneManager.LoadScene("Menu");
+                    break;
+                case 1:
+                    rewardsHandler.GetRewardScreenStats();
+                    break;
+                case 2:
+                    rewardsHandler.GetRewardScreenCard(true);
+                    break;
             }
-            else
-            {
-                rewardsHandler.GetRewardScreenStats();
-                roomSelectScreenGenerator.roomSelectObject.SetActive(true);
-                roomSelectScreenGenerator.Open();
-            }
+            roomSelectScreenGenerator.roomSelectObject.SetActive(true);
+            roomSelectScreenGenerator.Open();
         }
         else
         {
