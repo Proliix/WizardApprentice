@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Treasure 1
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 6842706563228681577, guid: 08fa89a63fead1f4580dbf09011061ff, type: 3}
-  roomSize: {x: 5, y: 5}
+  roomSize: {x: 0, y: 0}
   roomDifficulty: 0
-  generateRandomRoom: 1
+  generateRandomRoom: 0
+  roomAlreadyHasDoor: 1

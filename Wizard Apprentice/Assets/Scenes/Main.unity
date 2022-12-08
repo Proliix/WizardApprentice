@@ -4382,7 +4382,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f84fe22ba912e954993f039a2be94206, type: 2}
   - {fileID: 11400000, guid: 10dae228a02f62147a7447097f2e0f87, type: 2}
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
-  - {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
   titles:
   - {fileID: 476821372}
@@ -4403,12 +4402,16 @@ MonoBehaviour:
   - {fileID: 476821361}
   cards:
   - {fileID: 4730238429024741816, guid: a3a538cc47877d645b397a1b89efb814, type: 3}
+  - {fileID: 29307193165762805, guid: 7354d61bec7c2e74bbd72a9a581cf735, type: 3}
   - {fileID: 2085470275948324650, guid: 339e16e5879b2e84bae791056c7494f0, type: 3}
   - {fileID: 4496280925129985610, guid: 50a3e60586c32f2439ff5b2d4acec67e, type: 3}
   - {fileID: 6678203229998617382, guid: beca8782f55befd4e98e36b605e942db, type: 3}
+  - {fileID: 6595212247910812035, guid: 33d3ac41e89104749a3d3d21ed297282, type: 3}
   - {fileID: 6458547972587393656, guid: 01d41d8148ee8f941a930a4735a6db5e, type: 3}
   - {fileID: 7091902878019880311, guid: 2dfec47b74f78fc42a1efcd283bc20e6, type: 3}
   - {fileID: 1106177584714849619, guid: 2fedc790d35b1604c9c7edb4c5f54966, type: 3}
+  - {fileID: 6595212247910812035, guid: 12092e75bebac0747b91c392349847f6, type: 3}
+  - {fileID: 7699239943680715583, guid: 6766e7fc3fa73734a95bc56091781548, type: 3}
   descriptionObj:
   - {fileID: 1087225622}
   - {fileID: 1736745387}
@@ -4595,7 +4598,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
   - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
-  normalRoomsPoolAmount: 11
+  normalRoomsPoolAmount: 10
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
@@ -4604,12 +4607,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   miniBossRoomsPoolAmount: 2
   possibleTreasureRooms:
-  - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
-  - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
-  - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
-  - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
-  - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
-  treasureRoomsPoolAmount: 1
+  - {fileID: 11400000, guid: 326ee1e0bede5d84aa742c7d1ec92b52, type: 2}
+  treasureRoomsPoolAmount: 2
   possibleMysteryRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
@@ -4893,38 +4892,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2716490601393463312, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 292345907}
-    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: hitColour.b
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: hitColour.g
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: hitColour.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: dashingTime
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: dashingSpeed
-      value: 12.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
-      propertyPath: dashingCooldown
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548061, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: m_RootOrder
       value: 1

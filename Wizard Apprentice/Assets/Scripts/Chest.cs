@@ -26,7 +26,7 @@ public class Chest : MonoBehaviour
             textCanvas.SetActive(!rewardsHandler.CanAddCards());
 
         if (inTrigger)
-            if (rewardsHandler.CanAddCards())
+            if (rewardsHandler.CanAddCards() && !showingCards)
                 OpenChest();
     }
 
