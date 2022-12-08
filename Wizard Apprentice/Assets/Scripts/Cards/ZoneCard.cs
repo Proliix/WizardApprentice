@@ -11,7 +11,8 @@ public class ZoneCard : MonoBehaviour, ICard
     [SerializeField] string description;
     [SerializeField] AudioClip attackSound;
     [SerializeField] float audioVolume = 1;
-    [SerializeField] GameObject target;
+    [SerializeField] GameObject playerTarget;
+    [SerializeField] GameObject zoneObject;
 
     [SerializeField] float attackRange = 7;
     [SerializeField] float timer;
@@ -32,18 +33,17 @@ public class ZoneCard : MonoBehaviour, ICard
 
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+        zoneObject = GameObject.Find("ZoneCardActiveZone");
         enemyManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyManager>();
     }
 
     public void Effect()
     {
         //SoundManager.Instance.PlayAudio(attackSound);
-        enemies = enemyManager.GetEnemiesWithinRange(target.transform.position, attackRange);   
-        Debug.Log("Enemies: " + enemies.Count);
+        enemies = enemyManager.GetEnemiesWithinRange(player.transform.position, attackRange);   
         for (int i = 0; i < enemies.Count; i++)
         {
-            Debug.Log("is here");
             enemies[i].GetComponent<Health>()?.RemoveHealth(damage);
             Debug.Log(enemies[i].name);
         }
@@ -83,19 +83,17 @@ public class ZoneCard : MonoBehaviour, ICard
             hasActivated = true;
             StartCoroutine(Attack());
 
-
         }
-
-
 
     }
     IEnumerator Attack()
     {
-        target.GetComponentInChildren<CircleCollider2D>().enabled = true;
-        target.GetComponentInChildren<CircleCollider2D>().gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
+        zoneObject.GetComponent<SpriteRenderer>().enabled = true;
+
         yield return new WaitForSeconds(2);
-        target.GetComponentInChildren<CircleCollider2D>().enabled = false;
-        target.GetComponentInChildren<CircleCollider2D>().gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        zoneObject.GetComponent<SpriteRenderer>().enabled = false;
         yield return null;
     }
 

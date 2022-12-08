@@ -38,7 +38,7 @@ public class RoomManager : MonoBehaviour
     private bool canWalkThroughAnyDoor;
     private GameObject doorObject;
 
-
+   
 
     // Start is called before the first frame update
     void Start()
