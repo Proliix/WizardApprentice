@@ -214,7 +214,8 @@ public class Boss2AI2 : MonoBehaviour
     {
         for (int i = 0; i < spawnAmount; i++)
         {
-        Instantiate(spawningEnemy);
+            GameObject enemyObject = Instantiate(spawningEnemy);
+            bulletHandler.gameObject.GetComponent<RoomManager>().AddEnemy(enemyObject);
             yield return new WaitForSeconds(Random.Range(0.25f, 0.5f));
         }
         yield return new WaitForSeconds(2f);

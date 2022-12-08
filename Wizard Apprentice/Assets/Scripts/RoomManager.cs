@@ -130,6 +130,11 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public void AddEnemy(GameObject enemyObject)
+    {
+        enemyObjects.Add(enemyObject);
+        enemyManager.enemyObjects = enemyObjects;
+    }
     public void RemoveAllEnemies()
     {
         for (int i = enemyObjects.Count - 1; i >= 0; i--)
