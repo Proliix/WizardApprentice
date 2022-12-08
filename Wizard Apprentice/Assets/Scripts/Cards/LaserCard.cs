@@ -15,7 +15,7 @@ public class LaserCard : MonoBehaviour, ICard
     [Header("Laser Variables")]
     [SerializeField] GameObject laserSpritePrefab;
     [SerializeField] float laserLength = 4;
-    [SerializeField] float laserWith = 0.5f;
+    [SerializeField] float laserWith = 1f;
     [SerializeField] Vector3 mousePos;
 
     [SerializeField] Vector3 rayOrigin;
@@ -23,7 +23,9 @@ public class LaserCard : MonoBehaviour, ICard
     [SerializeField] float distanceToTarget;
     [SerializeField] float distance;
 
-     GameObject activeLaser;
+    GameObject activeLaser;
+    SpriteRenderer laserSpriteRenderer;
+    BoxCollider2D laserCol;
     Transform player;
 
     bool hasActivated = false;
@@ -65,7 +67,9 @@ public class LaserCard : MonoBehaviour, ICard
         if (!hasActivated)
         {
             hasActivated = true;
-            activeLaser = Instantiate(laserSpritePrefab,Vector3.one * 100,laserSpritePrefab.transform.rotation);
+            activeLaser = Instantiate(laserSpritePrefab, Vector3.one * 100, laserSpritePrefab.transform.rotation);
+            laserSpriteRenderer = activeLaser.GetComponent<SpriteRenderer>();
+            laserCol = activeLaser.GetComponent<BoxCollider2D>();
         }
     }
 
@@ -85,7 +89,9 @@ public class LaserCard : MonoBehaviour, ICard
 
         Vector2 mouseDirection = (mousePos - player.transform.position).normalized;
 
-        activeLaser.transform.localScale = new Vector2(laserWith, distanceToTarget);
+        //activeLaser.transform.localScale = new Vector2(laserWith, distanceToTarget);
+        laserSpriteRenderer.size = new Vector2(laserWith, distanceToTarget);
+        laserCol.size = new Vector2(laserWith, distanceToTarget);
 
         activeLaser.transform.position = (Vector2)player.transform.position - mouseDirection * 0.5f * laserLength * -1;
         float theta = Mathf.Atan2(mousePos.y - player.transform.position.y, player.transform.position.x - mousePos.x);

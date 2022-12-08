@@ -227,7 +227,7 @@ MonoBehaviour:
   audioVolume: 1
   laserSpritePrefab: {fileID: 1293822278273214030, guid: 6fbfd37f1cd02694680db433a729aaee, type: 3}
   laserLength: 4
-  laserWith: 0.5
+  laserWith: 1
   mousePos: {x: 0, y: 0, z: 0}
   rayOrigin: {x: 0, y: 0, z: 0}
   rayDirection: {x: 0, y: 0, z: 0}
