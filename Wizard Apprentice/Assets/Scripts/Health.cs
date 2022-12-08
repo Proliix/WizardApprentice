@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     Animator anim;
-    float healthbarValue = 1f;
+    float healthbarValue = 100f;
     bool canBeHit = true;
     private void Start()
     {
@@ -63,7 +63,10 @@ public class Health : MonoBehaviour
 
 
         if (usesHealthBar)
+        {
             healthbar.gameObject.SetActive(true);
+            healthbar.fillAmount = 1;
+        }
     }
 
     private void Update()
