@@ -2,16 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-using static UnityEditor.PlayerSettings;
 
 public class GreatswordArmor : MonoBehaviour
 {
 
     GameObject playerObject;
     BulletHandler bulletHandler;
+    [SerializeField] Vector2 roomSize;
 
     CurrentState state;
+
+    List<GameObject> allPieces;
+    bool piecesAreOut;
+    bool piecesAreReady;
+
+    [SerializeField] float pieceSpinDuration;
+    [SerializeField] float pieceSpinChargeTime;
+    [SerializeField] float pieceSpinTimeBetweenProjectiles;
+    [SerializeField] float pieceSpinRotationsPerSecond;
+
+    [SerializeField] GameObject pieceObject;
+    [SerializeField] float timeToSplit;
+    [SerializeField] int amountOfPieces;
+    [SerializeField] float distanceToBeWithin;
+    [SerializeField] float pieceMoveSpeed;
 
     [SerializeField] GameObject spinToWinDamageObject;
     [SerializeField] float spinToWinDuration;
@@ -31,9 +45,6 @@ public class GreatswordArmor : MonoBehaviour
     [SerializeField] float slashAttackProjectileSpeed;
     [SerializeField] float slashAttackRandomAngle;
 
-
-    bool piecesOut = false;
-
     bool hasDestination;
     Vector2 currentDestination;
     [SerializeField] float movementSpeed;
@@ -51,8 +62,14 @@ public class GreatswordArmor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        allPieces = new List<GameObject>();
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         playerObject = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public void SetRoomSize(Vector2 size)
+    {
+        roomSize = size;
     }
 
     // Update is called once per frame
@@ -66,8 +83,82 @@ public class GreatswordArmor : MonoBehaviour
         {
             StartCoroutine(SlashAttack());
         }
+        if (Input.GetKeyDown(KeyCode.Y) && state == CurrentState.idle)
+        {
+            StartCoroutine(SplitPieces());
+        }
+        if (Input.GetKeyDown(KeyCode.T) && piecesAreReady)
+        {
+            StartCoroutine(SplitPieces());
+        }
         //currentDestination = playerObject.transform.position;
         //transform.position += ((Vector3)currentDestination - transform.position).normalized * movementSpeed * Time.deltaTime;
+    }
+
+    IEnumerator SpinPieces()
+    {
+        piecesAreReady = false;
+        yield return new WaitForSeconds(pieceSpinChargeTime);
+        float timeSpinning = 0;
+        while (timeSpinning < pieceSpinDuration)
+        {
+            yield return null;
+            timeSpinning += Time.deltaTime;
+            for (int i = 0; i < allPieces.Count; i++)
+            {
+
+            }
+        }
+    }
+
+    IEnumerator SplitPieces()
+    {
+        state = CurrentState.splitting;
+        Vector2 startPos = transform.position;
+        yield return new WaitForSeconds(timeToSplit);
+
+        List<Vector2> targetPositions = new List<Vector2>();
+
+        for (int i = 0; i < amountOfPieces; i++)
+        {
+            targetPositions.Add(new Vector2(Random.Range(0, roomSize.x), Random.Range(0, roomSize.y)));
+            Debug.Log(targetPositions[i]);
+        }
+
+        for (int i = 0; i < amountOfPieces; i++)
+        {
+            GameObject piece = Instantiate(pieceObject);
+            piece.transform.position = startPos;
+            float theta = Mathf.Atan2(targetPositions[i].y - startPos.y, startPos.x - targetPositions[i].x);
+            if (theta < 0.0)
+                theta += Mathf.PI * 2;
+            piece.transform.localRotation = Quaternion.Euler(0, 0, (Mathf.Rad2Deg * theta - 90) * -1);
+            allPieces.Add(piece);
+        }
+        state = CurrentState.idle;
+        piecesAreOut = true;
+        int amountCompleted = 0;
+        bool[] isDoneMoving = new bool[allPieces.Count];
+        while (amountCompleted < allPieces.Count)
+        {
+            yield return null;
+            for (int i = 0; i < allPieces.Count; i++)
+            {
+                if (Vector2.Distance(allPieces[i].transform.position, targetPositions[i]) < distanceToBeWithin && !isDoneMoving[i])
+                {
+                    amountCompleted++;
+                    isDoneMoving[i] = true;
+                    Debug.Log("is close");
+                }
+                else if (!isDoneMoving[i])
+                {
+                    Debug.Log("is moving");
+                    allPieces[i].transform.position += (Vector3)((targetPositions[i] - startPos).normalized * Time.deltaTime * pieceMoveSpeed);
+                }
+            }
+        }
+        piecesAreReady = true;
+
     }
 
     IEnumerator SlashAttack()
