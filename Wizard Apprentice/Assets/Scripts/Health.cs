@@ -65,6 +65,7 @@ public class Health : MonoBehaviour
         if (usesHealthBar)
         {
             healthbar.gameObject.SetActive(true);
+            healthbarValue = hp;
             healthbar.fillAmount = 1;
         }
     }
