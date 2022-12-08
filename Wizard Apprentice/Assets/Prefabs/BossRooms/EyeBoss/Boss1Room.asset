@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
   m_Name: Boss1Room
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 0}
+  roomPrefab: {fileID: 4629461180731313550, guid: 90707af29c007a74ba85bef13e279115, type: 3}
   roomSize: {x: 20, y: 20}
   roomDifficulty: 0
   generateRandomRoom: 1
