@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Miniboss1AI : MonoBehaviour
+public class MinibossTeleportingSkeletonAI : MonoBehaviour
 {
 
 
