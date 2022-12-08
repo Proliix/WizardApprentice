@@ -4355,6 +4355,8 @@ GameObject:
   - component: {fileID: 1786813657}
   - component: {fileID: 1786813656}
   - component: {fileID: 1786813653}
+  - component: {fileID: 1786813664}
+  - component: {fileID: 1786813663}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -4583,8 +4585,10 @@ MonoBehaviour:
   bulletHandler: {fileID: 1786813660}
   cardHandler: {fileID: 1786813655}
   rewardsHandler: {fileID: 1786813653}
-  possibleBossRooms:
+  possibleBossRoomsByFloor:
   - {fileID: 11400000, guid: cdcfaa60af5e01f418d54753ea3514b0, type: 2}
+  - {fileID: 11400000, guid: b5116df22c300574aaa8449d90a88521, type: 2}
+  - {fileID: 11400000, guid: b28f0ea3a4decea4eadff67ed7ca66d9, type: 2}
   possibleNormalRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
@@ -4613,6 +4617,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   mysteryRoomsPoolAmount: 3
+  currentFloor: 0
 --- !u!114 &1786813660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4664,6 +4669,32 @@ MonoBehaviour:
   upTime: 1.25
   offsetMax: {x: 0.25, y: 0.25}
   offsetMin: {x: -0.25, y: -0.25}
+--- !u!114 &1786813663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786813652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfac2168fc5930e40aee68cd04e592f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1786813664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786813652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b121ef48e0e884093a2dba4df718a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  squareSprite: {fileID: 21300000, guid: af49ebd894695f548840115c9e218e18, type: 3}
+  circleSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
 --- !u!1 &1790516759
 GameObject:
   m_ObjectHideFlags: 0

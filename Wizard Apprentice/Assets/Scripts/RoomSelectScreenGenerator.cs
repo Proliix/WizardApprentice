@@ -29,12 +29,14 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     [SerializeField] Vector2 iconDistances;
     List<RoomSelectRoom> allRooms;
     List<List<RoomSelectRoom>> roomsByLayer;
+    int currentFloor;
 
     int totalPool;
     int normalPool;
     int minibossPool;
     int treasurePool;
     int mysteryPool;
+
     public enum RoomTypes
     {
         BossRoom, NormalRoom, MinibossRoom, TreasureRoom, MysteryRoom
@@ -47,6 +49,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentFloor = 0;
         objectsCreated = new List<GameObject>();
         GenerateRoomLayout();
         for(int i = 0; i < numberOfLayers; i++)
@@ -57,13 +60,35 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         GenerateLookOfScreen();
     }
 
+    public void GenerateAnotherFloor()
+    {
+        currentFloor++;
+        for(int i = objectsCreated.Count-1; i >= 0; i--)
+        {
+            Destroy(objectsCreated[i]);
+        }
+        objectsCreated.Clear();
+        roomsByLayer.Clear();
+        GeneratePoolAmounts();
+
+
+        GenerateRoomLayout();
+        for (int i = 0; i < numberOfLayers; i++)
+        {
+            GenerateLayer();
+        }
+        GenerateBottomLayer();
+        GenerateLookOfScreen();
+        roomManager.currentFloor = currentFloor;
+    }
+
     // Update is called once per frame
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.I))
        {
             GenerateLookOfScreen();
-        }
+       }
     }
 
     public void GenerateRoomLayout()

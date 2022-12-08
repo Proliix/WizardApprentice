@@ -24,7 +24,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] CardHandler cardHandler;
     [SerializeField] RewardsHandler rewardsHandler;
 
-    [SerializeField] List<Room> possibleBossRooms;
+    [SerializeField] List<Room> possibleBossRoomsByFloor;
     [SerializeField] List<Room> possibleNormalRooms;
     public int normalRoomsPoolAmount;
     [SerializeField] List<Room> possibleMinibossRooms;
@@ -38,7 +38,7 @@ public class RoomManager : MonoBehaviour
     private bool canWalkThroughAnyDoor;
     private GameObject doorObject;
 
-   
+    public int currentFloor;
 
     // Start is called before the first frame update
     void Start()
@@ -93,7 +93,8 @@ public class RoomManager : MonoBehaviour
             switch(currentRoomType)
             {
                 case 0:
-                    SceneManager.LoadScene("Menu");
+                    roomSelectScreenGenerator.GenerateAnotherFloor();
+                    rewardsHandler.GetRewardScreenCard(true);
                     break;
                 case 1:
                     rewardsHandler.GetRewardScreenStats();
@@ -174,7 +175,7 @@ public class RoomManager : MonoBehaviour
         {
             case 0:
                 currentRoomType = 0;
-                LoadPremadeRoom(possibleBossRooms[Random.Range(0, possibleBossRooms.Count)]);
+                LoadPremadeRoom(possibleBossRoomsByFloor[currentFloor % possibleBossRoomsByFloor.Count]);
                 break;
             case 1:
                 currentRoomType = 1;
