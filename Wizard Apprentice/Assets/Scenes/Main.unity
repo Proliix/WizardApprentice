@@ -2658,7 +2658,7 @@ Transform:
   - {fileID: 679064215}
   - {fileID: 708408438}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &927586302
 GameObject:
@@ -2725,7 +2725,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &945111915 stripped
 MonoBehaviour:
@@ -4498,7 +4498,7 @@ MonoBehaviour:
   roomSelectParent: {fileID: 119382419}
   lineParent: {fileID: 383864940}
   roomParent: {fileID: 1944693146}
-  numberOfLayers: 4
+  numberOfLayers: 7
   maxRoomsPerLayers: 4
   minRoomsPerLayers: 2
   allowedChangePerLayer: 3
@@ -4595,28 +4595,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
   - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
-  normalRoomsPoolAmount: 40
+  normalRoomsPoolAmount: 11
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
   - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
   - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
-  miniBossRoomsPoolAmount: 5
+  miniBossRoomsPoolAmount: 2
   possibleTreasureRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
   - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
   - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
-  treasureRoomsPoolAmount: 3
+  treasureRoomsPoolAmount: 1
   possibleMysteryRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
   - {fileID: 11400000, guid: 210f55a9479701744aa963798cfeb0f2, type: 2}
   - {fileID: 11400000, guid: b4d4847a7f3242640ae051106345cb0c, type: 2}
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
-  mysteryRoomsPoolAmount: 3
+  mysteryRoomsPoolAmount: 1
   currentFloor: 0
 --- !u!114 &1786813660
 MonoBehaviour:
@@ -5176,7 +5176,7 @@ RectTransform:
   - {fileID: 1143681555}
   - {fileID: 1268692970}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5444,7 +5444,7 @@ RectTransform:
   - {fileID: 2140121530}
   - {fileID: 1848352819}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
