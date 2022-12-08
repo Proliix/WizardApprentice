@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3725360020596219880}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8510016087536575833
 Animator:
@@ -121,8 +121,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8e1c9c157f2236c4cbb43f926b581ad9, type: 2}
-  m_sharedMaterial: {fileID: -2775901207537414707, guid: 8e1c9c157f2236c4cbb43f926b581ad9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
+  m_sharedMaterial: {fileID: -7217490493216259712, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
