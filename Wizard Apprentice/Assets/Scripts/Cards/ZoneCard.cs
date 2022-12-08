@@ -80,7 +80,8 @@ public class ZoneCard : MonoBehaviour, ICard
 
         if (hasActivated == false)
         {
-            Vector3 newScale = ((Vector3.one * attackRange) / 2) + (Vector3.one * 0.1f);
+            Vector3 scaleFix = Vector3.one - zoneObject.transform.parent.localScale;
+            Vector3 newScale = (((Vector3.one + scaleFix) * attackRange) * 2);
             zoneObject.transform.localScale = newScale;
             hasActivated = true;
             StartCoroutine(Attack());
@@ -97,6 +98,14 @@ public class ZoneCard : MonoBehaviour, ICard
 
         zoneObject.GetComponent<SpriteRenderer>().enabled = false;
         yield return null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (hasActivated)
+        {
+            Gizmos.DrawWireSphere(player.transform.position, attackRange);
+        }
     }
 
 }
