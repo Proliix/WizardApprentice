@@ -70,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer();
         }
 
+        dashIndicator.gameObject?.SetActive(canDash);
+
         if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
         {
             SoundManager.Instance.PlayAudio(dashSound);
@@ -108,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("IsDashing", isDashing);
 
         yield return new WaitForSeconds(dashingCooldown - stats.dashCooldown);
-        dashIndicator.ChangeDashIndicator();
+        //dashIndicator.ChangeDashIndicator();
         canDash = true;
         dashes++;
     }

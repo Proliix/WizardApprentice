@@ -19,19 +19,6 @@ public class LaserHurtBox : MonoBehaviour
         enemyhealth = new List<Health>();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (timer >= attackDelay)
-        {
-
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                collision.gameObject.GetComponent<Health>().RemoveHealth(damage + stats.damage);
-            }
-        }
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -61,7 +48,7 @@ public class LaserHurtBox : MonoBehaviour
             {
                 if (enemyhealth[i] != null)
                 {
-                    enemyhealth[i].RemoveHealth(damage);
+                    enemyhealth[i].RemoveHealth(damage + stats.damage);
                 }
             }
 
