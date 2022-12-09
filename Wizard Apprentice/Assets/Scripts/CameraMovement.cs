@@ -48,20 +48,28 @@ public class CameraMovement : MonoBehaviour
     /// <summary>
     /// Starts screenshake with duration with constrains vector2.one * amount
     /// </summary>
-    public void GetScreenShake(float duration,float amount)
+    public void GetScreenShake(float duration, float amount, bool withCurve = true)
     {
-        StartCoroutine(Shake(duration, Vector2.one * amount));
+        if (withCurve)
+            StartCoroutine(Shake(duration, Vector2.one * amount));
+        else
+            StartCoroutine(ShakeNoCurve(duration, Vector2.one * amount));
+
+
     }
 
     /// <summary>
     /// Starts screenshake with duration with constrains amount
     /// </summary>
-    public void GetScreenShake(float duration, Vector2 amount)
+    public void GetScreenShake(float duration, Vector2 amount, bool withCurve = true)
     {
-        StartCoroutine(Shake(duration, amount));
+        if (withCurve)
+            StartCoroutine(Shake(duration, amount));
+        else
+            StartCoroutine(ShakeNoCurve(duration, amount));
     }
 
-    IEnumerator Shake(float duration,Vector2 amount)
+    IEnumerator Shake(float duration, Vector2 amount)
     {
         isRunning++;
         float elapsed = duration;
@@ -82,6 +90,29 @@ public class CameraMovement : MonoBehaviour
         ResetCam();
 
     }
+
+    IEnumerator ShakeNoCurve(float duration, Vector2 amount)
+    {
+        isRunning++;
+        float elapsed = duration;
+        Vector3 lastPos = Vector3.zero;
+        Vector3 nextPos = Vector3.zero;
+        while (elapsed > 0)
+        {
+            elapsed -= Time.deltaTime;
+            nextPos = (Mathf.PerlinNoise(elapsed * shakeSpeed, elapsed * shakeSpeed * 2) - 0.5f) * amount.x * transform.right +
+                             (Mathf.PerlinNoise(elapsed * shakeSpeed * 2, elapsed * shakeSpeed) - 0.5f) * amount.y * transform.up;
+
+            gameObject.transform.Translate(nextPos - lastPos);
+            lastPos = nextPos;
+
+            yield return null;
+        }
+        isRunning--;
+        ResetCam();
+
+    }
+
     private void ResetCam()
     {
         if (isRunning <= 0)

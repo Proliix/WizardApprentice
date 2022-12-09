@@ -66,6 +66,7 @@ public class LaserCard : MonoBehaviour, ICard
     {
         if (!hasActivated)
         {
+            Camera.main.GetComponent<CameraMovement>().GetScreenShake(2, 0.10f, false);
             hasActivated = true;
             activeLaser = Instantiate(laserSpritePrefab, Vector3.one * 100, laserSpritePrefab.transform.rotation);
             laserSpriteRenderer = activeLaser.GetComponent<SpriteRenderer>();
