@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
+  m_Name: Damage
+  m_EditorClassIdentifier: 
+  Title: Arcane Potion
+  EffectText: Your magic becomes stronger and you deal more damage
+  health: 0
+  movementSpeed: 0
+  damage: 1
+  attackSpeed: 0
+  projectileSize: 0
+  projectileSpeed: 0
+  projectileAmount: 0
+  dashCharges: 0
+  dashCooldown: 0
