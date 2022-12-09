@@ -46,6 +46,15 @@ public class Drag : MonoBehaviour
         {
             inventory.cardHolders[unitIndex].transform.localScale = new Vector3(cardHoverScale,cardHoverScale,1);
         }
+
+        if(GetMyIndex() >= 4)
+        {
+            inventory.trashCan.gameObject.SetActive(true);
+        }
+        else
+        {
+            inventory.trashCan.gameObject.SetActive(false);
+        }
     }
 
     public void PointerDownHandler(BaseEventData data)
@@ -125,7 +134,7 @@ public class Drag : MonoBehaviour
                     inventory.cardHolders[unitIndex].cardObject = this.gameObject;
                     hasSnappedToNew = true;
                 }
-                else if (unitIndex < 4)
+                else if (GetMyIndex() >= 4 && unitIndex >= 4)
                 {
                     if (lastObjectAttachedTo != null)
                     {
@@ -138,6 +147,7 @@ public class Drag : MonoBehaviour
                 }
             }
         }
+        inventory.trashCan.gameObject.SetActive(false);
         if(!hasSnappedToNew)
         {
             transform.position = lastObjectAttachedTo.transform.position;
@@ -156,6 +166,17 @@ public class Drag : MonoBehaviour
         transform.localScale = new Vector3(1f, 1f);
     }
 
+    public int GetMyIndex()
+    {
+        for(int i = 0; i < inventory.cardHolders.Count; i++)
+        {
+            if(lastObjectAttachedTo == inventory.cardHolders[i].gameObject)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
     private float UnitsHoveringOther(Vector2 myPos, Vector2 myScale, Vector2 otherPos, Vector2 otherScale)
     {
         float myLeft = myPos.x - myScale.x/2;
