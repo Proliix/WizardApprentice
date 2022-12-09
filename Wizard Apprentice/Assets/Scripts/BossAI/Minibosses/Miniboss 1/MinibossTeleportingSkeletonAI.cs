@@ -75,22 +75,22 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
         switch (currentNumber)
         {
             case 1:
-        gameObject.transform.position = new Vector3(-5, 5, 0);
+        gameObject.transform.localPosition = new Vector3(-5, 5, 0);
                 
                 break;
 
             case 2:
-        gameObject.transform.position = new Vector3(5, 5, 0);
+        gameObject.transform.localPosition = new Vector3(5, 5, 0);
 
                 break;
 
             case 3:
-        gameObject.transform.position = new Vector3(5, -5, 0);
+        gameObject.transform.localPosition = new Vector3(5, -5, 0);
                 break;
                     
 
             case 4:
-        gameObject.transform.position = new Vector3(-5, -5, 0);
+        gameObject.transform.localPosition = new Vector3(-5, -5, 0);
                 break;
 
 
