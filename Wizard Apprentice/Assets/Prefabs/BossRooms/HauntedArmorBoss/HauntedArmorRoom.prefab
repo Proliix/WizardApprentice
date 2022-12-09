@@ -1229,6 +1229,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomSize: {x: 33, y: 35}
+  pieceSpinDuration: 5
+  pieceSpinChargeTime: 1
+  pieceSpinTimeBetweenProjectiles: 0.05
+  pieceSpinRotationsPerSecond: 6
   pieceObject: {fileID: 6299638387223732474, guid: 7283ac9d99803b24f9fcb18c87e353ce, type: 3}
   timeToSplit: 1
   amountOfPieces: 6

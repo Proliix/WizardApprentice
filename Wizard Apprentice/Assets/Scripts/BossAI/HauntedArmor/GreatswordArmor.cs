@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GreatswordArmor : MonoBehaviour
 {
-
     GameObject playerObject;
     BulletHandler bulletHandler;
     [SerializeField] Vector2 roomSize;
@@ -58,7 +56,6 @@ public class GreatswordArmor : MonoBehaviour
         splitting
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +86,7 @@ public class GreatswordArmor : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.T) && piecesAreReady)
         {
-            StartCoroutine(SplitPieces());
+            StartCoroutine(SpinPieces());
         }
         //currentDestination = playerObject.transform.position;
         //transform.position += ((Vector3)currentDestination - transform.position).normalized * movementSpeed * Time.deltaTime;
@@ -106,9 +103,17 @@ public class GreatswordArmor : MonoBehaviour
             timeSpinning += Time.deltaTime;
             for (int i = 0; i < allPieces.Count; i++)
             {
-
+                int counter = 0;
+                while (Mathf.FloorToInt((timeSpinning + (counter * pieceSpinTimeBetweenProjectiles)) / pieceSpinTimeBetweenProjectiles) < Mathf.FloorToInt((timeSpinning + Time.deltaTime) / pieceSpinTimeBetweenProjectiles))
+                {
+                    Vector3 dir = new Vector3(((Mathf.Cos((timeSpinning + (counter * pieceSpinTimeBetweenProjectiles)) * pieceSpinRotationsPerSecond) * 360) * Mathf.Deg2Rad), ((Mathf.Sin((timeSpinning + (counter * pieceSpinTimeBetweenProjectiles)) * pieceSpinRotationsPerSecond) * 360) * Mathf.Deg2Rad), 0);
+                    counter++;
+                    bulletHandler.GetBullet(allPieces[i].transform.position, dir, false, 10, 0.5f, 8f);
+                    Debug.Log("helo");
+                }
             }
         }
+        piecesAreReady = true;
     }
 
     IEnumerator SplitPieces()
