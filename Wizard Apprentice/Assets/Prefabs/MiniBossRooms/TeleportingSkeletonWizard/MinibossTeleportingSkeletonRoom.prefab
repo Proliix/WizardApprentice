@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5773732489135663311}
   m_Layer: 0
-  m_Name: Miniboss1Room
+  m_Name: MinibossTeleportingSkeletonRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
