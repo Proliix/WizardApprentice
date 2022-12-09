@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MinibossTeleportingSkeletonRoom
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 5773732489135663310, guid: 03b93d23143aada48947598bd02bd8ef, type: 3}
-  roomSize: {x: 25, y: 25}
+  roomSize: {x: 20, y: 20}
   roomDifficulty: 0
   generateRandomRoom: 1
+  roomAlreadyHasDoor: 0

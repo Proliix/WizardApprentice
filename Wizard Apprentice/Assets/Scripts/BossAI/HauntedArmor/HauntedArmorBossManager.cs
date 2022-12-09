@@ -27,6 +27,7 @@ public class HauntedArmorBossManager : MonoBehaviour
     void Start()
     {
         polearmArmorHealth.deathEvent += PolearmDeath;
+        crossbowArmorHealth.deathEvent += CrossbowDeath;
     }
 
     // Update is called once per frame
@@ -54,6 +55,16 @@ public class HauntedArmorBossManager : MonoBehaviour
             polearmObject.GetComponent<PolearmArmor>().enabled = false;
             StartCoroutine(OpenGate(firstGateObject));
             Invoke("SpawnCrossbow", 6f);
+        }
+    }
+
+    public void CrossbowDeath(GameObject crossbowObject)
+    {
+        if (currentPhase == 1)
+        {
+            currentPhase = 2;
+            crossbowObject.GetComponent<CrossbowArmor>().enabled = false;
+            StartCoroutine(OpenGate(secondGateObject));
         }
     }
 
