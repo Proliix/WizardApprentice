@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class HauntedArmorBossManager : MonoBehaviour
 {
+    [SerializeField] Vector2 roomSize;
     [SerializeField] GameObject helmetObject;
     [SerializeField] GameObject firstGateObject;
     [SerializeField] GameObject secondGateObject;

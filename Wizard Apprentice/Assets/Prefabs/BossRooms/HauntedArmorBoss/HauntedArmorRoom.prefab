@@ -160,7 +160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5642711017408561500
 Transform:
   m_ObjectHideFlags: 0
@@ -344,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8074789701067884602
 Transform:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5330919978814627371
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,6 +1228,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee07e03d246d8e44b35131540ceb6e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomSize: {x: 33, y: 35}
+  pieceSpinDuration: 5
+  pieceSpinChargeTime: 1
+  pieceSpinTimeBetweenProjectiles: 0.05
+  pieceSpinRotationsPerSecond: 6
+  pieceObject: {fileID: 6299638387223732474, guid: 7283ac9d99803b24f9fcb18c87e353ce, type: 3}
+  timeToSplit: 1
+  amountOfPieces: 6
+  distanceToBeWithin: 1
+  pieceMoveSpeed: 8
   spinToWinDamageObject: {fileID: 8451569352896389592, guid: ae8cd48c9027cb0448c42826a55e8903, type: 3}
   spinToWinDuration: 5
   spinToWinChargeTime: 0.8
@@ -1642,6 +1652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e98e879812a0d940bef2e8aa15ea01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomSize: {x: 0, y: 0}
   helmetObject: {fileID: 4246525664385911162}
   firstGateObject: {fileID: 2764878129022785059}
   secondGateObject: {fileID: 2343549516171952912}

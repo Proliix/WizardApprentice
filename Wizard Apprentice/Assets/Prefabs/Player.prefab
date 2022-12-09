@@ -371,7 +371,7 @@ MonoBehaviour:
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
-  playerScreenShakeAmount: 1
+  playerScreenShakeAmount: 1.25
 --- !u!114 &571476115768797418
 MonoBehaviour:
   m_ObjectHideFlags: 0
