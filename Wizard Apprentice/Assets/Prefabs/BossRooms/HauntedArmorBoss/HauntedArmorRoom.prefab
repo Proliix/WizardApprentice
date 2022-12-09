@@ -234,8 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: 91ecb82a79bdc4e4baf18f14545fa310, type: 3}
-  maxHP: 2000
-  hp: 2000
+  maxHP: 3500
+  hp: 3500
   hitCooldown: 0
   removeSelf: 1
   hasHitCooldown: 0
@@ -465,8 +465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: 91ecb82a79bdc4e4baf18f14545fa310, type: 3}
-  maxHP: 2000
-  hp: 2000
+  maxHP: 3500
+  hp: 3500
   hitCooldown: 0
   removeSelf: 1
   hasHitCooldown: 0
