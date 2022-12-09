@@ -16,3 +16,4 @@ MonoBehaviour:
   roomSize: {x: 20, y: 20}
   roomDifficulty: 0
   generateRandomRoom: 1
+  roomAlreadyHasDoor: 1
