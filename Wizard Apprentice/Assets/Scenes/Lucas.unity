@@ -1782,10 +1782,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Treasure Room
       objectReference: {fileID: 0}
-    - target: {fileID: 6842706563228681577, guid: 08fa89a63fead1f4580dbf09011061ff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 08fa89a63fead1f4580dbf09011061ff, type: 3}
