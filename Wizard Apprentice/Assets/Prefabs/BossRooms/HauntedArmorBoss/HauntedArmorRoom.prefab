@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6642542618867340225}
   - component: {fileID: 8727802340267729848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftWallCollider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 807967397217963164}
   - component: {fileID: 8129895712541418140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopWallCollider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1318,7 +1318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9106343654508729701}
   - component: {fileID: 4352543983105642977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall1Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1483,7 +1483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8086620948834039192}
   - component: {fileID: 8468876290632529635}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightWallCollider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1541,7 +1541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5171924132621929808}
   - component: {fileID: 8730631095262814234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall1Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1672,7 +1672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9115408374283440469}
   - component: {fileID: 3917069086594641710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BottomWallCollider
   m_TagString: Wall
   m_Icon: {fileID: 0}

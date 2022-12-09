@@ -116,6 +116,10 @@ public class GreatswordArmor : MonoBehaviour
         piecesAreReady = true;
     }
 
+    //IEnumerator PullInPieces()
+    //{
+        
+    //}
     IEnumerator SplitPieces()
     {
         state = CurrentState.splitting;

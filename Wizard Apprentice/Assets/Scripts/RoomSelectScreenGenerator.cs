@@ -39,7 +39,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
     public enum RoomTypes
     {
-        BossRoom, NormalRoom, MinibossRoom, TreasureRoom, MysteryRoom
+        BossRoom, NormalRoom, MinibossRoom, TreasureRoom, MysteryRoom, TutorialRoom
     }
 
     RoomSelectRoom playersCurrentRoom;
@@ -283,7 +283,14 @@ public class RoomSelectScreenGenerator : MonoBehaviour
             for(int j = 0; j < roomsByLayer[i].Count; j++)
             {
                 GameObject roomIcon;
-                if (roomsByLayer[i][j].outgoingRooms.Count > 0)
+                if (roomsByLayer[i][j].incommingRooms.Count == 0)
+                {
+                    int roomType = 5;
+                    roomIcon = Instantiate(roomIconPrefabs[roomType - 1], roomParent);
+                    roomsByLayer[i][j].roomIconObject = roomIcon;
+                    roomsByLayer[i][j].roomType = roomType;
+                }
+                else if (roomsByLayer[i][j].outgoingRooms.Count > 0)
                 {
                     int roomType = ChooseRoomTypeFromPool();
                     roomIcon = Instantiate(roomIconPrefabs[roomType-1], roomParent);

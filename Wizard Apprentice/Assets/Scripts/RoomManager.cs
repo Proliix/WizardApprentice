@@ -25,6 +25,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] CardHandler cardHandler;
     [SerializeField] RewardsHandler rewardsHandler;
 
+    [SerializeField] Room tutorialRoom;
     [SerializeField] List<Room> possibleBossRoomsByFloor;
     [SerializeField] List<Room> possibleNormalRooms;
     public int normalRoomsPoolAmount;
@@ -45,7 +46,7 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
         enemyObjects = new List<GameObject>();
-        LoadNewRoom(1);
+        LoadNewRoom(5);
     }
 
     // Update is called once per frame
@@ -89,7 +90,7 @@ public class RoomManager : MonoBehaviour
 
     public void PlayerWalkThroughDoor()
     {
-        if (enemyObjects.Count <= 0 || canWalkThroughAnyDoor)
+        if (enemyObjects.Count <= 0 || canWalkThroughAnyDoor || currentRoomType == 5)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
             RemoveAllEnemies();
@@ -198,6 +199,10 @@ public class RoomManager : MonoBehaviour
             case 4:
                 currentRoomType = 4;
                 LoadPremadeRoom(possibleMysteryRooms[Random.Range(0, possibleMysteryRooms.Count)]);
+                break;
+            case 5:
+                currentRoomType = 5;
+                LoadPremadeRoom(tutorialRoom);
                 break;
             default:
                 currentRoomType = 1;

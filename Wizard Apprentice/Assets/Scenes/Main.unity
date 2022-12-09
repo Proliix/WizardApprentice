@@ -4499,6 +4499,7 @@ MonoBehaviour:
   - {fileID: 8852811572161902115, guid: be20b816cb0d2e84da0d026e37530fef, type: 3}
   - {fileID: 8852811572161902115, guid: 892740022c6e7094dbdb49cc6e32b79c, type: 3}
   - {fileID: 8852811572161902115, guid: 96b7c023086d4e84789fbb7cee236baa, type: 3}
+  - {fileID: 8852811572161902115, guid: 4ba6eff7b2bb66f4d8a433c1803dfb1a, type: 3}
   linePrefab: {fileID: 8652366356293339359, guid: 8b1ccb8c0598d8f468d4790c194b07a5, type: 3}
   roomSelectParent: {fileID: 119382419}
   lineParent: {fileID: 383864940}
@@ -4590,6 +4591,7 @@ MonoBehaviour:
   bulletHandler: {fileID: 1786813660}
   cardHandler: {fileID: 1786813655}
   rewardsHandler: {fileID: 1786813653}
+  tutorialRoom: {fileID: 11400000, guid: f877f8f100769634e95747caafd4f663, type: 2}
   possibleBossRoomsByFloor:
   - {fileID: 11400000, guid: cdcfaa60af5e01f418d54753ea3514b0, type: 2}
   - {fileID: 11400000, guid: b5116df22c300574aaa8449d90a88521, type: 2}
