@@ -34,6 +34,7 @@ public class ZoneCard : MonoBehaviour, ICard
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
         zoneObject = GameObject.Find("ZoneCardActiveZone");
         enemyManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyManager>();
     }
@@ -44,7 +45,7 @@ public class ZoneCard : MonoBehaviour, ICard
         enemies = enemyManager.GetEnemiesWithinRange(player.transform.position, attackRange);
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponent<Health>()?.RemoveHealth(damage);
+            enemies[i].GetComponent<Health>()?.RemoveHealth(damage + stats.damage);
             Debug.Log(enemies[i].name);
         }
     }

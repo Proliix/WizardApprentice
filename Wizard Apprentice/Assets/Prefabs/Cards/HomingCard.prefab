@@ -226,7 +226,7 @@ MonoBehaviour:
   Bulletimage: {fileID: 21300000, guid: 15e47b5a0c99b5649bfa1a842619cb76, type: 3}
   attackSound: {fileID: 8300000, guid: 89dfa83f8451dcb4b8ede002c08c5b96, type: 3}
   audioVolume: 1
-  damage: 5
+  damage: 10
   size: 0.5
   speed: 8
   effectCooldown: 0.5

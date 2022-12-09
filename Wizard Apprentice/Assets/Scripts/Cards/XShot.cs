@@ -41,7 +41,7 @@ public class XShot : MonoBehaviour, ICard
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(attackSound);
-        bulletHandler.GetCircleShot(4, player, true, 45, damage, size, speed);
+        bulletHandler.GetCircleShot(4, player, true, 45, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
 
         if (crossShot != null)
         {

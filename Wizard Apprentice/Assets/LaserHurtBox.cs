@@ -8,10 +8,14 @@ public class LaserHurtBox : MonoBehaviour
     [SerializeField] float attackDelay;
     [SerializeField] float timer;
 
+    PlayerStats stats;
+
     List<Health> enemyhealth;
 
     private void Start()
     {
+
+        stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         enemyhealth = new List<Health>();
     }
 
@@ -22,7 +26,7 @@ public class LaserHurtBox : MonoBehaviour
 
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                collision.gameObject.GetComponent<Health>().RemoveHealth(damage);
+                collision.gameObject.GetComponent<Health>().RemoveHealth(damage + stats.damage);
             }
         }
 
