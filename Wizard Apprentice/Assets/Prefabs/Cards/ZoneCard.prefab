@@ -227,7 +227,7 @@ MonoBehaviour:
   audioVolume: 1
   playerTarget: {fileID: 0}
   zoneObject: {fileID: 0}
-  attackRange: 7
+  attackRange: 4
   timer: 0
   damage: 1
   attackDelay: 0.1
