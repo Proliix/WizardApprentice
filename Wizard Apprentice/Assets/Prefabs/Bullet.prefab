@@ -107,7 +107,7 @@ MonoBehaviour:
   PlayerColor: {r: 0.23529413, g: 0.38431376, b: 1, a: 1}
   EnemyColor: {r: 0.9811321, g: 0.2906372, b: 0.2906372, a: 1}
   bulletSpeed: 8
-  bulletLifetime: 5
+  bulletLifetime: 20
 --- !u!50 &-1594475458436723860
 Rigidbody2D:
   serializedVersion: 4
