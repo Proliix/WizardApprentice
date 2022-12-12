@@ -39,11 +39,6 @@ public class RewardsHandler : MonoBehaviour
         statScreenParent.SetActive(false);
         cardScreenParent.SetActive(false);
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
-
-        for (int i = 0; i < descriptionObj.Length; i++)
-        {
-            descriptionObj[i].SetActive(false);
-        }
     }
 
     public bool CanAddCards()
@@ -69,10 +64,6 @@ public class RewardsHandler : MonoBehaviour
             rewardScreen.SetActive(true);
             cardScreenParent.SetActive(true);
             statsAfterCard = withStats;
-            for (int i = 0; i < descriptionObj.Length; i++)
-            {
-                descriptionObj[i].SetActive(false);
-            }
             int first = -100;
             int seccond = -100;
             for (int i = 0; i < activeCards.Length; i++)
@@ -115,11 +106,6 @@ public class RewardsHandler : MonoBehaviour
             Debug.Log("Skipped adding cards went to stats");
             GetRewardScreenStats();
         }
-    }
-
-    public void ToggleDescriptionObj(int index)
-    {
-        descriptionObj[index].SetActive(!descriptionObj[index].activeSelf);
     }
 
 
