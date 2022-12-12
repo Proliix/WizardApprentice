@@ -18,6 +18,7 @@ public class HealCard : MonoBehaviour, ICard
     Health health;
     BulletHandler bulletHandler;
     Transform playerAimObj;
+    PlayerStats stats;
 
     float timer = 0;
 
@@ -26,6 +27,7 @@ public class HealCard : MonoBehaviour, ICard
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         playerAimObj = GameObject.FindWithTag("Player").GetComponent<PlayerAiming>().bulletSpawn.transform;
+        stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
     }
 
     public void Effect()
@@ -48,7 +50,7 @@ public class HealCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if (timer >= shootCooldown)
+        if (timer >= stats.GetAttackSpeed(shootCooldown))
         {
             timer = 0;
             bulletHandler.GetSpecialBullet(playerAimObj, player, bulletSprite, SpecialBulletState.Onhit, this, true, Vector3.zero, 0, 10, false, healAmmount);

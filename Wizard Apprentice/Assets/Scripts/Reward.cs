@@ -18,8 +18,5 @@ public class Reward : ScriptableObject
     public float projectileSize = 0f;
     public float projectileSpeed = 0f;
     public int projectileAmount = 0;
-    [Header("Dashes")]
-    public int dashCharges = 0;
-    public float dashCooldown = 0f;
 
 }

@@ -23,18 +23,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float activeSpeed;
     public float dashingTime = 0.2f;
     [SerializeField] bool canDash = true;
-    [SerializeField] int dashes = 1;
     public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
-    int maxDashes = 1;
     PlayerStats stats;
     Vector2 dashMovement = Vector2.right;
 
     void Start()
     {
         //Find our Rigidbody2D 
-        maxDashes = dashes;
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
@@ -46,11 +43,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if (maxDashes < stats.dashCharges + 1)
-        {
-            maxDashes++;
-            dashes++;
-        }
+
 
         if (!isDashing)
         {
@@ -74,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
             dashIndicators[i]?.SetActive(canDash);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             SoundManager.Instance.PlayAudio(dashSound);
             StartCoroutine(Dash());
@@ -88,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
     {
 
         //dashIndicator.ChangeDashIndicator();
-        dashes--;
         canDash = false;
         isDashing = true;
 
@@ -111,10 +103,9 @@ public class PlayerMovement : MonoBehaviour
         activeSpeed = moveSpeed;
         animator.SetBool("IsDashing", isDashing);
 
-        yield return new WaitForSeconds(dashingCooldown - stats.dashCooldown);
+        yield return new WaitForSeconds(dashingCooldown);
         //dashIndicator.ChangeDashIndicator();
         canDash = true;
-        dashes++;
     }
 
     private void MovePlayer()

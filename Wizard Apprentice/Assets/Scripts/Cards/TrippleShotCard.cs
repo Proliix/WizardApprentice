@@ -34,9 +34,9 @@ public class TrippleShotCard : MonoBehaviour, ICard
     {
         SoundManager.Instance.PlayAudio(attackSound, audioVolume);
 
-        bulletHandler.GetBullet(spawnpoint, player, true, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
-        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation), damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
-        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation), damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetBullet(spawnpoint, player, true, false, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, (Vector3.right * shootPosDeviation), stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetBullet(spawnpoint, player, true, true, -(Vector3.right * shootPosDeviation), stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()
@@ -53,7 +53,7 @@ public class TrippleShotCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if (timer >= shootCooldown)
+        if (timer >= stats.GetAttackSpeed(shootCooldown))
         {
             timer = 0;
             Effect();

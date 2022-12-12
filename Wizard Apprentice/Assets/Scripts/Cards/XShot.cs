@@ -41,7 +41,7 @@ public class XShot : MonoBehaviour, ICard
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(attackSound);
-        bulletHandler.GetCircleShot(4, player, true, 45, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetCircleShot(4, player, true, 45, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed);
 
         if (crossShot != null)
         {
@@ -83,7 +83,7 @@ public class XShot : MonoBehaviour, ICard
         }
 
         timer += Time.deltaTime;
-        if (timer >= attackDelay)
+        if (timer >= stats.GetAttackSpeed(attackDelay))
         {
             Effect();
             timer -= attackDelay;

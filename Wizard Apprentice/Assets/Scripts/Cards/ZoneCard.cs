@@ -45,7 +45,7 @@ public class ZoneCard : MonoBehaviour, ICard
         enemies = enemyManager.GetEnemiesWithinRange(player.transform.position, attackRange);
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponent<Health>()?.RemoveHealth(damage + stats.damage);
+            enemies[i].GetComponent<Health>()?.RemoveHealth(stats.GetDamage(damage));
             Debug.Log(enemies[i].name);
         }
     }
@@ -73,10 +73,10 @@ public class ZoneCard : MonoBehaviour, ICard
     public void UpdateCard()
     {
         timer += Time.deltaTime;
-        if (timer >= attackDelay)
+        if (timer >= stats.GetAttackSpeed(attackDelay))
         {
             Effect();
-            timer -= attackDelay;
+            timer -= 0;
         }
 
         if (hasActivated == false)
