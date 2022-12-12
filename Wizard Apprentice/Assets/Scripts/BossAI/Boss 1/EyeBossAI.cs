@@ -5,13 +5,17 @@ using UnityEngine;
 public class EyeBossAI : MonoBehaviour
 {
      
-     BulletHandler bulletHandler;
+    BulletHandler bulletHandler;
     Health health;
     RoomManager roomManager;
+    Rigidbody2D rb2d;
+
+    Vector2 movement; 
 
     [SerializeField] float timer;
     [SerializeField] GameObject target;
 
+    [SerializeField] float moveSpeed = 1;
 
     [Header("Boss Basic Attack Variables")]
     [SerializeField] float basicsUntilSpecial = 10;
@@ -49,8 +53,10 @@ public class EyeBossAI : MonoBehaviour
     {
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();
-        health = GetComponent<Health>();
         target = GameObject.FindGameObjectWithTag("Player");
+        health = GetComponent<Health>();
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+
         timer = -timeUntilBossStart;
 
         isAlive = true;
@@ -61,6 +67,15 @@ public class EyeBossAI : MonoBehaviour
     {
         if (isAlive == true)
         {
+
+
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                MoveEnemy();
+            }
+            
+
+            
 
         HP = health.GetHP();
         maxHP = health.GetMaxHP();
@@ -109,6 +124,12 @@ public class EyeBossAI : MonoBehaviour
         }
     }
 
+    void MoveEnemy()
+    {
+        movement = (target.transform.position - gameObject.transform.position).normalized;
+        rb2d.velocity = movement * moveSpeed;
+    }
+
    void BossAttackBasic()
     {
         
@@ -136,6 +157,9 @@ public class EyeBossAI : MonoBehaviour
 
     private void BossDead()
     {
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
+
         isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();

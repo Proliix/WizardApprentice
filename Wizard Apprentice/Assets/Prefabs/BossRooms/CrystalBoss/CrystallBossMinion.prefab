@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2664954099150742145}
   - component: {fileID: -520747424961699589}
   m_Layer: 6
-  m_Name: Boss1SpawningEnemy
+  m_Name: CrystallBossMinion
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2664954099150742148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2664954100238016235}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0746a45eacdb46c4e914d59af99b21bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5736a85aa3b4d22459fb452013bdcde7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -118,7 +118,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6622076
+  m_Radius: 0.604926
 --- !u!114 &-520747424961699589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +141,8 @@ MonoBehaviour:
   healthRemoveSpeed: 0.005
   usesHealthBar: 0
   healthbar: {fileID: 0}
+  removeHealthbar: 0
+  healthbarParent: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5

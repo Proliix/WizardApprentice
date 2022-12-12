@@ -56,6 +56,9 @@ public class CrystallBossAI : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] RoomManager roomManager;
 
+    public Vector3[] spawnPoints;
+
+
     void Start()
     {
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
@@ -63,10 +66,17 @@ public class CrystallBossAI : MonoBehaviour
         roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
+        //Vectors used as spawnpoints for ads
+        spawnPoints = new Vector3[4];
+        spawnPoints[0] = new Vector3(0, 0, 0);
+        spawnPoints[1] = new Vector3(0, 20, 0);
+        spawnPoints[2] = new Vector3(20, 0, 0);
+        spawnPoints[3] = new Vector3(20, 20, 0);
 
 
         phase1Active = true;
         isAlive = true;
+
         attackTimer -= patternStartUpDelay;
         randomAttackTimer -= randomStartUpDelay;
 
@@ -183,7 +193,7 @@ public class CrystallBossAI : MonoBehaviour
 
     void Phase2()
     {
-       // spawnAmount = 3;
+       spawnAmount = 3;
         rotationSpeed = 65;
         phase1Active = false;
         phase2Active = true;
@@ -194,7 +204,7 @@ public class CrystallBossAI : MonoBehaviour
 
     void Phase3()
     {
-        // spawnAmount = 4;
+        spawnAmount = 4;
         rotationSpeed = 90;
         StartCoroutine(AttackPattern());
         phase2Active = false;
@@ -226,17 +236,15 @@ public class CrystallBossAI : MonoBehaviour
         yield return null;
     }
 
-
     IEnumerator SpawnEnemy()
     {
         for (int i = 0; i < spawnAmount; i++)
         {
-            GameObject enemyObject = Instantiate(spawningEnemy);
+            GameObject enemyObject = Instantiate(spawningEnemy, spawnPoints[Random.Range(0, 4)], Quaternion.identity);
             bulletHandler.gameObject.GetComponent<RoomManager>().AddEnemy(enemyObject);
             yield return new WaitForSeconds(Random.Range(0.25f, 0.5f));
         }
         yield return new WaitForSeconds(2f);
-      
 
         yield return null;
 
@@ -244,7 +252,8 @@ public class CrystallBossAI : MonoBehaviour
 
     private void BossDead()
     {
-        Debug.Log("HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE");
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
+
         isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();

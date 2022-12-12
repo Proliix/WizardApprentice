@@ -618,6 +618,7 @@ GameObject:
   - component: {fileID: 4629461179871687210}
   - component: {fileID: 4629461179871687211}
   - component: {fileID: 2413505705107542157}
+  - component: {fileID: 1583371015}
   m_Layer: 6
   m_Name: EyeBoss
   m_TagString: Enemy
@@ -706,6 +707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   target: {fileID: 0}
+  moveSpeed: 0.25
   basicsUntilSpecial: 10
   currentBasics: 0
   attackSpeedBasic: 0.5
@@ -741,8 +743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: 91ecb82a79bdc4e4baf18f14545fa310, type: 3}
-  maxHP: 200
-  hp: 200
+  maxHP: 2500
+  hp: 2500
   hitCooldown: 1
   removeSelf: 0
   hasHitCooldown: 0
@@ -772,6 +774,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5579216
+--- !u!50 &1583371015
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629461179871687206}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4629461180731313550
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +832,7 @@ Transform:
   - {fileID: 400451401649550738}
   - {fileID: 889790491}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6164930781447964727
 GameObject:
