@@ -227,6 +227,8 @@ public class Health : MonoBehaviour
 
             if (removeSelf)
                 Destroy(gameObject);
+            else
+                canBeHit = false;
 
             if (usesHealthBar == true)
             {
