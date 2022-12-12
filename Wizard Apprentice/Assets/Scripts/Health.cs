@@ -22,6 +22,10 @@ public class Health : MonoBehaviour
     [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] bool usesHealthBar = false;
     [SerializeField] Image healthbar;
+    [Tooltip("Removes healthbar when health is <= 0")]
+    [SerializeField] bool removeHealthbar = false;
+    [Header("only needed if remove healthbar is active")]
+    [SerializeField] GameObject healthbarParent;
     [Header("Juice")]
     [SerializeField] bool hasDeathAnimation = false;
     [SerializeField] float hitEffectTime = 0.5f;
@@ -196,6 +200,9 @@ public class Health : MonoBehaviour
         }
         else
         {
+            if (removeHealthbar)
+                healthbarParent?.SetActive(false);
+
             if (removeSelf)
                 Destroy(gameObject);
 
