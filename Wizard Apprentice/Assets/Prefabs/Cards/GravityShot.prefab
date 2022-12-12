@@ -223,7 +223,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
   title: Black hole Spell
   particleEffect: {fileID: 2845704094484306700, guid: 22623d731e2c9d84baec34a5ec7996a4, type: 3}
-  description: Drags enemies toward the black hole
+  description: Shoots a black hole towards the cursor, dragging enemies in and dealing
+    damage
   damage: 3
   Bulletimage: {fileID: 21300000, guid: 64045465c3ac3f94fbbc2ba78f5f0a20, type: 3}
   attackSound: {fileID: 8300000, guid: 284b949722b4d8342ba13b4c94ce8bb9, type: 3}

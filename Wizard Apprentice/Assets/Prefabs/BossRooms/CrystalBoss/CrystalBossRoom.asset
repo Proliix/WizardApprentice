@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
-  m_Name: Boss1Room
+  m_Name: CrystalBossRoom
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 4629461180731313550, guid: 90707af29c007a74ba85bef13e279115, type: 3}
-  roomSize: {x: 20, y: 20}
+  roomPrefab: {fileID: 2180549999716263740, guid: 687820846060c5041ae665c0659d75d1, type: 3}
+  roomSize: {x: 20, y: 21}
   roomDifficulty: 0
-  generateRandomRoom: 0
-  roomAlreadyHasDoor: 1
+  generateRandomRoom: 1

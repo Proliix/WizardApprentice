@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss2AI2 : MonoBehaviour
+public class CrystallBossAI : MonoBehaviour
 {
 
     Boss2PiecesAI[] boss2PiecesAI;
@@ -15,6 +15,7 @@ public class Boss2AI2 : MonoBehaviour
     [Header("HP")]
     [SerializeField] private float HP;
     [SerializeField] private float maxHP;
+    [SerializeField] bool isAlive = true;
 
     [Header("Attack Variables")]
     [SerializeField] float attackDelay = 0.04f;
@@ -52,15 +53,20 @@ public class Boss2AI2 : MonoBehaviour
     [Header("")]
     [SerializeField] GameObject player;
     [SerializeField] GameObject[] targets;
-    [SerializeField] SpriteRenderer spriteRenderer; 
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] RoomManager roomManager;
 
     void Start()
     {
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         health = gameObject.GetComponent<Health>();
+        roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        phase1Active = true;
 
+
+
+        phase1Active = true;
+        isAlive = true;
         attackTimer -= patternStartUpDelay;
         randomAttackTimer -= randomStartUpDelay;
 
@@ -79,7 +85,10 @@ public class Boss2AI2 : MonoBehaviour
 
     void Update()
     {
+        if( isAlive == true)
+        {
 
+        
         HP = health.GetHP();
         maxHP = health.GetMaxHP();
 
@@ -139,6 +148,14 @@ public class Boss2AI2 : MonoBehaviour
             }
             patternTimer -= patternDelay;
         }
+
+        if (HP <= 0 && isAlive == true)
+        {
+            BossDead();
+        }
+        
+
+        }
     }
 
     void BasicAttack()
@@ -166,7 +183,7 @@ public class Boss2AI2 : MonoBehaviour
 
     void Phase2()
     {
-        spawnAmount = 3;
+       // spawnAmount = 3;
         rotationSpeed = 65;
         phase1Active = false;
         phase2Active = true;
@@ -177,7 +194,7 @@ public class Boss2AI2 : MonoBehaviour
 
     void Phase3()
     {
-        spawnAmount = 4;
+        // spawnAmount = 4;
         rotationSpeed = 90;
         StartCoroutine(AttackPattern());
         phase2Active = false;
@@ -225,6 +242,13 @@ public class Boss2AI2 : MonoBehaviour
 
     }
 
+    private void BossDead()
+    {
+        Debug.Log("HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE");
+        isAlive = false;
+        bulletHandler.ResetAll();
+        roomManager.RemoveAllEnemies();
+    }
 
 
 }

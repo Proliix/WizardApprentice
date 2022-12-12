@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss1AI : MonoBehaviour
+public class EyeBossAI : MonoBehaviour
 {
      
      BulletHandler bulletHandler;
     Health health;
+    RoomManager roomManager;
 
     [SerializeField] float timer;
     [SerializeField] GameObject target;
@@ -37,6 +38,7 @@ public class Boss1AI : MonoBehaviour
     [Header("HP")]
     [SerializeField] private float HP;
     [SerializeField] private float maxHP;
+    [SerializeField] bool isAlive = true;
 
     [Header("Phases")]
     [SerializeField] bool phase1;
@@ -46,18 +48,29 @@ public class Boss1AI : MonoBehaviour
     void Start()
     {
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
+        roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();
         health = GetComponent<Health>();
         target = GameObject.FindGameObjectWithTag("Player");
         timer = -timeUntilBossStart;
-        
+
+        isAlive = true;
         phase1 = true;
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
+        if (isAlive == true)
+        {
+
         HP = health.GetHP();
         maxHP = health.GetMaxHP();
+        
+            if (HP <= 0)
+            {
+                BossDead();
+            }
+
+        timer += Time.deltaTime;
 
         if (currentBasics >= basicsUntilSpecial && timer >= attackSpeedBasic)
         {
@@ -92,6 +105,8 @@ public class Boss1AI : MonoBehaviour
             basicMaxAmount = 12;
         }
 
+
+        }
     }
 
    void BossAttackBasic()
@@ -117,6 +132,14 @@ public class Boss1AI : MonoBehaviour
         bulletHandler.GetBullet(gameObject.transform.position, target.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
         Debug.Log("end of gigaAttack");
         yield return null;
+    }
+
+    private void BossDead()
+    {
+        isAlive = false;
+        bulletHandler.ResetAll();
+        roomManager.RemoveAllEnemies();
+
     }
 
 

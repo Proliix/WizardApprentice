@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dodge roll using:\n(SPACEBAR\n(You don't take damage \nduring your dodge
+  m_text: "Dodge roll using:\n(SPACEBAR)\n(You don't take damage \nduring your dodge
     roll,\nuse it to avoid enemy attacks)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}

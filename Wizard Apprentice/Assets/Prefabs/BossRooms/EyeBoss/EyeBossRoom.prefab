@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 4629461179871687211}
   - component: {fileID: 2413505705107542157}
   m_Layer: 6
-  m_Name: Boss 1
+  m_Name: EyeBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1041,6 +1041,7 @@ MonoBehaviour:
   timeUntilBossStart: 3
   HP: 0
   maxHP: 0
+  isAlive: 1
   phase1: 0
   phase2: 0
   phase3: 0
@@ -1058,10 +1059,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: 91ecb82a79bdc4e4baf18f14545fa310, type: 3}
-  maxHP: 2500
-  hp: 2500
+  maxHP: 200
+  hp: 200
   hitCooldown: 1
-  removeSelf: 1
+  removeSelf: 0
   hasHitCooldown: 0
   healthRemoveSpeed: 0.005
   usesHealthBar: 1
@@ -1097,7 +1098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4629461180731313549}
   m_Layer: 0
-  m_Name: Boss1Room
+  m_Name: EyeBossRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

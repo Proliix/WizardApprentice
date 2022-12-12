@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 2180549999716263739}
   - component: {fileID: 2180549999716263738}
   m_Layer: 0
-  m_Name: Boss2Room (2)
+  m_Name: CrystalBossRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 2180549999853740858}
   - component: {fileID: 2180549999853740859}
   m_Layer: 6
-  m_Name: Boss2
+  m_Name: Crystal boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,6 +546,7 @@ MonoBehaviour:
   randomStartUpDelay: 2.5
   HP: 0
   maxHP: 0
+  isAlive: 1
   attackDelay: 0.125
   patternDelay: 1
   pausetime: 0.5
@@ -559,8 +560,8 @@ MonoBehaviour:
   randomAttackTimer: 0
   spawningEnemy: {fileID: 2664954099150742148, guid: 53c223551cf9c57448027fd5ceb9567e, type: 3}
   spawnEnemyTimer: -3
-  spawnEnemyDelay: 4
-  spawnAmount: 0
+  spawnEnemyDelay: 5
+  spawnAmount: 2
   phase1Active: 0
   phase2Active: 0
   phase3Active: 0
@@ -573,6 +574,7 @@ MonoBehaviour:
   - {fileID: 2180549997973920240}
   - {fileID: 2180549998418730266}
   spriteRenderer: {fileID: 2180549999853740858}
+  roomManager: {fileID: 0}
 --- !u!114 &2180549999853740857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,7 +592,7 @@ MonoBehaviour:
   maxHP: 1000
   hp: 0
   hitCooldown: 1
-  removeSelf: 1
+  removeSelf: 0
   hasHitCooldown: 0
   healthRemoveSpeed: 0.005
   usesHealthBar: 1

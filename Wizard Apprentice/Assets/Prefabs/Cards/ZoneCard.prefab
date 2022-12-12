@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 980d84096939029428a52e38b87352e7, type: 3}
   title: Damage zone
-  description: Will damage enemies in a zone around the player
+  description: Will constantly damage enemies in a big circle zone around the player
   attackSound: {fileID: 0}
   audioVolume: 1
   playerTarget: {fileID: 0}
