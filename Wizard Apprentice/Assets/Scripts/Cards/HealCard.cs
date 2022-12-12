@@ -12,12 +12,20 @@ public class HealCard : MonoBehaviour, ICard
     [SerializeField] int healAmmount = 1;
     [SerializeField] AudioClip healSound;
     [SerializeField] float audioVolume = 0.25f;
+    [SerializeField] float shootCooldown = 0.25f;
+    [SerializeField] Sprite bulletSprite;
     bool playerIsHealed = false;
     Health health;
+    BulletHandler bulletHandler;
+    Transform playerAimObj;
+
+    float timer = 0;
 
     private void Start()
     {
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
+        bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+        playerAimObj = GameObject.FindWithTag("Player").GetComponent<PlayerAiming>().bulletSpawn.transform;
     }
 
     public void Effect()
@@ -38,11 +46,20 @@ public class HealCard : MonoBehaviour, ICard
 
     public void UpdateCard()
     {
-        if (playerIsHealed == false)
+        timer += Time.deltaTime;
+
+        if (timer >= shootCooldown)
         {
-            playerIsHealed = true;
-            Effect();
+            timer = 0;
+            bulletHandler.GetSpecialBullet(playerAimObj, player, bulletSprite, SpecialBulletState.Onhit, this, true, Vector3.zero, 0, 10, false, healAmmount);
         }
+
+
+        //if (playerIsHealed == false)
+        //{
+        //    playerIsHealed = true;
+        //    Effect();
+        //}
     }
 
     public string GetTitle()

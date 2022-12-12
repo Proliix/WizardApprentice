@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, HauntedArmorBigArrow, HauntedArmorSplittingArrow }
+public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, Onhit, HauntedArmorBigArrow, HauntedArmorSplittingArrow }
 
 public class SpecialProjectile : MonoBehaviour
 {
@@ -142,7 +142,7 @@ public class SpecialProjectile : MonoBehaviour
         if ((transform.position.x > cursorPos.x - 0.5f && transform.position.x < cursorPos.x + 0.5f &&
             transform.position.y > cursorPos.y - 0.5f && transform.position.y < cursorPos.y + 0.5f) || hasHitWall)
         {
-            stoppedMoving =  true;
+            stoppedMoving = true;
 
             if (rb2d.velocity != Vector2.zero)
                 rb2d.velocity = Vector2.zero;
@@ -182,7 +182,7 @@ public class SpecialProjectile : MonoBehaviour
         relativeDistance = Vector3.zero;
         hasHitWall = false;
         stoppedMoving = false;
-        if(data != null)
+        if (data != null)
         {
             data.Clear();
         }
@@ -242,7 +242,7 @@ public class SpecialProjectile : MonoBehaviour
                 if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
                 {
 
-                    switch(bulletState)
+                    switch (bulletState)
                     {
                         case SpecialBulletState.Timed:
                             effectTimer += effectCooldown;
@@ -254,6 +254,11 @@ public class SpecialProjectile : MonoBehaviour
                             ResetBullet();
                             break;
                         case SpecialBulletState.Homing:
+                            ResetBullet();
+                            break;
+                        case SpecialBulletState.Onhit:
+                            currentIcard.Effect();
+                            collision.GetComponent<Health>().RemoveHealth(damage);
                             ResetBullet();
                             break;
                         case SpecialBulletState.Bouncy:
@@ -381,7 +386,7 @@ public class SpecialProjectile : MonoBehaviour
                     transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * HauntedArmorSplittingArrow_angle - 90) * -1));
 
                     Vector2 newDir1 = new Vector2(Mathf.Cos((HauntedArmorSplittingArrow_angle + 15 * Mathf.Deg2Rad)), Mathf.Sin(HauntedArmorSplittingArrow_angle + 15 * Mathf.Deg2Rad));
-                    bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized,newDir1.normalized,false,10,0.5f,8);
+                    bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized, newDir1.normalized, false, 10, 0.5f, 8);
                     Vector2 newDir2 = new Vector2(Mathf.Cos((HauntedArmorSplittingArrow_angle - 15 * Mathf.Deg2Rad)), Mathf.Sin(HauntedArmorSplittingArrow_angle - 15 * Mathf.Deg2Rad));
                     bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized, newDir2.normalized, false, 10, 0.5f, 8);
                     ResetBullet();
