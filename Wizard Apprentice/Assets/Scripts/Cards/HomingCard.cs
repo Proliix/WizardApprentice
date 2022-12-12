@@ -37,7 +37,7 @@ public class HomingCard : MonoBehaviour, ICard
     {
         SoundManager.Instance.PlayAudio(attackSound, audioVolume);
 
-        bulletHandler.GetSpecialBullet(spawnpoint, gameObject, Bulletimage, SpecialBulletState.Homing, this, true, Vector3.zero,0,lifeTime,false,damage + stats.damage,size + stats.projectileSize,speed + stats.projectileSpeed);
+        bulletHandler.GetSpecialBullet(spawnpoint, gameObject, Bulletimage, SpecialBulletState.Homing, this, true, Vector3.zero,0,lifeTime,false, stats.GetDamage(damage), size + stats.projectileSize,speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()

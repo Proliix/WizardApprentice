@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float health = 0f;
+    public float health = 1f;
     public float movementSpeed = 0f;
-    public float damage = 0f;
-    public float attackSpeed = 0f;
+    public float damage = 1f;
+    public float attackSpeed = 1f;
     [Header("Projectiles")]
     public float projectileSize = 0f;
     public float projectileSpeed = 0f;
     public int projectileAmount = 0;
-    [Header("Dashes")]
-    public int dashCharges = 0;
-    public float dashCooldown = 0f;
 
-    float currentHealth = 0f;
-    float currentMovementSPeed = 0f;
-    float currentDamage = 0F;
-    float currentAttackSpeed = 0f;
-    float currentProjectileSize = 0f;
-    float currentProjectileSpeed = 0f;
-    int currentProjectileAmount = 0;
+    float currentHealth = 1f;
+    float currentMovementSPeed = 1f;
+    float currentDamage = 1F;
+    float currentAttackSpeed = 1f;
+    float currentProjectileSize = 1f;
+    float currentProjectileSpeed = 1f;
+    int currentProjectileAmount = 1;
     void Start()
     {
         UpdateCurrentStats();
@@ -41,13 +38,23 @@ public class PlayerStats : MonoBehaviour
 
     public void ResetToCurrentStats()
     {
-        health = currentHealth ;
-        damage = currentDamage = damage;
+        health = currentHealth;
+        damage = currentDamage;
         movementSpeed = currentMovementSPeed;
         attackSpeed = currentAttackSpeed;
         projectileSize = currentProjectileSize;
         projectileSpeed = currentProjectileSpeed;
         projectileAmount = currentProjectileAmount;
+    }
+
+    public int GetDamage(float damageValue)
+    {
+        return Mathf.FloorToInt(damageValue * damage);
+    }
+
+    public float GetAttackSpeed(float AttackSpeedValue)
+    {
+        return AttackSpeedValue / attackSpeed;
     }
 
 }

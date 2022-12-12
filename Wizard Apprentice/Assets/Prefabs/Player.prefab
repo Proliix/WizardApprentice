@@ -269,7 +269,7 @@ Transform:
   - {fileID: 2972845709103323633}
   - {fileID: 2205426267745955852}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6565921895385548058
 SpriteRenderer:
@@ -335,14 +335,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c89b619e5f4f3344b0c862057d20577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashIndicator: {fileID: 0}
+  dashIndicators: []
   dashSound: {fileID: 8300000, guid: f76c75fa4d89e6346843243cdedf2e0c, type: 3}
   moveSpeed: 7
   dashingSpeed: 12.5
   activeSpeed: 0
   dashingTime: 0.4
   canDash: 1
-  dashes: 1
   isDashing: 0
   dashingCooldown: 0.4
 --- !u!114 &5924314082677940546
@@ -367,6 +366,8 @@ MonoBehaviour:
   healthRemoveSpeed: 0.01
   usesHealthBar: 1
   healthbar: {fileID: 0}
+  removeHealthbar: 0
+  healthbarParent: {fileID: 0}
   hasDeathAnimation: 1
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -384,15 +385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbbfaba34a153c47a997149f4d1ca6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 1
   movementSpeed: 0
-  damage: 0
-  attackSpeed: 0
+  damage: 1
+  attackSpeed: 1
   projectileSize: 0
   projectileSpeed: 0
   projectileAmount: 0
-  dashCharges: 0
-  dashCooldown: 0
 --- !u!114 &2645551619851752075
 MonoBehaviour:
   m_ObjectHideFlags: 0

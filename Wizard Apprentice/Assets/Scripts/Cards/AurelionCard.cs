@@ -45,7 +45,7 @@ public class AurelionCard : MonoBehaviour, ICard
 
             Vector3 spawnPos = player.transform.position + spawnDir;
 
-            bulletHandler.GetSpecialBullet(spawnPos, player, bulletImage, SpecialBulletState.Rotating, this, true, 0, lifetime, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed, distance + stats.projectileSize);
+            bulletHandler.GetSpecialBullet(spawnPos, player, bulletImage, SpecialBulletState.Rotating, this, true, 0, lifetime, false, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed, distance + stats.projectileSize);
         }
 
     }

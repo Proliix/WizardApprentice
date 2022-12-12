@@ -32,7 +32,7 @@ public class CircleShotCard : MonoBehaviour, ICard
     {
         SoundManager.Instance.PlayAudio(attackSound, audioVolume);
 
-        bulletHandler.GetCircleShot(projectileAmmount + stats.projectileAmount, player, true, damage + stats.damage, bulletSize + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetCircleShot(projectileAmmount + stats.projectileAmount, player, true, stats.GetDamage(damage), bulletSize + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()
@@ -49,7 +49,7 @@ public class CircleShotCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if (timer >= shootCooldown)
+        if (timer >= stats.GetAttackSpeed(shootCooldown))
         {
             timer = 0;
             Effect();

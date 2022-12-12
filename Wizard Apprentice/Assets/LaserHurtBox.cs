@@ -40,7 +40,7 @@ public class LaserHurtBox : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= attackDelay)
+        if (timer >= stats.GetAttackSpeed(attackDelay))
         {
             timer = 0;
 
@@ -48,7 +48,7 @@ public class LaserHurtBox : MonoBehaviour
             {
                 if (enemyhealth[i] != null)
                 {
-                    enemyhealth[i].RemoveHealth(damage + stats.damage);
+                    enemyhealth[i].RemoveHealth(stats.GetDamage(damage));
                 }
             }
 

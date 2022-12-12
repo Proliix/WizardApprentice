@@ -201,8 +201,6 @@ public class RewardsHandler : MonoBehaviour
         stats.projectileSize += activeRewards[index].projectileSize;
         stats.projectileSpeed += activeRewards[index].projectileSpeed;
         stats.projectileAmount += activeRewards[index].projectileAmount;
-        stats.dashCharges += activeRewards[index].dashCharges;
-        stats.dashCooldown += activeRewards[index].dashCooldown;
     }
     #endregion
 

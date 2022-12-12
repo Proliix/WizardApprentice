@@ -3913,6 +3913,8 @@ MonoBehaviour:
   healAmmount: 1
   healSound: {fileID: 0}
   audioVolume: 0.25
+  shootCooldown: 0.25
+  bulletSprite: {fileID: 0}
 --- !u!1 &1553289751
 GameObject:
   m_ObjectHideFlags: 0
