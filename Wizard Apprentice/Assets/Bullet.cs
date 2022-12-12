@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     public Color EnemyColor;
 
     public float bulletSpeed = 8;
-    [SerializeField] float bulletLifetime = 5f;
+    [SerializeField] float bulletLifetime = 20f;
 
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb2d;
