@@ -130,12 +130,34 @@ public class Health : MonoBehaviour
             hitNumbers.GetHitText(transform.position, -healAmount);
     }
 
+    public void FullHeal()
+    {
+        hp = maxHP;
+        hitNumbers?.GetHitText(transform.position, -maxHP);
+    }
+
+    /// <summary>
+    /// Heals the target by maxHp / divide
+    /// </summary>
+    public void HealPercentageOf(float divide)
+    {
+        float healAmount = 0;
+        healAmount = maxHP / 3;
+
+        if (hp + healAmount <= maxHP)
+            hp += healAmount;
+        else
+            hp = maxHP;
+
+        hitNumbers?.GetHitText(transform.position, -healAmount);
+    }
+
     public void AddMaxHealth(float healAmount)
     {
         maxHP += healAmount;
         AddHealth(healAmount);
-
     }
+
 
     public void RemoveHealth(float value = 10)
     {
