@@ -172,7 +172,7 @@ public class RewardsHandler : MonoBehaviour
         for (int i = 0; i < titles.Length; i++)
         {
             titles[i].text = activeRewards[i].Title;
-            effectText[i].text = activeRewards[i].EffectText;
+            effectText[i].text = activeRewards[i].GetDesription();
         }
     }
 
@@ -198,6 +198,8 @@ public class RewardsHandler : MonoBehaviour
         stats.movementSpeed += activeRewards[index].movementSpeed;
         stats.damage += activeRewards[index].damage;
         stats.attackSpeed += activeRewards[index].attackSpeed;
+        stats.critChance += activeRewards[index].critChange;
+        stats.critDamage += activeRewards[index].critDamage;
         stats.projectileSize += activeRewards[index].projectileSize;
         stats.projectileSpeed += activeRewards[index].projectileSpeed;
         stats.projectileAmount += activeRewards[index].projectileAmount;
