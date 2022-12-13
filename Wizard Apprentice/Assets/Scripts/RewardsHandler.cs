@@ -10,6 +10,7 @@ public class RewardsHandler : MonoBehaviour
     [Header("Stat Rewards")]
     [SerializeField] GameObject statScreenParent;
     public List<Reward> rewards;
+    public Reward healReward;
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [Header("Card Rewards")]
@@ -68,6 +69,7 @@ public class RewardsHandler : MonoBehaviour
             int seccond = -100;
             for (int i = 0; i < activeCards.Length; i++)
             {
+
 
                 int newNum = Random.Range(0, cards.Count);
 
@@ -154,19 +156,26 @@ public class RewardsHandler : MonoBehaviour
         int seccond = -100;
         for (int i = 0; i < activeRewards.Length; i++)
         {
-
-            int newNum = Random.Range(0, rewards.Count);
-
-            int runs = 0;
-            while ((first == newNum || seccond == newNum) && runs < 20)
+            if (i != 2)
             {
-                newNum = Random.Range(0, rewards.Count);
-                runs++;
-            }
-            seccond = first;
-            first = newNum;
 
-            activeRewards[i] = rewards[newNum];
+                int newNum = Random.Range(0, rewards.Count);
+
+                int runs = 0;
+                while ((first == newNum || seccond == newNum) && runs < 20)
+                {
+                    newNum = Random.Range(0, rewards.Count);
+                    runs++;
+                }
+                seccond = first;
+                first = newNum;
+
+                activeRewards[i] = rewards[newNum];
+            }
+            else
+            {
+                activeRewards[i] = healReward;
+            }
 
         }
         for (int i = 0; i < titles.Length; i++)
@@ -206,7 +215,7 @@ public class RewardsHandler : MonoBehaviour
 
         if (activeRewards[index].addHealh > 0)
         {
-            stats.gameObject.GetComponent<Health>()?.AddHealth(activeRewards[index].addHealh);
+            stats.gameObject.GetComponent<Health>()?.HealPercentageOf(activeRewards[index].addHealh);
         }
     }
     #endregion

@@ -5317,6 +5317,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
   - {fileID: 11400000, guid: 28f296f841febe1489f37a23b97f3d3a, type: 2}
+  healReward: {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
   titles:
   - {fileID: 476821372}
   - {fileID: 476821371}

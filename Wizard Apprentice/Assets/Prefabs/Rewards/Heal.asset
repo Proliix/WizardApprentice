@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
-  m_Name: More Projectiles
+  m_Name: Heal
   m_EditorClassIdentifier: 
-  Title: Pink Mana potion
-  EffectText: This sure taste like more projectiles
+  Title: Small Green health potion
+  EffectText: 'i feel slightly refreshed
+
+    current health <color=green>+{6}</color>'
   maxHealth: 0
   movementSpeed: 0
   damage: 0
   attackSpeed: 0
-  critChange: 0
+  critChance: 0
   critDamage: 0
-  addHealh: 0
+  addHealh: 5
   projectileSize: 0
   projectileSpeed: 0
   projectileAmount: 0

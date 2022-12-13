@@ -27,8 +27,9 @@ public class Reward : ScriptableObject
     {
         string CritChangeStr = "" + (critChance * 100) + "%";
         string CritDamageStr = "" + (critDamage * 100) + "%";
+        float maxHp = GameObject.FindWithTag("Player").GetComponent<Health>().GetMaxHP();
+        float newAddHealth = maxHp / addHealh;
 
-
-        return string.Format(EffectText, maxHealth, movementSpeed, damage, attackSpeed, CritChangeStr, CritDamageStr, addHealh, projectileSize, projectileSpeed, projectileAmount);
+        return string.Format(EffectText, maxHealth, movementSpeed, damage, attackSpeed, CritChangeStr, CritDamageStr, newAddHealth, projectileSize, projectileSpeed, projectileAmount);
     }
 }
