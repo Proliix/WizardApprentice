@@ -13,16 +13,20 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Animator settingsButtonAnimator;
     [SerializeField] Animator exitButtonAnimator;
     [SerializeField] Animator cameraAnimator;
+    [Header("Settings")]
+    [SerializeField] GameObject statsInGameCheckmark;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(FadeInObjects());
+        bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+        statsInGameCheckmark.SetActive(activeBool);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator FadeInObjects()
@@ -38,10 +42,24 @@ public class MenuManager : MonoBehaviour
     {
         cameraAnimator.SetTrigger("MoveIntoCave");
         backgroundObject.transform.parent = infrontParent;
-        Invoke("LoadMainScene",1f);
+        Invoke("LoadMainScene", 1f);
         //Zoom in on cave opening
         //Maybe wait a bit
         //Switch scene
+    }
+
+    public void EnableStatsWhenPlaying()
+    {
+        bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+
+        if (activeBool)
+            PlayerPrefs.SetInt("StatInGame", 0);
+        else
+            PlayerPrefs.SetInt("StatInGame", 1);
+
+
+        statsInGameCheckmark.SetActive(!activeBool);
+        PlayerPrefs.Save();
     }
 
     public void LoadMainScene()

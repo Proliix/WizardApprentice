@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 guid: 6e5add145408b874d905c9b310734ec3
-=======
-<<<<<<< Updated upstream:Wizard Apprentice/Assets/Art/Player assets/Wizard/wizard animation/death animation1.png.meta
-guid: b10688c7ddc09a9469fd78dc7b214063
-=======
-guid: 6e5add145408b874d905c9b310734ec3
->>>>>>> Stashed changes:Wizard Apprentice/Assets/Art/slime/big slime walkc/big slime walkc1.png.meta
->>>>>>> Stashed changes
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,6 +93,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

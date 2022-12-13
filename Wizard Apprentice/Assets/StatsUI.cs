@@ -26,25 +26,45 @@ public class StatsUI : MonoBehaviour
     [SerializeField] float bulletSpeed = 1;
     [SerializeField] float bulletSize = 1;
 
+    [Header("Misc")]
+    [SerializeField] GameObject PauseScreen;
     [SerializeField] float timer = 0;
 
+    bool activeIngame;
+    GameObject holderChild;
 
     void Start()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        activeIngame = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+        holderChild = gameObject.transform.GetChild(0).gameObject;
+        holderChild.SetActive(activeIngame);
+        UpdateStats();
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= 0.05f)
+        if (activeIngame)
         {
-            timer -= 0.05f;
-            CheckStats();
+            timer += Time.deltaTime;
+            if (timer >= 0.05f)
+            {
+                timer -= 0.05f;
+                CheckStats();
+            }
+            UpdateStats();
         }
-
-        UpdateStats();
+        else
+        {
+            holderChild.SetActive(PauseScreen.activeSelf);
+            if (PauseScreen.activeSelf)
+            {
+                CheckStats();
+                UpdateStats();
+            }
+        }
     }
+
 
     private void CheckStats()
     {
@@ -65,10 +85,10 @@ public class StatsUI : MonoBehaviour
         string attackSpeedText = "AS : " + Mathf.RoundToInt(attackSpeed);
         attackSpeedTMP.SetText(attackSpeedText);
 
-        string critMultText = "Crit DMG : " + Mathf.RoundToInt(critDmgMultiplier * 100)+"%";
+        string critMultText = "Crit DMG : " + Mathf.RoundToInt(critDmgMultiplier * 100) + "%";
         critDmgMultiplierTMP.SetText(critMultText);
 
-        string critChanceText = "Crit chance : " + Mathf.RoundToInt(critChance * 100) +"%";
+        string critChanceText = "Crit chance : " + Mathf.RoundToInt(critChance * 100) + "%";
         critChanceTMP.SetText(critChanceText);
 
         string moveSpeedText = "MS : " + Mathf.RoundToInt(moveSpeed);

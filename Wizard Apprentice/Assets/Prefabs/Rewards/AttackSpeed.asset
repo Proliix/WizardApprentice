@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
-  m_Name: Bullet Speed
+  m_Name: AttackSpeed
   m_EditorClassIdentifier: 
   Title: Green Mana potion
   EffectText: 'Wow sure tastes like faster fire rate
