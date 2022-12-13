@@ -50,7 +50,8 @@ public class StatsUI : MonoBehaviour
     {
         damage = playerStats.damage;
         attackSpeed = playerStats.attackSpeed;
-        //crit = playerStats.crit;
+        critChance = playerStats.critChance;
+        critDmgMultiplier = playerStats.critDamage;
         moveSpeed = playerStats.movementSpeed;
         bulletSpeed = playerStats.projectileSize;
         bulletSize = playerStats.projectileSize;
@@ -58,25 +59,25 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateStats()
     {
-        string dmgText = "DMG : " + damage;
+        string dmgText = "DMG : " + Mathf.RoundToInt(damage);
         damageTMP.SetText(dmgText);
 
-        string attackSpeedText = "AS : " + attackSpeed;
+        string attackSpeedText = "AS : " + Mathf.RoundToInt(attackSpeed);
         attackSpeedTMP.SetText(attackSpeedText);
 
-        string critMultText = "Crit DMG % : ";
+        string critMultText = "Crit DMG : " + Mathf.RoundToInt(critDmgMultiplier * 100)+"%";
         critDmgMultiplierTMP.SetText(critMultText);
 
-        string critChanceText = "Crit chance : ";
+        string critChanceText = "Crit chance : " + Mathf.RoundToInt(critChance * 100) +"%";
         critChanceTMP.SetText(critChanceText);
 
-        string moveSpeedText = "MS : " + moveSpeed;
+        string moveSpeedText = "MS : " + Mathf.RoundToInt(moveSpeed);
         moveSpeedTMP.SetText(moveSpeedText);
 
-        string bulletSpeedText = "Bullet Speed : " + bulletSpeed;
+        string bulletSpeedText = "Bullet Speed : " + Mathf.RoundToInt(bulletSpeed);
         bulletSpeedTMP.SetText(bulletSpeedText);
 
-        string bulletSizeText = "Bullet Size : " + bulletSize;
+        string bulletSizeText = "Bullet Size : " + Mathf.RoundToInt(bulletSize);
         bulletSizeTMP.SetText(bulletSizeText);
 
     }
