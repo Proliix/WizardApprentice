@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
@@ -14,20 +16,84 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Animator exitButtonAnimator;
     [SerializeField] Animator cameraAnimator;
     [Header("Settings")]
-    [SerializeField] GameObject statsInGameCheckmark;
+    [SerializeField] Sprite checkMark;
+    [SerializeField] Sprite Cross;
+    [SerializeField] Sprite normalHandle;
+    [SerializeField] Image statsInGameRenderer;
+    [SerializeField] AudioMixer mixer;
+    [SerializeField] Slider masterVolume;
+    [SerializeField] Slider musicVolume;
+    [SerializeField] Slider effectVolume;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(FadeInObjects());
         bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
-        statsInGameCheckmark.SetActive(activeBool);
+        statsInGameRenderer.sprite = activeBool ? checkMark : Cross;
+
+        float newValue = 0;
+        masterVolume.maxValue = 0;
+        masterVolume.minValue = -30;
+        mixer.GetFloat("Master", out newValue);
+        masterVolume.value = newValue;
+
+        musicVolume.maxValue = 0;
+        musicVolume.minValue = -30;
+        mixer.GetFloat("Music", out newValue);
+        musicVolume.value = newValue;
+
+        effectVolume.maxValue = 0;
+        effectVolume.minValue = -30;
+        mixer.GetFloat("Effect", out newValue);
+        effectVolume.value = newValue;
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateMixer(int type)
     {
-
+        switch (type)
+        {
+            case 0:
+                if (masterVolume.minValue == masterVolume.value)
+                {
+                    mixer.SetFloat("Master", -80);
+                    masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+                }
+                else
+                {
+                    masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
+                    mixer.SetFloat("Master", masterVolume.value);
+                }
+                break;
+            case 1:
+                if (musicVolume.minValue == musicVolume.value)
+                {
+                    mixer.SetFloat("Music", -80);
+                    musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+                }
+                else
+                {
+                    musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
+                    mixer.SetFloat("Music", musicVolume.value);
+                }
+                break;
+            case 2:
+                if (effectVolume.minValue == effectVolume.value)
+                {
+                    mixer.SetFloat("Effect", -80);
+                    effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+                }
+                else
+                {
+                    effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
+                    mixer.SetFloat("Effect", effectVolume.value);
+                }
+                break;
+        }
     }
+
 
     IEnumerator FadeInObjects()
     {
@@ -58,7 +124,7 @@ public class MenuManager : MonoBehaviour
             PlayerPrefs.SetInt("StatInGame", 1);
 
 
-        statsInGameCheckmark.SetActive(!activeBool);
+        statsInGameRenderer.sprite = activeBool ? Cross : checkMark;
         PlayerPrefs.Save();
     }
 
