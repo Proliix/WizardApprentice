@@ -10,18 +10,18 @@ public class Reward : ScriptableObject
     [TextArea(2, 10)]
     public string EffectText = "This is the flavour text";
     [Header("Player Stats")]
-    public float maxHealth = 0f;
-    public float movementSpeed = 0f;
-    public float damage = 0f;
-    public float attackSpeed = 0f;
-    public float critChance = 0;
-    public float critDamage = 0;
-    [Header("This will only heal, maxHealth will give maxhp and heal")]
-    public float addHealh;
+    [Tooltip("{0}")] public float maxHealth = 0f;
+    [Tooltip("{1}")] public float movementSpeed = 0f;
+    [Tooltip("{2}")] public float damage = 0f;
+    [Tooltip("{3}")] public float attackSpeed = 0f;
+    [Tooltip("{4}")] public float critChance = 0;
+    [Tooltip("{5}")] public float critDamage = 0;
+    [Header("This will only heal,it heals with maxHP / addHealth")]
+    [Tooltip("{6}")] public float addHealh;
     [Header("Projectiles")]
-    public float projectileSize = 0f;
-    public float projectileSpeed = 0f;
-    public int projectileAmount = 0;
+    [Tooltip("{7}")] public float projectileSize = 0f;
+    [Tooltip("{8}")] public float projectileSpeed = 0f;
+    [Tooltip("{9}")] public int projectileAmount = 0;
 
     public string GetDesription()
     {
