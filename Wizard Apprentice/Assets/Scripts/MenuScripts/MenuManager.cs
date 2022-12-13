@@ -20,31 +20,38 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Sprite Cross;
     [SerializeField] Sprite normalHandle;
     [SerializeField] Image statsInGameRenderer;
+    [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioMixer mixer;
     [SerializeField] Slider masterVolume;
+    [SerializeField] Image masterImage;
     [SerializeField] Slider musicVolume;
+    [SerializeField] Image musicImage;
     [SerializeField] Slider effectVolume;
+    [SerializeField] Image effectImage;
+
+    int sfxFix = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(FadeInObjects());
         bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+        settingsPanel.SetActive(false);
         statsInGameRenderer.sprite = activeBool ? checkMark : Cross;
 
         float newValue = 0;
         masterVolume.maxValue = 0;
-        masterVolume.minValue = -30;
+        masterVolume.minValue = -25;
         mixer.GetFloat("Master", out newValue);
         masterVolume.value = newValue;
 
         musicVolume.maxValue = 0;
-        musicVolume.minValue = -30;
+        musicVolume.minValue = -25;
         mixer.GetFloat("Music", out newValue);
         musicVolume.value = newValue;
 
-        effectVolume.maxValue = 0;
-        effectVolume.minValue = -30;
+        effectVolume.maxValue = 10;
+        effectVolume.minValue = -15;
         mixer.GetFloat("Effect", out newValue);
         effectVolume.value = newValue;
 
@@ -66,6 +73,7 @@ public class MenuManager : MonoBehaviour
                     masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Master", masterVolume.value);
                 }
+                masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
                 break;
             case 1:
                 if (musicVolume.minValue == musicVolume.value)
@@ -78,6 +86,7 @@ public class MenuManager : MonoBehaviour
                     musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Music", musicVolume.value);
                 }
+                musicImage.fillAmount = 1 - (musicVolume.value / musicVolume.minValue);
                 break;
             case 2:
                 if (effectVolume.minValue == effectVolume.value)
@@ -90,10 +99,29 @@ public class MenuManager : MonoBehaviour
                     effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Effect", effectVolume.value);
                 }
+                float debugMath = 1 - ((effectVolume.value) * (effectVolume.minValue / effectVolume.maxValue));
+                effectImage.fillAmount = debugMath;
+                Debug.Log("" + ((effectVolume.maxValue / effectVolume.minValue)));
+                Debug.Log("" + (effectVolume.value / effectVolume.minValue));
+                Debug.Log("" + (effectVolume.value + (effectVolume.maxValue / effectVolume.minValue)));
+                Debug.Log("" + debugMath);
+                Debug.LogError("___");
+                sfxFix++;
+                StartCoroutine(PlaySoundWithDelay(sfxFix));
                 break;
         }
     }
 
+    IEnumerator PlaySoundWithDelay(int index)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (index == sfxFix)
+        {
+            sfxFix = 0;
+            sfxSource.Play();
+        }
+
+    }
 
     IEnumerator FadeInObjects()
     {
