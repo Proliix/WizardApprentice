@@ -47,6 +47,10 @@ public class Health : MonoBehaviour
     Color tempColor;
     bool hitEffectActve = false;
 
+    PlayerStats stats;
+    float startHealth;
+    bool isPlayer;
+
     HitNumberHandler hitNumbers;
 
     SpriteRenderer spriteRenderer;
@@ -55,6 +59,13 @@ public class Health : MonoBehaviour
     bool canBeHit = true;
     private void Start()
     {
+        stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        if (gameObject.CompareTag("Player"))
+        {
+            startHealth = maxHP;
+            isPlayer = true;
+        }
+
         if (hasDeathAnimation)
             anim = gameObject.GetComponent<Animator>();
 
@@ -76,6 +87,14 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
+        if (isPlayer)
+            if (maxHP != startHealth + stats.health)
+            {
+                float healHp = (startHealth + stats.health) - maxHP;
+                maxHP = startHealth + stats.health;
+                AddHealth(healHp);
+            }
+
         if (usesHealthBar)
         {
             healthbarValue = Mathf.SmoothDamp(healthbarValue, hp, ref currentHealthRemoveSpeed, healthRemoveSpeed, 100, Time.deltaTime);
@@ -152,19 +171,25 @@ public class Health : MonoBehaviour
         hitNumbers?.GetHitText(transform.position, -healAmount);
     }
 
-    public void AddMaxHealth(float healAmount)
-    {
-        maxHP += healAmount;
-        AddHealth(healAmount);
-    }
-
-
     public void RemoveHealth(float value = 10)
     {
         if (canBeHit)
         {
+            bool isCrit = false;
             if (gameObject.CompareTag("Player"))
+            {
                 Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown, playerScreenShakeAmount);
+            }
+            else
+            {
+                float critDamage = stats.GetCrit(value);
+                if (critDamage != value)
+                {
+                    isCrit = true;
+                    value = critDamage;
+                }
+            }
+
 
             hp -= value;
             if (hp > 0)
@@ -178,7 +203,7 @@ public class Health : MonoBehaviour
                 SetDead();
 
             if (hitNumbers != null)
-                hitNumbers.GetHitText(transform.position, value);
+                hitNumbers.GetHitText(transform.position, value, isCrit);
         }
     }
 

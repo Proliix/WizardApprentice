@@ -100,12 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886e441b06afdce4c8de483528fb820c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: []
   bulletState: 0
   poolIndex: 0
   Shooter: {fileID: 0}
   isPlayerBullet: 0
   damage: 10
-  bulletSpeed: 8
+  bulletSpeed: 10
   bulletLifetime: 5
   effectCooldown: 1.5
   effectSize: 1

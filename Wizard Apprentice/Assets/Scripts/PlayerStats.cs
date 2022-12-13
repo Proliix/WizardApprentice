@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     public float movementSpeed = 0f;
     public float damage = 1f;
     public float attackSpeed = 1f;
+    public float critChance = 0.05f;
+    public float critDamage = 1.5f;
     [Header("Projectiles")]
     public float projectileSize = 0f;
     public float projectileSpeed = 0f;
@@ -45,6 +47,16 @@ public class PlayerStats : MonoBehaviour
         projectileSize = currentProjectileSize;
         projectileSpeed = currentProjectileSpeed;
         projectileAmount = currentProjectileAmount;
+    }
+
+    public float GetCrit(float damageValue)
+    {
+        float returnValue = damageValue;
+
+        if (Random.Range(0, 101) <= critChance * 100)
+            returnValue = damageValue * critDamage;
+
+        return Mathf.FloorToInt(returnValue);
     }
 
     public int GetDamage(float damageValue)

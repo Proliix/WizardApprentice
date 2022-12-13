@@ -273,7 +273,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Spawns a circle of bullets around the shooter that has Amount of bullets.
     /// </summary>
-    public void GetCircleShot(int amount, GameObject shooter, bool isPlayer, float damage = 10f, float bulletSize = 0.5f, float speed = 8f)
+    public void GetCircleShot(int amount, GameObject shooter, bool isPlayer, float damage = 10f, float bulletSize = 0.5f, float speed = 10f)
     {
         if (amount <= 0)
             Debug.LogError("INVALID SIZE IN CIRCLESHOTFUNCTION MADE BY " + shooter.name);
@@ -296,7 +296,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Spawns a circle of bullets around the shooter that has Amount of bullets. Changes where the bullets spawns depending on angle
     /// </summary>
-    public void GetCircleShot(int amount, GameObject shooter, bool isPlayer, float angle, float damage = 10f, float bulletSize = 0.5f, float speed = 8f)
+    public void GetCircleShot(int amount, GameObject shooter, bool isPlayer, float angle, float damage = 10f, float bulletSize = 0.5f, float speed = 10f)
     {
         if (amount <= 0)
             Debug.LogError("INVALID SIZE IN CIRCLESHOTFUNCTION MADE BY " + shooter.name);
@@ -319,7 +319,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Spawns a bullet at position. If move away form shooter is true it will change direction depending on where it spawned compared to the shooter
     /// </summary>
-    public void GetBullet(Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage = 10f, float size = 0.5f, float speed = 8f)
+    public void GetBullet(Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage = 10f, float size = 0.5f, float speed = 10f)
     {
         bool hasSpawned = false;
         for (int i = 0; i < projectilePool.Count; i++)
@@ -354,7 +354,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Spawns a bullet at position. It will move in the given direction
     /// </summary>
-    public void GetBullet(Vector3 position, Vector3 direction, bool isPlayer, float damage = 10f, float size = 0.5f, float speed = 8f)
+    public void GetBullet(Vector3 position, Vector3 direction, bool isPlayer, float damage = 10f, float size = 0.5f, float speed = 10f)
     {
         bool hasSpawned = false;
         for (int i = 0; i < projectilePool.Count; i++)
@@ -389,7 +389,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Spawns a bullet at shootpos  with shootpos's rotation. If move away form shooter is true it will change direction depending on where it spawned compared to the shooter
     /// </summary>
-    public void GetBullet(Transform shootPos, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage = 10f, float size = 0.5f, float speed = 8f)
+    public void GetBullet(Transform shootPos, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage = 10f, float size = 0.5f, float speed = 10f)
     {
         bool hasSpawned = false;
         for (int i = 0; i < projectilePool.Count; i++)
@@ -423,7 +423,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Spawns a bullet at shootpos + posdeviation with shootpos's rotation. If move away form shooter is true it will change direction depending on where it spawned compared to the shooter
     /// </summary>
-    public void GetBullet(Transform shootPos, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, Vector3 posDeviation, float damage = 10f, float size = 0.5f, float speed = 8f)
+    public void GetBullet(Transform shootPos, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, Vector3 posDeviation, float damage = 10f, float size = 0.5f, float speed = 10f)
     {
         bool hasSpawned = false;
         for (int i = 0; i < projectilePool.Count; i++)
@@ -456,7 +456,7 @@ public class BulletHandler : MonoBehaviour
     }
 
 
-    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 8f, float effectSize = 1)
+    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 10f, float effectSize = 1)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];
@@ -497,7 +497,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Shoots special bullet in direciton
     /// </summary>
-    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Vector3 direction, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, float effectCooldown = 0, float lifeTime = 2.5f, float damage = 10f, float size = 0.5f, float speed = 8f, float effectSize = 1)
+    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Vector3 direction, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, float effectCooldown = 0, float lifeTime = 2.5f, float damage = 10f, float size = 0.5f, float speed = 10f, float effectSize = 1)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];
@@ -539,7 +539,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Shoots special bullet towards mouse
     /// </summary>
-    public GameObject GetSpecialBullet(Transform shotpos, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, Vector3 posDeviation, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 8f, float effectSize = 1)
+    public GameObject GetSpecialBullet(Transform shotpos, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, Vector3 posDeviation, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 10f, float effectSize = 1)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];
@@ -580,7 +580,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Shoots special bullet with animation depending on the animation name corresponding to a bool in specialbullet animationcontroller
     /// </summary>
-    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, string animationName, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 8f, float effectSize = 1)
+    public GameObject GetSpecialBullet(Vector3 position, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, string animationName, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 10f, float effectSize = 1)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];
@@ -621,7 +621,7 @@ public class BulletHandler : MonoBehaviour
     /// <summary>
     /// Shoots special bullet towards mouse with animation depending on the animation name corresponding to a bool in specialbullet animationcontroller
     /// </summary>
-    public GameObject GetSpecialBullet(Transform shotPos, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, string animationName, Vector3 shotDiveation, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 8f, float effectSize = 1)
+    public GameObject GetSpecialBullet(Transform shotPos, GameObject newShooter, Sprite bulletImage, SpecialBulletState newBulletState, ICard icard, bool isPlayer, string animationName, Vector3 shotDiveation, float effectCooldown = 0, float lifeTime = 2.5f, bool moveAwayFromShooter = false, float damage = 10f, float size = 0.5f, float speed = 10f, float effectSize = 1)
     {
         bool hasSpawned = false;
         GameObject newBullet = specialProjectilePool[0];
