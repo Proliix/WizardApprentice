@@ -198,11 +198,16 @@ public class RewardsHandler : MonoBehaviour
         stats.movementSpeed += activeRewards[index].movementSpeed;
         stats.damage += activeRewards[index].damage;
         stats.attackSpeed += activeRewards[index].attackSpeed;
-        stats.critChance += activeRewards[index].critChange;
+        stats.critChance += activeRewards[index].critChance;
         stats.critDamage += activeRewards[index].critDamage;
         stats.projectileSize += activeRewards[index].projectileSize;
         stats.projectileSpeed += activeRewards[index].projectileSpeed;
         stats.projectileAmount += activeRewards[index].projectileAmount;
+
+        if (activeRewards[index].addHealh > 0)
+        {
+            stats.gameObject.GetComponent<Health>()?.AddHealth(activeRewards[index].addHealh);
+        }
     }
     #endregion
 

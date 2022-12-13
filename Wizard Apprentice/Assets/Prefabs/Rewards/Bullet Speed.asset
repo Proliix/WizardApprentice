@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: Bullet Speed
   m_EditorClassIdentifier: 
   Title: Green Mana potion
-  EffectText: Wow sure tastes like faster fire rate
-  health: 0
+  EffectText: 'Wow sure tastes like faster fire rate
+
+    Attack speed <color=blue>+{3}</color>'
+  maxHealth: 0
   movementSpeed: 0
   damage: 0
   attackSpeed: 0.1
+  critChange: 0
+  critDamage: 0
+  addHealh: 0
   projectileSize: 0
   projectileSpeed: 0
   projectileAmount: 0

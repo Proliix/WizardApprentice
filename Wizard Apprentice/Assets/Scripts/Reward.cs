@@ -10,12 +10,14 @@ public class Reward : ScriptableObject
     [TextArea(2, 10)]
     public string EffectText = "This is the flavour text";
     [Header("Player Stats")]
-    public float health = 0f;
+    public float maxHealth = 0f;
     public float movementSpeed = 0f;
     public float damage = 0f;
     public float attackSpeed = 0f;
-    public float critChange = 0;
+    public float critChance = 0;
     public float critDamage = 0;
+    [Header("This will only heal, maxHealth will give maxhp and heal")]
+    public float addHealh;
     [Header("Projectiles")]
     public float projectileSize = 0f;
     public float projectileSpeed = 0f;
@@ -23,6 +25,10 @@ public class Reward : ScriptableObject
 
     public string GetDesription()
     {
-        return string.Format(EffectText, health, movementSpeed, damage, attackSpeed,critChange,critDamage, projectileSize, projectileSpeed, projectileAmount);
+        string CritChangeStr = "" + (critChance * 100) + "%";
+        string CritDamageStr = "" + (critDamage * 100) + "%";
+
+
+        return string.Format(EffectText, maxHealth, movementSpeed, damage, attackSpeed, CritChangeStr, CritDamageStr, addHealh, projectileSize, projectileSpeed, projectileAmount);
     }
 }

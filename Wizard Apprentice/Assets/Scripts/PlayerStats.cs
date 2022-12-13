@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float health = 1f;
+    public float health = 0f;
     public float movementSpeed = 0f;
     public float damage = 1f;
     public float attackSpeed = 1f;
@@ -14,41 +14,6 @@ public class PlayerStats : MonoBehaviour
     public float projectileSize = 0f;
     public float projectileSpeed = 0f;
     public int projectileAmount = 0;
-
-    float currentHealth = 1f;
-    float currentMovementSPeed = 1f;
-    float currentDamage = 1F;
-    float currentAttackSpeed = 1f;
-    float currentProjectileSize = 1f;
-    float currentProjectileSpeed = 1f;
-    int currentProjectileAmount = 1;
-    void Start()
-    {
-        UpdateCurrentStats();
-    }
-
-    public void UpdateCurrentStats()
-    {
-        currentHealth = health;
-        currentDamage = damage;
-        currentMovementSPeed = movementSpeed;
-        currentAttackSpeed = attackSpeed;
-        currentProjectileSize = projectileSize;
-        currentProjectileSpeed = projectileSpeed;
-        currentProjectileAmount = projectileAmount;
-    }
-
-    public void ResetToCurrentStats()
-    {
-        health = currentHealth;
-        damage = currentDamage;
-        movementSpeed = currentMovementSPeed;
-        attackSpeed = currentAttackSpeed;
-        projectileSize = currentProjectileSize;
-        projectileSpeed = currentProjectileSpeed;
-        projectileAmount = currentProjectileAmount;
-    }
-
     public float GetCrit(float damageValue)
     {
         float returnValue = damageValue;

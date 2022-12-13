@@ -269,7 +269,7 @@ Transform:
   - {fileID: 2972845709103323633}
   - {fileID: 2205426267745955852}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6565921895385548058
 SpriteRenderer:
@@ -385,10 +385,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbbfaba34a153c47a997149f4d1ca6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 0
   movementSpeed: 0
   damage: 1
   attackSpeed: 1
+  critChance: 0.05
+  critDamage: 1.5
   projectileSize: 0
   projectileSpeed: 0
   projectileAmount: 0
