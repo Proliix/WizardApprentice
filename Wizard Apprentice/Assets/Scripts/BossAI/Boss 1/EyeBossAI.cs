@@ -150,7 +150,8 @@ public class EyeBossAI : MonoBehaviour
     {
         Debug.Log("start of gigaAttack");
         yield return new WaitForSeconds(2f);
-        bulletHandler.GetBullet(gameObject.transform.position, target.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
+        //Shoots a bullet from the gameObject towards the target(player)
+        bulletHandler.GetBullet(gameObject.transform.position, target.transform.position - gameObject.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
         Debug.Log("end of gigaAttack");
         yield return null;
     }
