@@ -6,7 +6,12 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 {
 
 
-    private Rigidbody2D rb2d;
+    BulletHandler bulletHandler;
+    Rigidbody2D rb2d;
+    public Vector3 movePos;
+    [SerializeField] float indicatorRadius = 50;
+    float indicatorTime = 0.5f;
+
 
     [Header("Attack Variables")]
     [SerializeField] float bulletSize;
@@ -30,9 +35,9 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
     private int lastNumber;
     
 
+
     [SerializeField] GameObject target;
 
-    BulletHandler bulletHandler;
 
 
     void Start()
@@ -57,10 +62,13 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
     }
 
-    
+ 
 
     IEnumerator MoveEnemy()
     {
+
+        
+
         canMove = false;
         int currentNumber = Random.Range(1, 5);   
 
@@ -75,34 +83,42 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
         switch (currentNumber)
         {
             case 1:
-        gameObject.transform.localPosition = new Vector3(-5, 5, 0);
                 
+                movePos = new Vector3(-5, 5, 0);
+
                 break;
 
             case 2:
-        gameObject.transform.localPosition = new Vector3(5, 5, 0);
+                movePos = new Vector3(5, 5, 0);
 
                 break;
 
             case 3:
-        gameObject.transform.localPosition = new Vector3(5, -5, 0);
+                movePos = new Vector3(5, -5, 0);
+                
                 break;
                     
-
             case 4:
-        gameObject.transform.localPosition = new Vector3(-5, -5, 0);
+                movePos = new Vector3(-5, -5, 0);
+               
                 break;
 
-
-
         }
-        yield return new WaitForSeconds(0.25f);
-        
+       
+        yield return new WaitForSeconds(1f);
+        GoInvisable();
+        yield return new WaitForSeconds(1f);
+        TeleportIndicator();
+        yield return new WaitForSeconds(indicatorTime);
+
+        gameObject.transform.localPosition = movePos;
+        GoVisable();
+
         SpecialAttack();
 
         yield return new WaitForSeconds(1);
 
-       StartCoroutine(AttackPattern());
+      StartCoroutine(AttackPattern());
         
         yield return null;
     }
@@ -127,8 +143,31 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenShots);
 
         }
+
         canMove = true;
+        yield return new WaitForSeconds(2f);
         yield return null;
+    }
+
+    private void TeleportIndicator()
+    {
+        AttackIndicator.CreateCircle(movePos, indicatorRadius, indicatorTime, true);
+    }
+
+  
+
+    private void GoInvisable()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider2D>().GetComponentInChildren<CapsuleCollider2D>().enabled = false;
+    }
+
+
+    private void GoVisable()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<CapsuleCollider2D>().GetComponentInChildren<CapsuleCollider2D>().enabled = true;
+    
     }
 
 

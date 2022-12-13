@@ -75,13 +75,14 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     IEnumerator DashAttack()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         FlipSpriteTowardsPlayer();
-
-        
 
 
         movement = (playerTarget.transform.position - gameObject.transform.position).normalized;
+        DashIndicator();
+        yield return new WaitForSeconds(0.5f);
+
         rb2d.velocity = movement * moveSpeed;
         
         yield return null;
@@ -131,6 +132,11 @@ public class MinibossSkeledogAI : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+    }
+
+    private void DashIndicator()
+    {
+        AttackIndicator.CreateSquare(gameObject.transform.position, playerTarget.transform.position, new Vector2(4,30) , 1f, true);
     }
 
 }
