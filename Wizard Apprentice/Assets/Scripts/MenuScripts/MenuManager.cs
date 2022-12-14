@@ -44,16 +44,19 @@ public class MenuManager : MonoBehaviour
         masterVolume.minValue = -25;
         mixer.GetFloat("Master", out newValue);
         masterVolume.value = newValue;
+        masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
 
         musicVolume.maxValue = 0;
         musicVolume.minValue = -25;
         mixer.GetFloat("Music", out newValue);
         musicVolume.value = newValue;
+        musicImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
 
         effectVolume.maxValue = 10;
         effectVolume.minValue = -15;
         mixer.GetFloat("Effect", out newValue);
         effectVolume.value = newValue;
+        effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
 
 
     }
@@ -99,13 +102,8 @@ public class MenuManager : MonoBehaviour
                     effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Effect", effectVolume.value);
                 }
-                float debugMath = 1 - ((effectVolume.value) * (effectVolume.minValue / effectVolume.maxValue));
-                effectImage.fillAmount = debugMath;
-                Debug.Log("" + ((effectVolume.maxValue / effectVolume.minValue)));
-                Debug.Log("" + (effectVolume.value / effectVolume.minValue));
-                Debug.Log("" + (effectVolume.value + (effectVolume.maxValue / effectVolume.minValue)));
-                Debug.Log("" + debugMath);
-                Debug.LogError("___");
+
+                effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
                 sfxFix++;
                 StartCoroutine(PlaySoundWithDelay(sfxFix));
                 break;
