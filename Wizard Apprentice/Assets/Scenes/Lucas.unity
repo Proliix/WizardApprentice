@@ -733,6 +733,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 571476115768797418, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
@@ -1837,6 +1841,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
+  healReward: {fileID: 0}
   titles:
   - {fileID: 816771111}
   - {fileID: 649940052}
@@ -2042,7 +2047,7 @@ MonoBehaviour:
   bulletHandler: {fileID: 542232918}
   cardHandler: {fileID: 542232913}
   rewardsHandler: {fileID: 542232911}
-  tutorialRoom: {fileID: 0}
+  tutorialRoom: {fileID: 11400000, guid: f877f8f100769634e95747caafd4f663, type: 2}
   possibleBossRoomsByFloor: []
   possibleNormalRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
@@ -2101,10 +2106,12 @@ MonoBehaviour:
   worldCanvas: {fileID: 1912086194}
   damageColor: {r: 1, g: 0.42745098, b: 0.42745098, a: 1}
   healColor: {r: 0.4458443, g: 1, b: 0.427451, a: 1}
+  critColor: {r: 0.63, g: 0.12, b: 0.95, a: 1}
   startAmount: 25
   upTime: 1.25
   offsetMax: {x: 0.25, y: 0.25}
   offsetMin: {x: -0.25, y: -0.25}
+  critSize: 2.5
 --- !u!4 &542232920
 Transform:
   m_ObjectHideFlags: 0

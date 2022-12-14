@@ -16,7 +16,7 @@ MonoBehaviour:
   EffectText: 'I feel refreshed
 
     I gain <color=green>+{0}</color> max hp'
-  maxHealth: 10
+  maxHealth: 0.1
   movementSpeed: 0
   damage: 0
   attackSpeed: 0

@@ -28,13 +28,14 @@ public class StatsUI : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] GameObject PauseScreen;
-    [SerializeField] float timer = 0;
 
+    float timer = 0;
     bool activeIngame;
     GameObject holderChild;
 
     void Start()
     {
+        timer = 10;
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         activeIngame = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
         holderChild = gameObject.transform.GetChild(0).gameObject;

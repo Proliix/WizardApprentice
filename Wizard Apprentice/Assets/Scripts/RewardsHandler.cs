@@ -204,6 +204,7 @@ public class RewardsHandler : MonoBehaviour
     {
         rewardScreen.SetActive(false);
         statScreenParent.SetActive(false);
+        stats.health += activeRewards[index].maxHealth;
         stats.movementSpeed += activeRewards[index].movementSpeed;
         stats.damage += activeRewards[index].damage;
         stats.attackSpeed += activeRewards[index].attackSpeed;

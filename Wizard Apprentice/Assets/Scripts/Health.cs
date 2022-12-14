@@ -88,12 +88,15 @@ public class Health : MonoBehaviour
     private void Update()
     {
         if (isPlayer)
-            if (maxHP != startHealth + stats.health)
+        {
+            float newHp = startHealth * stats.health;
+            if (maxHP != newHp)
             {
-                float healHp = (startHealth + stats.health) - maxHP;
-                maxHP = startHealth + stats.health;
+                float healHp = newHp - maxHP;
+                maxHP = newHp;
                 AddHealth(healHp);
             }
+        }
 
         if (usesHealthBar)
         {
@@ -210,6 +213,11 @@ public class Health : MonoBehaviour
     public float GetHP()
     {
         return hp;
+    }
+    
+    public float GetStartMaxHp()
+    {
+        return startHealth;
     }
 
     public bool GetCanBeHit()
