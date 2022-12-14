@@ -39,24 +39,59 @@ public class MenuManager : MonoBehaviour
         settingsPanel.SetActive(false);
         statsInGameRenderer.sprite = activeBool ? checkMark : Cross;
 
-        float newValue = 0;
+        float newValue = masterVolume.maxValue;
         masterVolume.maxValue = 0;
         masterVolume.minValue = -25;
-        mixer.GetFloat("Master", out newValue);
+        newValue = PlayerPrefs.GetFloat("MasterVol");
         masterVolume.value = newValue;
         masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
+        if (newValue == -80)
+        {
+            masterVolume.value = masterVolume.minValue;
+            masterImage.fillAmount = 0;
+            masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+        }
+        else
+        {
+            masterVolume.value = newValue;
+            masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
+        }
 
+
+        newValue = musicVolume.maxValue;
         musicVolume.maxValue = 0;
         musicVolume.minValue = -25;
-        mixer.GetFloat("Music", out newValue);
+        newValue = PlayerPrefs.GetFloat("MusicVol");
         musicVolume.value = newValue;
         musicImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
+        if (newValue == -80)
+        {
+            musicVolume.value = musicVolume.minValue;
+            musicImage.fillAmount = 0;
+            musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+        }
+        else
+        {
+            musicVolume.value = newValue;
+            musicImage.fillAmount = 1 - (musicVolume.value / musicVolume.minValue);
+        }
 
+
+        newValue = effectVolume.maxValue;
         effectVolume.maxValue = 10;
         effectVolume.minValue = -15;
-        mixer.GetFloat("Effect", out newValue);
-        effectVolume.value = newValue;
-        effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
+        newValue = PlayerPrefs.GetFloat("EffectVol");
+        if (newValue == -80)
+        {
+            effectVolume.value = effectVolume.minValue;
+            effectImage.fillAmount = 0;
+            effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+        }
+        else
+        {
+            effectVolume.value = newValue;
+            effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
+        }
 
 
     }
@@ -69,12 +104,14 @@ public class MenuManager : MonoBehaviour
                 if (masterVolume.minValue == masterVolume.value)
                 {
                     mixer.SetFloat("Master", -80);
+                    PlayerPrefs.SetFloat("MasterVol", -80);
                     masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
                 }
                 else
                 {
                     masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Master", masterVolume.value);
+                    PlayerPrefs.SetFloat("MasterVol", masterVolume.value);
                 }
                 masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
                 break;
@@ -83,11 +120,13 @@ public class MenuManager : MonoBehaviour
                 {
                     mixer.SetFloat("Music", -80);
                     musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+                    PlayerPrefs.SetFloat("MusicVol", -80);
                 }
                 else
                 {
                     musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Music", musicVolume.value);
+                    PlayerPrefs.SetFloat("MusicVol", musicVolume.value);
                 }
                 musicImage.fillAmount = 1 - (musicVolume.value / musicVolume.minValue);
                 break;
@@ -96,11 +135,13 @@ public class MenuManager : MonoBehaviour
                 {
                     mixer.SetFloat("Effect", -80);
                     effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+                    PlayerPrefs.SetFloat("EffectVol", -80);
                 }
                 else
                 {
                     effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = normalHandle;
                     mixer.SetFloat("Effect", effectVolume.value);
+                    PlayerPrefs.SetFloat("EffectVol", effectVolume.value);
                 }
 
                 effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
@@ -108,6 +149,7 @@ public class MenuManager : MonoBehaviour
                 StartCoroutine(PlaySoundWithDelay(sfxFix));
                 break;
         }
+        PlayerPrefs.Save();
     }
 
     IEnumerator PlaySoundWithDelay(int index)
