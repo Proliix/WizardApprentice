@@ -12,9 +12,8 @@ public class LightningstrikeImpact : MonoBehaviour
     List<Health> enemyHealth;
 
     [SerializeField] float timer;
-    [SerializeField] float damage = 3.33f;
-    [SerializeField] float damageDelay = 0.1f;
-    [SerializeField] float lifeTime = 2f;
+    [SerializeField] float damage = 50;
+    [SerializeField] float lifeTime = 0.25f;
     void Start()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
@@ -27,28 +26,13 @@ public class LightningstrikeImpact : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if (collision.gameObject.GetComponent<Health>() != null)
-                enemyHealth.Add(collision.gameObject.GetComponent<Health>());
+            collision.gameObject.GetComponent<Health>().RemoveHealth(playerStats.GetDamage(damage));
+
+           
         }
     }
 
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer >= playerStats.GetAttackSpeed(damageDelay))
-        {
-            timer = 0;
 
-            for (int i = 0; i < enemyHealth.Count; i++)
-            {
-                if (enemyHealth[i] != null)
-                {
-                    enemyHealth[i].RemoveHealth(playerStats.GetDamage(damage));
-                }
-            }
-
-        }
-    }
 
     
 }

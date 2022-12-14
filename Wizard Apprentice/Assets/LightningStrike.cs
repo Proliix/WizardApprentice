@@ -14,19 +14,19 @@ public class LightningStrike : MonoBehaviour, ICard
     [SerializeField] string description;
 
     [SerializeField] float shootCooldown = 0.25f;
-    [SerializeField] float damage = 10f;
+    [SerializeField] string StatsAreLocatedOnPrefab;
 
-
+    PlayerStats playerStats;
 
     GameObject activeLightningStrike;
-    Transform spawnpoint;
-    PlayerStats stats;
+    
 
     float timer;
 
     void Start()
     {
-        
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+
     }
 
     public void Effect()
@@ -58,9 +58,9 @@ public class LightningStrike : MonoBehaviour, ICard
     public void UpdateCard()
     {
         timer += Time.deltaTime;
-        if (timer >= shootCooldown)
+        if (timer >= playerStats.GetAttackSpeed(shootCooldown))
         {
-            timer -= shootCooldown;
+            timer = 0;
             Effect();
         }
     }
