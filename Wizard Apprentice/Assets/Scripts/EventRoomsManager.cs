@@ -10,11 +10,9 @@ public class EventRoomsManager : MonoBehaviour
     [SerializeField] public Button declineButton;
     [SerializeField] Reward reward;
 
-
     RoomManager roomManager;
     PlayerStats playerStats;
     
-
     void Start()
     {
         roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();

@@ -155,8 +155,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6422166620116230659}
-        m_TargetAssemblyTypeName: EventRoom1, Assembly-CSharp
-        m_MethodName: TaskOnClick
+        m_TargetAssemblyTypeName: EventRoomsManager, Assembly-CSharp
+        m_MethodName: TaskOnClickAccept
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -365,8 +365,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6422166620116230659}
-        m_TargetAssemblyTypeName: EventRoom1, Assembly-CSharp
-        m_MethodName: TaskOnClickD
+        m_TargetAssemblyTypeName: EventRoomsManager, Assembly-CSharp
+        m_MethodName: TaskOnClickDecline
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -414,7 +414,7 @@ RectTransform:
   - {fileID: 6422166619180275270}
   - {fileID: 6422166620880135509}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

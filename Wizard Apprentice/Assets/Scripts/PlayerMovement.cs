@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashingSpeed;
     [SerializeField] float activeSpeed;
     public float dashingTime = 0.2f;
-    [SerializeField] bool canDash = true;
+    [SerializeField] public bool canDash = true;
     public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
