@@ -204,20 +204,22 @@ public class RewardsHandler : MonoBehaviour
     {
         rewardScreen.SetActive(false);
         statScreenParent.SetActive(false);
-        stats.health += activeRewards[index].maxHealth;
-        stats.movementSpeed += activeRewards[index].movementSpeed;
-        stats.damage += activeRewards[index].damage;
-        stats.attackSpeed += activeRewards[index].attackSpeed;
-        stats.critChance += activeRewards[index].critChance;
-        stats.critDamage += activeRewards[index].critDamage;
-        stats.projectileSize += activeRewards[index].projectileSize;
-        stats.projectileSpeed += activeRewards[index].projectileSpeed;
-        stats.projectileAmount += activeRewards[index].projectileAmount;
+        stats.GiveStats(activeRewards[index]);
+        
+        //stats.health += activeRewards[index].maxHealth;
+        //stats.movementSpeed += activeRewards[index].movementSpeed;
+        //stats.damage += activeRewards[index].damage;
+        //stats.attackSpeed += activeRewards[index].attackSpeed;
+        //stats.critChance += activeRewards[index].critChance;
+        //stats.critDamage += activeRewards[index].critDamage;
+        //stats.projectileSize += activeRewards[index].projectileSize;
+        //stats.projectileSpeed += activeRewards[index].projectileSpeed;
+        //stats.projectileAmount += activeRewards[index].projectileAmount;
 
-        if (activeRewards[index].addHealh > 0)
-        {
-            stats.gameObject.GetComponent<Health>()?.HealPercentageOf(activeRewards[index].addHealh);
-        }
+        //if (activeRewards[index].addHealh > 0)
+        //{
+        //    stats.gameObject.GetComponent<Health>()?.HealPercentageOf(activeRewards[index].addHealh);
+        //}
     }
     #endregion
 

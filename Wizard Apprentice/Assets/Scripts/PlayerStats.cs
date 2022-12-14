@@ -34,4 +34,21 @@ public class PlayerStats : MonoBehaviour
         return AttackSpeedValue / attackSpeed;
     }
 
+    public void GiveStats(Reward newStats)
+    {
+        health += newStats.maxHealth;
+        movementSpeed += newStats.movementSpeed;
+        damage += newStats.damage;
+        attackSpeed += newStats.attackSpeed;
+        critChance += newStats.critChance;
+        critDamage += newStats.critDamage;
+        projectileSize += newStats.projectileSize;
+        projectileSpeed += newStats.projectileSpeed;
+        projectileAmount += newStats.projectileAmount;
+
+        if (newStats.addHealh > 0)
+        {
+            gameObject.GetComponent<Health>()?.HealPercentageOf(newStats.addHealh);
+        }
+    }
 }
