@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] GameObject exitDoorPrefab;
     [SerializeField] Sprite openDoorImage;
     GameObject currentRoomObject;
-    Room currentRoom;
+    [HideInInspector] public Room currentRoom;
     [SerializeField] GameObject roomParent;
     GameObject currentRoomParent;
     [SerializeField] EnemyManager enemyManager;
