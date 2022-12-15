@@ -2027,17 +2027,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1786813653}
-    - target: {fileID: 1801830341810095461, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.25
+    - target: {fileID: 2227809823445520057, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1801830341810095461, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801830341810095461, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.25
+    - target: {fileID: 2227809823445520057, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3228216035634398762, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2047,6 +2043,14 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1786813653}
+    - target: {fileID: 3386676453049871728, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3386676453049871728, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3975035592451256096, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2055,34 +2059,18 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1786813653}
-    - target: {fileID: 4214157399345826799, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.25
+    - target: {fileID: 5764292477448299249, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4214157399345826799, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4214157399345826799, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.25
+    - target: {fileID: 6218182873074801593, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6506703001355142673, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1786813653}
-    - target: {fileID: 7532773444427317016, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7532773444427317016, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7532773444427317016, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.25
-      objectReference: {fileID: 0}
     - target: {fileID: 8616646530660218123, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2171,10 +2159,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reward screen
       objectReference: {fileID: 0}
+    - target: {fileID: 8616646530660218231, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8616646530907202013, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1786813653}
+    - target: {fileID: 8616646530968990803, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616646530968990803, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616646531134944535, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
