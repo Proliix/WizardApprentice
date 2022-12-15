@@ -17,16 +17,18 @@ public class PlayerStats : MonoBehaviour
     public float GetCrit(float damageValue)
     {
         float returnValue = damageValue;
+        int randomNum = Random.Range(1, 101);
 
-        if (Random.Range(0, 101) <= critChance * 100)
+        if (randomNum <= critChance * 100)
             returnValue = damageValue * critDamage;
 
-        return Mathf.FloorToInt(returnValue);
+
+        return Mathf.RoundToInt(returnValue);
     }
 
     public int GetDamage(float damageValue)
     {
-        return Mathf.FloorToInt(damageValue * damage);
+        return Mathf.RoundToInt(damageValue * damage);
     }
 
     public float GetAttackSpeed(float AttackSpeedValue)
