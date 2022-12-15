@@ -3949,7 +3949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec260b7ee496094582a1236f4ace7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 679064214}
   effectSource: {fileID: 708408437}
 --- !u!4 &921360404
 Transform:
