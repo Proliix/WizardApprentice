@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8842748281547521037}
   - component: {fileID: 8842748281547521036}
-  - component: {fileID: 8842748281547521039}
   - component: {fileID: 8842748281547521032}
+  - component: {fileID: 4503677894879975618}
+  - component: {fileID: 8842748281547521039}
   - component: {fileID: 8842748281547521035}
   - component: {fileID: 8842748281547521034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crossbow skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8842748281547521036
 SpriteRenderer:
@@ -88,6 +89,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8842748281547521032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8842748281547521038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 785c2dffe40e9744da2406fd16e2ef83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 3
+  shootCooldown: 0.25
+  waitAfterShoot: 0.5
+  state: 0
+  spawnDistance: 0.5
+  spawnDeviation: 0.15
+--- !u!114 &4503677894879975618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8842748281547521038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472235d1be28e4749ba901948b3294de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
+  deathSound: {fileID: 8300000, guid: a6e2f2c7d43e7a84fb32daf00c24d531, type: 3}
+  maxHP: 50
+  hp: 50
+  hitCooldown: 1
+  removeSelf: 1
+  hasHitCooldown: 0
+  healthRemoveSpeed: 0.005
+  usesHealthBar: 0
+  healthbar: {fileID: 0}
+  removeHealthbar: 0
+  healthbarParent: {fileID: 0}
+  hasDeathAnimation: 0
+  hitEffectTime: 0.5
+  hitTransparancy: 0.5
+  flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!95 &8842748281547521039
 Animator:
   serializedVersion: 4
@@ -108,19 +156,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8842748281547521032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8842748281547521038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785c2dffe40e9744da2406fd16e2ef83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 2
 --- !u!50 &8842748281547521035
 Rigidbody2D:
   serializedVersion: 4
@@ -141,7 +176,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &8842748281547521034
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,7 +187,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.025437683, y: -0.06613779}

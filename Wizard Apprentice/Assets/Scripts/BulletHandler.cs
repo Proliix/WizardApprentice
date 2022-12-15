@@ -97,7 +97,7 @@ public class BulletHandler : MonoBehaviour
 
     }
 
-    void SetUpBullet(GameObject poolMember, Vector3 position, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage, float size, float speed)
+    void SetUpBullet(GameObject poolMember, Vector3 position, Vector3 direction, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage, float size, float speed)
     {
         poolMember.transform.position = position;
         poolMember.transform.localScale = Vector3.one * size;
@@ -108,7 +108,10 @@ public class BulletHandler : MonoBehaviour
         bullet.isPlayerBullet = isPlayer;
         bullet.moveAwayFromShoter = moveAwayFromShooter;
         bullet.UpdateColor();
-        bullet.UpdateDirection();
+        if (moveAwayFromShooter || direction == Vector3.zero)
+            bullet.UpdateDirection();
+        else
+            bullet.UpdateDirection(direction);
         bullet.ResetTimer();
         poolMember.SetActive(true);
     }
@@ -326,7 +329,7 @@ public class BulletHandler : MonoBehaviour
         {
             if (projectilePool[i].activeSelf == false)
             {
-                SetUpBullet(projectilePool[i], position, shooter, isPlayer, moveAwayFromShooter, damage, size, speed);
+                SetUpBullet(projectilePool[i], position, Vector3.zero, shooter, isPlayer, moveAwayFromShooter, damage, size, speed);
                 hasSpawned = true;
                 break;
             }
@@ -344,7 +347,42 @@ public class BulletHandler : MonoBehaviour
                 projectilePool[index].name = "Bullet: " + index;
                 if (i == 0)
                 {
-                    SetUpBullet(projectilePool[currentCount + i], position, shooter, isPlayer, moveAwayFromShooter, damage, size, speed);
+                    SetUpBullet(projectilePool[currentCount + i], position, Vector3.zero, shooter, isPlayer, moveAwayFromShooter, damage, size, speed);
+                }
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Spawns a bullet at position towards direction. If move away form shooter is true it will change direction depending on where it spawned compared to the shooter
+    /// </summary>
+    public void GetBullet(Vector3 position, Vector3 direciton, GameObject shooter, bool isPlayer, bool moveAwayFromShooter, float damage = 10f, float size = 0.5f, float speed = 10f)
+    {
+        bool hasSpawned = false;
+        for (int i = 0; i < projectilePool.Count; i++)
+        {
+            if (projectilePool[i].activeSelf == false)
+            {
+                SetUpBullet(projectilePool[i], position, direciton, shooter, isPlayer, moveAwayFromShooter, damage, size, speed);
+                hasSpawned = true;
+                break;
+            }
+        }
+
+        if (!hasSpawned)
+        {
+            int currentCount = projectilePool.Count;
+            for (int i = 0; i < 5; i++)
+            {
+                int index = currentCount + i;
+                projectilePool.Add(Instantiate(normalProjectile, poolParentNormal.transform.position, normalProjectile.transform.rotation, poolParentNormal.transform));
+                projectilePool[index].SetActive(false);
+                projectilePool[index].GetComponent<Bullet>().poolIndex = index;
+                projectilePool[index].name = "Bullet: " + index;
+                if (i == 0)
+                {
+                    SetUpBullet(projectilePool[currentCount + i], position, direciton, shooter, isPlayer, moveAwayFromShooter, damage, size, speed);
                 }
             }
         }

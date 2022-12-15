@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 2664954100238016235}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2664954099150742150
 SpriteRenderer:
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c8cf704a55f868246b4e028e67c8a407, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af7c5ce57fe684946b7c8a9b191f34f9, type: 3}
   m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 5
   timer: 0
+  stunned: 0
 --- !u!95 &2664954099150742144
 Animator:
   serializedVersion: 4
@@ -162,9 +163,13 @@ MonoBehaviour:
   healthRemoveSpeed: 0.005
   usesHealthBar: 0
   healthbar: {fileID: 0}
+  removeHealthbar: 0
+  healthbarParent: {fileID: 0}
+  hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!1 &2664954100238016234
 GameObject:
   m_ObjectHideFlags: 0

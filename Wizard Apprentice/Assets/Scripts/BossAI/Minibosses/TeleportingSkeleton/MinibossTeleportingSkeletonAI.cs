@@ -33,7 +33,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
     [SerializeField] float moveDelay;
 
     private int lastNumber;
-    
+    Vector3 parentPos;
 
 
     [SerializeField] GameObject target;
@@ -46,7 +46,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         MoveEnemy();
         target = GameObject.FindWithTag("Player");
-      
+        parentPos = gameObject.transform.parent.position;
     }
 
     void Update()
@@ -56,21 +56,21 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
         if (timer >= moveDelay && canMove == true)
         {
             timer -= moveDelay;
-           
+
             StartCoroutine(MoveEnemy());
         }
 
     }
 
- 
+
 
     IEnumerator MoveEnemy()
     {
 
-        
+
 
         canMove = false;
-        int currentNumber = Random.Range(1, 5);   
+        int currentNumber = Random.Range(1, 5);
 
         while (currentNumber == lastNumber)
         {
@@ -78,12 +78,12 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
         }
 
-         lastNumber = currentNumber;
+        lastNumber = currentNumber;
 
         switch (currentNumber)
         {
             case 1:
-                
+
                 movePos = new Vector3(-5, 5, 0);
 
                 break;
@@ -95,16 +95,16 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
             case 3:
                 movePos = new Vector3(5, -5, 0);
-                
+
                 break;
-                    
+
             case 4:
                 movePos = new Vector3(-5, -5, 0);
-               
+
                 break;
 
         }
-       
+
         yield return new WaitForSeconds(1f);
         GoInvisable();
         yield return new WaitForSeconds(1f);
@@ -118,8 +118,8 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-      StartCoroutine(AttackPattern());
-        
+        StartCoroutine(AttackPattern());
+
         yield return null;
     }
 
@@ -151,10 +151,10 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
     private void TeleportIndicator()
     {
-        AttackIndicator.CreateCircle(movePos, indicatorRadius, indicatorTime, true);
+        AttackIndicator.CreateCircle(parentPos + movePos, indicatorRadius, indicatorTime, true);
     }
 
-  
+
 
     private void GoInvisable()
     {
@@ -167,7 +167,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<CapsuleCollider2D>().GetComponentInChildren<CapsuleCollider2D>().enabled = true;
-    
+
     }
 
 
