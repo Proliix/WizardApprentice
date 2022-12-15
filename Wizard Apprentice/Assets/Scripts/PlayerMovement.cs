@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         activeSpeed = dashingSpeed;
-        rb2d.velocity = dashMovement.normalized * (activeSpeed + stats.movementSpeed);
+        rb2d.velocity = dashMovement.normalized * (activeSpeed * stats.movementSpeed);
         health.SetInvicible(dashingTime + 0.2f);
         yield return new WaitForSeconds(dashingTime);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public float health = 1f;
-    public float movementSpeed = 0f;
+    public float movementSpeed = 1f;
     public float damage = 1f;
     public float attackSpeed = 1f;
     public float critChance = 0.05f;
