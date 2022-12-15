@@ -11,6 +11,10 @@ public class Drag : MonoBehaviour
     public Inventory inventory;
     public GameObject lastObjectAttachedTo;
     float cardHoverScale = 1.25f;
+    float timeToOpenDescriptionMenu = 0.5f;
+
+    Coroutine currentCoroutine;
+
     private void Start()
     {
     }
@@ -158,11 +162,20 @@ public class Drag : MonoBehaviour
     public void PointerEnterHandler(BaseEventData data)
     {
         transform.localScale = new Vector3(cardHoverScale, cardHoverScale);
+        if(currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+        currentCoroutine = StartCoroutine(WaitToOpenDescription(this.gameObject));
     }
 
     public void PointerExitHandler(BaseEventData data)
     {
-        
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+        inventory.HideDescriptionObject();
         transform.localScale = new Vector3(1f, 1f);
     }
 
@@ -192,5 +205,11 @@ public class Drag : MonoBehaviour
         float coveredY = Mathf.Max(Mathf.Min(myTop, otherTop) - Mathf.Max(myBottom, otherBottom),0);
 
         return coveredX * coveredY;
+    }
+
+    IEnumerator WaitToOpenDescription(GameObject cardObject)
+    {
+        yield return new WaitForSeconds(timeToOpenDescriptionMenu);
+        inventory.ShowDescriptionObject(cardObject.GetComponent<ICard>().GetTitle(), cardObject.GetComponent<ICard>().GetDescription(), (Vector2)transform.localPosition, true, new Vector2(0,lastObjectAttachedTo.GetComponent<CardHolder>().size.y / 2));
     }
 }

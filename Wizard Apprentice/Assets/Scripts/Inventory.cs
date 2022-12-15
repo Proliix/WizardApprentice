@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -9,6 +10,9 @@ public class Inventory : MonoBehaviour
     public CardHandler cardHandler;
     public List<CardHolder> cardHolders = new List<CardHolder>();
     public CardHolder trashCan;
+    [SerializeField] GameObject cardDescriptionObject;
+    [SerializeField] TextMeshProUGUI cardTitleText;
+    [SerializeField] TextMeshProUGUI cardDescriptionText;
 
     void Start()
     {
@@ -42,6 +46,30 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void ShowDescriptionObject()
+    {
+        cardDescriptionObject.SetActive(true);
+    }
+
+    public void ShowDescriptionObject(string cardTitle, string cardDescription, Vector2 position)
+    {
+        cardDescriptionObject.transform.localPosition = position;
+        cardTitleText.text = cardTitle;
+        cardDescriptionText.text = cardDescription;
+        cardDescriptionObject.SetActive(true);
+    }
+    public void ShowDescriptionObject(string cardTitle, string cardDescription, Vector2 position, bool adjustToLeft, Vector2 adjustAmount)
+    {
+        cardDescriptionObject.transform.localPosition = position + (new Vector2(0,(cardDescriptionObject.GetComponent<RectTransform>().sizeDelta.y/2))+adjustAmount);
+        cardTitleText.text = cardTitle;
+        cardDescriptionText.text = cardDescription;
+        cardDescriptionObject.SetActive(true);
+    }
+
+    public void HideDescriptionObject()
+    {
+        cardDescriptionObject.SetActive(false);
+    }
     public bool IsFull()
     {
         bool isfull = true;
