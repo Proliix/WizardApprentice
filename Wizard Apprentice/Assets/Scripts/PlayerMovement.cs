@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
+
+    bool CanMove = true;
     PlayerStats stats;
     Vector2 dashMovement = Vector2.right;
 
@@ -42,41 +44,47 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
-
-
-        if (!isDashing)
+        if (CanMove)
         {
-            //get input from player
-            float horInput = Input.GetAxisRaw("Horizontal");
-            float verInput = Input.GetAxisRaw("Vertical");
 
-            animator.SetFloat("Horizontal", horInput);
-            animator.SetFloat("Vertical", verInput);
-            movement.x = horInput;
-            movement.y = verInput;
 
-            if ((horInput >= 0.1 || horInput <= -0.1) || (verInput >= 0.1 || verInput <= -0.1))
-                dashMovement = movement;
 
-            MovePlayer();
-        }
+            if (!isDashing)
+            {
+                //get input from player
+                float horInput = Input.GetAxisRaw("Horizontal");
+                float verInput = Input.GetAxisRaw("Vertical");
 
-        for (int i = 0; i < dashIndicators.Length; i++)
-        {
-            dashIndicators[i]?.SetActive(canDash);
-        }
+                animator.SetFloat("Horizontal", horInput);
+                animator.SetFloat("Vertical", verInput);
+                movement.x = horInput;
+                movement.y = verInput;
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
-        {
-            SoundManager.Instance.PlayAudio(dashSound);
-            StartCoroutine(Dash());
+                if ((horInput >= 0.1 || horInput <= -0.1) || (verInput >= 0.1 || verInput <= -0.1))
+                    dashMovement = movement;
 
+                MovePlayer();
+            }
+
+            for (int i = 0; i < dashIndicators.Length; i++)
+            {
+                dashIndicators[i]?.SetActive(canDash);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && canDash)
+            {
+                SoundManager.Instance.PlayAudio(dashSound);
+                StartCoroutine(Dash());
+
+            }
         }
 
     }
 
-
+    public void SetCanMove(bool value)
+    {
+        CanMove = value;
+    }
     private IEnumerator Dash()
     {
 
