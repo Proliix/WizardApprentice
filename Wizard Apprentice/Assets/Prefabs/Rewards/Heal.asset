@@ -16,6 +16,7 @@ MonoBehaviour:
   EffectText: 'i feel slightly refreshed
 
     current health <color=green>+{6}</color>'
+  Image: {fileID: 21300000, guid: 8391ab97137ee32479d470a19db69af2, type: 3}
   maxHealth: 0
   movementSpeed: 0
   damage: 0

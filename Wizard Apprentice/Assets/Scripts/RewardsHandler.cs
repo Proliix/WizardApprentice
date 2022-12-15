@@ -13,6 +13,7 @@ public class RewardsHandler : MonoBehaviour
     public Reward healReward;
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
+    [SerializeField] Image[] potionImage = new Image[3];
     [Header("Card Rewards")]
     [SerializeField] GameObject cardScreenParent;
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
@@ -180,9 +181,15 @@ public class RewardsHandler : MonoBehaviour
         }
         for (int i = 0; i < titles.Length; i++)
         {
+            potionImage[i].color = new Color(1, 1, 1, 1);
             titles[i].text = activeRewards[i].Title;
             effectText[i].text = activeRewards[i].GetDesription();
-        }
+
+            if (activeRewards[i].Image != null)
+                potionImage[i].sprite = activeRewards[i].Image;
+            else
+                potionImage[i].color = new Color(0, 0, 0, 0);
+            }
     }
 
     public void SelectRewardStat(int index)
