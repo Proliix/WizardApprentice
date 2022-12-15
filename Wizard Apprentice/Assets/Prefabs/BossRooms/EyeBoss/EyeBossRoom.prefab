@@ -617,9 +617,10 @@ GameObject:
   - component: {fileID: 4629461179871687204}
   - component: {fileID: 4629461179871687210}
   - component: {fileID: 4629461179871687211}
-  - component: {fileID: 2413505705107542157}
   - component: {fileID: 1583371015}
   - component: {fileID: 1790913901745312041}
+  - component: {fileID: 2436764416846040811}
+  - component: {fileID: 8835115304869299359}
   m_Layer: 6
   m_Name: EyeBoss
   m_TagString: Enemy
@@ -636,7 +637,7 @@ Transform:
   m_GameObject: {fileID: 4629461179871687206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4629461180731313549}
@@ -762,22 +763,6 @@ MonoBehaviour:
   hitTransparancy: 0.5
   flashSpeed: 0.05
   playerScreenShakeAmount: 1
---- !u!58 &2413505705107542157
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4629461179871687206}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5579216
 --- !u!50 &1583371015
 Rigidbody2D:
   serializedVersion: 4
@@ -819,6 +804,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &2436764416846040811
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629461179871687206}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0073572095, y: 0.06992516}
+  m_Size: {x: 2.3965151, y: 2.0212216}
+  m_Direction: 1
+--- !u!70 &8835115304869299359
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629461179871687206}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.036800988, y: -0.32016295}
+  m_Size: {x: 2.7497804, y: 1.4912512}
+  m_Direction: 1
 --- !u!1 &4629461180731313550
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +873,7 @@ Transform:
   - {fileID: 400451401649550738}
   - {fileID: 889790491}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6164930781447964727
 GameObject:

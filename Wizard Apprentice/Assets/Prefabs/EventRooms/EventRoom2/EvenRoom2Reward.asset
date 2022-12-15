@@ -15,10 +15,10 @@ MonoBehaviour:
   Title: This is the title
   EffectText: This is the flavour text
   Image: {fileID: 0}
-  maxHealth: 0
+  maxHealth: 0.1
   movementSpeed: 0
-  damage: 0
-  attackSpeed: 0
+  damage: 0.1
+  attackSpeed: 0.1
   critChance: 0
   critDamage: 0
   addHealh: 0

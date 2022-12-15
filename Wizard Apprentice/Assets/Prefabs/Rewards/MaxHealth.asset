@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: MaxHealth
   m_EditorClassIdentifier: 
   Title: Max HP Potion
-  EffectText: '
-
-    You gain: <color=green>+({0}) Max HP</color> '
+  EffectText: 'You gain: <color=green>+({0}) Max HP</color> '
   Image: {fileID: 21300000, guid: 39182de897f68a5469ae947e9702a472, type: 3}
   maxHealth: 0.1
   movementSpeed: 0
