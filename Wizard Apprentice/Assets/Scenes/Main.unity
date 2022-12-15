@@ -2135,6 +2135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reward screen
       objectReference: {fileID: 0}
+    - target: {fileID: 8616646530660218231, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8616646530907202013, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
