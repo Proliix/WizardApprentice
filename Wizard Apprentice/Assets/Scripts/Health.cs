@@ -19,9 +19,12 @@ public class Health : MonoBehaviour
     [SerializeField] bool removeSelf = true;
     [SerializeField] bool hasHitCooldown = false;
     [Header("UI")]
-    [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] bool usesHealthBar = false;
+    [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] Image healthbar;
+    [SerializeField] Image damageBufferhbar;
+    [SerializeField] float damagebufferUpTime = 0.26f;
+    [SerializeField] float damageBufferRemoveSpeed = 0.0025f;
     [Tooltip("Removes healthbar when health is <= 0")]
     [SerializeField] bool removeHealthbar = false;
     [Header("only needed if remove healthbar is active")]
@@ -53,12 +56,23 @@ public class Health : MonoBehaviour
 
     HitNumberHandler hitNumbers;
 
+    float currentDamageBufferSpeed;
+    float DamageBufferValue;
+
+    float timer = 0;
+
     SpriteRenderer spriteRenderer;
     Animator anim;
     float healthbarValue = 100f;
     bool canBeHit = true;
     private void Start()
     {
+        if (usesHealthBar && damageBufferhbar == null)
+        {
+            damageBufferhbar = Instantiate(healthbar, healthbar.transform.position, healthbar.transform.rotation, healthbar.transform.parent);
+            healthbar.transform.parent = damageBufferhbar.transform;
+        }
+
         stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         if (gameObject.CompareTag("Player"))
         {
@@ -76,12 +90,13 @@ public class Health : MonoBehaviour
         tempColor = startColor;
         targetRGBA = new Quaternion(hitColor.r, hitColor.g, hitColor.b, hitTransparancy);
 
-
         if (usesHealthBar)
         {
             healthbar.gameObject.SetActive(true);
             healthbarValue = hp;
             healthbar.fillAmount = 1;
+            DamageBufferValue = hp;
+            damageBufferhbar.fillAmount = 1;
         }
     }
 
@@ -94,14 +109,22 @@ public class Health : MonoBehaviour
             {
                 float healHp = newHp - maxHP;
                 maxHP = newHp;
-                AddHealth(healHp);
+                AddHealth(healHp / 2);
             }
         }
 
         if (usesHealthBar)
         {
+            timer += Time.deltaTime;
             healthbarValue = Mathf.SmoothDamp(healthbarValue, hp, ref currentHealthRemoveSpeed, healthRemoveSpeed, 100, Time.deltaTime);
             healthbar.fillAmount = (healthbarValue / maxHP);
+
+            if (timer > damagebufferUpTime)
+            {
+                DamageBufferValue = Mathf.SmoothDamp(DamageBufferValue, hp, ref currentDamageBufferSpeed, damageBufferRemoveSpeed, 100, Time.deltaTime);
+                damageBufferhbar.fillAmount = (DamageBufferValue / maxHP);
+            }
+
         }
 
         if (hitEffectActve)
@@ -193,6 +216,8 @@ public class Health : MonoBehaviour
                 }
             }
 
+            if (usesHealthBar)
+                timer = 0;
 
             hp -= value;
             if (hp > 0)
@@ -214,7 +239,7 @@ public class Health : MonoBehaviour
     {
         return hp;
     }
-    
+
     public float GetStartMaxHp()
     {
         return startHealth;

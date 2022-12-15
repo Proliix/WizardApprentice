@@ -230,6 +230,7 @@ MonoBehaviour:
   HP: 0
   maxHP: 0
   isAlive: 1
+  damage: 10
   attackDelay: 0.125
   patternDelay: 1
   pausetime: 0.5
@@ -278,9 +279,12 @@ MonoBehaviour:
   hitCooldown: 1
   removeSelf: 0
   hasHitCooldown: 0
-  healthRemoveSpeed: 0.005
   usesHealthBar: 1
+  healthRemoveSpeed: 0.005
   healthbar: {fileID: 6471494261871217660}
+  damageBufferhbar: {fileID: 7133186773945957843}
+  damagebufferUpTime: 0.26
+  damageBufferRemoveSpeed: 0.0015
   removeHealthbar: 1
   healthbarParent: {fileID: 4025330548894195490}
   hasDeathAnimation: 0
@@ -651,6 +655,17 @@ RectTransform:
 --- !u!114 &6471494261871217660 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1806190742233198109, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}
+  m_PrefabInstance: {fileID: 4674663121602258401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7133186773945957843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2459412642598000690, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}
   m_PrefabInstance: {fileID: 4674663121602258401}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

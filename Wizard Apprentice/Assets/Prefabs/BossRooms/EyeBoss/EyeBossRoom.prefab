@@ -749,9 +749,12 @@ MonoBehaviour:
   hitCooldown: 1
   removeSelf: 0
   hasHitCooldown: 0
-  healthRemoveSpeed: 0.005
   usesHealthBar: 1
+  healthRemoveSpeed: 0.005
   healthbar: {fileID: 7931830088294003908}
+  damageBufferhbar: {fileID: 6134733224443953899}
+  damagebufferUpTime: 0.26
+  damageBufferRemoveSpeed: 0.0015
   removeHealthbar: 1
   healthbarParent: {fileID: 889790490}
   hasDeathAnimation: 0
@@ -1079,6 +1082,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8575809827172088514, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}
   m_PrefabInstance: {fileID: 8575809826954435289}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6134733224443953899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2459412642598000690, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}
+  m_PrefabInstance: {fileID: 8575809826954435289}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7931830088294003908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1806190742233198109, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}

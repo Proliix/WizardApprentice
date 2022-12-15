@@ -9,6 +9,8 @@ public class Reward : ScriptableObject
     public string Title = "This is the title";
     [TextArea(2, 10)]
     public string EffectText = "This is the flavour text";
+    [Tooltip("It is okay to be null then it just will have no image")]
+    public Sprite Image;
     [Header("Player Stats")]
     [Tooltip("{0}")] public float maxHealth = 0f;
     [Tooltip("{1}")] public float movementSpeed = 0f;
