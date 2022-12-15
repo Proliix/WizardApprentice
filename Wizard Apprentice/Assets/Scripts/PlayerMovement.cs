@@ -78,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
+        else
+        {
+            animator.SetFloat("Horizontal", rb2d.velocity.normalized.x);
+            animator.SetFloat("Vertical", rb2d.velocity.normalized.y);
+        }
 
     }
 
