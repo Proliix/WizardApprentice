@@ -48,6 +48,16 @@ public class CardHandler : MonoBehaviour
         return returnValue;
     }
 
+    public bool CheckInSlot(ICard card, int index)
+    {
+        bool returnValue = false;
+
+        if (cards[index].GetType() == card.GetType())
+            returnValue = true;
+
+        return returnValue;
+    }
+
     public void ReplaceCard(GameObject card, int index)
     {
         if (card.GetComponent<ICard>() == null)
