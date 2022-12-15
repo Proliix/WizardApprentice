@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CritDamage
   m_EditorClassIdentifier: 
   Title: Crit Damage Potion
-  EffectText: 'You gain: <color=#F334DA>+({5})% Crit Damage</color>
+  EffectText: 'You gain: <color=#F334DA>+({5}) Crit Damage</color>
 
 
 '
