@@ -35,6 +35,7 @@ public class EventRoomsManager : MonoBehaviour
     
     private void ExitEvent()
     {
+        gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
         roomManager.PlayerWalkThroughDoor();
     }
 
