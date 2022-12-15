@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
   m_Name: Damage
   m_EditorClassIdentifier: 
-  Title: Arcane Potion
-  EffectText: Your magic becomes stronger and your damage multiplier gains <color=red>
-    +{2} </color>
+  Title: Damage Potion
+  EffectText: 'You gain: <color=red>+({2}) Damage </color>'
   Image: {fileID: 21300000, guid: 2c44309edc14767499b60812fe71d349, type: 3}
   maxHealth: 0
   movementSpeed: 0
