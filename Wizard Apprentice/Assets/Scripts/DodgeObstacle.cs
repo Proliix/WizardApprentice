@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class DodgeObstacle : MonoBehaviour
 {
 
     GameObject playerTarget;
     PlayerMovement playerMovement;
-
+    [SerializeField] float TimesFailedDodgeroll = 0;
 
 
     private void Start()
@@ -31,7 +31,9 @@ public class DodgeObstacle : MonoBehaviour
 
     IEnumerator DeathByLava()
     {
-        playerTarget.transform.position = new Vector3(0, -27f, 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+       // playerTarget.transform.position = new Vector3(0, -27f, 0);
         yield return null;
     }
 

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 792088773941804642}
   - component: {fileID: 4592997266121685278}
-  m_Layer: 6
+  - component: {fileID: 4858932889243357828}
+  m_Layer: 0
   m_Name: Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,12 +43,25 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.006463319, y: -0.16158316}
   m_Size: {x: 0.38366014, y: 0.61220044}
   m_Direction: 0
+--- !u!114 &4858932889243357828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544537847569436152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8a53f48112c3348a7d34f814dabccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &8152395500555433418
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,9 +199,13 @@ MonoBehaviour:
   healthRemoveSpeed: 0.005
   usesHealthBar: 0
   healthbar: {fileID: 0}
+  removeHealthbar: 0
+  healthbarParent: {fileID: 0}
+  hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
   flashSpeed: 0.05
+  playerScreenShakeAmount: 1
 --- !u!50 &6583972212536658051
 Rigidbody2D:
   serializedVersion: 4

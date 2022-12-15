@@ -18,6 +18,7 @@ public class CrystallBossAI : MonoBehaviour
     [SerializeField] bool isAlive = true;
 
     [Header("Attack Variables")]
+    [SerializeField] float damage = 10;
     [SerializeField] float attackDelay = 0.04f;
     [SerializeField] float patternDelay = 3;
     [SerializeField] float pausetime = 0.5f;
@@ -173,13 +174,13 @@ public class CrystallBossAI : MonoBehaviour
 
         for (int i = 0; i < targets.Length; i++)
         {
-            bulletHandler.GetBullet(transform.position, transform.position - targets[i].transform.position, false, 10, 0.5f, bulletSpeed);
+            bulletHandler.GetBullet(transform.position, transform.position - targets[i].transform.position, false, damage, 0.5f, bulletSpeed);
         }
     }
 
     void RandomAttack()
     {
-        bulletHandler.GetCircleShot(randomBulletAmount, gameObject, false, Random.Range(0, 360f), 10, randomBulletSize, randomBulletSpeed);
+        bulletHandler.GetCircleShot(randomBulletAmount, gameObject, false, Random.Range(0, 360f), damage, randomBulletSize, randomBulletSpeed);
 
     }
 
