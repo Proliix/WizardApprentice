@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1171437109815066233}
   - component: {fileID: 1806190742233198109}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 8240925988101555038}
   - component: {fileID: 2459412642598000690}
   m_Layer: 5
-  m_Name: Slider (2)
+  m_Name: Hitbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +478,7 @@ RectTransform:
   - {fileID: 3393130231824900213}
   - {fileID: 2631894293587140298}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

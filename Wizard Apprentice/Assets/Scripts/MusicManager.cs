@@ -122,6 +122,7 @@ public class MusicManager : MonoBehaviour
         if (newType != musicType)
         {
             musicType = newType;
+            currentLoopStarted = false;
 
             switch (musicType)
             {
