@@ -73,10 +73,10 @@ public class ZoneCard : MonoBehaviour, ICard
     public void UpdateCard()
     {
         timer += Time.deltaTime;
-        if (timer >= attackDelay)
+        if (timer >= stats.GetAttackSpeed(attackDelay))
         {
             Effect();
-            timer -= 0;
+            timer = 0;
         }
 
         if (hasActivated == false)
