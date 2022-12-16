@@ -10,13 +10,15 @@ public class DodgeObstacle : MonoBehaviour
     PlayerMovement playerMovement;
     [SerializeField] float TimesFailedDodgeroll = 0;
     float counter;
+    [SerializeField] TextMeshPro textMeshPro;
 
     private void Start()
     {
         playerTarget = GameObject.FindGameObjectWithTag("Player");
         playerMovement = playerTarget.GetComponent<PlayerMovement>();
         TimesFailedDodgeroll = 0;
-        gameObject.GetComponentInChildren<TextMeshPro>().enabled = false;
+        textMeshPro.enabled = false;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,7 +40,7 @@ public class DodgeObstacle : MonoBehaviour
          
         if (TimesFailedDodgeroll >= 3)
         {
-            gameObject.GetComponentInChildren<TextMeshPro>().enabled = true;
+            textMeshPro.enabled = true;
 
         }
 
@@ -49,12 +51,12 @@ public class DodgeObstacle : MonoBehaviour
             else
                 counter ++;
 
-            gameObject.GetComponentInChildren<TextMeshPro>().text += "!";
-            gameObject.GetComponentInChildren<TextMeshPro>().fontSize += TimesFailedDodgeroll / 50;
+            textMeshPro.text += "!";
+            textMeshPro.fontSize += TimesFailedDodgeroll / 50;
 
             if (TimesFailedDodgeroll >= 10)
             {
-                gameObject.GetComponentInChildren<TextMeshPro>().color = Color.red;
+                textMeshPro.color = Color.red;
             }
         }
     }
