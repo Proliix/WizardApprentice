@@ -123,6 +123,7 @@ public class MusicManager : MonoBehaviour
         {
             musicType = newType;
             currentLoopStarted = false;
+            StopCoroutine(StopMusicAfterTime());
 
             switch (musicType)
             {
@@ -161,7 +162,6 @@ public class MusicManager : MonoBehaviour
             isAudioSource1 = !isAudioSource1;
             currentLoopStarted = false;
 
-            StopCoroutine(StopMusicAfterTime());
             StartCoroutine(StopMusicAfterTime());
         }
     }
