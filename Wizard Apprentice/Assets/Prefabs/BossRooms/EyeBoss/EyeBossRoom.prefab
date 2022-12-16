@@ -755,7 +755,7 @@ MonoBehaviour:
   healthbar: {fileID: 7931830088294003908}
   damageBufferhbar: {fileID: 6134733224443953899}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 0.0015
+  damageBufferRemoveSpeed: 0.75
   removeHealthbar: 1
   healthbarParent: {fileID: 889790490}
   hasDeathAnimation: 0
@@ -873,7 +873,7 @@ Transform:
   - {fileID: 400451401649550738}
   - {fileID: 889790491}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6164930781447964727
 GameObject:

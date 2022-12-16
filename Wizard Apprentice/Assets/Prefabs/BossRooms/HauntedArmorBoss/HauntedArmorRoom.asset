@@ -16,3 +16,5 @@ MonoBehaviour:
   roomSize: {x: 33, y: 35}
   roomDifficulty: 0
   generateRandomRoom: 0
+  roomAlreadyHasDoor: 0
+  musicType: 1

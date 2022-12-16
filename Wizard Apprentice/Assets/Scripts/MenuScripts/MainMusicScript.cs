@@ -9,12 +9,20 @@ public class MainMusicScript : MonoBehaviour
 
     bool loopStarted = false;
     AudioSource audioSource;
+    Animator anim;
 
     private void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetTrigger("FadeIn");
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = intro;
         audioSource.Play();
+    }
+
+    public void FadeOut()
+    {
+        anim.SetTrigger("FadeOut");
     }
 
     private void Update()

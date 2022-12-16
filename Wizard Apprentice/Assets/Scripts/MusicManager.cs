@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MusicType { Normal, Boss, Event, Treasure,Map }
+public enum MusicType { Normal, Boss, Event, Treasure, Map }
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] GameObject musicObj1;
@@ -142,8 +142,8 @@ public class MusicManager : MonoBehaviour
                     currentLoop = treasureLoop;
                     break;
                 case MusicType.Map:
-                    currentIntro = treasureIntro;
-                    currentLoop = treasureLoop;
+                    currentIntro = mapIntro;
+                    currentLoop = mapLoop;
                     break;
             }
 
@@ -160,6 +160,7 @@ public class MusicManager : MonoBehaviour
             isAudioSource1 = !isAudioSource1;
             currentLoopStarted = false;
 
+            StopCoroutine(StopMusicAfterTime());
             StartCoroutine(StopMusicAfterTime());
         }
     }
@@ -178,7 +179,7 @@ public class MusicManager : MonoBehaviour
             anim2.SetTrigger("FadeIn");
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         if (isAudioSource1)
         {
             audioSource2.Stop();

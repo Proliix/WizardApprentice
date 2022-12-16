@@ -29,11 +29,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Slider effectVolume;
     [SerializeField] Image effectImage;
 
+    MainMusicScript musicScript;
+    bool playSfxSound = false;
     int sfxFix = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        Invoke("PlaySfxSoundOn", 1);
+        musicScript = gameObject.GetComponent<MainMusicScript>();
         StartCoroutine(FadeInObjects());
         bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
         settingsPanel.SetActive(false);
@@ -157,8 +161,14 @@ public class MenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (index == sfxFix)
         {
-            sfxFix = 0;
-            sfxSource.Play();
+            if (playSfxSound)
+            {
+
+                sfxFix = 0;
+                sfxSource.Play();
+            }
+            else
+                playSfxSound = true;
         }
 
     }
@@ -175,6 +185,7 @@ public class MenuManager : MonoBehaviour
     public void StartGameButtonClicked()
     {
         cameraAnimator.SetTrigger("MoveIntoCave");
+        musicScript?.FadeOut();
         backgroundObject.transform.parent = infrontParent;
         Invoke("LoadMainScene", 1f);
         //Zoom in on cave opening

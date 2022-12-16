@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             canWalkThroughAnyDoor = !canWalkThroughAnyDoor;
         }
@@ -65,10 +65,11 @@ public class RoomManager : MonoBehaviour
             Destroy(currentRoomParent);
         }
         currentRoom = room;
+        MusicManager.Instance.ChangeToMusicType(room.musicType);
         currentRoomParent = Instantiate(roomParent);
         currentRoomObject = Instantiate(room.roomPrefab, currentRoomParent.transform);
         currentRoomObject.transform.position += new Vector3((float)room.roomSize.x / 2f, (float)room.roomSize.y / 2f, 0);
-        if(room.generateRandomRoom)
+        if (room.generateRandomRoom)
         {
             LoadRoomFloor(room.roomSize);
         }
@@ -81,7 +82,7 @@ public class RoomManager : MonoBehaviour
             }
         }
         enemyManager.enemyObjects = enemyObjects;
-        if(!room.roomAlreadyHasDoor)
+        if (!room.roomAlreadyHasDoor)
         {
             doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y - 0.5f, 0), Quaternion.identity, currentRoomParent.transform);
         }
@@ -93,10 +94,11 @@ public class RoomManager : MonoBehaviour
         if (enemyObjects.Count <= 0 || canWalkThroughAnyDoor || currentRoomType == 5)
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
+            MusicManager.Instance.ChangeToMusicType(MusicType.Map);
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
-            switch(currentRoomType)
+            switch (currentRoomType)
             {
                 case 0:
                     roomSelectScreenGenerator.GenerateAnotherFloor();
@@ -119,7 +121,7 @@ public class RoomManager : MonoBehaviour
     }
     public void LoadRoomFloor(Vector2Int size)
     {
-        cellManager.GenerateRoom(size, currentRoomParent.transform,true);
+        cellManager.GenerateRoom(size, currentRoomParent.transform, true);
     }
 
     public void LoadRandomRoom()
@@ -162,7 +164,7 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
-        if(enemyObjects.Count <= 0)
+        if (enemyObjects.Count <= 0)
         {
             OpenDoor();
         }
@@ -170,14 +172,17 @@ public class RoomManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        if(!currentRoom.roomAlreadyHasDoor)
+        if (!currentRoom.roomAlreadyHasDoor)
             doorObject.GetComponentInChildren<SpriteRenderer>().sprite = openDoorImage;
     }
 
     public void LoadNewRoom(int roomType)
     {
         bulletHandler.ResetAll();
-        cardHandler.isActive = true;
+        
+        if (roomType != 4)
+            cardHandler.isActive = true;
+      
         switch (roomType)
         {
             case 0:
