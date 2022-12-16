@@ -7318,7 +7318,11 @@ MonoBehaviour:
   treasureRoomsPoolAmount: 2
   possibleMysteryRooms:
   - {fileID: 11400000, guid: f0fcf371fb5720b409221976c82079c7, type: 2}
-  mysteryRoomsPoolAmount: 5
+  - {fileID: 11400000, guid: f1fbdc9c31c327d44ba03db8cefd30d0, type: 2}
+  - {fileID: 11400000, guid: 07eb6ebc804b9494584c478d6062a807, type: 2}
+  - {fileID: 11400000, guid: 11bdc2b15fd4d6740b2a80cb6cd8c214, type: 2}
+  - {fileID: 11400000, guid: 5ea815aadace9d04c800f2dc4d1ed2fa, type: 2}
+  mysteryRoomsPoolAmount: 3
   currentFloor: 0
 --- !u!114 &1786813660
 MonoBehaviour:
