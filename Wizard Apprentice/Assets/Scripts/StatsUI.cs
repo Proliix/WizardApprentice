@@ -80,10 +80,10 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateStats()
     {
-        string dmgText = "DMG : " + Mathf.RoundToInt(damage);
+        string dmgText = "DMG : " +damage.ToString("F2");
         damageTMP.SetText(dmgText);
 
-        string attackSpeedText = "AS : " + Mathf.RoundToInt(attackSpeed);
+        string attackSpeedText = "AS : " +attackSpeed.ToString("F2");
         attackSpeedTMP.SetText(attackSpeedText);
 
         string critMultText = "Crit DMG : " + Mathf.RoundToInt(critDmgMultiplier * 100) + "%";
@@ -92,13 +92,13 @@ public class StatsUI : MonoBehaviour
         string critChanceText = "Crit chance : " + Mathf.RoundToInt(critChance * 100) + "%";
         critChanceTMP.SetText(critChanceText);
 
-        string moveSpeedText = "MS : " + Mathf.RoundToInt(moveSpeed);
+        string moveSpeedText = "MS : " + moveSpeed.ToString("F2");
         moveSpeedTMP.SetText(moveSpeedText);
 
-        string bulletSpeedText = "Bullet Speed : " + Mathf.RoundToInt(bulletSpeed);
+        string bulletSpeedText = "Bullet Speed : " + bulletSpeed.ToString("F2");
         bulletSpeedTMP.SetText(bulletSpeedText);
 
-        string bulletSizeText = "Bullet Size : " + Mathf.RoundToInt(bulletSize);
+        string bulletSizeText = "Bullet Size : " + bulletSize.ToString("F2");
         bulletSizeTMP.SetText(bulletSizeText);
 
     }
