@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator Dash()
     {
-
+        
         //dashIndicator.ChangeDashIndicator();
         canDash = false;
         isDashing = true;
