@@ -33,6 +33,7 @@ public class MusicManager : MonoBehaviour
     AudioClip currentLoop;
     bool isAudioSource1 = true;
     bool currentLoopStarted = false;
+    bool hasStoppedLastPlayer = true;
 
     public static MusicManager Instance;
 
@@ -75,32 +76,47 @@ public class MusicManager : MonoBehaviour
             ChangeToMusicType(musicType - 1);
         }
 
-        if (currentLoop == null)
+        if (!hasStoppedLastPlayer)
         {
-            if (isAudioSource1)
-                audioSource1.loop = true;
-            else
-                audioSource2.loop = true;
-
-            currentLoopStarted = true;
+            if ((isAudioSource1 ? audioSource1.volume : audioSource2.volume) <= 0)
+            {
+                Debug.Log("Is here");
+                switch (isAudioSource1)
+                {
+                    case false:
+                        audioSource1.Stop();
+                        audioSource1.loop = false;
+                        break;
+                    case true:
+                        audioSource2.Stop();
+                        audioSource2.loop = false;
+                        break;
+                }
+                hasStoppedLastPlayer = true;
+            }
         }
 
-        if (audioSource1.time >= currentIntro.length && !currentLoopStarted && isAudioSource1)
+
+        if (!currentLoopStarted)
         {
-            Debug.Log("Is 1");
-            currentLoopStarted = true;
-            StartCurrentLoop();
-        }
-        else if (audioSource2.time >= currentIntro.length && !currentLoopStarted && !isAudioSource1)
-        {
-            Debug.Log("Is 2");
-            currentLoopStarted = true;
-            StartCurrentLoop();
+
+            if (audioSource1.time >= currentIntro.length && isAudioSource1)
+            {
+                Debug.Log("Is 1");
+                StartCurrentLoop();
+            }
+            else if (audioSource2.time >= currentIntro.length && !isAudioSource1)
+            {
+                Debug.Log("Is 2");
+                StartCurrentLoop();
+            }
         }
     }
 
     void StartCurrentLoop()
     {
+
+        currentLoopStarted = true;
         if (isAudioSource1)
         {
             audioSource1.clip = currentLoop;
@@ -123,7 +139,6 @@ public class MusicManager : MonoBehaviour
         {
             musicType = newType;
             currentLoopStarted = false;
-            StopCoroutine(StopMusicAfterTime());
 
             switch (musicType)
             {
@@ -149,47 +164,47 @@ public class MusicManager : MonoBehaviour
                     break;
             }
 
-            if (!isAudioSource1)
+            isAudioSource1 = !isAudioSource1;
+            currentLoopStarted = false;
+            if (isAudioSource1)
             {
-                audioSource1.clip = currentIntro;
-                audioSource1.Play();
+                if (currentIntro != null)
+                {
+                    audioSource1.clip = currentIntro;
+                    audioSource1.Play();
+                }
+                else
+                {
+                    StartCurrentLoop();
+                }
             }
             else
             {
-                audioSource2.clip = currentIntro;
-                audioSource2.Play();
+                if (currentIntro != null)
+                {
+                    audioSource2.clip = currentIntro;
+                    audioSource2.Play();
+                }
+                else
+                {
+                    StartCurrentLoop();
+                }
             }
-            isAudioSource1 = !isAudioSource1;
-            currentLoopStarted = false;
 
-            StartCoroutine(StopMusicAfterTime());
-        }
-    }
 
-    IEnumerator StopMusicAfterTime()
-    {
-        if (isAudioSource1)
-        {
-            anim2.SetTrigger("FadeOut");
-            anim1.SetTrigger("FadeIn");
+            if (isAudioSource1)
+            {
+                anim2.SetTrigger("FadeOut");
+                anim1.SetTrigger("FadeIn");
 
-        }
-        else
-        {
-            anim1.SetTrigger("FadeOut");
-            anim2.SetTrigger("FadeIn");
-        }
+            }
+            else
+            {
+                anim1.SetTrigger("FadeOut");
+                anim2.SetTrigger("FadeIn");
+            }
 
-        yield return new WaitForSeconds(1f);
-        if (isAudioSource1)
-        {
-            audioSource2.Stop();
-            audioSource2.loop = false;
-        }
-        else
-        {
-            audioSource1.Stop();
-            audioSource1.loop = false;
+            hasStoppedLastPlayer = false;
         }
     }
 
