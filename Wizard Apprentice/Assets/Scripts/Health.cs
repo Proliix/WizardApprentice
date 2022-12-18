@@ -20,11 +20,11 @@ public class Health : MonoBehaviour
     [SerializeField] bool hasHitCooldown = false;
     [Header("UI")]
     [SerializeField] bool usesHealthBar = false;
-    [SerializeField] float healthRemoveSpeed = 0.005f;
+    [SerializeField] float healthRemoveSpeed = 0.5f;
     [SerializeField] Image healthbar;
     [SerializeField] Image damageBufferhbar;
     [SerializeField] float damagebufferUpTime = 0.26f;
-    [SerializeField] float damageBufferRemoveSpeed = 0.0025f;
+    [SerializeField] float damageBufferRemoveSpeed = 1f;
     [Tooltip("Removes healthbar when health is <= 0")]
     [SerializeField] bool removeHealthbar = false;
     [Header("only needed if remove healthbar is active")]
@@ -56,17 +56,21 @@ public class Health : MonoBehaviour
 
     HitNumberHandler hitNumbers;
 
-    float currentDamageBufferSpeed;
-    float DamageBufferValue;
+        float DamageBufferValue;
 
     float timer = 0;
+    float prevHp;
+    float prevHitHp;
 
     SpriteRenderer spriteRenderer;
     Animator anim;
     float healthbarValue = 100f;
     bool canBeHit = true;
+
     private void Start()
     {
+        prevHp = hp;
+        prevHitHp = hp;
         if (usesHealthBar && damageBufferhbar == null)
         {
             damageBufferhbar = Instantiate(healthbar, healthbar.transform.position, healthbar.transform.rotation, healthbar.transform.parent);
@@ -116,15 +120,24 @@ public class Health : MonoBehaviour
         if (usesHealthBar)
         {
             timer += Time.deltaTime;
-            healthbarValue = Mathf.SmoothDamp(healthbarValue, hp, ref currentHealthRemoveSpeed, healthRemoveSpeed, 100, Time.deltaTime);
-            healthbar.fillAmount = (healthbarValue / maxHP);
 
-            if (timer > damagebufferUpTime)
+            if (healthbar)
             {
-                DamageBufferValue = Mathf.SmoothDamp(DamageBufferValue, hp, ref currentDamageBufferSpeed, damageBufferRemoveSpeed, 100, Time.deltaTime);
-                damageBufferhbar.fillAmount = (DamageBufferValue / maxHP);
-            }
+                if (healthbarValue == hp)
+                    prevHp = hp;
 
+                if (DamageBufferValue == hp)
+                    prevHitHp = hp;
+
+                healthbarValue = Mathf.MoveTowards(healthbarValue, hp, healthRemoveSpeed * (1 + (hp - prevHp) / maxHP));
+                healthbar.fillAmount = (healthbarValue / maxHP);
+
+                if (timer > damagebufferUpTime)
+                {
+                    DamageBufferValue = Mathf.MoveTowards(DamageBufferValue, hp, damageBufferRemoveSpeed * (1 - (hp - prevHitHp) / maxHP));
+                    damageBufferhbar.fillAmount = (DamageBufferValue / maxHP);
+                }
+            }
         }
 
         if (hitEffectActve)

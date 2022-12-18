@@ -50,28 +50,30 @@ public class MusicManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        musicType = MusicType.Normal;
+        musicType = MusicType.Map;
         audioSource1 = musicObj1.GetComponent<AudioSource>();
         audioSource2 = musicObj2.GetComponent<AudioSource>();
         anim1 = musicObj1.GetComponent<Animator>();
         anim2 = musicObj2.GetComponent<Animator>();
-        currentIntro = normalIntro;
-        currentLoop = normalLoop;
-        isAudioSource1 = true;
+        //currentIntro = normalIntro;
+        //currentLoop = normalLoop;
+        //isAudioSource1 = true;
+
         audioSource1.loop = false;
         audioSource2.loop = false;
-        audioSource1.clip = currentIntro;
-        audioSource1.Play();
-        anim1.SetTrigger("FadeIn");
+        // audioSource1.clip = currentIntro;
+        //audioSource1.Play();
+        //anim1.SetTrigger("FadeIn");
+        ChangeToMusicType(MusicType.Normal);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.F5) && musicType != MusicType.Map)
         {
             ChangeToMusicType(musicType + 1);
         }
-        else if (Input.GetKeyDown(KeyCode.F4))
+        else if (Input.GetKeyDown(KeyCode.F4) && musicType != MusicType.Normal)
         {
             ChangeToMusicType(musicType - 1);
         }

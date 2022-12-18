@@ -751,11 +751,11 @@ MonoBehaviour:
   removeSelf: 0
   hasHitCooldown: 0
   usesHealthBar: 1
-  healthRemoveSpeed: 0.005
+  healthRemoveSpeed: 0.5
   healthbar: {fileID: 7931830088294003908}
   damageBufferhbar: {fileID: 6134733224443953899}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 0.75
+  damageBufferRemoveSpeed: 1
   removeHealthbar: 1
   healthbarParent: {fileID: 889790490}
   hasDeathAnimation: 0

@@ -240,11 +240,11 @@ MonoBehaviour:
   removeSelf: 1
   hasHitCooldown: 0
   usesHealthBar: 1
-  healthRemoveSpeed: 0.005
+  healthRemoveSpeed: 0.5
   healthbar: {fileID: 5532072124274683321}
   damageBufferhbar: {fileID: 8643718736214989718}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 0.75
+  damageBufferRemoveSpeed: 1
   removeHealthbar: 1
   healthbarParent: {fileID: 2510294145188657511}
   hasDeathAnimation: 0
@@ -476,11 +476,11 @@ MonoBehaviour:
   removeSelf: 1
   hasHitCooldown: 0
   usesHealthBar: 1
-  healthRemoveSpeed: 0.005
+  healthRemoveSpeed: 0.5
   healthbar: {fileID: 4301037555923259345}
   damageBufferhbar: {fileID: 36359694237547006}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 0.75
+  damageBufferRemoveSpeed: 0.751
   removeHealthbar: 1
   healthbarParent: {fileID: 6171021854940486415}
   hasDeathAnimation: 0

@@ -1830,12 +1830,12 @@ MonoBehaviour:
   normalLoop: {fileID: 8300000, guid: a9231a2a2de166d478b0924946954a95, type: 3}
   bossIntro: {fileID: 8300000, guid: dc4931aae186c4e49ba2f65e95deb212, type: 3}
   bossLoop: {fileID: 8300000, guid: 994967e7cc9e00c499263fb218fe8930, type: 3}
-  eventIntro: {fileID: 8300000, guid: 9e1bba9c1c0beeb47a0a1fabb44d5224, type: 3}
-  eventLoop: {fileID: 0}
+  eventIntro: {fileID: 0}
+  eventLoop: {fileID: 8300000, guid: 9e1bba9c1c0beeb47a0a1fabb44d5224, type: 3}
   treasureIntro: {fileID: 8300000, guid: 546aafa125221a646b8442797b679dbc, type: 3}
   treasureLoop: {fileID: 8300000, guid: 3dff81f7ec63d6b4ab9c416d6e55c3e3, type: 3}
-  mapIntro: {fileID: 8300000, guid: b0771ac3780b52d42a690e230766f2f6, type: 3}
-  mapLoop: {fileID: 0}
+  mapIntro: {fileID: 0}
+  mapLoop: {fileID: 8300000, guid: b0771ac3780b52d42a690e230766f2f6, type: 3}
 --- !u!4 &398396966
 Transform:
   m_ObjectHideFlags: 0
@@ -7840,6 +7840,14 @@ PrefabInstance:
       propertyPath: damageBufferhbar
       value: 
       objectReference: {fileID: 1236314618}
+    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: healthRemoveSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: damageBufferRemoveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: dashIndicators.Array.data[0]
       value: 
