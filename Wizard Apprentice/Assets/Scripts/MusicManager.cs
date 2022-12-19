@@ -59,8 +59,8 @@ public class MusicManager : MonoBehaviour
         //currentLoop = normalLoop;
         //isAudioSource1 = true;
 
-        audioSource1.loop = false;
-        audioSource2.loop = false;
+        audioSource1.loop = true;
+        audioSource2.loop = true;
         // audioSource1.clip = currentIntro;
         //audioSource1.Play();
         //anim1.SetTrigger("FadeIn");
@@ -87,11 +87,11 @@ public class MusicManager : MonoBehaviour
                 {
                     case false:
                         audioSource1.Stop();
-                        audioSource1.loop = false;
+                        //audioSource1.loop = false;
                         break;
                     case true:
                         audioSource2.Stop();
-                        audioSource2.loop = false;
+                        //audioSource2.loop = false;
                         break;
                 }
                 hasStoppedLastPlayer = true;
@@ -102,12 +102,14 @@ public class MusicManager : MonoBehaviour
         if (!currentLoopStarted)
         {
 
-            if (audioSource1.time >= currentIntro.length && isAudioSource1)
+            Debug.Log("" + audioSource1.time + " | " + (currentIntro.length - 0.01f));
+            Debug.Log("" + audioSource2.time + " | " + (currentIntro.length - 0.01f));
+            if (audioSource1.time >= currentIntro.length - 0.01f && isAudioSource1)
             {
                 Debug.Log("Is 1");
                 StartCurrentLoop();
             }
-            else if (audioSource2.time >= currentIntro.length && !isAudioSource1)
+            else if (audioSource2.time >= currentIntro.length - 0.01f && !isAudioSource1)
             {
                 Debug.Log("Is 2");
                 StartCurrentLoop();
@@ -122,13 +124,13 @@ public class MusicManager : MonoBehaviour
         if (isAudioSource1)
         {
             audioSource1.clip = currentLoop;
-            audioSource1.loop = true;
+            //audioSource1.loop = true;
             audioSource1.Play();
         }
         else
         {
             audioSource2.clip = currentLoop;
-            audioSource2.loop = true;
+            //audioSource2.loop = true;
             audioSource2.Play();
         }
 

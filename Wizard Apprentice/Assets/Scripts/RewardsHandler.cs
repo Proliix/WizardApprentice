@@ -30,6 +30,7 @@ public class RewardsHandler : MonoBehaviour
 
     bool statsAfterCard = false;
     Health health;
+    PlayerMovement pMovement;
     PlayerStats stats;
     bool isPressed = false;
 
@@ -42,6 +43,7 @@ public class RewardsHandler : MonoBehaviour
         cardScreenParent.SetActive(false);
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
+        pMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     public bool CanAddCards()
@@ -61,6 +63,7 @@ public class RewardsHandler : MonoBehaviour
     #region Card Rewards
     public void GetRewardScreenCard(bool withStats = false)
     {
+        pMovement.SetCanMove(false);
         if (CanAddCards())
         {
 
@@ -152,6 +155,7 @@ public class RewardsHandler : MonoBehaviour
     #region Stat Rewards
     public void GetRewardScreenStats()
     {
+        pMovement.SetCanMove(false);
         bool canGetCritChance = stats.critChance < 1 ? true : false;
         rewardScreen.SetActive(true);
         statScreenParent.SetActive(true);
