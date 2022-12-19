@@ -19,7 +19,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Sprite checkMark;
     [SerializeField] Sprite Cross;
     [SerializeField] Sprite normalHandle;
+    [Header("Stats")]
     [SerializeField] Image statsInGameRenderer;
+    [SerializeField] bool defaultStatValue;
+    [Header("Dash")]
+    [SerializeField] Image dashOverHeadRenderer;
+    [SerializeField] bool defaultDashValue;
+    [Header("Music")]
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioMixer mixer;
     [SerializeField] Slider masterVolume;
@@ -39,14 +45,57 @@ public class MenuManager : MonoBehaviour
         Invoke("PlaySfxSoundOn", 1);
         musicScript = gameObject.GetComponent<MainMusicScript>();
         StartCoroutine(FadeInObjects());
-        bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+        UpdateValues();
         settingsPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F7))
+        {
+            PlayerPrefs.DeleteAll();
+            UpdateValues();
+            Debug.Log("DeletedAll");
+        }
+    }
+
+    private void UpdateValues()
+    {
+        bool activeBool;
+        if (PlayerPrefs.HasKey("StatsInGame"))
+        {
+            activeBool = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
+        }
+        else
+        {
+            activeBool = defaultStatValue;
+            PlayerPrefs.SetInt("StatsInGame", activeBool ? 1 : 0);
+        }
         statsInGameRenderer.sprite = activeBool ? checkMark : Cross;
+
+        if (PlayerPrefs.HasKey("DashOverHead"))
+        {
+            activeBool = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
+        }
+        else
+        {
+            activeBool = defaultDashValue;
+            PlayerPrefs.SetInt("DashOverHead", activeBool ? 1 : 0);
+        }
+        dashOverHeadRenderer.sprite = activeBool ? checkMark : Cross;
 
         float newValue = masterVolume.maxValue;
         masterVolume.maxValue = 0;
         masterVolume.minValue = -25;
-        newValue = PlayerPrefs.GetFloat("MasterVol");
+
+        if (PlayerPrefs.HasKey("MasterVol"))
+            newValue = PlayerPrefs.GetFloat("MasterVol");
+        else
+        {
+            newValue = masterVolume.maxValue;
+            PlayerPrefs.SetFloat("MasterVol", newValue);
+        }
+
         masterVolume.value = newValue;
         masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
         if (newValue == -80)
@@ -65,7 +114,14 @@ public class MenuManager : MonoBehaviour
         newValue = musicVolume.maxValue;
         musicVolume.maxValue = 0;
         musicVolume.minValue = -25;
-        newValue = PlayerPrefs.GetFloat("MusicVol");
+        if (PlayerPrefs.HasKey("MusicVol"))
+            newValue = PlayerPrefs.GetFloat("MusicVol");
+        else
+        {
+            newValue = musicVolume.maxValue;
+            PlayerPrefs.SetFloat("MusicVol", newValue);
+        }
+
         musicVolume.value = newValue;
         musicImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
         if (newValue == -80)
@@ -84,7 +140,15 @@ public class MenuManager : MonoBehaviour
         newValue = effectVolume.maxValue;
         effectVolume.maxValue = 10;
         effectVolume.minValue = -15;
-        newValue = PlayerPrefs.GetFloat("EffectVol");
+
+        if (PlayerPrefs.HasKey("EffectVol"))
+            newValue = PlayerPrefs.GetFloat("EffectVol");
+        else
+        {
+            newValue = effectVolume.maxValue;
+            PlayerPrefs.SetFloat("EffectVol", newValue);
+        }
+
         if (newValue == -80)
         {
             effectVolume.value = effectVolume.minValue;
@@ -96,8 +160,6 @@ public class MenuManager : MonoBehaviour
             effectVolume.value = newValue;
             effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
         }
-
-
     }
 
     public void UpdateMixer(int type)
@@ -156,6 +218,16 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void ResetSettings()
+    {
+        PlayerPrefs.DeleteKey("StatsInGame");
+        PlayerPrefs.DeleteKey("DashOverHead");
+        PlayerPrefs.DeleteKey("MasterVol");
+        PlayerPrefs.DeleteKey("MusicVol");
+        PlayerPrefs.DeleteKey("EffectVol");
+        UpdateValues();
+    }
+
     IEnumerator PlaySoundWithDelay(int index)
     {
         yield return new WaitForSeconds(0.1f);
@@ -195,15 +267,29 @@ public class MenuManager : MonoBehaviour
 
     public void EnableStatsWhenPlaying()
     {
-        bool activeBool = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+        bool activeBool = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
 
         if (activeBool)
-            PlayerPrefs.SetInt("StatInGame", 0);
+            PlayerPrefs.SetInt("StatsInGame", 0);
         else
-            PlayerPrefs.SetInt("StatInGame", 1);
+            PlayerPrefs.SetInt("StatsInGame", 1);
 
 
         statsInGameRenderer.sprite = activeBool ? Cross : checkMark;
+        PlayerPrefs.Save();
+    }
+
+    public void EnableDashOverHead()
+    {
+        bool activeBool = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
+
+        if (activeBool)
+            PlayerPrefs.SetInt("DashOverHead", 0);
+        else
+            PlayerPrefs.SetInt("DashOverHead", 1);
+
+
+        dashOverHeadRenderer.sprite = activeBool ? Cross : checkMark;
         PlayerPrefs.Save();
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,7 +9,10 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb2d;
     Animator animator;
     Health health;
-    [SerializeField] GameObject[] dashIndicators;
+    [SerializeField] Image dashIndicator;
+    [SerializeField] Image dashIndicatorInacive;
+    [SerializeField] Image SmallDashIndicator;
+    [SerializeField] Image SmallDashIndicatorInactive;
 
     Vector2 movement = new Vector2();
 
@@ -26,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
-
+    bool hasSmallIcon;
     bool CanMove = true;
     PlayerStats stats;
     Vector2 dashMovement = Vector2.right;
@@ -40,6 +44,9 @@ public class PlayerMovement : MonoBehaviour
         stats = GetComponent<PlayerStats>();
         activeSpeed = moveSpeed;
 
+        hasSmallIcon = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
+        SmallDashIndicator.gameObject.SetActive(hasSmallIcon);
+        SmallDashIndicatorInactive.gameObject.SetActive(hasSmallIcon);
     }
 
     void Update()
@@ -66,10 +73,9 @@ public class PlayerMovement : MonoBehaviour
                 MovePlayer();
             }
 
-            for (int i = 0; i < dashIndicators.Length; i++)
-            {
-                dashIndicators[i]?.SetActive(canDash);
-            }
+
+            else if (hasSmallIcon != PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false)
+                hasSmallIcon = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
 
             if (Input.GetKeyDown(KeyCode.Space) && canDash)
             {
@@ -90,9 +96,22 @@ public class PlayerMovement : MonoBehaviour
     {
         CanMove = value;
     }
+
+    IEnumerator FillImage(float fillTime)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < fillTime)
+        {
+            elapsedTime += Time.deltaTime;
+            dashIndicator.fillAmount = elapsedTime / fillTime;
+            SmallDashIndicator.fillAmount = elapsedTime / fillTime;
+            yield return null;
+        }
+    }
+
     private IEnumerator Dash()
     {
-        
+
         //dashIndicator.ChangeDashIndicator();
         canDash = false;
         isDashing = true;
@@ -105,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Horizontal", dashMovement.x);
         animator.SetFloat("Vertical", dashMovement.y);
 
+
+        StartCoroutine(FillImage(dashingCooldown + dashingTime));
 
         activeSpeed = dashingSpeed;
         rb2d.velocity = dashMovement.normalized * (activeSpeed * stats.movementSpeed);
