@@ -21,7 +21,7 @@ public class DodgeObstacle : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -44,21 +44,7 @@ public class DodgeObstacle : MonoBehaviour
 
         }
 
-        if (TimesFailedDodgeroll >= 4 && counter < TimesFailedDodgeroll)
-        {
-            if (counter == 0)
-                counter = TimesFailedDodgeroll + 1;
-            else
-                counter ++;
-
-            textMeshPro.text += "!";
-            textMeshPro.fontSize += TimesFailedDodgeroll / 50;
-
-            if (TimesFailedDodgeroll >= 10)
-            {
-                textMeshPro.color = Color.red;
-            }
-        }
+        
     }
 
     IEnumerator DeathByLava()

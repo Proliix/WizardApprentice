@@ -34,13 +34,13 @@ public class TutorialPuzzle : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        if (timer >= 60 && timer < 120)
+        if (timer >= 30 && timer < 60)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "You can rearrange the spellcards";
             SoundManager.Instance.PlayAudio(puzzleSuccess);
         }
 
-        if (timer >= 120 && timer < 180)
+        if (timer >= 60)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "Use Mouse 1 to rearrange the 4 cards as shown on the sign";
             SoundManager.Instance.PlayAudio(puzzleSuccess);

@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 8185b89e57416be49a79c6201a954948, type: 3}
-  title: Circle Shot
-  description: This spell shoots projectiles in a circle around the player
+  title: Round tactics
+  description: Covers all directions (mostly)
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   projectileAmmount: 10

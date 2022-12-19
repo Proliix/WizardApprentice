@@ -42,6 +42,10 @@ public class RoomManager : MonoBehaviour
 
     public int currentFloor;
 
+    [Header("Room Clear Variables")]
+    [SerializeField] AudioClip roomClearSound;
+    [SerializeField] float audioVolume = 1;
+    [SerializeField] ParticleSystem particleSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -150,20 +154,27 @@ public class RoomManager : MonoBehaviour
     }
     public void RemoveAllEnemies()
     {
+        int enemyCount = enemyObjects.Count;
         for (int i = enemyObjects.Count - 1; i >= 0; i--)
         {
             Destroy(enemyObjects[i]);
             enemyObjects.RemoveAt(i);
         }
         enemyObjects.Clear();
+        if (enemyCount!=0 && currentRoomType != 5)
+        {
+
         OpenDoor();
+        }
     }
 
     public void RemoveEnemy(GameObject enemyObject)
     {
+        
         Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
+
         if (enemyObjects.Count <= 0)
         {
             OpenDoor();
@@ -172,6 +183,8 @@ public class RoomManager : MonoBehaviour
 
     public void OpenDoor()
     {
+        SoundManager.Instance.PlayAudio(roomClearSound, audioVolume);
+        ActivateParticleSystem();
         if (!currentRoom.roomAlreadyHasDoor)
             doorObject.GetComponentInChildren<SpriteRenderer>().sprite = openDoorImage;
     }
@@ -217,4 +230,13 @@ public class RoomManager : MonoBehaviour
         Debug.Log("Turning off room select object");
         roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }
+
+    public void ActivateParticleSystem()
+    {
+      
+            // Set the number of particles to emit for this burst
+            particleSystem.Emit(10);
+        
+    }
+
 }
