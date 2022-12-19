@@ -171,7 +171,7 @@ public class RewardsHandler : MonoBehaviour
                 runs++;
             }
 
-            Debug.Log("First: " + first + " |Seccond: " + seccond + " |Newnum: " + newNum + "|Runs: " + runs);
+            //Debug.Log("First: " + first + " |Seccond: " + seccond + " |Newnum: " + newNum + "|Runs: " + runs);
 
             seccond = first;
             first = newNum;
