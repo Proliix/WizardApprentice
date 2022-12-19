@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
 
     HitNumberHandler hitNumbers;
 
-        float DamageBufferValue;
+    float DamageBufferValue;
 
     float timer = 0;
     float prevHp;
@@ -113,7 +113,7 @@ public class Health : MonoBehaviour
             {
                 float healHp = newHp - maxHP;
                 maxHP = newHp;
-                AddHealth(healHp / 2);
+                AddHealth(healHp);
             }
         }
 
@@ -139,6 +139,13 @@ public class Health : MonoBehaviour
                 }
             }
         }
+
+        if (removeHealthbar)
+            if (healthbarValue <= 0 && DamageBufferValue <= 0)
+            {
+                healthbarParent?.SetActive(false);
+                removeHealthbar = false;
+            }
 
         if (hitEffectActve)
         {
@@ -191,8 +198,8 @@ public class Health : MonoBehaviour
     public bool HasFullHealth()
     {
         bool returnValue = false;
-        
-        if(hp >= maxHP)
+
+        if (hp >= maxHP)
         {
             returnValue = true;
         }
@@ -305,8 +312,8 @@ public class Health : MonoBehaviour
         }
         else
         {
-            if (removeHealthbar)
-                healthbarParent?.SetActive(false);
+            //if (removeHealthbar)
+            //    healthbarParent?.SetActive(false);
 
             if (removeSelf)
                 Destroy(gameObject);
