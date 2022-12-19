@@ -7828,6 +7828,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 105267002, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105267002, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105267002, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 571476115768797418, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: movementSpeed
       value: 1
