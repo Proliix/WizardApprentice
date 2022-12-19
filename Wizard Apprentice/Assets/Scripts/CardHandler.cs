@@ -34,18 +34,16 @@ public class CardHandler : MonoBehaviour
 
     }
 
-    public ICard CheckInCycle(ICard card)
+    public T CheckInCycle<T>() where T : ICard
     {
-        ICard returnValue = null;
         for (int i = 0; i < cards.Length; i++)
         {
-            if (cards[i].GetType() == card.GetType())
+            if (cards[i] is T)
             {
-                returnValue = cards[i];
-                break;
+                return (T)cards[i];
             }
         }
-        return returnValue;
+        return default(T);
     }
 
     public bool CheckInSlot(ICard card, int index)

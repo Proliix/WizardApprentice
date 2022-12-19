@@ -77,9 +77,7 @@ public class XShot : MonoBehaviour, ICard
         if (!triedToFind)
         {
             triedToFind = true;
-            CrossShot temp = new CrossShot();
-
-            crossShot = (CrossShot)cardHandler.CheckInCycle(temp);
+            crossShot = cardHandler.CheckInCycle<CrossShot>();
         }
 
         timer += Time.deltaTime;

@@ -87,9 +87,7 @@ public class CrossShot : MonoBehaviour, ICard
         if (!triedToFind)
         {
             triedToFind = true;
-            XShot temp = new XShot();
-
-            xShot = (XShot)cardHandler.CheckInCycle(temp);
+            xShot = cardHandler.CheckInCycle<XShot>();
         }
         timer += Time.deltaTime;
         if (timer >= stats.GetAttackSpeed(attackDelay))
