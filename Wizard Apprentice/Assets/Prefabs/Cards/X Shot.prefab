@@ -221,11 +221,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: faaafe0f3736479429a0f7f7b7b8fa7a, type: 3}
-  title: X Shot
-  description: 'Shoots projectiles in a x formation
-
-    Has special interaction
-    with + shot'
+  title: X
+  description: "To cover the weak sides \n(Secret interaction with +)"
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   damage: 20

@@ -221,9 +221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 26a9cf81fb0eefa46bf4f53db2a8bbaa, type: 3}
-  title: Lightning Strike Card
+  title: Thunderstruck
   mousePos: {x: 0, y: 0, z: 0}
   lightningStrike: {fileID: 2445282581275634261, guid: e78522ed6aa6ab94db77e2da55af5e4c, type: 3}
-  description: Shoots a Lightning Strike on the cursor that deals AOE damage
+  description: Light up your enemies (literally)
   shootCooldown: 1
   StatsAreLocatedOnPrefab: Stats are located on "LightningStrikePrefab

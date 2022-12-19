@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, Onhit, HauntedArmorBigArrow, HauntedArmorSplittingArrow }
+public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, Onhit, HauntedArmorBigArrow, HauntedArmorSplittingArrow, WontHitWall }
 
 public class SpecialProjectile : MonoBehaviour
 {
@@ -225,6 +225,7 @@ public class SpecialProjectile : MonoBehaviour
             default:
                 NormalShot();
                 break;
+           
         }
 
         if (timer > bulletLifetime)
@@ -295,6 +296,10 @@ public class SpecialProjectile : MonoBehaviour
             hasHitWall = true;
             switch (bulletState)
             {
+                case SpecialBulletState.WontHitWall:
+
+                    break;
+
                 case SpecialBulletState.Timed:
 
                     break;

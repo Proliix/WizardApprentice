@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class BIGBOIBULLET : MonoBehaviour, ICard
 {
-
+    [SerializeField] Sprite bulletSprite;
     [SerializeField] Sprite cardSprite;
     [SerializeField] string title;
     [SerializeField] string description;
+    [SerializeField] AudioClip shootAudioClip;
+    [SerializeField] float audioVolume = 1;
 
     [Header("Card Stats")]
     [SerializeField] float damage = 65;
-    [SerializeField] float shootCooldown = 2;
+    [SerializeField] float shootCooldown = 1;
     [SerializeField] float bulletSpeed = 15;
     [SerializeField] float bulletSize = 10;
+    [SerializeField] float lifeTime = 20;
 
     bool hasFired;
-    float timer = 1;
+    float timer = 0;
 
     BulletHandler bulletHandler;
     Transform spawnpoint;
@@ -34,7 +37,10 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
 
     public void Effect()
     {
-        bulletHandler.GetBullet(spawnpoint, player, true, false, stats.GetDamage(damage), bulletSize + stats.projectileSize, bulletSpeed + stats.projectileSpeed); 
+      //  bulletHandler.GetBullet(spawnpoint, player, true, false, stats.GetDamage(damage), bulletSize + stats.projectileSize, bulletSpeed + stats.projectileSpeed);
+        bulletHandler.GetSpecialBullet(spawnpoint, player, bulletSprite, SpecialBulletState.WontHitWall, null, true,Vector3.zero, 0, lifeTime, false, stats.GetDamage(damage), bulletSize + stats.projectileSize, bulletSpeed + stats.projectileSpeed);
+        SoundManager.Instance.PlayAudio(shootAudioClip, audioVolume);
+
     }
 
     public string GetDescription()
@@ -54,7 +60,7 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
 
     public void ResetCard()
     {
-        timer = 1;
+        timer = 0;
         hasFired = false;
     }
 
@@ -62,7 +68,7 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if (timer >= shootCooldown && hasFired == false)
+        if (timer >= stats.GetAttackSpeed(shootCooldown) && hasFired == false)
         {
             hasFired = true;
             timer -= shootCooldown;

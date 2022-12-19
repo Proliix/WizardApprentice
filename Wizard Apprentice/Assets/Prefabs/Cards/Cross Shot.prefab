@@ -222,13 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: cee28767df6f9764caaa6710d67badeb, type: 3}
   comboImage: {fileID: 21300000, guid: 14639a0b32b0cb7478e9159672d8f870, type: 3}
-  title: + shot
-  description: 'Shoots projectiles in a + formation
+  title: +
+  description: 'North East South West
 
-    Has special interaction
-    with x shot'
+    (Secret interaction with X)'
   attackSound: {fileID: 0}
   audioVolume: 1
-  damage: 10
-  size: 0.5
+  damage: 12.5
+  size: 0.75
   speed: 10
