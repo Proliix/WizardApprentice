@@ -1145,7 +1145,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1850,6 +1850,10 @@ MonoBehaviour:
   - {fileID: 495364100}
   - {fileID: 900929226}
   - {fileID: 47327744}
+  potionImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   cardScreenParent: {fileID: 1688963745}
   cardTitles:
   - {fileID: 1057746902}
@@ -1906,6 +1910,9 @@ MonoBehaviour:
   - {fileID: 1826943768}
   - {fileID: 183019209}
   trashCan: {fileID: 1574135464}
+  cardDescriptionObject: {fileID: 0}
+  cardTitleText: {fileID: 0}
+  cardDescriptionText: {fileID: 0}
 --- !u!114 &542232913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3043,7 +3050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec260b7ee496094582a1236f4ace7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 887598027}
   effectSource: {fileID: 211932798}
 --- !u!4 &1060323617
 Transform:
@@ -5562,6 +5568,9 @@ MonoBehaviour:
   - {fileID: 1826943768}
   - {fileID: 183019209}
   trashCan: {fileID: 0}
+  cardDescriptionObject: {fileID: 0}
+  cardTitleText: {fileID: 0}
+  cardDescriptionText: {fileID: 0}
 --- !u!114 &2082162360
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -70,6 +70,7 @@ public class RoomManager : MonoBehaviour
         }
         currentRoom = room;
         MusicManager.Instance.ChangeToMusicType(room.musicType);
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
         currentRoomParent = Instantiate(roomParent);
         currentRoomObject = Instantiate(room.roomPrefab, currentRoomParent.transform);
         currentRoomObject.transform.position += new Vector3((float)room.roomSize.x / 2f, (float)room.roomSize.y / 2f, 0);
@@ -192,10 +193,10 @@ public class RoomManager : MonoBehaviour
     public void LoadNewRoom(int roomType)
     {
         bulletHandler.ResetAll();
-        
+
         if (roomType != 4)
             cardHandler.isActive = true;
-      
+
         switch (roomType)
         {
             case 0:

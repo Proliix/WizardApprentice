@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  Title: Small Health Potion
-  EffectText: 'Restore: <color=green>({6}) Missing Health</color>'
+  Title: Restore
+  EffectText: 'Restore: <color=green>({6}) Missing Health</color>
+
+
+    {16}'
   Image: {fileID: 21300000, guid: 8391ab97137ee32479d470a19db69af2, type: 3}
   maxHealth: 0
   movementSpeed: 0

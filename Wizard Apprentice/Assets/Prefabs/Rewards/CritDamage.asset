@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
   m_Name: CritDamage
   m_EditorClassIdentifier: 
-  Title: Crit Damage Potion
+  Title: Crit Damage
   EffectText: 'You gain: <color=#F334DA>+({5}) Crit Damage</color>
 
+
+    {15}
 
 '
   Image: {fileID: 21300000, guid: f01575572a568154da96499dd94191ad, type: 3}
