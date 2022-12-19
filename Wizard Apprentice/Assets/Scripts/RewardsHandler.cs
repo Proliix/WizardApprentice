@@ -29,7 +29,7 @@ public class RewardsHandler : MonoBehaviour
     private Inventory inventory;
 
     bool statsAfterCard = false;
-
+    Health health;
     PlayerStats stats;
     bool isPressed = false;
 
@@ -41,6 +41,7 @@ public class RewardsHandler : MonoBehaviour
         statScreenParent.SetActive(false);
         cardScreenParent.SetActive(false);
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        health = GameObject.FindWithTag("Player").GetComponent<Health>();
     }
 
     public bool CanAddCards()
@@ -151,33 +152,31 @@ public class RewardsHandler : MonoBehaviour
     #region Stat Rewards
     public void GetRewardScreenStats()
     {
+        bool canGetCritChance = stats.critChance < 1 ? true : false;
         rewardScreen.SetActive(true);
         statScreenParent.SetActive(true);
         int first = -100;
         int seccond = -100;
+        bool fullHp = health.HasFullHealth();
         for (int i = 0; i < activeRewards.Length; i++)
         {
-            if (i != 2)
+
+            int newNum = Random.Range(0, rewards.Count);
+
+            int runs = 0;
+
+            while ((first == newNum || seccond == newNum || (rewards[newNum].critChance > 0 && !canGetCritChance)) && runs < 100)
             {
-
-                int newNum = Random.Range(0, rewards.Count);
-
-                int runs = 0;
-                while ((first == newNum || seccond == newNum) && runs < 20)
-                {
-                    newNum = Random.Range(0, rewards.Count);
-                    runs++;
-                }
-                seccond = first;
-                first = newNum;
-
-                activeRewards[i] = rewards[newNum];
-            }
-            else
-            {
-                activeRewards[i] = healReward;
+                newNum = Random.Range(0, rewards.Count);
+                runs++;
             }
 
+            Debug.Log("First: " + first + " |Seccond: " + seccond + " |Newnum: " + newNum + "|Runs: " + runs);
+
+            seccond = first;
+            first = newNum;
+
+            activeRewards[i] = i == 2 && !fullHp ? healReward : rewards[newNum];
         }
         for (int i = 0; i < titles.Length; i++)
         {
@@ -189,7 +188,7 @@ public class RewardsHandler : MonoBehaviour
                 potionImage[i].sprite = activeRewards[i].Image;
             else
                 potionImage[i].color = new Color(0, 0, 0, 0);
-            }
+        }
     }
 
     public void SelectRewardStat(int index)
@@ -212,7 +211,7 @@ public class RewardsHandler : MonoBehaviour
         rewardScreen.SetActive(false);
         statScreenParent.SetActive(false);
         stats.GiveStats(activeRewards[index]);
-        
+
         //stats.health += activeRewards[index].maxHealth;
         //stats.movementSpeed += activeRewards[index].movementSpeed;
         //stats.damage += activeRewards[index].damage;

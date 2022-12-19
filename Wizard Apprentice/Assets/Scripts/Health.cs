@@ -188,6 +188,18 @@ public class Health : MonoBehaviour
             hitNumbers.GetHitText(transform.position, -healAmount);
     }
 
+    public bool HasFullHealth()
+    {
+        bool returnValue = false;
+        
+        if(hp >= maxHP)
+        {
+            returnValue = true;
+        }
+
+        return returnValue;
+    }
+
     public void FullHeal()
     {
         hp = maxHP;
