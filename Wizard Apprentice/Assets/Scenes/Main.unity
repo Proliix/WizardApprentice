@@ -7643,6 +7643,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ea815aadace9d04c800f2dc4d1ed2fa, type: 2}
   mysteryRoomsPoolAmount: 3
   currentFloor: 0
+  roomClearSound: {fileID: 8300000, guid: e3b6952a3f4409c4781b2bf3a0451cc4, type: 3}
+  audioVolume: 1
+  particleSystem: {fileID: 3620108843941724010, guid: ce5e3b383c353ca49bbdcebf606d400d, type: 3}
 --- !u!114 &1786813660
 MonoBehaviour:
   m_ObjectHideFlags: 0

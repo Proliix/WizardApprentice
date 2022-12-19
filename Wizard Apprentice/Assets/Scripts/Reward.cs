@@ -40,18 +40,18 @@ public class Reward : ScriptableObject
         float newMaxHPStr = Mathf.RoundToInt(startHP * maxHealth);
 
         float restoreAmount = Mathf.RoundToInt(maxHp / addHealh);
-        if (currentHP + restoreAmount >= 100)
-            restoreAmount -= (currentHP + restoreAmount) - 100;
+        if (currentHP + restoreAmount >= maxHp)
+            restoreAmount -= (currentHP + restoreAmount) - maxHp;
         string newAddHealthstr = "" + restoreAmount;
 
 
         string newMaxHPStrChange = "" + maxHp + " -> <color=green>" + ((maxHp + Mathf.RoundToInt(startHP * maxHealth))) + "</color>";
         string movementStrChange = "" + (stats.movementSpeed * 100) + "%" + " -> <color=green>" + ((stats.movementSpeed + movementSpeed) * 100) + "%" + "</color>";
         string damageStrChange = "" + (stats.damage * 100) + "%" + " -> <color=red>" + ((stats.damage + damage) * 100) + "%" + "</color>";
-        string attackSpeedStrChange = "" + (stats.attackSpeed * 100) + "%" + " -> <color=blue>" + ((stats.attackSpeed + attackSpeed) * 100) + "%" + "</color>";
-        string critChanceStrChange = "" + (stats.critChance * 100) + "%" + " -> <color=purple>" + ((stats.critChance + critChance) * 100) + "%" + "</color>";
-        string critDamageStrChange = "" + (stats.critDamage * 100) + "%" + " -> <color=#F334DA>" + ((stats.critDamage + critDamage) * 100) + "%" + "</color>";
-        string newAddHealthStrChange = "" + currentHP + "/" + maxHp + " -> <color=green>" + (currentHP + restoreAmount) + "/" + maxHp + "</color>";
+        string attackSpeedStrChange = "" + (stats.attackSpeed * 100) + "%" + " -> <color=blue>" + (Mathf.RoundToInt(stats.attackSpeed + attackSpeed) * 100) + "%" + "</color>";
+        string critChanceStrChange = "" + (stats.critChance * 100) + "%" + " -> <color=purple>" + (Mathf.RoundToInt(stats.critChance + critChance) * 100) + "%" + "</color>";
+        string critDamageStrChange = "" + (stats.critDamage * 100) + "%" + " -> <color=#F334DA>" + (Mathf.RoundToInt(stats.critDamage + critDamage) * 100) + "%" + "</color>";
+        string newAddHealthStrChange = "" + Mathf.RoundToInt(currentHP) + "/" + maxHp + " -> <color=green>" + Mathf.RoundToInt(currentHP + restoreAmount) + "/" + maxHp + "</color>";
 
 
         return string.Format(EffectText, newMaxHPStr, movementStr, DamageStr, attackSpeedStr, CritChanceStr, CritDamageStr, newAddHealthstr, projectileSize, projectileSpeed, projectileAmount, newMaxHPStrChange, movementStrChange, damageStrChange, attackSpeedStrChange, critChanceStrChange, critDamageStrChange, newAddHealthStrChange);
