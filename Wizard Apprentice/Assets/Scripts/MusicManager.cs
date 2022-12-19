@@ -102,16 +102,12 @@ public class MusicManager : MonoBehaviour
         if (!currentLoopStarted)
         {
 
-            Debug.Log("" + audioSource1.time + " | " + (currentIntro.length - 0.01f));
-            Debug.Log("" + audioSource2.time + " | " + (currentIntro.length - 0.01f));
             if (audioSource1.time >= currentIntro.length - 0.01f && isAudioSource1)
             {
-                Debug.Log("Is 1");
                 StartCurrentLoop();
             }
             else if (audioSource2.time >= currentIntro.length - 0.01f && !isAudioSource1)
             {
-                Debug.Log("Is 2");
                 StartCurrentLoop();
             }
         }

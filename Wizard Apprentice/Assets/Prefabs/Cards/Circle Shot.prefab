@@ -205,7 +205,7 @@ MonoBehaviour:
   description: Covers all directions (mostly)
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
-  projectileAmmount: 10
+  projectileAmmount: 12
   shootCooldown: 0.5
   damage: 10
   bulletSize: 0.5

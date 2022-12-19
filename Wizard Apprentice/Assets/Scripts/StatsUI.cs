@@ -37,7 +37,7 @@ public class StatsUI : MonoBehaviour
     {
         timer = 10;
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        activeIngame = PlayerPrefs.GetInt("StatInGame") > 0 ? true : false;
+        activeIngame = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
         holderChild = gameObject.transform.GetChild(0).gameObject;
         holderChild.SetActive(activeIngame);
         UpdateStats();

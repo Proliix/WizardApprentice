@@ -255,6 +255,7 @@ public class BulletHandler : MonoBehaviour
         poolMember.transform.parent = poolParentSpecial.transform;
         //________________________________________________________
 
+
         poolMember.transform.localScale = Vector3.one * size;
         poolMember.GetComponent<SpriteRenderer>().sprite = bulletImage;
         SpecialProjectile specialBullet = poolMember.GetComponent<SpecialProjectile>();

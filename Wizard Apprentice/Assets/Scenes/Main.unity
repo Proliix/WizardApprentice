@@ -230,6 +230,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4730238429024741830, guid: a3a538cc47877d645b397a1b89efb814, type: 3}
+      propertyPath: projectileAmmount
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4730238429024741831, guid: a3a538cc47877d645b397a1b89efb814, type: 3}
       propertyPath: canvas
       value: 
@@ -7424,7 +7428,6 @@ MonoBehaviour:
   - {fileID: 7091902878019880311, guid: 2dfec47b74f78fc42a1efcd283bc20e6, type: 3}
   - {fileID: 1106177584714849619, guid: 2fedc790d35b1604c9c7edb4c5f54966, type: 3}
   - {fileID: 6595212247910812035, guid: 12092e75bebac0747b91c392349847f6, type: 3}
-  - {fileID: 7699239943680715583, guid: 6766e7fc3fa73734a95bc56091781548, type: 3}
   - {fileID: 7699239943680715583, guid: 6766e7fc3fa73734a95bc56091781548, type: 3}
   - {fileID: 6975772864624791361, guid: 7a1bb412b46e1584d9b15d42691a7983, type: 3}
   descriptionObj:

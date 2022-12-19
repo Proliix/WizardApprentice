@@ -100,6 +100,7 @@ public class RoomManager : MonoBehaviour
         {
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
             MusicManager.Instance.ChangeToMusicType(MusicType.Map);
+            GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;

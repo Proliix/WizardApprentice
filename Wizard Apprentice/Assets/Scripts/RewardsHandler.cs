@@ -63,7 +63,6 @@ public class RewardsHandler : MonoBehaviour
     #region Card Rewards
     public void GetRewardScreenCard(bool withStats = false)
     {
-        pMovement.SetCanMove(false);
         if (CanAddCards())
         {
 
@@ -155,7 +154,6 @@ public class RewardsHandler : MonoBehaviour
     #region Stat Rewards
     public void GetRewardScreenStats()
     {
-        pMovement.SetCanMove(false);
         bool canGetCritChance = stats.critChance < 1 ? true : false;
         rewardScreen.SetActive(true);
         statScreenParent.SetActive(true);
