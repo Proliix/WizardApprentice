@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 980d84096939029428a52e38b87352e7, type: 3}
   title: Soulzone
-  description: "Be the death of your dreams\xB4"
+  description: Be the death of your dreams
   attackSound: {fileID: 0}
   audioVolume: 1
   playerTarget: {fileID: 0}

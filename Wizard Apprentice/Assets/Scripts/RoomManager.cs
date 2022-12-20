@@ -70,6 +70,7 @@ public class RoomManager : MonoBehaviour
         }
         currentRoom = room;
         MusicManager.Instance.ChangeToMusicType(room.musicType);
+        RoomFadeIn.NewRoom();
         GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
         currentRoomParent = Instantiate(roomParent);
         currentRoomObject = Instantiate(room.roomPrefab, currentRoomParent.transform);
@@ -193,6 +194,7 @@ public class RoomManager : MonoBehaviour
 
     public void LoadNewRoom(int roomType)
     {
+        
         bulletHandler.ResetAll();
 
         if (roomType != 4)

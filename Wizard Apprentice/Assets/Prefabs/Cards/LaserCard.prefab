@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: f19defc0cfd3399498c70f83ba880973, type: 3}
   title: Imperium Trabem
-  description: 'vincit qui vincit '
+  description: Enemies fear the laser
   attackSound: {fileID: 0}
   audioVolume: 1
   laserSpritePrefab: {fileID: 1293822278273214030, guid: 6fbfd37f1cd02694680db433a729aaee, type: 3}
