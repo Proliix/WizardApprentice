@@ -84,6 +84,11 @@ public class Inventory : MonoBehaviour
         return isfull;
     }
 
+    public void AddQueuedCards(GameObject cardToSwap, int indexToSwap)
+    {
+        cardHandler.AddQueuedCards(cardToSwap, indexToSwap);
+    }
+
     public void ReplaceCard(GameObject cardHolder, GameObject cardObject)
     {
         for (int i = 0; i < Mathf.Min(cardHolders.Count, 4); i++)

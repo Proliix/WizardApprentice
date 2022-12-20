@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Drag : MonoBehaviour
 {
@@ -12,11 +13,16 @@ public class Drag : MonoBehaviour
     public GameObject lastObjectAttachedTo;
     float cardHoverScale = 1.25f;
     float timeToOpenDescriptionMenu = 0.5f;
+    public bool isInSwapQueue;
+    public int swapPartner;
 
     Coroutine currentCoroutine;
 
+    public List<int> queuedUpSwaps;
+
     private void Start()
     {
+        queuedUpSwaps = new List<int>();
     }
     public void DragHandler(BaseEventData data)
     {
@@ -128,6 +134,18 @@ public class Drag : MonoBehaviour
             {
                 if (inventory.cardHolders[unitIndex].cardObject != null)
                 {
+                    if (isInSwapQueue)
+                    {
+                        ResetQueuedCards();
+                        inventory.cardHolders[swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                        ResetThisCard();
+                    }
+                    if (inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
+                    {
+                        inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetQueuedCards();
+                        inventory.cardHolders[inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                        inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetThisCard();
+                    }
                     transform.position = inventory.cardHolders[unitIndex].transform.position;
                     inventory.ReplaceCard(inventory.cardHolders[unitIndex].gameObject, this.gameObject);
                     inventory.cardHolders[unitIndex].cardObject.transform.position = lastObjectAttachedTo.transform.position;
@@ -140,6 +158,18 @@ public class Drag : MonoBehaviour
                 }
                 else if (GetMyIndex() >= 4 && unitIndex >= 4)
                 {
+                    if (isInSwapQueue)
+                    {
+                        ResetQueuedCards();
+                        inventory.cardHolders[swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                        ResetThisCard();
+                    }
+                    if (inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
+                    {
+                        inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetQueuedCards();
+                        inventory.cardHolders[inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                        inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetThisCard();
+                    }
                     if (lastObjectAttachedTo != null)
                     {
                         lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
@@ -150,6 +180,29 @@ public class Drag : MonoBehaviour
                     hasSnappedToNew = true;
                 }
             }
+            else
+            {
+                if (isInSwapQueue)
+                {
+                    ResetQueuedCards();
+                    inventory.cardHolders[swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                    ResetThisCard();
+                }
+                if (inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
+                {
+                    inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetQueuedCards();
+                    inventory.cardHolders[inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                    inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetThisCard();
+                }
+                inventory.cardHandler.cardSwapEvent += SwapQueuedUpCards;
+                queuedUpSwaps.Add(unitIndex);
+                isInSwapQueue = true;
+                swapPartner = unitIndex;
+                inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue = true;
+                inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner = GetMyIndex();
+                QueueUpCardSwap(inventory.cardHolders[unitIndex].cardObject,GetMyIndex());
+                QueueUpCardSwap(lastObjectAttachedTo.GetComponent<CardHolder>().cardObject, unitIndex);
+            }
         }
         inventory.trashCan.gameObject.SetActive(false);
         if(!hasSnappedToNew)
@@ -158,6 +211,44 @@ public class Drag : MonoBehaviour
         }
     }
 
+    private void ResetQueuedCards()
+    {
+        inventory.cardHandler.cardSwapEvent -= SwapQueuedUpCards;
+        inventory.cardHandler.ResetQueuedCards();
+    }
+
+    public void ResetThisCard()
+    {
+        isInSwapQueue = false;
+        swapPartner = 0;
+        queuedUpSwaps.Clear();
+        lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+    }
+
+    public void QueueUpCardSwap(GameObject cardToSwap, int indexToSwap)
+    {
+        cardToSwap.GetComponent<Image>().color = new Color32(64,64,64, 255);
+        if (indexToSwap < 4)
+        {
+            inventory.AddQueuedCards(cardToSwap, indexToSwap);
+        }
+    }
+
+    private void SwapQueuedUpCards()
+    {
+        for(int i = 0; i < queuedUpSwaps.Count; i+=2)
+        {
+            transform.position = inventory.cardHolders[queuedUpSwaps[i]].transform.position;
+            inventory.cardHolders[queuedUpSwaps[i]].cardObject.transform.position = lastObjectAttachedTo.transform.position;
+            lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            inventory.cardHolders[queuedUpSwaps[i]].cardObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = inventory.cardHolders[queuedUpSwaps[i]].cardObject;
+            lastObjectAttachedTo.GetComponent<CardHolder>().cardObject.GetComponent<Drag>().lastObjectAttachedTo = lastObjectAttachedTo;
+            lastObjectAttachedTo = inventory.cardHolders[queuedUpSwaps[i]].gameObject;
+            inventory.cardHolders[queuedUpSwaps[i]].cardObject = this.gameObject;
+        }
+        queuedUpSwaps.Clear();
+    }
 
     public void PointerEnterHandler(BaseEventData data)
     {
