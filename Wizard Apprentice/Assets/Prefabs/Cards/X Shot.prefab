@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &6595212247910812029
 Animator:
   serializedVersion: 4
@@ -221,8 +224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: faaafe0f3736479429a0f7f7b7b8fa7a, type: 3}
-  title: X
-  description: "To cover the weak sides \n(Secret interaction with +)"
+  title: Diametro X
+  description: "To cover the weak sides \n(Secret interaction with Crux +)"
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   damage: 20

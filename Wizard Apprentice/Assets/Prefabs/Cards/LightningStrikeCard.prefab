@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &8479776691095616197
 Animator:
   serializedVersion: 4
@@ -221,9 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 26a9cf81fb0eefa46bf4f53db2a8bbaa, type: 3}
-  title: Thunderstruck
+  title: Tonitribus
   mousePos: {x: 0, y: 0, z: 0}
   lightningStrike: {fileID: 2445282581275634261, guid: e78522ed6aa6ab94db77e2da55af5e4c, type: 3}
-  description: Light up your enemies (literally)
+  description: Strikes down upon thee
   shootCooldown: 1
   StatsAreLocatedOnPrefab: Stats are located on "LightningStrikePrefab

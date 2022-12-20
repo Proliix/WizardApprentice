@@ -193,8 +193,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599478806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.85, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -10.1, y: -0.19, z: 0}
+  m_LocalScale: {x: 15.624, y: 15.624, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1401780091}
@@ -3361,6 +3361,7 @@ MonoBehaviour:
   damageBufferRemoveSpeed: 0.0025
   removeHealthbar: 0
   healthbarParent: {fileID: 0}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
