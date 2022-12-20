@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &6595212247910812029
 Animator:
   serializedVersion: 4
@@ -222,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: f19defc0cfd3399498c70f83ba880973, type: 3}
   title: Imperium Trabem
-  description: Enemies fear the laser
+  description: Enemies fear the BEAM of POWER
   attackSound: {fileID: 0}
   audioVolume: 1
   laserSpritePrefab: {fileID: 1293822278273214030, guid: 6fbfd37f1cd02694680db433a729aaee, type: 3}

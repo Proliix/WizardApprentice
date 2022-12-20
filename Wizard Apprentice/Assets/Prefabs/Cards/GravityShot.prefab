@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &2085470275948324648
 Animator:
   serializedVersion: 4
@@ -221,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
-  title: Event Horizon
+  title: Viverra
   particleEffect: {fileID: 2845704094484306700, guid: 22623d731e2c9d84baec34a5ec7996a4, type: 3}
   description: 'Pulls in enemies with MAGIC (and science) '
   damage: 3

@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!114 &4730238429024741830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 8185b89e57416be49a79c6201a954948, type: 3}
   title: Round tactics
-  description: Covers all directions (mostly)
+  description: Covers all directions
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   projectileAmmount: 12
