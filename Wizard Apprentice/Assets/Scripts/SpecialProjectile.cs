@@ -118,6 +118,8 @@ public class SpecialProjectile : MonoBehaviour
 
     void HomingShot()
     {
+        dir = transform.up;
+
         if (!hasShot)
         {
             homingTarget = enemyManager.GetClosestEnemy(gameObject.transform.position);
@@ -126,15 +128,12 @@ public class SpecialProjectile : MonoBehaviour
 
         if (homingTarget != null)
         {
-            dir = (Vector2)homingTarget.transform.position - (Vector2)transform.position;
+            Vector3 direction = homingTarget.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * (bulletSpeed / 2));
         }
-
-        if (dir == Vector3.zero || dir == null)
-        {
-            dir = transform.up;
-        }
-
-        rb2d.velocity = dir.normalized * bulletSpeed;
+        rb2d.velocity = dir * bulletSpeed;
     }
 
     void StaticShot()
