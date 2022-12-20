@@ -237,6 +237,7 @@ public class BulletHandler : MonoBehaviour
         specialBullet.Shooter = newShooter;
         specialBullet.currentIcard = icard;
         specialBullet.isMovingAway = moveAwayFromShooter;
+        specialBullet.UpdateDirection();
         specialBullet.isPlayerBullet = isPlayer;
         specialBullet.effectCooldown = effectCooldown;
         specialBullet.bulletLifetime = lifetime;
@@ -266,6 +267,7 @@ public class BulletHandler : MonoBehaviour
         specialBullet.Shooter = newShooter;
         specialBullet.currentIcard = icard;
         specialBullet.isMovingAway = moveAwayFromShooter;
+        specialBullet.UpdateDirection();
         specialBullet.isPlayerBullet = isPlayer;
         specialBullet.effectCooldown = effectCooldown;
         specialBullet.bulletLifetime = lifetime;

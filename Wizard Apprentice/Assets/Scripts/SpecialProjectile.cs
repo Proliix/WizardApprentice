@@ -53,6 +53,19 @@ public class SpecialProjectile : MonoBehaviour
         startLifeTime = bulletLifetime;
     }
 
+    public void UpdateDirection()
+    {
+        if (isMovingAway)
+        {
+            dir = transform.position - Shooter.transform.position;
+        }
+        else
+        {
+            dir = transform.up;
+        }
+
+    }
+
     public void UpdateDirection(Vector3 Direction)
     {
         dir = Direction;
