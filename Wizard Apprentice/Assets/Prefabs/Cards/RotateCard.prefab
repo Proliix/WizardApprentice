@@ -227,7 +227,7 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: 416f64c858b131f449a876803e1bbf5b, type: 3}
   audioVolume: 1
   distance: 3
-  lifetime: 8.1
+  lifetime: 8.175
   damage: 3
   size: 1
   speed: 20
