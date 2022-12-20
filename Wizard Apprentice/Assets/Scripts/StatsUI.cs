@@ -118,7 +118,7 @@ public class StatsUI : MonoBehaviour
         string bulletSizeText = "Bullet Size : " + bulletSize.ToString("F2");
         bulletSizeTMP.SetText(bulletSizeText);
 
-        string healthText = currentHP + "/" + maxHP;
+        string healthText = Mathf.RoundToInt(currentHP) + "/" + Mathf.RoundToInt(maxHP);
         healthTMP.SetText(healthText);
     }
 

@@ -68,7 +68,7 @@ public class HitNumberHandler : MonoBehaviour
             hitnumberText[index].transform.parent.transform.localScale = Vector3.one * critSize;
         }
 
-        hitnumberText[index].text = "" + (damage > 0 ? damage : -damage);
+        hitnumberText[index].text = "" + Mathf.RoundToInt(damage > 0 ? damage : -damage);
         return newHitText;
     }
 

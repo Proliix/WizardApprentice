@@ -22,7 +22,10 @@ public class RewardsHandler : MonoBehaviour
     [SerializeField] GameObject[] descriptionObj = new GameObject[3];
     [SerializeField] TextMeshProUGUI[] cardTitleObj = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] cardTextObj = new TextMeshProUGUI[3];
-
+    [Header("Card Removal")]
+    [SerializeField] GameObject fadeOut;
+    [SerializeField] Vector3 newHotbarPos;
+    [SerializeField] Vector3 newHotbarScale;
 
     private Reward[] activeRewards = new Reward[3];
     private GameObject[] activeCards = new GameObject[3];

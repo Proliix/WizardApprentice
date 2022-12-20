@@ -8153,6 +8153,9 @@ MonoBehaviour:
   - {fileID: 945111915}
   - {fileID: 1248728898}
   - {fileID: 371465571}
+  fadeOut: {fileID: 0}
+  newHotbarPos: {x: 0, y: 0, z: 0}
+  newHotbarScale: {x: 0, y: 0, z: 0}
 --- !u!114 &1786813654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9518,7 +9521,7 @@ GameObject:
   - component: {fileID: 1942698996}
   - component: {fileID: 1942698995}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Card Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
