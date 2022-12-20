@@ -19,11 +19,20 @@ public class CardHandler : MonoBehaviour
     public int cardIndex;
     bool hasbeenReset = false;
 
+    private List<GameObject> rememberedSwapObject;
+    private List<int> rememberedSwapIndex;
+
+    public delegate void CardHasSwappedDelegate();
+    public event CardHasSwappedDelegate cardSwapEvent;
+
     // Start is called before the first frame update
     void Start()
     {
         cards = new ICard[cardObjs.Length];
         animators = new Animator[cardCycle.Length];
+
+        rememberedSwapIndex = new List<int>();
+        rememberedSwapObject = new List<GameObject>();
 
         for (int i = 0; i < cardCycle.Length; i++)
         {
@@ -69,6 +78,38 @@ public class CardHandler : MonoBehaviour
         }
     }
 
+    public void AddQueuedCards(GameObject cardToSwap, int indexToSwap)
+    {
+        rememberedSwapObject.Add(cardToSwap);
+        rememberedSwapIndex.Add(indexToSwap);
+    }
+
+    public void ResetQueuedCards()
+    {
+        rememberedSwapObject.Clear();
+        rememberedSwapIndex.Clear();
+    }
+
+    public void SwapQueuedCards()
+    {
+        if(rememberedSwapObject.Count <= 0)
+        {
+            return;
+        }
+        Debug.Log("swapping");
+        for(int i = 0; i < rememberedSwapObject.Count; i++)
+        {
+            Debug.Log("replaceed cards");
+            ReplaceCard(rememberedSwapObject[i], rememberedSwapIndex[i]);
+        }
+        rememberedSwapIndex.Clear();
+        rememberedSwapObject.Clear();
+        if(cardSwapEvent != null)
+        {
+            cardSwapEvent.Invoke();
+        }
+    }
+
     void UpdateInterface()
     {
         for (int i = 0; i < cardObjs.Length; i++)
@@ -110,6 +151,7 @@ public class CardHandler : MonoBehaviour
             else
                 Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
 
+
             if (timer >= timePerCard + 0.05f)
             {
                 timer = 0;
@@ -117,6 +159,7 @@ public class CardHandler : MonoBehaviour
                 if (cards[cardIndex] != null)
                     cards[cardIndex].ResetCard();
 
+                SwapQueuedCards();
                 if (cardIndex < cardObjs.Length - 1)
                     cardIndex++;
                 else
