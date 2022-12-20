@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Team W.Ap
   productName: Wizard Apprentice
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 0d98992e3537e1a439b9ed5a79c7ced2, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
