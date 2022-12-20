@@ -7,7 +7,6 @@ using TMPro;
 public class StatsUI : MonoBehaviour
 {
 
-    PlayerStats playerStats;
     [Header("TMP references ")]
     public TextMeshProUGUI damageTMP;
     public TextMeshProUGUI attackSpeedTMP;
@@ -16,6 +15,7 @@ public class StatsUI : MonoBehaviour
     public TextMeshProUGUI moveSpeedTMP;
     public TextMeshProUGUI bulletSpeedTMP;
     public TextMeshProUGUI bulletSizeTMP;
+    public TextMeshProUGUI healthTMP;
 
     [Header("Player Stats")]
     [SerializeField] float damage = 1;
@@ -25,18 +25,23 @@ public class StatsUI : MonoBehaviour
     [SerializeField] float moveSpeed = 1;
     [SerializeField] float bulletSpeed = 1;
     [SerializeField] float bulletSize = 1;
+    [SerializeField] float currentHP = 100;
+    [SerializeField] float maxHP = 100;
 
     [Header("Misc")]
     [SerializeField] GameObject PauseScreen;
 
     float timer = 0;
     bool activeIngame;
+    PlayerStats playerStats;
+    Health playerHealth;
     GameObject holderChild;
 
     void Start()
     {
         timer = 10;
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         activeIngame = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
         holderChild = gameObject.transform.GetChild(0).gameObject;
         holderChild.SetActive(activeIngame);
@@ -45,6 +50,7 @@ public class StatsUI : MonoBehaviour
 
     void Update()
     {
+
         if (activeIngame)
         {
             timer += Time.deltaTime;
@@ -76,14 +82,25 @@ public class StatsUI : MonoBehaviour
         moveSpeed = playerStats.movementSpeed;
         bulletSpeed = playerStats.projectileSize;
         bulletSize = playerStats.projectileSize;
+        UpdateHP();
     }
 
+    public void UpdateHP()
+    {
+        currentHP = playerHealth.GetHP();
+        maxHP = playerHealth.GetMaxHP();
+    }
+
+    public void UpdateShowStatus()
+    {
+        activeIngame = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
+    }
     private void UpdateStats()
     {
-        string dmgText = "DMG : " +damage.ToString("F2");
+        string dmgText = "DMG : " + damage.ToString("F2");
         damageTMP.SetText(dmgText);
 
-        string attackSpeedText = "AS : " +attackSpeed.ToString("F2");
+        string attackSpeedText = "AS : " + attackSpeed.ToString("F2");
         attackSpeedTMP.SetText(attackSpeedText);
 
         string critMultText = "Crit DMG : " + Mathf.RoundToInt(critDmgMultiplier * 100) + "%";
@@ -101,6 +118,8 @@ public class StatsUI : MonoBehaviour
         string bulletSizeText = "Bullet Size : " + bulletSize.ToString("F2");
         bulletSizeTMP.SetText(bulletSizeText);
 
+        string healthText = currentHP + "/" + maxHP;
+        healthTMP.SetText(healthText);
     }
 
 }

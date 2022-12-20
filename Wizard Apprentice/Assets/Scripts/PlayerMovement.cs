@@ -73,10 +73,6 @@ public class PlayerMovement : MonoBehaviour
                 MovePlayer();
             }
 
-
-            else if (hasSmallIcon != PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false)
-                hasSmallIcon = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
-
             if (Input.GetKeyDown(KeyCode.Space) && canDash)
             {
                 SoundManager.Instance.PlayAudio(dashSound);

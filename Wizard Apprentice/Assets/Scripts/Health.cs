@@ -29,6 +29,8 @@ public class Health : MonoBehaviour
     [SerializeField] bool removeHealthbar = false;
     [Header("only needed if remove healthbar is active")]
     [SerializeField] GameObject healthbarParent;
+    [Header("Player Specific")]
+    [SerializeField] StatsUI statsUI;
     [Header("Juice")]
     [SerializeField] bool hasDeathAnimation = false;
     [SerializeField] float hitEffectTime = 0.5f;
@@ -181,6 +183,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(float healAmount)
     {
+
         if ((hp + healAmount) > maxHP)
         {
             hp = maxHP;
@@ -191,6 +194,9 @@ public class Health : MonoBehaviour
 
         }
 
+        if (isPlayer)
+            statsUI?.UpdateHP();
+       
         if (hitNumbers != null)
             hitNumbers.GetHitText(transform.position, -healAmount);
     }
@@ -204,12 +210,19 @@ public class Health : MonoBehaviour
             returnValue = true;
         }
 
+        if (isPlayer)
+            statsUI?.UpdateHP();
+
         return returnValue;
     }
 
     public void FullHeal()
     {
         hp = maxHP;
+
+        if (isPlayer)
+            statsUI?.UpdateHP();
+
         hitNumbers?.GetHitText(transform.position, -maxHP);
     }
 
@@ -225,6 +238,9 @@ public class Health : MonoBehaviour
             hp += healAmount;
         else
             hp = maxHP;
+
+        if (isPlayer)
+            statsUI?.UpdateHP();
 
         hitNumbers?.GetHitText(transform.position, -healAmount);
     }
@@ -261,6 +277,9 @@ public class Health : MonoBehaviour
             }
             else
                 SetDead();
+
+            if (isPlayer)
+                statsUI?.UpdateHP();
 
             if (hitNumbers != null)
                 hitNumbers.GetHitText(transform.position, value, isCrit);
