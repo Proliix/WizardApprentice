@@ -129,12 +129,12 @@ public class Health : MonoBehaviour
                 if (DamageBufferValue == hp)
                     prevHitHp = hp;
 
-                healthbarValue = Mathf.MoveTowards(healthbarValue, hp, healthRemoveSpeed * (1 + (hp - prevHp) / maxHP));
+                healthbarValue = Mathf.MoveTowards(healthbarValue, hp, healthRemoveSpeed * (1 + (prevHp / hp)));
                 healthbar.fillAmount = (healthbarValue / maxHP);
 
                 if (timer > damagebufferUpTime)
                 {
-                    DamageBufferValue = Mathf.MoveTowards(DamageBufferValue, hp, damageBufferRemoveSpeed * (1 - (hp - prevHitHp) / maxHP));
+                    DamageBufferValue = Mathf.MoveTowards(DamageBufferValue, hp, damageBufferRemoveSpeed * (1 + (prevHitHp / hp)));
                     damageBufferhbar.fillAmount = (DamageBufferValue / maxHP);
                 }
             }
