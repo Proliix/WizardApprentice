@@ -82,6 +82,7 @@ public class BulletHandler : MonoBehaviour
             if (specialProjectilePool[i].activeSelf == true)
             {
                 specialProjectilePool[i].SetActive(false);
+                specialProjectilePool[i].GetComponent<SpecialProjectile>().ResetBullet();
                 specialProjectilePool[i].transform.position = poolParentSpecial.transform.position;
             }
         }

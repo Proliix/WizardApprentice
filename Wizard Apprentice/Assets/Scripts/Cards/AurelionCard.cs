@@ -16,6 +16,7 @@ public class AurelionCard : MonoBehaviour, ICard
     [SerializeField] float damage = 10f;
     [SerializeField] float size = 1.25f;
     [SerializeField] float speed = 10f;
+    [SerializeField] float sinSpeed = 5f;
     [Range(1, 100)]
     [SerializeField] int amount = 4;
     [Tooltip("Shoot pos from player pos")]
@@ -45,9 +46,8 @@ public class AurelionCard : MonoBehaviour, ICard
 
             Vector3 spawnPos = player.transform.position + spawnDir;
 
-            bulletHandler.GetSpecialBullet(spawnPos, player, bulletImage, SpecialBulletState.Rotating, this, true, 0, lifetime, false, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed, distance + stats.projectileSize);
+            bulletHandler.GetSpecialBullet(spawnPos, player, bulletImage, SpecialBulletState.Rotating, this, true, sinSpeed,lifetime, false, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed, distance + stats.projectileSize);
         }
-
     }
 
     public void UpdateCard()

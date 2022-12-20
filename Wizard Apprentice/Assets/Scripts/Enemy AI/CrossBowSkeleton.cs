@@ -21,6 +21,7 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
     bool stunned = false;
 
     bool waitActive = false;
+    bool hasResetTimer = false;
     BulletHandler bulletHandler;
     GameObject player;
 
@@ -68,19 +69,37 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
     {
         state = AttackState.Walking;
         rb2d.velocity = Vector3.zero;
-        float x = Random.Range(0 + 1, roomBoundary.x - 1);
-        float y = Random.Range(0 + 1, roomBoundary.y - 1);
+        GetNewTargetDir();
+    }
+
+    private void GetNewTargetDir()
+    {
+        float x = Random.Range(0 + 1, roomBoundary.x - 1.5f);
+        float y = Random.Range(0 + 1, roomBoundary.y - 1.5f);
         targetPos = new Vector3(x, y, 0);
         dir = targetPos - gameObject.transform.position;
     }
 
     void Walking()
     {
+        if (!hasResetTimer)
+        {
+            timer = 0;
+            hasResetTimer = true;
+        }
+
+        if (timer >= 7.5f)
+        {
+            timer = 0;
+            GetNewTargetDir();
+        }
+
         rb2d.velocity = dir.normalized * walkSpeed;
         Vector3 pos = transform.position;
         if ((pos.x > targetPos.x - 0.25f && pos.x < targetPos.x + 0.25f) && (pos.y > targetPos.y - 0.25f && pos.y < targetPos.y + 0.25f))
         {
             state = AttackState.Shooting;
+            hasResetTimer = false;
         }
         dir = targetPos - pos;
     }

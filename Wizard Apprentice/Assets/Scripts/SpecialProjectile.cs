@@ -85,16 +85,21 @@ public class SpecialProjectile : MonoBehaviour
 
     void RotatingShot()
     {
-        if (relativeDistance == Vector3.zero)
+        if (!hasShot)
+        {
+            hasShot = true;
             relativeDistance = transform.position - Shooter.transform.position;
+            timer = 0;
+        }
 
-        transform.position = Shooter.transform.position + relativeDistance;
+        float distance = Mathf.Sin(timer * effectCooldown);
 
-        transform.position = Shooter.transform.position + (transform.position - Shooter.transform.position).normalized * effectSize;
+        transform.position = Shooter.transform.position + relativeDistance.normalized * (effectSize * Mathf.Abs(distance) + 1.25f);
 
         transform.RotateAround(Shooter.transform.position, Vector3.forward, (bulletSpeed * 10) * Time.deltaTime);
 
         relativeDistance = transform.position - Shooter.transform.position;
+
     }
 
     void TimedShot()
@@ -152,8 +157,8 @@ public class SpecialProjectile : MonoBehaviour
             }
         }
 
-        if ((transform.position.x > cursorPos.x - 0.5f && transform.position.x < cursorPos.x + 0.5f &&
-            transform.position.y > cursorPos.y - 0.5f && transform.position.y < cursorPos.y + 0.5f) || hasHitWall)
+        if ((transform.position.x > cursorPos.x - 0.75f && transform.position.x < cursorPos.x + 0.75f &&
+            transform.position.y > cursorPos.y - 0.75f && transform.position.y < cursorPos.y + 0.75f) || hasHitWall)
         {
             stoppedMoving = true;
 
@@ -238,7 +243,7 @@ public class SpecialProjectile : MonoBehaviour
             default:
                 NormalShot();
                 break;
-           
+
         }
 
         if (timer > bulletLifetime)
