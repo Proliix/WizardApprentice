@@ -307,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   hasEntered: 0
+  puzzleSuccess: {fileID: 8300000, guid: e3b6952a3f4409c4781b2bf3a0451cc4, type: 3}
 --- !u!70 &632790396326130210
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

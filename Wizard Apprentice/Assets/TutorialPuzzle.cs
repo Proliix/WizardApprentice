@@ -6,6 +6,7 @@ using TMPro;
 public class TutorialPuzzle : MonoBehaviour
 {
 
+
     [SerializeField] float timer;
     [SerializeField] bool hasEntered = false;
 
@@ -14,7 +15,8 @@ public class TutorialPuzzle : MonoBehaviour
     CircleShotCard circleShotCard;
     CardHandler cardHandler;
 
-    AudioClip puzzleSuccess;
+   [SerializeField] AudioClip puzzleSuccess;
+    private bool puzzleDone = false;
 
     void Start()
     {
@@ -22,7 +24,7 @@ public class TutorialPuzzle : MonoBehaviour
         normalCard = new NormalCard();
         trippleShotCard = new TrippleShotCard();
         circleShotCard = new CircleShotCard();
-
+        
         cardHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<CardHandler>();
     }
 
@@ -37,23 +39,24 @@ public class TutorialPuzzle : MonoBehaviour
         if (timer >= 30 && timer < 60)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "You can rearrange the spellcards";
-            SoundManager.Instance.PlayAudio(puzzleSuccess);
+            
         }
 
         if (timer >= 60)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "Use Mouse 1 to rearrange the 4 cards as shown on the sign";
-            SoundManager.Instance.PlayAudio(puzzleSuccess);
+            
         }
 
 
 
-        if (cardHandler.CheckInSlot(normalCard, 0) && cardHandler.CheckInSlot(trippleShotCard, 1) && cardHandler.CheckInSlot(circleShotCard, 2) && cardHandler.CheckInSlot(normalCard, 3))
+        if (cardHandler.CheckInSlot(normalCard, 0) && cardHandler.CheckInSlot(trippleShotCard, 1) && cardHandler.CheckInSlot(circleShotCard, 2) && cardHandler.CheckInSlot(normalCard, 3) && !puzzleDone)
         {
-            Debug.Log("1");
+            
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
-
             SoundManager.Instance.PlayAudio(puzzleSuccess);
+            puzzleDone = true;
+            
         }
 
     }

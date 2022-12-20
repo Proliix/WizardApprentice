@@ -42,6 +42,10 @@ public class RoomManager : MonoBehaviour
 
     public int currentFloor;
 
+    [Header("Room Pause Variables")]
+    [SerializeField] float pauseDuration = 1;
+    public float originalTimescale;
+
     [Header("Room Clear Variables")]
     [SerializeField] AudioClip roomClearSound;
     [SerializeField] float audioVolume = 1;
@@ -59,6 +63,11 @@ public class RoomManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             canWalkThroughAnyDoor = !canWalkThroughAnyDoor;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            StartCoroutine(PauseEnemies());
         }
     }
 
@@ -231,7 +240,7 @@ public class RoomManager : MonoBehaviour
                 LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
                 break;
         }
-        Debug.Log("Turning off room select object");
+       
         roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }
 
@@ -242,5 +251,20 @@ public class RoomManager : MonoBehaviour
             particleSystem.Emit(10);
         
     }
+
+   
+    IEnumerator PauseEnemies()
+    {
+        originalTimescale = Time.timeScale;
+
+        Time.timeScale = 0;
+
+        yield return new WaitForSeconds(pauseDuration);
+
+        Time.timeScale = originalTimescale;
+        
+    }
+
+   
 
 }
