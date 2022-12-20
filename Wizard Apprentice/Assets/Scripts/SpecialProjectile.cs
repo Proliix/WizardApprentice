@@ -69,6 +69,7 @@ public class SpecialProjectile : MonoBehaviour
     public void UpdateDirection(Vector3 Direction)
     {
         dir = Direction;
+        transform.right = -Direction;
     }
 
     #region Updates for projectiles
@@ -351,7 +352,7 @@ public class SpecialProjectile : MonoBehaviour
                     float theta = Mathf.Atan2(dir.y, dir.x);
                     if (theta < 0.0)
                         theta += Mathf.PI * 2;
-                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * theta - 90) * -1));
+                    transform.right = -dir;
                     NormalShot();
                     break;
                 case SpecialBulletState.HauntedArmorBigArrow:
@@ -380,7 +381,7 @@ public class SpecialProjectile : MonoBehaviour
                     float HauntedArmorBigArrow_angle = Mathf.Atan2(dir.y, dir.x);
                     if (HauntedArmorBigArrow_angle < 0.0)
                         HauntedArmorBigArrow_angle += Mathf.PI * 2;
-                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * HauntedArmorBigArrow_angle - 90) * -1));
+                    transform.right = -dir;
                     data[0]--;
                     NormalShot();
                     break;
