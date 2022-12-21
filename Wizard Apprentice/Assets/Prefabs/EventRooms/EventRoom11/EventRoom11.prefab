@@ -655,7 +655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceptButton: {fileID: 8812372787919699794}
   declineButton: {fileID: 1810807794975163552}
-  reward: {fileID: 11400000, guid: 3f303c1f0b70df8479cdfbd5ddc5bae6, type: 2}
+  reward: {fileID: 11400000, guid: 71e033b605557fb438a388f76404bb06, type: 2}
 --- !u!114 &8779001799977373941
 MonoBehaviour:
   m_ObjectHideFlags: 0
