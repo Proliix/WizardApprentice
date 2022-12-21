@@ -55,7 +55,8 @@ public class CrystallBossAI : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject[] targets;
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] RoomManager roomManager;
+    RoomManager roomManager;
+    [SerializeField] PolygonCollider2D bossHurtbox;
 
     public Vector3[] spawnPoints;
 
@@ -167,6 +168,11 @@ public class CrystallBossAI : MonoBehaviour
         
 
         }
+
+        if (isAlive != true)
+        {
+            roomManager.RemoveAllEnemies();
+        }
     }
 
     void BasicAttack()
@@ -254,7 +260,8 @@ public class CrystallBossAI : MonoBehaviour
     private void BossDead()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
-
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        bossHurtbox.enabled = false;
         isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();

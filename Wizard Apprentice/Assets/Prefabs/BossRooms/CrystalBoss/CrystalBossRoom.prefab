@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 2180549997973920240}
   - {fileID: 2180549998418730266}
   spriteRenderer: {fileID: 2180549999853740858}
-  roomManager: {fileID: 0}
+  bossHurtbox: {fileID: 2120415091722079606}
   spawnPoints: []
 --- !u!114 &2180549999853740857
 MonoBehaviour:
