@@ -16,14 +16,18 @@ public class PlayerStats : MonoBehaviour
     public int projectileAmount = 0;
     public float GetCrit(float damageValue)
     {
+
         float returnValue = damageValue;
         int randomNum = Random.Range(1, 101);
 
         if (randomNum <= critChance * 100)
+        { 
             returnValue = damageValue * critDamage;
+            Mathf.RoundToInt(returnValue);
+        }
 
 
-        return Mathf.RoundToInt(returnValue);
+        return returnValue;
     }
 
     public int GetDamage(float damageValue)

@@ -148,19 +148,21 @@ public class EyeBossAI : MonoBehaviour
 
   IEnumerator GigaAttack()
     {
-        Debug.Log("start of gigaAttack");
+        if (isAlive == true) 
+        {
+
         yield return new WaitForSeconds(2f);
         //Shoots a bullet from the gameObject towards the target(player)
         bulletHandler.GetBullet(gameObject.transform.position, target.transform.position - gameObject.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
-        Debug.Log("end of gigaAttack");
         yield return null;
+        }
     }
 
     private void BossDead()
     {
 
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
-
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
         isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();

@@ -17,7 +17,9 @@ public class DodgeObstacle : MonoBehaviour
         playerTarget = GameObject.FindGameObjectWithTag("Player");
         playerMovement = playerTarget.GetComponent<PlayerMovement>();
         TimesFailedDodgeroll = 0;
-        textMeshPro.enabled = false;
+
+     
+
 
     }
 
@@ -37,15 +39,18 @@ public class DodgeObstacle : MonoBehaviour
 
     private void UpdateText()
     {
-         
-        if (TimesFailedDodgeroll >= 3)
+        if (textMeshPro != null)
         {
+            if (TimesFailedDodgeroll >= 3)
+            {
             textMeshPro.enabled = true;
+            }
 
         }
 
         
     }
+
 
     IEnumerator DeathByLava()
     {
@@ -55,7 +60,7 @@ public class DodgeObstacle : MonoBehaviour
 
         TimesFailedDodgeroll++;
         playerTarget.GetComponent<PlayerMovement>().SetCanMove(false);
-        playerTarget.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Sign(Pos.normalized.y) * 5);
+        playerTarget.GetComponent<Rigidbody2D>().velocity = Pos.normalized * 5;
         yield return new WaitForSeconds(0.5f);
         playerTarget.GetComponent<PlayerMovement>().SetCanMove(true);
 
@@ -63,6 +68,24 @@ public class DodgeObstacle : MonoBehaviour
         yield return null;
     }
 
-   
+
+
+
 }
 
+
+//IEnumerator DeathByLava()
+//{
+//    Vector2 Pos = playerTarget.transform.position - gameObject.transform.position;
+
+//    playerTarget.GetComponent<Health>().RemoveHealth(5);
+
+//    TimesFailedDodgeroll++;
+//    playerTarget.GetComponent<PlayerMovement>().SetCanMove(false);
+//    playerTarget.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Sign(Pos.normalized.y) * 5);
+//    yield return new WaitForSeconds(0.5f);
+//    playerTarget.GetComponent<PlayerMovement>().SetCanMove(true);
+
+
+//    yield return null;
+//}
