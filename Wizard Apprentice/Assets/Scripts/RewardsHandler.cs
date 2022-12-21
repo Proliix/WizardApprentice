@@ -13,7 +13,13 @@ public class RewardsHandler : MonoBehaviour
     public List<Reward> rewardsTier2;
     public List<Reward> rewardsTier3;
     public Reward healReward;
-    [SerializeField] AnimationCurve percentageCurve;
+    [HideInInspector]
+    [Range(0, 100)] public float chanceTeir1;
+    [HideInInspector]
+    [Range(0, 100)] public float chanceTeir2;
+    [HideInInspector]
+    [Range(0, 100)] public float chanceTeir3;
+    [SerializeField] AnimationCurve percentageCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f, 0.5f), new Keyframe(1, 1));
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [SerializeField] Image[] potionImage = new Image[3];
@@ -103,6 +109,8 @@ public class RewardsHandler : MonoBehaviour
             //if (!inventory.IsFull())
             GetRewardScreenCard();
         }
+        else if (Input.GetKeyDown(KeyCode.F11))
+            GetRewardScreenStats();
 
         if (isMoving)
         {
@@ -251,12 +259,13 @@ public class RewardsHandler : MonoBehaviour
 
     public void SkipCards()
     {
-        cardScreenParent.SetActive(false);
         if (statsAfterCard)
         {
+            cardScreenParent.SetActive(false);
             GetRewardScreenStats();
         }
-
+        else
+            rewardScreen.SetActive(false);
     }
 
     public void SelectRewardCard(int index)
@@ -304,16 +313,45 @@ public class RewardsHandler : MonoBehaviour
         int first = -100;
         int seccond = -100;
         bool fullHp = health.HasFullHealth();
+
+        List<Reward> currentRewardsList = new List<Reward>();
+
+        float eval = Random.Range(0, 101);
+        if (eval <= chanceTeir1)
+        {
+            currentRewardsList = rewards;
+            Debug.Log("1 " + eval + " | " + chanceTeir1);
+        }
+        else if (eval <= chanceTeir2 + chanceTeir1)
+        {
+            currentRewardsList = rewardsTier2;
+            Debug.Log("2 " + eval + " | " + (chanceTeir2 + chanceTeir1));
+        }
+        else if (eval <= chanceTeir3 + (chanceTeir2 + chanceTeir1))
+        {
+            currentRewardsList = rewardsTier3;
+            Debug.Log("3 " + eval + " | " + (chanceTeir3 + (chanceTeir2 + chanceTeir1)));
+        }
+        else
+        {
+            Debug.Log("is wrong" + eval);
+            currentRewardsList = rewards;
+        }
+
+        if (currentRewardsList.Count == 0)
+            currentRewardsList = rewards;
+
+
         for (int i = 0; i < activeRewards.Length; i++)
         {
 
-            int newNum = Random.Range(0, rewards.Count);
+            int newNum = Random.Range(0, currentRewardsList.Count);
 
             int runs = 0;
 
-            while ((first == newNum || seccond == newNum || (rewards[newNum].critChance > 0 && !canGetCritChance)) && runs < 100)
+            while ((first == newNum || seccond == newNum || (currentRewardsList[newNum].critChance > 0 && !canGetCritChance)) && runs < 100)
             {
-                newNum = Random.Range(0, rewards.Count);
+                newNum = Random.Range(0, currentRewardsList.Count);
                 runs++;
             }
 
@@ -322,7 +360,7 @@ public class RewardsHandler : MonoBehaviour
             seccond = first;
             first = newNum;
 
-            activeRewards[i] = i == 2 && !fullHp ? healReward : rewards[newNum];
+            activeRewards[i] = i == 2 && !fullHp ? healReward : currentRewardsList[newNum];
         }
         for (int i = 0; i < titles.Length; i++)
         {
@@ -351,6 +389,7 @@ public class RewardsHandler : MonoBehaviour
         yield return new WaitForSeconds(0.03f);
         UpdatePlayerStats(index);
         isPressed = false;
+
     }
     void UpdatePlayerStats(int index)
     {
