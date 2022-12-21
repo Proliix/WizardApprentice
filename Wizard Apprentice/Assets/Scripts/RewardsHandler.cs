@@ -18,6 +18,8 @@ public class RewardsHandler : MonoBehaviour
     [SerializeField] GameObject cardScreenParent;
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
     [SerializeField] Button[] cardButtons = new Button[3];
+    [SerializeField] Button skipButton;
+    [SerializeField] Button invButton;
     [SerializeField] Image[] cardImages = new Image[3];
     [SerializeField] List<GameObject> cards;
     [SerializeField] GameObject[] descriptionObj = new GameObject[3];
@@ -29,21 +31,29 @@ public class RewardsHandler : MonoBehaviour
     [SerializeField] GameObject hotbar;
     [SerializeField] GameObject invHolder;
     [SerializeField] GameObject trashCan;
-    [SerializeField] float fadeSpeed = 1f;
+    [SerializeField] GameObject background;
+    [SerializeField] Button backButton;
+    [SerializeField] Canvas cardCanvas;
+    [SerializeField] float moveSpeed = 1f;
     [SerializeField] Vector3 newHotbarPos;
     [SerializeField] Vector3 newHotbarScale = Vector3.one;
     [SerializeField] Vector3 newInvHolderPos;
-    [SerializeField] Vector3 newInvHolderScale = Vector3.one;
     [SerializeField] Vector3 newTrashCanPos;
+    [SerializeField] Vector3 newBackgroundPos;
 
     Vector3 oldHotbarPos;
     Vector3 oldHotbarScale;
     Vector3 oldTrashCanPos;
     Vector3 oldInvHolderPos;
-    Vector3 oldInvHolderScale;
+    Vector3 oldBackgroundPos;
+    Vector3 hotbarMoveStartPos;
     Animator fadeoutAnim;
-    bool isFading = false;
+    bool isMoving = false;
+    bool resetAfterMove = false;
+    Vector3 movePos;
     int checkIndex = 0;
+    int startLayer;
+    CardHandler cardHandler;
 
     private Reward[] activeRewards = new Reward[3];
     private GameObject[] activeCards = new GameObject[3];
@@ -54,7 +64,7 @@ public class RewardsHandler : MonoBehaviour
     PlayerMovement pMovement;
     PlayerStats stats;
     bool isPressed = false;
-
+    bool wasActive;
 
     // Start is called before the first frame update
     void Start()
@@ -70,13 +80,17 @@ public class RewardsHandler : MonoBehaviour
         inventoryFullScreen.SetActive(false);
 
         //card removal screen
-        oldHotbarPos = hotbar.transform.position;
+        cardHandler = GetComponent<CardHandler>();
+        oldHotbarPos = hotbar.transform.localPosition;
         oldHotbarScale = hotbar.transform.localScale;
         oldTrashCanPos = trashCan.transform.localPosition;
         oldInvHolderPos = invHolder.transform.localPosition;
-        oldInvHolderScale = invHolder.transform.localScale;
+        oldBackgroundPos = background.transform.localPosition;
         fadeOut.SetActive(false);
+        background.SetActive(false);
+        backButton.gameObject.SetActive(false);
         fadeoutAnim = fadeOut.GetComponent<Animator>();
+        startLayer = cardCanvas.sortingOrder;
     }
 
     private void Update()
@@ -87,23 +101,85 @@ public class RewardsHandler : MonoBehaviour
             GetRewardScreenCard();
         }
 
+        if (isMoving)
+        {
+            hotbar.transform.localPosition = new Vector3(hotbar.transform.localPosition.x, Mathf.MoveTowards(hotbar.transform.localPosition.y, movePos.y, moveSpeed * Time.deltaTime), hotbar.transform.localPosition.z);
 
+            if (hotbar.transform.localPosition.y <= movePos.y + 0.1f && hotbar.transform.localPosition.y >= movePos.y - 0.11f)
+            {
+                if (resetAfterMove)
+                {
+                    resetInventoryObj();
+                }
+
+                isMoving = false;
+            }
+        }
 
     }
 
     #region Card Rewards
 
-    public void GetCardInventoryScreen()
+    public void RemoveCardInventoryScreen()
     {
+        if (!isMoving)
+        {
+            inventoryFullScreen.SetActive(!CanAddCards());
+            resetAfterMove = true;
+            movePos = hotbarMoveStartPos;
+            isMoving = true;
+            fadeoutAnim.SetTrigger("FadeIn");
+        }
+    }
+
+    void resetInventoryObj()
+    {
+        resetAfterMove = false;
         for (int i = 0; i < cardButtons.Length; i++)
         {
-            cardButtons[i].interactable = false;
+            cardButtons[i].interactable = true;
         }
-        fadeOut.SetActive(true);
-        fadeoutAnim.SetTrigger("FadeOut");
-        hotbar.transform.position = newHotbarPos;
-        hotbar.transform.localScale = newHotbarScale;
-        trashCan.transform.localPosition = newTrashCanPos;
+        skipButton.interactable = true;
+        invButton.interactable = true;
+        fadeOut.SetActive(false);
+        backButton.gameObject.SetActive(false);
+        background.SetActive(false);
+        hotbar.transform.localPosition = oldHotbarPos;
+        background.transform.localPosition = oldBackgroundPos;
+        hotbar.transform.localScale = oldHotbarScale;
+        invHolder.transform.localPosition = oldInvHolderPos;
+        trashCan.transform.localPosition = oldTrashCanPos;
+        inventory.ResetCardsPos();
+        cardHandler.isActive = wasActive;
+        cardCanvas.sortingOrder = startLayer;
+    }
+    public void GetCardInventoryScreen()
+    {
+        if (!isMoving)
+        {
+            wasActive = cardHandler.isActive;
+            cardHandler.isActive = false;
+            for (int i = 0; i < cardButtons.Length; i++)
+            {
+                cardButtons[i].interactable = false;
+            }
+            skipButton.interactable = false;
+            invButton.interactable = false;
+            fadeOut.SetActive(true);
+            fadeoutAnim.SetTrigger("FadeOut");
+            backButton.gameObject.SetActive(true);
+            background.SetActive(true);
+            hotbarMoveStartPos = hotbar.transform.localPosition + Vector3.down * 800;
+            hotbar.transform.localPosition = hotbarMoveStartPos;
+            background.transform.localPosition = newBackgroundPos;
+            hotbar.transform.localScale = newHotbarScale;
+            invHolder.transform.localPosition = newInvHolderPos;
+            trashCan.transform.localPosition = newTrashCanPos;
+            movePos = newHotbarPos;
+            inventory.ResetCardsPos();
+            cardCanvas.sortingOrder = 10;
+            isMoving = true;
+        }
     }
 
     public bool CanAddCards()

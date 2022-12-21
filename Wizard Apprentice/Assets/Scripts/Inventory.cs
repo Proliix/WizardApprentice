@@ -23,6 +23,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void ResetCardsPos()
+    {
+        for (int i = 0; i < cardHolders.Count; i++)
+        {
+            if (cardHolders[i].cardObject != null)
+                cardHolders[i].cardObject.transform.position = cardHolders[i].transform.position;
+        }
+    }
+
     public void AddCard(GameObject cardPrefab)
     {
         if (!IsFull())
@@ -61,7 +70,7 @@ public class Inventory : MonoBehaviour
     }
     public void ShowDescriptionObject(string cardTitle, string cardDescription, Vector2 position, bool adjustToLeft, Vector2 adjustAmount)
     {
-        cardDescriptionObject.transform.localPosition = position + (new Vector2(0,(cardDescriptionObject.GetComponent<RectTransform>().sizeDelta.y/2))+adjustAmount);
+        cardDescriptionObject.transform.localPosition = position + (new Vector2(0, (cardDescriptionObject.GetComponent<RectTransform>().sizeDelta.y / 2)) + adjustAmount);
         cardTitleText.text = cardTitle;
         cardDescriptionText.text = cardDescription;
         cardDescriptionObject.SetActive(true);
