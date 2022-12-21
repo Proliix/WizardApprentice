@@ -17,15 +17,33 @@ public class RewardsHandler : MonoBehaviour
     [Header("Card Rewards")]
     [SerializeField] GameObject cardScreenParent;
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
+    [SerializeField] Button[] cardButtons = new Button[3];
     [SerializeField] Image[] cardImages = new Image[3];
     [SerializeField] List<GameObject> cards;
     [SerializeField] GameObject[] descriptionObj = new GameObject[3];
     [SerializeField] TextMeshProUGUI[] cardTitleObj = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] cardTextObj = new TextMeshProUGUI[3];
+    [SerializeField] GameObject inventoryFullScreen;
     [Header("Card Removal")]
     [SerializeField] GameObject fadeOut;
+    [SerializeField] GameObject hotbar;
+    [SerializeField] GameObject invHolder;
+    [SerializeField] GameObject trashCan;
+    [SerializeField] float fadeSpeed = 1f;
     [SerializeField] Vector3 newHotbarPos;
-    [SerializeField] Vector3 newHotbarScale;
+    [SerializeField] Vector3 newHotbarScale = Vector3.one;
+    [SerializeField] Vector3 newInvHolderPos;
+    [SerializeField] Vector3 newInvHolderScale = Vector3.one;
+    [SerializeField] Vector3 newTrashCanPos;
+
+    Vector3 oldHotbarPos;
+    Vector3 oldHotbarScale;
+    Vector3 oldTrashCanPos;
+    Vector3 oldInvHolderPos;
+    Vector3 oldInvHolderScale;
+    Animator fadeoutAnim;
+    bool isFading = false;
+    int checkIndex = 0;
 
     private Reward[] activeRewards = new Reward[3];
     private GameObject[] activeCards = new GameObject[3];
@@ -37,6 +55,7 @@ public class RewardsHandler : MonoBehaviour
     PlayerStats stats;
     bool isPressed = false;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +66,44 @@ public class RewardsHandler : MonoBehaviour
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
         pMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+
+        inventoryFullScreen.SetActive(false);
+
+        //card removal screen
+        oldHotbarPos = hotbar.transform.position;
+        oldHotbarScale = hotbar.transform.localScale;
+        oldTrashCanPos = trashCan.transform.localPosition;
+        oldInvHolderPos = invHolder.transform.localPosition;
+        oldInvHolderScale = invHolder.transform.localScale;
+        fadeOut.SetActive(false);
+        fadeoutAnim = fadeOut.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            //if (!inventory.IsFull())
+            GetRewardScreenCard();
+        }
+
+
+
+    }
+
+    #region Card Rewards
+
+    public void GetCardInventoryScreen()
+    {
+        for (int i = 0; i < cardButtons.Length; i++)
+        {
+            cardButtons[i].interactable = false;
+        }
+        fadeOut.SetActive(true);
+        fadeoutAnim.SetTrigger("FadeOut");
+        hotbar.transform.position = newHotbarPos;
+        hotbar.transform.localScale = newHotbarScale;
+        trashCan.transform.localPosition = newTrashCanPos;
     }
 
     public bool CanAddCards()
@@ -54,69 +111,72 @@ public class RewardsHandler : MonoBehaviour
         return !inventory.IsFull();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            if (!inventory.IsFull())
-                GetRewardScreenCard();
-        }
-    }
-
-    #region Card Rewards
     public void GetRewardScreenCard(bool withStats = false)
     {
-        if (CanAddCards())
+        if (!CanAddCards())
+        {
+            for (int i = 0; i < cardButtons.Length; i++)
+            {
+                cardButtons[i].interactable = false;
+            }
+            inventoryFullScreen.SetActive(true);
+        }
+        else
+        {
+            inventoryFullScreen.SetActive(false);
+        }
+
+        rewardScreen.SetActive(true);
+        cardScreenParent.SetActive(true);
+        statsAfterCard = withStats;
+        int first = -100;
+        int seccond = -100;
+        for (int i = 0; i < activeCards.Length; i++)
         {
 
-            rewardScreen.SetActive(true);
-            cardScreenParent.SetActive(true);
-            statsAfterCard = withStats;
-            int first = -100;
-            int seccond = -100;
-            for (int i = 0; i < activeCards.Length; i++)
+
+            int newNum = Random.Range(0, cards.Count);
+
+            int runs = 0;
+            while ((first == newNum || seccond == newNum) && runs < 20)
             {
+                newNum = Random.Range(0, cards.Count);
+                runs++;
+            }
 
+            activeCards[i] = cards[newNum];
 
-                int newNum = Random.Range(0, cards.Count);
-
-                int runs = 0;
-                while ((first == newNum || seccond == newNum) && runs < 20)
-                {
-                    newNum = Random.Range(0, cards.Count);
-                    runs++;
-                }
-
-                activeCards[i] = cards[newNum];
-
-                if (activeCards[i].GetComponent<ICard>() != null)
-                {
-                    seccond = first;
-                    first = newNum;
-
-                }
-                else
-                {
-                    i--;
-                    Debug.LogError("<color=red>Error: </color>no icard script on " + activeCards[i].name + "in rewardhandler list");
-                }
+            if (activeCards[i].GetComponent<ICard>() != null)
+            {
+                seccond = first;
+                first = newNum;
 
             }
-            for (int i = 0; i < titles.Length; i++)
+            else
             {
-                cardTitles[i].text = activeCards[i].GetComponent<ICard>().GetTitle();
-                cardTitleObj[i].text = activeCards[i].GetComponent<ICard>().GetTitle();
-                cardTextObj[i].text = activeCards[i].GetComponent<ICard>().GetDescription();
-                cardImages[i].sprite = activeCards[i].GetComponent<ICard>().GetSprite();
+                i--;
+                Debug.LogError("<color=red>Error: </color>no icard script on " + activeCards[i].name + "in rewardhandler list");
             }
+
         }
-        else if (withStats)
+        for (int i = 0; i < titles.Length; i++)
         {
-            Debug.Log("Skipped adding cards went to stats");
-            GetRewardScreenStats();
+            cardTitles[i].text = activeCards[i].GetComponent<ICard>().GetTitle();
+            cardTitleObj[i].text = activeCards[i].GetComponent<ICard>().GetTitle();
+            cardTextObj[i].text = activeCards[i].GetComponent<ICard>().GetDescription();
+            cardImages[i].sprite = activeCards[i].GetComponent<ICard>().GetSprite();
         }
+
     }
 
+    public void SkipCards()
+    {
+        if (!statsAfterCard)
+            rewardScreen.SetActive(false);
+        else
+            GetRewardScreenStats();
+
+    }
 
     public void SelectRewardCard(int index)
     {

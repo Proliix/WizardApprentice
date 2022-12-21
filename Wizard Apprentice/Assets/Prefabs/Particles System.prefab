@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3620108843941724010}
   - component: {fileID: 3620108843941723989}
   m_Layer: 7
-  m_Name: Temp
+  m_Name: Particles System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

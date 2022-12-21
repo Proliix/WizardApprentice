@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject cardDescriptionObject;
     [SerializeField] TextMeshProUGUI cardTitleText;
     [SerializeField] TextMeshProUGUI cardDescriptionText;
+    [SerializeField] Canvas cardCanvas;
 
     void Start()
     {
@@ -32,7 +33,7 @@ public class Inventory : MonoBehaviour
                 {
                     GameObject cardObject = Instantiate(cardPrefab, cardHolders[i].transform.parent);
                     cardObject.transform.localPosition = cardHolders[i].transform.localPosition;
-                    cardObject.GetComponent<Drag>().canvas = cardHolders[i].transform.parent.gameObject.GetComponent<Canvas>();
+                    cardObject.GetComponent<Drag>().canvas = cardCanvas;
                     cardObject.GetComponent<Drag>().inventory = this;
                     cardHolders[i].cardObject = cardObject;
                     cardObject.GetComponent<Drag>().lastObjectAttachedTo = cardHolders[i].gameObject;
