@@ -10,7 +10,10 @@ public class RewardsHandler : MonoBehaviour
     [Header("Stat Rewards")]
     [SerializeField] GameObject statScreenParent;
     public List<Reward> rewards;
+    public List<Reward> rewardsTier2;
+    public List<Reward> rewardsTier3;
     public Reward healReward;
+    [SerializeField] AnimationCurve percentageCurve;
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [SerializeField] Image[] potionImage = new Image[3];
@@ -109,7 +112,7 @@ public class RewardsHandler : MonoBehaviour
             {
                 if (resetAfterMove)
                 {
-                    resetInventoryObj();
+                    ResetInventoryObj();
                 }
 
                 isMoving = false;
@@ -132,7 +135,7 @@ public class RewardsHandler : MonoBehaviour
         }
     }
 
-    void resetInventoryObj()
+    void ResetInventoryObj()
     {
         resetAfterMove = false;
         for (int i = 0; i < cardButtons.Length; i++)
@@ -144,6 +147,7 @@ public class RewardsHandler : MonoBehaviour
         fadeOut.SetActive(false);
         backButton.gameObject.SetActive(false);
         background.SetActive(false);
+        backButton.gameObject.SetActive(false);
         hotbar.transform.localPosition = oldHotbarPos;
         background.transform.localPosition = oldBackgroundPos;
         hotbar.transform.localScale = oldHotbarScale;
@@ -247,10 +251,11 @@ public class RewardsHandler : MonoBehaviour
 
     public void SkipCards()
     {
-        if (!statsAfterCard)
-            rewardScreen.SetActive(false);
-        else
+        cardScreenParent.SetActive(false);
+        if (statsAfterCard)
+        {
             GetRewardScreenStats();
+        }
 
     }
 
