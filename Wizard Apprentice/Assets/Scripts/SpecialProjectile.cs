@@ -277,7 +277,7 @@ public class SpecialProjectile : MonoBehaviour
                             break;
                         case SpecialBulletState.Onhit:
                             currentIcard.Effect();
-                            collision.GetComponent<Health>().RemoveHealth(damage);
+                            //collision.GetComponent<Health>().RemoveHealth(damage);
                             ResetBullet();
                             break;
                         case SpecialBulletState.Bouncy:
