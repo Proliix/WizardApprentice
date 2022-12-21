@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
   m_Name: EventRoom7
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 8812372787159045625, guid: 17da1c132f33d744091240c3457e360f, type: 3}
+  roomPrefab: {fileID: 8812372787159045625, guid: 1755ac900ef82164c8c5c2f37cfa8dcf, type: 3}
   roomSize: {x: 0, y: 0}
   roomDifficulty: 0
   generateRandomRoom: 0
