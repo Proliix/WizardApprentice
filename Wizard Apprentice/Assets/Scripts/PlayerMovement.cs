@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
+        rb2d.velocity = movement.normalized * (activeSpeed * stats.movementSpeed);
     }
 
 }
