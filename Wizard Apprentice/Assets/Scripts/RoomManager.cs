@@ -64,11 +64,6 @@ public class RoomManager : MonoBehaviour
         {
             canWalkThroughAnyDoor = !canWalkThroughAnyDoor;
         }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            StartCoroutine(PauseEnemies());
-        }
     }
 
     public void LoadPremadeRoom(Room room)
@@ -94,6 +89,13 @@ public class RoomManager : MonoBehaviour
             if (transformsInRoom[i].CompareTag("Enemy"))
             {
                 enemyObjects.Add(transformsInRoom[i].gameObject);
+            }
+        }
+        if (currentRoomType != 0)
+        {
+            for (int i = 0; i < enemyObjects.Count; i++)
+            {
+                enemyObjects[i].GetComponent<Health>().AddMaxHealth(currentFloor * 0.75f, true);
             }
         }
         enemyManager.enemyObjects = enemyObjects;

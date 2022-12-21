@@ -572,11 +572,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You <color=green> gain </color> : <color=blue>+(50) Attack Speed </color>
+  m_text: 'You <color=green> gain </color> : <color=blue>+(15%) Attack Speed </color>
 
 
     You
-    <color=red> lose</color> : <color=red> -(30) Damage </color>'
+    <color=green> gain</color> : <color=yellow> +(15%) Movement Speed </color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
   m_sharedMaterial: {fileID: -7217490493216259712, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}

@@ -335,14 +335,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-
-    You gain: <color=yellow> +(50%) Movement Speed </color>
+  m_text: 'You <color=green> gain </color> : <color=green>+(10) Max Health  </color>
 
 
     You
-    gain: <color=blue> +(20) Attack Speed </color>
+    <color=green> gain</color> : <color=yellow> +(15%) Movement Speed </color>
+
+
+    You
+    <color=red> lose </color> : <color=blue>-(15%) Attack Speed </color>
 
 '
   m_isRightToLeft: 0
@@ -586,7 +587,7 @@ RectTransform:
   - {fileID: 1810807794975163553}
   - {fileID: 8812372786893613667}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

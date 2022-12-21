@@ -470,8 +470,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\nYour magic becomes stronger and you gain:\n <color=red> +(1) Damage</color>\n\n<color=blue>
-    +(1) Attack Speed</color>\n\n<color=green> +(10) Max HP</color>"
+  m_text: 'You <color=green> gain</color> : <color=red> +(10%) Damage </color>
+
+
+    You
+    <color=green> gain </color> : <color=green>+(10) Max Health </color>
+
+
+    You
+    <color=green> gain</color> : <color=blue> +(5%) Attack Speed </color>
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
   m_sharedMaterial: {fileID: -7217490493216259712, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
@@ -578,7 +587,7 @@ RectTransform:
   - {fileID: 4266099149789331383}
   - {fileID: 6367708164474130805}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

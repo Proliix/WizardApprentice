@@ -17,13 +17,10 @@ public class CrossbowArmor : MonoBehaviour
     [SerializeField] float trippleShotAngleDiff;
     [SerializeField] float trippleShotArrowSpeed;
 
-    List<GameObject> arrows;
-
     CurrentState state;
 
-
     [SerializeField] float timeToChargeArrowRain;
-    [SerializeField] GameObject arrowRainDamageObject; 
+    [SerializeField] GameObject arrowRainDamageObject;
     [SerializeField] float timeBetweenArrowRainDamage;
     [SerializeField] int arrowRainAmount;
     [SerializeField] float arrowRainRadius;
@@ -63,7 +60,6 @@ public class CrossbowArmor : MonoBehaviour
     {
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        arrows = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -153,6 +149,9 @@ public class CrossbowArmor : MonoBehaviour
         GameObject splittingArrow1 = bulletHandler.GetSpecialBullet(pos, this.gameObject, newDir1, arrowImage, SpecialBulletState.HauntedArmorSplittingArrow, null, false, 0, 300, 10, 0.5f, trippleShotArrowSpeed, 1);
         GameObject splittingArrow2 = bulletHandler.GetSpecialBullet(pos, this.gameObject, (playerPos - pos), arrowImage, SpecialBulletState.HauntedArmorSplittingArrow, null, false, 0, 300, 10, 0.5f, trippleShotArrowSpeed, 1);
         GameObject splittingArrow3 = bulletHandler.GetSpecialBullet(pos, this.gameObject, newDir2, arrowImage, SpecialBulletState.HauntedArmorSplittingArrow, null, false, 0, 300, 10, 0.5f, trippleShotArrowSpeed, 1);
+        splittingArrow1.transform.right = -newDir1;
+        splittingArrow2.transform.right = -arrowDir;
+        splittingArrow3.transform.right = -newDir2;
         hasDestination = false;
         state = CurrentState.idle;
     }

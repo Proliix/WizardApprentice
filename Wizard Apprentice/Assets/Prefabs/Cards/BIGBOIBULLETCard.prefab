@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &6975772864624791360
 Animator:
   serializedVersion: 4
@@ -226,7 +229,7 @@ MonoBehaviour:
   description: One BIG boi
   shootAudioClip: {fileID: 8300000, guid: 2650667497a793c45bfafd7b24a86583, type: 3}
   audioVolume: 1
-  damage: 65
+  damage: 45
   shootCooldown: 2
   bulletSpeed: 15
   bulletSize: 10

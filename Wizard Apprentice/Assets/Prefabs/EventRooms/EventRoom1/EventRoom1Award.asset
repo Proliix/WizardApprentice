@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: This is the title
   EffectText: This is the flavour text
+  Image: {fileID: 0}
   maxHealth: 0
-  movementSpeed: 0
-  damage: -0.3
-  attackSpeed: 0.5
+  movementSpeed: 0.15
+  damage: 0
+  attackSpeed: 0.15
   critChance: 0
   critDamage: 0
   addHealh: 0

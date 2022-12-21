@@ -209,8 +209,8 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   projectileAmmount: 12
-  shootCooldown: 0.5
-  damage: 10
+  shootCooldown: 0.65
+  damage: 7
   bulletSize: 0.5
   speed: 10
 --- !u!95 &4730238429024741817

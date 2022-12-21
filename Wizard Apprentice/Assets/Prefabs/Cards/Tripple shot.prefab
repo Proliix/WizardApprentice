@@ -228,7 +228,7 @@ MonoBehaviour:
   description: When 3 is better than 1
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
-  shootCooldown: 0.5
+  shootCooldown: 0.6
   shootPosDeviation: 0.25
   damage: 10
   size: 0.5

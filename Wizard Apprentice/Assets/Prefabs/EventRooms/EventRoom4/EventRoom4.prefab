@@ -248,7 +248,7 @@ RectTransform:
   - {fileID: 6266587933567089693}
   - {fileID: 3863519768382264031}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -406,14 +406,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
+  m_text: 'You <color=green> gain </color> : <color=green>+(10) Max Health  </color>
 
 
-    You heal: <color=green> +(100%) of your HP </color>
+    You
+    <color=green> gain</color> : <color=blue> +(15%) Attack Speed </color>
 
 
-    You gain:
-    <color=blue> +(10) Attack Speed</color>
+    You
+    <color=red> lose </color> : <color=yellow>-(15%) Movement Speed </color>
 
 '
   m_isRightToLeft: 0

@@ -95,7 +95,7 @@ public class SpecialProjectile : MonoBehaviour
 
         float distance = Mathf.Sin(timer * effectCooldown);
 
-        transform.position = Shooter.transform.position + relativeDistance.normalized * (effectSize * Mathf.Abs(distance) + 1.25f);
+        transform.position = Shooter.transform.position + relativeDistance.normalized * (effectSize * Mathf.Abs(distance) + 2.5f);
 
         transform.RotateAround(Shooter.transform.position, Vector3.forward, (bulletSpeed * 10) * Time.deltaTime);
 

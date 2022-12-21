@@ -248,6 +248,7 @@ MonoBehaviour:
   damageBufferRemoveSpeed: 1
   removeHealthbar: 1
   healthbarParent: {fileID: 2510294145188657511}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -380,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ce38b0fa89f334e9279f43e7a5e2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowImage: {fileID: 21300000, guid: dc6437d56248c094fbbc9cbe03aa07ac, type: 3}
+  arrowImage: {fileID: 21300000, guid: 5380cabd584c4a04d89702f88341058a, type: 3}
   bigArrowHealth: 6
   bigArrowChargeTime: 0.6
   bigArrowSpeed: 30
@@ -388,7 +389,7 @@ MonoBehaviour:
   bigArrowWarningWidth: 3
   trippleShotChargeTime: 0.15
   trippleShotAngleDiff: 20
-  trippleShotArrowSpeed: 8
+  trippleShotArrowSpeed: 16
   timeToChargeArrowRain: 0.8
   arrowRainDamageObject: {fileID: 2024047170095420035, guid: ca6c5631785eac94db9f5666444e2705, type: 3}
   timeBetweenArrowRainDamage: 0.1
@@ -472,8 +473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: 91ecb82a79bdc4e4baf18f14545fa310, type: 3}
-  maxHP: 3500
-  hp: 3500
+  maxHP: 3000
+  hp: 3000
   hitCooldown: 0
   removeSelf: 1
   hasHitCooldown: 0
@@ -485,6 +486,7 @@ MonoBehaviour:
   damageBufferRemoveSpeed: 0.751
   removeHealthbar: 1
   healthbarParent: {fileID: 6171021854940486415}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -811,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  cooldown: 0.25
 --- !u!1 &3197934361322075994
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  cooldown: 0.25
 --- !u!1 &3200850555545371976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1292,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: c0ea32cb8b553034d8f6065f3d111ded, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1473,13 +1477,14 @@ MonoBehaviour:
   removeSelf: 0
   hasHitCooldown: 0
   usesHealthBar: 1
-  healthRemoveSpeed: 0.005
+  healthRemoveSpeed: 0.5
   healthbar: {fileID: 4043421766676334084}
   damageBufferhbar: {fileID: 228672588553089067}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 0.0025
+  damageBufferRemoveSpeed: 0.751
   removeHealthbar: 0
   healthbarParent: {fileID: 0}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -2328,6 +2333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  cooldown: 0.25
 --- !u!1001 &2381839352079312921
 PrefabInstance:
   m_ObjectHideFlags: 0

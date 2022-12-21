@@ -231,6 +231,6 @@ MonoBehaviour:
     (Secret interaction with Diametro X)'
   attackSound: {fileID: 0}
   audioVolume: 1
-  damage: 12.5
+  damage: 8
   size: 0.75
   speed: 10

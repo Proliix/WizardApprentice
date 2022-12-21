@@ -275,8 +275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: 91ecb82a79bdc4e4baf18f14545fa310, type: 3}
-  maxHP: 1000
-  hp: 0
+  maxHP: 1500
+  hp: 1500
   hitCooldown: 1
   removeSelf: 0
   hasHitCooldown: 0
@@ -288,6 +288,7 @@ MonoBehaviour:
   damageBufferRemoveSpeed: 1
   removeHealthbar: 1
   healthbarParent: {fileID: 4025330548894195490}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -592,6 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  cooldown: 0.25
 --- !u!60 &2120415091722079606
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -335,8 +335,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\nYou gain:\n <color=purple> +(50) Crit Chance</color>\n<color=#F334DA>
-    +(50) Crit Damage</color>\nYou lose:\n<color=green> -(50) Max HP</color>"
+  m_text: '
+
+    You <color=green> gain</color> : <color=purple> +(10%) Crit Chance
+    </color>
+
+
+    You <color=green> gain </color> : <color=#F334DA>+(25%) Crit Damage
+    </color>
+
+
+    You <color=red> lose </color> : <color=green>-(20) Max Health 
+    </color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
   m_sharedMaterial: {fileID: -7217490493216259712, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
@@ -578,7 +588,7 @@ RectTransform:
   - {fileID: 3671285795934291006}
   - {fileID: 5879898732476361468}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

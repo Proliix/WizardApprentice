@@ -201,6 +201,23 @@ public class Health : MonoBehaviour
             hitNumbers.GetHitText(transform.position, -healAmount);
     }
 
+    public void AddMaxHealth(float healAmount)
+    {
+
+        maxHP += healAmount;
+        AddHealth(healAmount);
+    }
+    public void AddMaxHealth(float healAmount, bool usePercent)
+    {
+        float healthChange = 0;
+        if(usePercent)
+        {
+            healthChange = Mathf.Floor(GetMaxHP() * healAmount);
+        }
+        maxHP += healthChange;
+        AddHealth(healthChange);
+    }
+
     public bool HasFullHealth()
     {
         bool returnValue = false;
