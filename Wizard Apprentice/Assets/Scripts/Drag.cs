@@ -35,7 +35,7 @@ public class Drag : MonoBehaviour
         {
             inventory.cardHolders[i].transform.localScale = new Vector3(1f, 1f, 1);
         }
-        inventory.trashCan.transform.localScale = new Vector3(1f,1f,1f);
+        inventory.trashCan.transform.localScale = new Vector3(1f, 1f, 1f);
         int unitIndex = 0;
         float largestCover = -999990;
         for (int i = 0; i < inventory.cardHolders.Count; i++)
@@ -54,10 +54,10 @@ public class Drag : MonoBehaviour
         }
         else if (largestCover > 0)
         {
-            inventory.cardHolders[unitIndex].transform.localScale = new Vector3(cardHoverScale,cardHoverScale,1);
+            inventory.cardHolders[unitIndex].transform.localScale = new Vector3(cardHoverScale, cardHoverScale, 1);
         }
 
-        if(GetMyIndex() >= 4)
+        if (GetMyIndex() >= 4)
         {
             inventory.trashCan.gameObject.SetActive(true);
         }
@@ -81,7 +81,7 @@ public class Drag : MonoBehaviour
         for (int i = 0; i < inventory.cardHolders.Count; i++)
         {
             float cover = (UnitsHoveringOther(transform.position, new Vector2(transform.GetComponent<RectTransform>().rect.width * transform.localScale.x, transform.GetComponent<RectTransform>().rect.height * transform.localScale.y), inventory.cardHolders[i].transform.position, new Vector2(inventory.cardHolders[i].GetComponent<RectTransform>().rect.width * transform.localScale.x, inventory.cardHolders[i].GetComponent<RectTransform>().rect.height * transform.localScale.y)));
-            if(cover > largestCover)
+            if (cover > largestCover)
             {
                 largestCover = cover;
                 unitIndex = i;
@@ -104,17 +104,17 @@ public class Drag : MonoBehaviour
                 largestCover = cover;
                 unitIndex = i;
             }
-            inventory.cardHolders[i].transform.localScale = new Vector3(1,1,1);
+            inventory.cardHolders[i].transform.localScale = new Vector3(1, 1, 1);
         }
         inventory.trashCan.transform.localScale = new Vector3(1f, 1f, 1f);
         float trashCancover = (UnitsHoveringOther(transform.position, new Vector2(transform.GetComponent<RectTransform>().rect.width * transform.localScale.x, transform.GetComponent<RectTransform>().rect.height * transform.localScale.y), inventory.trashCan.transform.position, new Vector2(inventory.trashCan.GetComponent<RectTransform>().rect.width * transform.localScale.x, inventory.trashCan.GetComponent<RectTransform>().rect.height * transform.localScale.y)));
         if (trashCancover > largestCover)
         {
-            for(int i = 0; i < inventory.cardHolders.Count; i++)
+            for (int i = 0; i < inventory.cardHolders.Count; i++)
             {
                 if (inventory.cardHolders[i].gameObject == lastObjectAttachedTo)
                 {
-                    if(i >= 4)
+                    if (i >= 4)
                     {
                         lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
                         Destroy(this.gameObject);
@@ -122,7 +122,7 @@ public class Drag : MonoBehaviour
                     break;
                 }
             }
-            
+
         }
         else if (largestCover > 0)
         {
@@ -164,7 +164,7 @@ public class Drag : MonoBehaviour
                         inventory.cardHolders[swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
                         ResetThisCard();
                     }
-                    if (inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
+                    if (inventory.cardHolders[unitIndex].cardObject != null && inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
                     {
                         inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetQueuedCards();
                         inventory.cardHolders[inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
@@ -200,12 +200,12 @@ public class Drag : MonoBehaviour
                 swapPartner = unitIndex;
                 inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue = true;
                 inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner = GetMyIndex();
-                QueueUpCardSwap(inventory.cardHolders[unitIndex].cardObject,GetMyIndex());
+                QueueUpCardSwap(inventory.cardHolders[unitIndex].cardObject, GetMyIndex());
                 QueueUpCardSwap(lastObjectAttachedTo.GetComponent<CardHolder>().cardObject, unitIndex);
             }
         }
         inventory.trashCan.gameObject.SetActive(false);
-        if(!hasSnappedToNew)
+        if (!hasSnappedToNew)
         {
             transform.position = lastObjectAttachedTo.transform.position;
         }
@@ -227,7 +227,7 @@ public class Drag : MonoBehaviour
 
     public void QueueUpCardSwap(GameObject cardToSwap, int indexToSwap)
     {
-        cardToSwap.GetComponent<Image>().color = new Color32(64,64,64, 255);
+        cardToSwap.GetComponent<Image>().color = new Color32(64, 64, 64, 255);
         if (indexToSwap < 4)
         {
             inventory.AddQueuedCards(cardToSwap, indexToSwap);
@@ -236,7 +236,7 @@ public class Drag : MonoBehaviour
 
     private void SwapQueuedUpCards()
     {
-        for(int i = 0; i < queuedUpSwaps.Count; i+=2)
+        for (int i = 0; i < queuedUpSwaps.Count; i += 2)
         {
             transform.position = inventory.cardHolders[queuedUpSwaps[i]].transform.position;
             inventory.cardHolders[queuedUpSwaps[i]].cardObject.transform.position = lastObjectAttachedTo.transform.position;
@@ -253,7 +253,7 @@ public class Drag : MonoBehaviour
     public void PointerEnterHandler(BaseEventData data)
     {
         transform.localScale = new Vector3(cardHoverScale, cardHoverScale);
-        if(currentCoroutine != null)
+        if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
         }
@@ -272,9 +272,9 @@ public class Drag : MonoBehaviour
 
     public int GetMyIndex()
     {
-        for(int i = 0; i < inventory.cardHolders.Count; i++)
+        for (int i = 0; i < inventory.cardHolders.Count; i++)
         {
-            if(lastObjectAttachedTo == inventory.cardHolders[i].gameObject)
+            if (lastObjectAttachedTo == inventory.cardHolders[i].gameObject)
             {
                 return i;
             }
@@ -283,7 +283,7 @@ public class Drag : MonoBehaviour
     }
     private float UnitsHoveringOther(Vector2 myPos, Vector2 myScale, Vector2 otherPos, Vector2 otherScale)
     {
-        float myLeft = myPos.x - myScale.x/2;
+        float myLeft = myPos.x - myScale.x / 2;
         float otherRight = otherPos.x + otherScale.x / 2;
         float myRight = myPos.x + myScale.x / 2;
         float otherLeft = otherPos.x - otherScale.x / 2;
@@ -292,8 +292,8 @@ public class Drag : MonoBehaviour
         float myBottom = myPos.y - myScale.y / 2;
         float otherTop = otherPos.y + otherScale.y / 2;
 
-        float coveredX = Mathf.Max(Mathf.Min(myRight, otherRight) - Mathf.Max(myLeft, otherLeft),0);
-        float coveredY = Mathf.Max(Mathf.Min(myTop, otherTop) - Mathf.Max(myBottom, otherBottom),0);
+        float coveredX = Mathf.Max(Mathf.Min(myRight, otherRight) - Mathf.Max(myLeft, otherLeft), 0);
+        float coveredY = Mathf.Max(Mathf.Min(myTop, otherTop) - Mathf.Max(myBottom, otherBottom), 0);
 
         return coveredX * coveredY;
     }
@@ -301,6 +301,6 @@ public class Drag : MonoBehaviour
     IEnumerator WaitToOpenDescription(GameObject cardObject)
     {
         yield return new WaitForSeconds(timeToOpenDescriptionMenu);
-        inventory.ShowDescriptionObject(cardObject.GetComponent<ICard>().GetTitle(), cardObject.GetComponent<ICard>().GetDescription(), (Vector2)transform.localPosition, true, new Vector2(0,lastObjectAttachedTo.GetComponent<CardHolder>().size.y / 2));
+        inventory.ShowDescriptionObject(cardObject.GetComponent<ICard>().GetTitle(), cardObject.GetComponent<ICard>().GetDescription(), (Vector2)transform.localPosition, true, new Vector2(0, lastObjectAttachedTo.GetComponent<CardHolder>().size.y / 2));
     }
 }
