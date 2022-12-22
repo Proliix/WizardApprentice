@@ -25,7 +25,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   critChance: 0
-  critDamage: 0.75
+  critDamage: 0.6
   addHealh: 0
   projectileSize: 0
   projectileSpeed: 0

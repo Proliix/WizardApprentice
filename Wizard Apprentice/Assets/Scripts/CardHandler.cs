@@ -133,6 +133,17 @@ public class CardHandler : MonoBehaviour
 
     }
 
+    public void TrunOffAnims()
+    {
+        for (int i = 0; i < animators.Length; i++)
+        {
+            if (animators[cardIndex] != null && cardObjs[cardIndex] != null)
+            {
+                animators[cardIndex].SetBool("IsActive", false);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -179,7 +190,7 @@ public class CardHandler : MonoBehaviour
                     }
                     else
                     {
-                        if (animators[i] != null)
+                        if (animators[i] != null && cardObjs[cardIndex] != null)
                             animators[i].SetBool("IsActive", false);
                     }
                 }
