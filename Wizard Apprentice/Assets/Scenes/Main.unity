@@ -3722,7 +3722,7 @@ AudioSource:
   m_GameObject: {fileID: 708408436}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8759317431393161273, guid: 9f104b0f58438584cb555dadda057f59, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -9447,9 +9447,10 @@ MonoBehaviour:
   rewardsTier2: []
   rewardsTier3: []
   healReward: {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
-  chanceTeir1: 70
-  chanceTeir2: 22.5
-  chanceTeir3: 7.5
+  chanceTeir1: []
+  chanceTeir2: []
+  chanceTeir3: []
+  floor: 0
   percentageCurve:
     serializedVersion: 2
     m_Curve:
