@@ -15,12 +15,30 @@ public class Inventory : MonoBehaviour
     [SerializeField] TextMeshProUGUI cardDescriptionText;
     [SerializeField] Canvas cardCanvas;
 
+    bool trashcanAlwaysOn;
+
     void Start()
     {
         for (int i = 0; i < cardHolders.Count; i++)
         {
             cardHolders[i].index = i;
         }
+    }
+
+    public void TurnOnTrashcan()
+    {
+        trashcanAlwaysOn = true;
+        trashCan.gameObject.SetActive(true);
+    }
+    public void TurnOffTrashcan()
+    {
+        trashcanAlwaysOn = false;
+        trashCan.gameObject.SetActive(false);
+    }
+
+    public bool GetTrashcanAlwaysOnStatus()
+    {
+        return trashcanAlwaysOn;
     }
 
     public void ResetCardsPos()

@@ -4,35 +4,22 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] GameObject textCanvas;
     [SerializeField] Sprite Opened;
 
 
     RewardsHandler rewardsHandler;
-    bool showingCards = false;
-    bool inTrigger = false;
     SpriteRenderer sr;
+    bool hasShown = false;
 
     private void Start()
     {
         rewardsHandler = GameObject.FindWithTag("GameController").GetComponent<RewardsHandler>();
         sr = gameObject.GetComponent<SpriteRenderer>();
-        textCanvas.SetActive(!rewardsHandler.CanAddCards());
-    }
-
-    private void Update()
-    {
-        if (!showingCards)
-            textCanvas.SetActive(!rewardsHandler.CanAddCards());
-
-        if (inTrigger)
-            if (rewardsHandler.CanAddCards() && !showingCards)
-                OpenChest();
     }
 
     void OpenChest()
     {
-        showingCards = true;
+        hasShown = true;
         sr.sprite = Opened;
         rewardsHandler.GetRewardScreenCard();
     }
@@ -41,24 +28,10 @@ public class Chest : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            inTrigger = true;
-            if (rewardsHandler.CanAddCards() && !showingCards)
-            {
+            if(!hasShown)
                 OpenChest();
-            }
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-
-            inTrigger = false;
-
-        }
-    }
-
 
 }
 

@@ -56,15 +56,7 @@ public class Drag : MonoBehaviour
         {
             inventory.cardHolders[unitIndex].transform.localScale = new Vector3(cardHoverScale, cardHoverScale, 1);
         }
-
-        if (GetMyIndex() >= 4)
-        {
-            inventory.trashCan.gameObject.SetActive(true);
-        }
-        else
-        {
-            inventory.trashCan.gameObject.SetActive(false);
-        }
+        inventory.trashCan.gameObject.SetActive(true);
     }
 
     public void PointerDownHandler(BaseEventData data)
@@ -114,8 +106,14 @@ public class Drag : MonoBehaviour
             {
                 if (inventory.cardHolders[i].gameObject == lastObjectAttachedTo)
                 {
-                    if (i >= 4)
+                    if (inventory.cardHandler.cardIndex != GetMyIndex())
                     {
+                        if (isInSwapQueue)
+                        {
+                            ResetQueuedCards();
+                            inventory.cardHolders[swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                            ResetThisCard();
+                        }
                         lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
                         Destroy(this.gameObject);
                     }
@@ -204,7 +202,10 @@ public class Drag : MonoBehaviour
                 QueueUpCardSwap(lastObjectAttachedTo.GetComponent<CardHolder>().cardObject, unitIndex);
             }
         }
-        inventory.trashCan.gameObject.SetActive(false);
+        if(!inventory.GetTrashcanAlwaysOnStatus())
+        {
+            inventory.trashCan.gameObject.SetActive(false);
+        }
         if (!hasSnappedToNew)
         {
             transform.position = lastObjectAttachedTo.transform.position;
