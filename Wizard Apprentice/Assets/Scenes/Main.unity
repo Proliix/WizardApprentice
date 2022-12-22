@@ -9913,7 +9913,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50bfc6c86bad8ce4199bb8535c290e0b, type: 2}
   - {fileID: 11400000, guid: 0529ac54dc57f7a439ee8128070eb629, type: 2}
   - {fileID: 11400000, guid: 3217c04141539074782d9818ad92065e, type: 2}
-  slicedTileSprite: {fileID: 21300000, guid: c0ea32cb8b553034d8f6065f3d111ded, type: 3}
+  slicedTileSprite: {fileID: 21300000, guid: d05195b9ca8812a49afc5b0eedf96dd0, type: 3}
   tileObject: {fileID: 4337728806912349567, guid: 0681a8f07a4ab634ea401d076a884bc7, type: 3}
   colliderObject: {fileID: 822333543755316854, guid: b345072c5238aff4a8c57405f5594ede, type: 3}
   walls:

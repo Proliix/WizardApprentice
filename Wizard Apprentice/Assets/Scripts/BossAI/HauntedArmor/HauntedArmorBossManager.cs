@@ -76,18 +76,22 @@ public class HauntedArmorBossManager : MonoBehaviour
     {
         if (currentPhase == 2)
         {
+            greatSwordObject.GetComponent<GreatswordArmor>().Death();
             greatSwordObject.GetComponent<GreatswordArmor>().enabled = false;
+            Destroy(greatSwordObject);
         }
     }
 
     public void SpawnCrossbow()
     {
         crossbowObject.GetComponent<CrossbowArmor>().enabled = true;
+        Destroy(polearmObject);
     }
 
     public void SpawnGreatSword()
     {
         greatSwordObject.GetComponent<GreatswordArmor>().enabled = true;
+        Destroy(crossbowObject);
     }
 
     public IEnumerator OpenGate(GameObject gateObject)
