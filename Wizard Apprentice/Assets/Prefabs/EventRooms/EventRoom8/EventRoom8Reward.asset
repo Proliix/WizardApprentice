@@ -21,7 +21,7 @@ MonoBehaviour:
   attackSpeed: 0
   critChance: 0
   critDamage: 0
-  addHealh: -0.3
+  addHealh: -3.333
   projectileSize: 0
   projectileSpeed: 0
   projectileAmount: 0

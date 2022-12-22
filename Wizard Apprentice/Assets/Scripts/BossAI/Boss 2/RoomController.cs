@@ -10,11 +10,14 @@ public class RoomController : MonoBehaviour
 
     void Start()
     {
-        bossTaunt.enabled = true;
-        StartCoroutine(DestroyTaunt());
+        if (bossTaunt != null)
+        {
+            bossTaunt.enabled = true;
+            StartCoroutine(DestroyTaunt());
+        }
     }
 
-   
+
 
     IEnumerator DestroyTaunt()
     {

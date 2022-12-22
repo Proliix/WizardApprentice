@@ -130,8 +130,10 @@ public class Drag : MonoBehaviour
             //Set new objcet to me
             if (unitIndex != inventory.cardHandler.cardIndex && lastObjectAttachedTo.GetComponent<CardHolder>().index != inventory.cardHandler.cardIndex)
             {
+                //Swapping with both cards inactive
                 if (inventory.cardHolders[unitIndex].cardObject != null)
                 {
+                    //Target location is taken
                     if (isInSwapQueue)
                     {
                         ResetQueuedCards();
@@ -154,7 +156,8 @@ public class Drag : MonoBehaviour
                     inventory.cardHolders[unitIndex].cardObject = this.gameObject;
                     hasSnappedToNew = true;
                 }
-                else if (GetMyIndex() >= 4 && unitIndex >= 4)
+                //Target location is empty
+                else
                 {
                     if (isInSwapQueue)
                     {
@@ -172,12 +175,23 @@ public class Drag : MonoBehaviour
                     {
                         lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
                     }
+                    if(unitIndex < 4)
+                    {
+                        inventory.cardHandler.cardObjs[unitIndex] = this.gameObject;
+                        inventory.cardHandler.UpdateInterface();
+                    }
+                    if(GetMyIndex() < 4)
+                    {
+                        inventory.cardHandler.cardObjs[GetMyIndex()] = null;
+                        inventory.cardHandler.UpdateInterface();
+                    }
                     inventory.cardHolders[unitIndex].cardObject = this.gameObject;
                     transform.position = inventory.cardHolders[unitIndex].transform.position;
                     lastObjectAttachedTo = inventory.cardHolders[unitIndex].gameObject;
                     hasSnappedToNew = true;
                 }
             }
+            //Swapping with atleast one card active
             else
             {
                 if (isInSwapQueue)
@@ -186,20 +200,27 @@ public class Drag : MonoBehaviour
                     inventory.cardHolders[swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
                     ResetThisCard();
                 }
-                if (inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
+                if (inventory.cardHolders[unitIndex].cardObject != null)
                 {
-                    inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetQueuedCards();
-                    inventory.cardHolders[inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
-                    inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetThisCard();
+                    if (inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue)
+                    {
+                        inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetQueuedCards();
+                        inventory.cardHolders[inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner].cardObject.GetComponent<Drag>().ResetThisCard();
+                        inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().ResetThisCard();
+                    }
+                    inventory.cardHandler.cardSwapEvent += SwapQueuedUpCards;
+                    queuedUpSwaps.Add(unitIndex);
+                    isInSwapQueue = true;
+                    swapPartner = unitIndex;
+                    inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue = true;
+                    inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner = GetMyIndex();
+                    QueueUpCardSwap(inventory.cardHolders[unitIndex].cardObject, GetMyIndex());
+                    QueueUpCardSwap(lastObjectAttachedTo.GetComponent<CardHolder>().cardObject, unitIndex);
                 }
-                inventory.cardHandler.cardSwapEvent += SwapQueuedUpCards;
-                queuedUpSwaps.Add(unitIndex);
-                isInSwapQueue = true;
-                swapPartner = unitIndex;
-                inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().isInSwapQueue = true;
-                inventory.cardHolders[unitIndex].cardObject.GetComponent<Drag>().swapPartner = GetMyIndex();
-                QueueUpCardSwap(inventory.cardHolders[unitIndex].cardObject, GetMyIndex());
-                QueueUpCardSwap(lastObjectAttachedTo.GetComponent<CardHolder>().cardObject, unitIndex);
+                else
+                {
+                    //inventory.cardHolders[unitIndex].cardObject
+                }
             }
         }
         if(!inventory.GetTrashcanAlwaysOnStatus())

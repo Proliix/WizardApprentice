@@ -61,6 +61,7 @@ public class RewardsHandler : MonoBehaviour
     int checkIndex = 0;
     int startLayer;
     CardHandler cardHandler;
+    RoomManager roomManager;
 
     private Reward[] activeRewards = new Reward[3];
     private GameObject[] activeCards = new GameObject[3];
@@ -83,7 +84,7 @@ public class RewardsHandler : MonoBehaviour
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
         pMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-
+        roomManager = gameObject.GetComponent<RoomManager>();
         inventoryFullScreen.SetActive(false);
 
         //card removal screen
@@ -149,6 +150,7 @@ public class RewardsHandler : MonoBehaviour
         {
             cardButtons[i].interactable = true;
         }
+        inventory.TurnOffTrashcan();
         skipButton.interactable = true;
         invButton.interactable = true;
         fadeOut.SetActive(false);
@@ -174,6 +176,7 @@ public class RewardsHandler : MonoBehaviour
             {
                 cardButtons[i].interactable = false;
             }
+            inventory.TurnOnTrashcan();
             skipButton.interactable = false;
             invButton.interactable = false;
             fadeOut.SetActive(true);
@@ -309,24 +312,27 @@ public class RewardsHandler : MonoBehaviour
     {
         List<Reward> listToChange;
         float eval = Random.Range(0, 1f) * 100;
+        floor = roomManager.currentFloor;
+        if (floor >= chanceTeir1.Length)
+            floor = chanceTeir1.Length - 1;
         if (eval <= chanceTeir1[floor])
         {
             listToChange = rewards;
-            Debug.Log("1 " + eval + " | " + chanceTeir1[floor]);
+            //Debug.Log("1 " + eval + " | " + chanceTeir1[floor]);
         }
         else if (eval <= chanceTeir2[floor] + chanceTeir1[floor])
         {
             listToChange = rewardsTier2;
-            Debug.Log("2 " + eval + " | " + (chanceTeir2[floor] + chanceTeir1[floor]));
+            //Debug.Log("2 " + eval + " | " + (chanceTeir2[floor] + chanceTeir1[floor]));
         }
         else if (eval <= chanceTeir3[floor] + (chanceTeir2[floor] + chanceTeir1[floor]))
         {
             listToChange = rewardsTier3;
-            Debug.LogError("3 " + eval + " | " + (chanceTeir3[floor] + (chanceTeir2[floor] + chanceTeir1[floor])));
+            //Debug.LogError("3 " + eval + " | " + (chanceTeir3[floor] + (chanceTeir2[floor] + chanceTeir1[floor])));
         }
         else
         {
-            Debug.Log("is wrong" + eval);
+            //Debug.Log("is wrong" + eval);
             listToChange = rewards;
         }
 

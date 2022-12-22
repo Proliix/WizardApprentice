@@ -64,6 +64,11 @@ public class Inventory : MonoBehaviour
                     cardObject.GetComponent<Drag>().inventory = this;
                     cardHolders[i].cardObject = cardObject;
                     cardObject.GetComponent<Drag>().lastObjectAttachedTo = cardHolders[i].gameObject;
+                    if(i < 4)
+                    {
+                        cardHandler.cardObjs[i] = cardObject;
+                        cardHandler.UpdateInterface();
+                    }
                     break;
                 }
             }

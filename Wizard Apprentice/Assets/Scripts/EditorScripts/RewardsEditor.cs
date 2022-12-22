@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(RewardsHandler))]
 [CanEditMultipleObjects]
 public class RewardsEditor : Editor
@@ -49,3 +49,4 @@ public class RewardsEditor : Editor
         DrawDefaultInspector();
     }
 }
+#endif
