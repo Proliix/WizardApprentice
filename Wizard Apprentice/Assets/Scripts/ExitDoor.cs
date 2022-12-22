@@ -5,6 +5,8 @@ using UnityEngine;
 public class ExitDoor : MonoBehaviour
 {
     RoomManager roomManager;
+    [SerializeField] ExitTutorialHeal exitTutorialHeak;
+    Health health;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
@@ -12,5 +14,10 @@ public class ExitDoor : MonoBehaviour
             roomManager = GameObject.FindWithTag("GameController").GetComponent<RoomManager>();
             roomManager.PlayerWalkThroughDoor();
         }
+    }
+
+    private void FullHealPlayer()
+    {
+        //health = FindObjectOfType("")
     }
 }

@@ -1606,6 +1606,7 @@ GameObject:
   - component: {fileID: 8281914238192787533}
   - component: {fileID: 6258952360502171098}
   - component: {fileID: 2192230507123133365}
+  - component: {fileID: 7019773860286747528}
   m_Layer: 0
   m_Name: DoorCollider
   m_TagString: Untagged
@@ -1664,6 +1665,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c16238f58b3dd0d4590d248077220fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitTutorialHeak: {fileID: 7019773860286747528}
+--- !u!114 &7019773860286747528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113643703701408868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af6ccba7a9759ef418e0da1fd6c2c215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2982436758571589249
