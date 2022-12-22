@@ -54,7 +54,7 @@ public class HomingCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if (timer >= effectCooldown)
+        if (timer >= stats.GetAttackSpeed(effectCooldown))
         {
             timer = 0;
             Effect();
