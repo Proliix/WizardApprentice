@@ -42,7 +42,7 @@ public class Reward : ScriptableObject
         float restoreAmount = Mathf.RoundToInt(maxHp / addHealh);
         if (currentHP + restoreAmount >= maxHp)
             restoreAmount -= (currentHP + restoreAmount) - maxHp;
-        string newAddHealthstr = "" + restoreAmount;
+        string newAddHealthstr = "" + Mathf.RoundToInt(restoreAmount);
 
 
         string newMaxHPStrChange = "" + Mathf.RoundToInt(maxHp) + " -> <color=green>" + Mathf.RoundToInt((maxHp + (startHP * maxHealth))) + "</color>";

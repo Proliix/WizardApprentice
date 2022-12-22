@@ -9753,12 +9753,32 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
   - {fileID: 11400000, guid: 28f296f841febe1489f37a23b97f3d3a, type: 2}
-  rewardsTier2: []
-  rewardsTier3: []
+  rewardsTier2:
+  - {fileID: 11400000, guid: 424db56cf1909a741a9cfb2475294cf6, type: 2}
+  - {fileID: 11400000, guid: d17b6ee36674be44cb0a4c29088eb52d, type: 2}
+  - {fileID: 11400000, guid: eba13429a5f041c488ba70e28af967dc, type: 2}
+  - {fileID: 11400000, guid: 503adb775e345e1448a42bc9599318cf, type: 2}
+  - {fileID: 11400000, guid: 6423698adfa64d54ea62a20256c44c13, type: 2}
+  rewardsTier3:
+  - {fileID: 11400000, guid: 9dd1efe93792ab44d8854a50dc854aa2, type: 2}
+  - {fileID: 11400000, guid: d5a27a89084225f43b484a92802a066f, type: 2}
+  - {fileID: 11400000, guid: 745181be25ab3da4b9c9aff69d1466b7, type: 2}
+  - {fileID: 11400000, guid: 51cb5ef5afc3f7c459c40c4479e52db1, type: 2}
+  - {fileID: 11400000, guid: 914b2b6d13589744994ae88f4f88fbd3, type: 2}
   healReward: {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
-  chanceTeir1: 0
-  chanceTeir2: 0
-  chanceTeir3: 0
+  floor: 0
+  chanceTeir1:
+  - 90
+  - 0
+  - 0
+  chanceTeir2:
+  - 9.651
+  - 0
+  - 0
+  chanceTeir3:
+  - 0.34899998
+  - 100
+  - 100
   percentageCurve:
     serializedVersion: 2
     m_Curve:

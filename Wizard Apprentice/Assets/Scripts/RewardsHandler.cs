@@ -13,12 +13,10 @@ public class RewardsHandler : MonoBehaviour
     public List<Reward> rewardsTier2;
     public List<Reward> rewardsTier3;
     public Reward healReward;
-    [HideInInspector]
-    [Range(0, 100)] public float chanceTeir1;
-    [HideInInspector]
-    [Range(0, 100)] public float chanceTeir2;
-    [HideInInspector]
-    [Range(0, 100)] public float chanceTeir3;
+    public int floor = 0;
+    [Range(0, 100)] public float[] chanceTeir1 = new float[3];
+    [Range(0, 100)] public float[] chanceTeir2 = new float[3];
+    [Range(0, 100)] public float[] chanceTeir3 = new float[3];
     [SerializeField] AnimationCurve percentageCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f, 0.5f), new Keyframe(1, 1));
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
@@ -101,6 +99,7 @@ public class RewardsHandler : MonoBehaviour
         fadeoutAnim = fadeOut.GetComponent<Animator>();
         startLayer = cardCanvas.sortingOrder;
     }
+
 
     private void Update()
     {
@@ -305,6 +304,37 @@ public class RewardsHandler : MonoBehaviour
 
 
     #region Stat Rewards
+
+    List<Reward> RollChanceList()
+    {
+        List<Reward> listToChange;
+        float eval = Random.Range(0, 1f) * 100;
+        if (eval <= chanceTeir1[floor])
+        {
+            listToChange = rewards;
+            Debug.Log("1 " + eval + " | " + chanceTeir1[floor]);
+        }
+        else if (eval <= chanceTeir2[floor] + chanceTeir1[floor])
+        {
+            listToChange = rewardsTier2;
+            Debug.Log("2 " + eval + " | " + (chanceTeir2[floor] + chanceTeir1[floor]));
+        }
+        else if (eval <= chanceTeir3[floor] + (chanceTeir2[floor] + chanceTeir1[floor]))
+        {
+            listToChange = rewardsTier3;
+            Debug.LogError("3 " + eval + " | " + (chanceTeir3[floor] + (chanceTeir2[floor] + chanceTeir1[floor])));
+        }
+        else
+        {
+            Debug.Log("is wrong" + eval);
+            listToChange = rewards;
+        }
+
+        if (listToChange.Count == 0)
+            listToChange = rewards;
+        return listToChange;
+    }
+
     public void GetRewardScreenStats()
     {
         bool canGetCritChance = stats.critChance < 1 ? true : false;
@@ -316,34 +346,11 @@ public class RewardsHandler : MonoBehaviour
 
         List<Reward> currentRewardsList = new List<Reward>();
 
-        float eval = Random.Range(0, 101);
-        if (eval <= chanceTeir1)
-        {
-            currentRewardsList = rewards;
-            Debug.Log("1 " + eval + " | " + chanceTeir1);
-        }
-        else if (eval <= chanceTeir2 + chanceTeir1)
-        {
-            currentRewardsList = rewardsTier2;
-            Debug.Log("2 " + eval + " | " + (chanceTeir2 + chanceTeir1));
-        }
-        else if (eval <= chanceTeir3 + (chanceTeir2 + chanceTeir1))
-        {
-            currentRewardsList = rewardsTier3;
-            Debug.Log("3 " + eval + " | " + (chanceTeir3 + (chanceTeir2 + chanceTeir1)));
-        }
-        else
-        {
-            Debug.Log("is wrong" + eval);
-            currentRewardsList = rewards;
-        }
-
-        if (currentRewardsList.Count == 0)
-            currentRewardsList = rewards;
 
 
         for (int i = 0; i < activeRewards.Length; i++)
         {
+            currentRewardsList = RollChanceList();
 
             int newNum = Random.Range(0, currentRewardsList.Count);
 
