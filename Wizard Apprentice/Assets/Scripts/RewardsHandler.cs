@@ -61,6 +61,7 @@ public class RewardsHandler : MonoBehaviour
     int checkIndex = 0;
     int startLayer;
     CardHandler cardHandler;
+    RoomManager roomManager;
 
     private Reward[] activeRewards = new Reward[3];
     private GameObject[] activeCards = new GameObject[3];
@@ -83,7 +84,7 @@ public class RewardsHandler : MonoBehaviour
         stats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         health = GameObject.FindWithTag("Player").GetComponent<Health>();
         pMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-
+        roomManager = gameObject.GetComponent<RoomManager>();
         inventoryFullScreen.SetActive(false);
 
         //card removal screen
@@ -309,6 +310,7 @@ public class RewardsHandler : MonoBehaviour
     {
         List<Reward> listToChange;
         float eval = Random.Range(0, 1f) * 100;
+        floor = roomManager.currentFloor;
         if (floor >= chanceTeir1.Length)
             floor = chanceTeir1.Length - 1;
         if (eval <= chanceTeir1[floor])
