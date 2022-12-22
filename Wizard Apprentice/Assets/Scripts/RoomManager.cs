@@ -42,6 +42,10 @@ public class RoomManager : MonoBehaviour
 
     public int currentFloor;
 
+    [Header("Map Open Sound")]
+    [SerializeField] AudioClip mapOpen;
+    [SerializeField] float mapOpenVolume = 1;
+
     [Header("Room Pause Variables")]
     [SerializeField] float pauseDuration = 1;
     public float originalTimescale;
@@ -110,6 +114,7 @@ public class RoomManager : MonoBehaviour
     {
         if (enemyObjects.Count <= 0 || canWalkThroughAnyDoor || currentRoomType == 5)
         {
+
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
             MusicManager.Instance.ChangeToMusicType(MusicType.Map);
             GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
@@ -131,6 +136,7 @@ public class RoomManager : MonoBehaviour
             }
             roomSelectScreenGenerator.roomSelectObject.SetActive(true);
             roomSelectScreenGenerator.Open();
+            SoundManager.Instance.PlayAudio(mapOpen, mapOpenVolume);
         }
         else
         {

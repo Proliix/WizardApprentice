@@ -4301,6 +4301,7 @@ GameObject:
   - component: {fileID: 796234659}
   - component: {fileID: 796234658}
   - component: {fileID: 796234657}
+  - component: {fileID: 796234662}
   m_Layer: 5
   m_Name: Skip
   m_TagString: Untagged
@@ -4418,6 +4419,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 796234662}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: buttonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &796234660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4456,6 +4469,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796234655}
   m_CullTransparentMesh: 1
+--- !u!114 &796234662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796234655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07f0ed92224b7a45a39c461dfbcb45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: ed1a4abdb91017f4e832b98f6dfa24cb, type: 3}
+  howerSound: {fileID: 0}
 --- !u!1 &803396641
 GameObject:
   m_ObjectHideFlags: 0
@@ -5138,9 +5165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: ed1a4abdb91017f4e832b98f6dfa24cb, type: 3}
-  clickVolume: 1
   howerSound: {fileID: 8300000, guid: a3d1c4e645d3f1e429daceb32f588beb, type: 3}
-  howerVolume: 1
 --- !u!1 &908806822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5848,6 +5873,7 @@ GameObject:
   - component: {fileID: 1075659729}
   - component: {fileID: 1075659728}
   - component: {fileID: 1075659727}
+  - component: {fileID: 1075659732}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -5965,6 +5991,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1075659732}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: buttonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1075659730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6003,6 +6041,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075659725}
   m_CullTransparentMesh: 1
+--- !u!114 &1075659732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075659725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07f0ed92224b7a45a39c461dfbcb45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: fa334eef56edba3408a752c11bf1ff44, type: 3}
+  howerSound: {fileID: 0}
 --- !u!1001 &1078614067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6436,9 +6488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: ed1a4abdb91017f4e832b98f6dfa24cb, type: 3}
-  clickVolume: 1
   howerSound: {fileID: 8300000, guid: a3d1c4e645d3f1e429daceb32f588beb, type: 3}
-  howerVolume: 1
 --- !u!1 &1087225622 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1087225622, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
@@ -7306,9 +7356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: ed1a4abdb91017f4e832b98f6dfa24cb, type: 3}
-  clickVolume: 1
   howerSound: {fileID: 8300000, guid: a3d1c4e645d3f1e429daceb32f588beb, type: 3}
-  howerVolume: 1
 --- !u!1 &1236314616
 GameObject:
   m_ObjectHideFlags: 0
@@ -7946,9 +7994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: ed1a4abdb91017f4e832b98f6dfa24cb, type: 3}
-  clickVolume: 1
   howerSound: {fileID: 8300000, guid: a3d1c4e645d3f1e429daceb32f588beb, type: 3}
-  howerVolume: 1
 --- !u!1 &1451161103
 GameObject:
   m_ObjectHideFlags: 0
@@ -7963,6 +8009,7 @@ GameObject:
   - component: {fileID: 1451161107}
   - component: {fileID: 1451161106}
   - component: {fileID: 1451161105}
+  - component: {fileID: 1451161110}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -8080,6 +8127,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1451161110}
+        m_TargetAssemblyTypeName: ButtonSound, Assembly-CSharp
+        m_MethodName: buttonClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1451161108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8118,6 +8177,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451161103}
   m_CullTransparentMesh: 1
+--- !u!114 &1451161110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451161103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e07f0ed92224b7a45a39c461dfbcb45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: fa334eef56edba3408a752c11bf1ff44, type: 3}
+  howerSound: {fileID: 0}
 --- !u!1 &1468516659 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6968860360884540025, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
@@ -9995,6 +10068,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4fbd2f2219f3de42ab7f85bc7ce43e7, type: 2}
   mysteryRoomsPoolAmount: 2
   currentFloor: 0
+  mapOpen: {fileID: 8300000, guid: 5bca36377da7f084f88b3011816fc85f, type: 3}
+  mapOpenVolume: 1
   pauseDuration: 1
   originalTimescale: 0
   roomClearSound: {fileID: 8300000, guid: e3b6952a3f4409c4781b2bf3a0451cc4, type: 3}
@@ -10424,9 +10499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: ed1a4abdb91017f4e832b98f6dfa24cb, type: 3}
-  clickVolume: 1
   howerSound: {fileID: 8300000, guid: a3d1c4e645d3f1e429daceb32f588beb, type: 3}
-  howerVolume: 1
 --- !u!1 &1797857946
 GameObject:
   m_ObjectHideFlags: 0

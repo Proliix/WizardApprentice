@@ -6,9 +6,9 @@ public class ButtonSound : MonoBehaviour
 {
 
     [SerializeField] AudioClip clickSound;
-    [SerializeField] float clickVolume = 1;
+    private float clickVolume = 0.18f;
     [SerializeField] AudioClip howerSound;
-    [SerializeField] float howerVolume = 1;
+    private float howerVolume = 0.06f;
 
     public void buttonClickSound()
     {
