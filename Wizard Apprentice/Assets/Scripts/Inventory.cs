@@ -30,6 +30,11 @@ public class Inventory : MonoBehaviour
         trashcanAlwaysOn = true;
         trashCan.gameObject.SetActive(true);
     }
+    public void TurnOffTrashcan()
+    {
+        trashcanAlwaysOn = false;
+        trashCan.gameObject.SetActive(false);
+    }
 
     public bool GetTrashcanAlwaysOnStatus()
     {
