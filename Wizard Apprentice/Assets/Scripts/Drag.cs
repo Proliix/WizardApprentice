@@ -154,7 +154,7 @@ public class Drag : MonoBehaviour
                     inventory.cardHolders[unitIndex].cardObject = this.gameObject;
                     hasSnappedToNew = true;
                 }
-                else if (GetMyIndex() >= 4 && unitIndex >= 4)
+                else
                 {
                     if (isInSwapQueue)
                     {
