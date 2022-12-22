@@ -5967,9 +5967,10 @@ MonoBehaviour:
   rewardsTier2: []
   rewardsTier3: []
   healReward: {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
-  chanceTeir1: 0
-  chanceTeir2: 0
-  chanceTeir3: 0
+  floor: 0
+  chanceTeir1: []
+  chanceTeir2: []
+  chanceTeir3: []
   percentageCurve:
     serializedVersion: 2
     m_Curve:
