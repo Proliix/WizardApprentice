@@ -5964,7 +5964,45 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
   - {fileID: 11400000, guid: 28f296f841febe1489f37a23b97f3d3a, type: 2}
+  rewardsTier2: []
+  rewardsTier3: []
   healReward: {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
+  chanceTeir1: 0
+  chanceTeir2: 0
+  chanceTeir3: 0
+  percentageCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   titles:
   - {fileID: 1672007370}
   - {fileID: 1134945689}
@@ -6313,7 +6351,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 50bfc6c86bad8ce4199bb8535c290e0b, type: 2}
   - {fileID: 11400000, guid: 0529ac54dc57f7a439ee8128070eb629, type: 2}
   - {fileID: 11400000, guid: 3217c04141539074782d9818ad92065e, type: 2}
-  slicedTileSprite: {fileID: 21300000, guid: c0ea32cb8b553034d8f6065f3d111ded, type: 3}
+  slicedTileSprite: {fileID: 21300000, guid: d05195b9ca8812a49afc5b0eedf96dd0, type: 3}
   tileObject: {fileID: 4337728806912349567, guid: 0681a8f07a4ab634ea401d076a884bc7, type: 3}
   colliderObject: {fileID: 822333543755316854, guid: b345072c5238aff4a8c57405f5594ede, type: 3}
   walls:
@@ -6401,6 +6439,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4fbd2f2219f3de42ab7f85bc7ce43e7, type: 2}
   mysteryRoomsPoolAmount: 2
   currentFloor: 0
+  mapOpen: {fileID: 0}
+  mapOpenVolume: 1
   pauseDuration: 1
   originalTimescale: 0
   roomClearSound: {fileID: 8300000, guid: e3b6952a3f4409c4781b2bf3a0451cc4, type: 3}
