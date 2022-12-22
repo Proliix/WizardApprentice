@@ -9769,16 +9769,16 @@ MonoBehaviour:
   floor: 0
   chanceTeir1:
   - 90
-  - 0
-  - 0
+  - 80
+  - 70
   chanceTeir2:
   - 9.651
-  - 0
-  - 0
+  - 18.5
+  - 27
   chanceTeir3:
   - 0.34899998
-  - 100
-  - 100
+  - 1.5
+  - 3
   percentageCurve:
     serializedVersion: 2
     m_Curve:
@@ -9871,12 +9871,12 @@ MonoBehaviour:
   background: {fileID: 285724053}
   backButton: {fileID: 1451161107}
   cardCanvas: {fileID: 1942698998}
-  moveSpeed: 1250
+  moveSpeed: 2500
   newHotbarPos: {x: 0, y: 0, z: 0}
   newHotbarScale: {x: 1.5, y: 1.5, z: 1.5}
   newInvHolderPos: {x: 100, y: -200, z: 0}
   newTrashCanPos: {x: -245, y: -225, z: 0}
-  newBackgroundPos: {x: 0, y: -415, z: 0}
+  newBackgroundPos: {x: 0, y: -550, z: 0}
 --- !u!114 &1786813654
 MonoBehaviour:
   m_ObjectHideFlags: 0
