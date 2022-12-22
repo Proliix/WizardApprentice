@@ -10569,6 +10569,7 @@ GameObject:
   - component: {fileID: 1848352818}
   - component: {fileID: 1848352817}
   - component: {fileID: 1848352816}
+  - component: {fileID: 1848352820}
   m_Layer: 5
   m_Name: TrashCan
   m_TagString: Untagged
@@ -10649,6 +10650,26 @@ RectTransform:
   m_AnchoredPosition: {x: -847, y: 1}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1848352820
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848352815}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccce735e95f8ad14e98450df461f2d9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1852615596
 GameObject:
   m_ObjectHideFlags: 0

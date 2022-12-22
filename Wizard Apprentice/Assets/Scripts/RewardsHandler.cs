@@ -150,6 +150,7 @@ public class RewardsHandler : MonoBehaviour
         {
             cardButtons[i].interactable = true;
         }
+        inventory.TurnOffTrashcan();
         skipButton.interactable = true;
         invButton.interactable = true;
         fadeOut.SetActive(false);
@@ -175,6 +176,7 @@ public class RewardsHandler : MonoBehaviour
             {
                 cardButtons[i].interactable = false;
             }
+            inventory.TurnOnTrashcan();
             skipButton.interactable = false;
             invButton.interactable = false;
             fadeOut.SetActive(true);
