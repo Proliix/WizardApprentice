@@ -113,6 +113,14 @@ public class GreatswordArmor : MonoBehaviour
         roomSize = size;
     }
 
+    public void Death()
+    {
+        for(int i = 0; i < allPieces.Count; i++)
+        {
+            Destroy(allPieces[i]);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

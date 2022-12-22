@@ -238,7 +238,7 @@ MonoBehaviour:
   maxHP: 3500
   hp: 3500
   hitCooldown: 0
-  removeSelf: 1
+  removeSelf: 0
   hasHitCooldown: 0
   usesHealthBar: 1
   healthRemoveSpeed: 0.5
@@ -384,7 +384,7 @@ MonoBehaviour:
   arrowImage: {fileID: 21300000, guid: 5380cabd584c4a04d89702f88341058a, type: 3}
   bigArrowHealth: 6
   bigArrowChargeTime: 0.6
-  bigArrowSpeed: 30
+  bigArrowSpeed: 24
   bigArrowWarningLength: 20
   bigArrowWarningWidth: 3
   trippleShotChargeTime: 0.15
@@ -393,13 +393,13 @@ MonoBehaviour:
   timeToChargeArrowRain: 0.8
   arrowRainDamageObject: {fileID: 2024047170095420035, guid: ca6c5631785eac94db9f5666444e2705, type: 3}
   timeBetweenArrowRainDamage: 0.1
-  arrowRainAmount: 4
-  arrowRainRadius: 5
-  arrowRainDistanceAroundPlayer: 5
-  arrowRainDuration: 3
+  arrowRainAmount: 8
+  arrowRainRadius: 4
+  arrowRainDistanceAroundPlayer: 7
+  arrowRainDuration: 4
   abilityVariety: {x: 0.8, y: 1.6}
-  valueNeededForTrippleShot: 2
-  valueNeededForArrowRain: 10
+  valueNeededForTrippleShot: 3
+  valueNeededForArrowRain: 12
   valueNeededForBigArrow: 5
   abilityTimeDependance: 1
   playerScaredRange: 5
@@ -476,7 +476,7 @@ MonoBehaviour:
   maxHP: 3000
   hp: 3000
   hitCooldown: 0
-  removeSelf: 1
+  removeSelf: 0
   hasHitCooldown: 0
   usesHealthBar: 1
   healthRemoveSpeed: 0.5
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   damageBufferhbar: {fileID: 228672588553089067}
   damagebufferUpTime: 0.26
   damageBufferRemoveSpeed: 0.751
-  removeHealthbar: 0
+  removeHealthbar: 1
   healthbarParent: {fileID: 0}
   statsUI: {fileID: 0}
   hasDeathAnimation: 0
