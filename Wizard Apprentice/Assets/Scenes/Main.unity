@@ -10494,6 +10494,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1236314618}
     - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: dashingTime
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: dashingSpeed
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565921895385548059, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: dashIndicator
       value: 
       objectReference: {fileID: 2942564470373587845}

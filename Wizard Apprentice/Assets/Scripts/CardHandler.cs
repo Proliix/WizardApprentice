@@ -110,7 +110,7 @@ public class CardHandler : MonoBehaviour
         }
     }
 
-    void UpdateInterface()
+    public void UpdateInterface()
     {
         for (int i = 0; i < cardObjs.Length; i++)
         {
@@ -118,7 +118,7 @@ public class CardHandler : MonoBehaviour
             {
                 cards[i] = cardObjs[i].GetComponent<ICard>();
                 cardCycle[i] = cardObjs[i].GetComponent<Image>();
-                animators[i] = cardCycle[i].gameObject.GetComponent<Animator>();
+                animators[i] = cardObjs[i].GetComponent<Animator>();
             }
 
         }
