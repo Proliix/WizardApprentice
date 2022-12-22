@@ -92,19 +92,19 @@ public class CardHandler : MonoBehaviour
 
     public void SwapQueuedCards()
     {
-        if(rememberedSwapObject.Count <= 0)
+        if (rememberedSwapObject.Count <= 0)
         {
             return;
         }
         Debug.Log("swapping");
-        for(int i = 0; i < rememberedSwapObject.Count; i++)
+        for (int i = 0; i < rememberedSwapObject.Count; i++)
         {
             Debug.Log("replaceed cards");
             ReplaceCard(rememberedSwapObject[i], rememberedSwapIndex[i]);
         }
         rememberedSwapIndex.Clear();
         rememberedSwapObject.Clear();
-        if(cardSwapEvent != null)
+        if (cardSwapEvent != null)
         {
             cardSwapEvent.Invoke();
         }
@@ -141,25 +141,28 @@ public class CardHandler : MonoBehaviour
             if (hasbeenReset)
             {
                 cardIndex = 0;
-                animators[cardIndex].SetBool("IsActive", true);
+                if (cards[cardIndex] != null && (cardObjs[cardIndex] != null))
+                    animators[cardIndex].SetBool("IsActive", true);
                 hasbeenReset = false;
             }
             timer += Time.deltaTime;
 
-            if (cards[cardIndex] != null)
+            if (cards[cardIndex] != null && (cardObjs[cardIndex] != null))
                 cards[cardIndex].UpdateCard();
-            else
-                Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
+            //else
+            //    Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
 
 
             if (timer >= timePerCard + 0.05f)
             {
                 timer = 0;
 
-                if (cards[cardIndex] != null)
+                if (cards[cardIndex] != null && (cardObjs[cardIndex] != null))
                     cards[cardIndex].ResetCard();
 
+
                 SwapQueuedCards();
+
                 if (cardIndex < cardObjs.Length - 1)
                     cardIndex++;
                 else
@@ -167,28 +170,35 @@ public class CardHandler : MonoBehaviour
                     cardIndex = 0;
                 }
 
+
                 for (int i = 0; i < animators.Length; i++)
                 {
-                    if (i == cardIndex)
+                    if (i == cardIndex && cardObjs[cardIndex] != null)
                     {
                         animators[cardIndex].SetBool("IsActive", true);
                     }
                     else
                     {
-                        animators[i].SetBool("IsActive", false);
+                        if (animators[i] != null)
+                            animators[i].SetBool("IsActive", false);
                     }
                 }
+
             }
         }
         else if (!hasbeenReset)
         {
             hasbeenReset = true;
-            cards[cardIndex].ResetCard();
             cardIndex = -1;
             timer = 0;
-            for (int i = 0; i < animators.Length; i++)
+            if ((cardObjs[cardIndex] != null) && cards[cardIndex] != null)
             {
-                animators[i].SetBool("IsActive", false);
+                cards[cardIndex].ResetCard();
+                for (int i = 0; i < animators.Length; i++)
+                {
+                    if (animators[i] != null)
+                        animators[i].SetBool("IsActive", false);
+                }
             }
 
         }
