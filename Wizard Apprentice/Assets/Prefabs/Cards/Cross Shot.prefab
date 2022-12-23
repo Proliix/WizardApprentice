@@ -226,9 +226,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: cee28767df6f9764caaa6710d67badeb, type: 3}
   comboImage: {fileID: 21300000, guid: 14639a0b32b0cb7478e9159672d8f870, type: 3}
   title: 'Crux + '
-  description: 'North East South West
-
-    (Secret interaction with Diametro X)'
+  description: Casts projectiles in a X shape that damaged enemies
   attackSound: {fileID: 0}
   audioVolume: 1
   damage: 8

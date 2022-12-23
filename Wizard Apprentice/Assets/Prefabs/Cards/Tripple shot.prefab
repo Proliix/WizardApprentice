@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: af2805ffbf255e745a5082ab356b3b87, type: 3}
   title: Triplum
-  description: When 3 is better than 1
+  description: Casts 3 projectiles that damages enemies
   attackSound: {fileID: 8300000, guid: 204ceb070ee8adf46abf0a0e71c21e6c, type: 3}
   audioVolume: 1
   shootCooldown: 0.6

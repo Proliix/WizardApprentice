@@ -225,7 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: ba17290631248d040987996cc22352bf, type: 3}
   title: Spatium
-  description: Become the centre of the universe
+  description: Casts a herd of small planets that orbit you, the planets damages
+    enemies
   bulletImage: {fileID: 21300000, guid: 095cf9fffb07ab046af2c34d4e340d05, type: 3}
   attackSound: {fileID: 8300000, guid: 416f64c858b131f449a876803e1bbf5b, type: 3}
   audioVolume: 1

@@ -225,12 +225,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSprite: {fileID: 21300000, guid: c03de3b04661b4a4e8a10f0b68ea63c8, type: 3}
   cardSprite: {fileID: 21300000, guid: e351f54dd41da4d4ea3475f1c0d5fbac, type: 3}
-  title: BB (Big Boi)
-  description: One BIG boi
+  title: Big Boi
+  description: casts ONE big boy (damage and size scales with distance travelled)
   shootAudioClip: {fileID: 8300000, guid: 2650667497a793c45bfafd7b24a86583, type: 3}
   audioVolume: 1
-  damage: 45
+  startingDamage: 50
+  maxDamage: 70
   shootCooldown: 2
-  bulletSpeed: 15
-  bulletSize: 10
+  bulletSpeed: 10
+  bulletSize: 2
   lifeTime: 20
+  scaleSpeed: 8
+  maxScale: 10

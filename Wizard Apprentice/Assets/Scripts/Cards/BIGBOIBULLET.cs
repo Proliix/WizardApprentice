@@ -21,6 +21,7 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
     [SerializeField] float scaleSpeed = 0.5f;
     [SerializeField] float maxScale = 20.0f;
    
+
     float timer = 0;
     float elapsedTime = 0.0f;
 
@@ -103,7 +104,7 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
 
         if (bulletScript != null)
         {
-            bulletScript.damage = Mathf.Lerp(startingDamage, maxDamage, interpolationAmount);
+            bulletScript.damage = Mathf.Lerp(startingDamage, maxDamage, (activeBullet.gameObject.transform.localScale.y - bulletSize) / (maxScale - bulletSize));
             Debug.Log(bulletScript.damage);
             Debug.Log(interpolationAmount);
         }

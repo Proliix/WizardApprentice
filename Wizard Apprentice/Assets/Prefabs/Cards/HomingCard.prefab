@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 99f80dec328882947abc5f02040f8abe, type: 3}
   title: Venatus
-  description: Will hunt your enemies
+  description: Casts projectiles that hunts down and damages enemies
   Bulletimage: {fileID: 21300000, guid: 15e47b5a0c99b5649bfa1a842619cb76, type: 3}
   attackSound: {fileID: 8300000, guid: 89dfa83f8451dcb4b8ede002c08c5b96, type: 3}
   audioVolume: 1
