@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MinibossTeleportingSkeletonAI : MonoBehaviour
 {
-
+   [SerializeField] ParticleSystem teleportParticleEffect;
 
     BulletHandler bulletHandler;
     Rigidbody2D rb2d;
@@ -102,22 +102,24 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
         }
 
+        TeleportEffect();
         yield return new WaitForSeconds(1f);
+
+        //Boss isn't visable
         GoInvisable();
         yield return new WaitForSeconds(1f);
+
         TeleportIndicator();
         yield return new WaitForSeconds(indicatorTime);
 
+        //Bos is visable
         gameObject.transform.localPosition = movePos;
-        GoVisable();
 
         StartCoroutine(SpecialAttack()); 
-
         yield return new WaitForSeconds(1);
 
         StartCoroutine(AttackPattern());
-
-        yield return null;
+        
     }
 
 
@@ -147,7 +149,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
         canMove = true;
         yield return new WaitForSeconds(2f);
-        yield return null;
+       
     }
 
     private void TeleportIndicator()
@@ -160,17 +162,12 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
     private void GoInvisable()
     {
         gameObject.transform.position = new Vector3(100, 100, 0);
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<CapsuleCollider2D>().GetComponentInChildren<CapsuleCollider2D>().enabled = false;
+       
     }
 
-
-    private void GoVisable()
+    private void TeleportEffect()
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        gameObject.GetComponent<CapsuleCollider2D>().GetComponentInChildren<CapsuleCollider2D>().enabled = true;
-
+        teleportParticleEffect.Play();
     }
-
 
 }
