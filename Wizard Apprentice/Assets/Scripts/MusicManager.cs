@@ -82,7 +82,6 @@ public class MusicManager : MonoBehaviour
         {
             if ((isAudioSource1 ? audioSource1.volume : audioSource2.volume) <= 0)
             {
-                Debug.Log("Is here");
                 switch (isAudioSource1)
                 {
                     case false:
