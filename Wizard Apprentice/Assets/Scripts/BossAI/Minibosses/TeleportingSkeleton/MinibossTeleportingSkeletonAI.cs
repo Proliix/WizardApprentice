@@ -114,7 +114,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
         gameObject.transform.localPosition = movePos;
         GoVisable();
 
-        SpecialAttack();
+        StartCoroutine(SpecialAttack()); 
 
         yield return new WaitForSeconds(1);
 
@@ -129,9 +129,13 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
         bulletHandler.GetBullet(gameObject.transform.position, (target.transform.position - gameObject.transform.position).normalized, false, damage, bulletSize, bulletSpeed);
 
     }
-    private void SpecialAttack()
+     IEnumerator SpecialAttack()
     {
-        bulletHandler.GetCircleShot(specialBulletAmount, gameObject, false, specialDamage, specialBulletSize, specialBulletSpeed);
+        for (int i = 0; i < 4; i++)
+        {
+            yield return new WaitForSeconds(0.15f);
+        bulletHandler.GetCircleShot(specialBulletAmount, gameObject, false, i*25 ,specialDamage, specialBulletSize, specialBulletSpeed);
+        }
     }
 
 
@@ -158,6 +162,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
     private void GoInvisable()
     {
+        gameObject.transform.position = new Vector3(100, 100, 0);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<CapsuleCollider2D>().GetComponentInChildren<CapsuleCollider2D>().enabled = false;
     }

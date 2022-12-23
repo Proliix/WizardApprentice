@@ -230,5 +230,5 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   audioVolume: 1
   damage: 8
-  size: 0.75
+  size: 1
   speed: 10

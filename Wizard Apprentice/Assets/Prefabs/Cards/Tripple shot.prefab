@@ -231,5 +231,5 @@ MonoBehaviour:
   shootCooldown: 0.6
   shootPosDeviation: 0.25
   damage: 10
-  size: 0.5
+  size: 0.7
   speed: 10

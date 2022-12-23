@@ -233,7 +233,7 @@ MonoBehaviour:
   distance: 2.5
   lifetime: 8.175
   damage: 5
-  size: 1
+  size: 1.2
   speed: 20
   sinSpeed: 1.5
   amount: 7

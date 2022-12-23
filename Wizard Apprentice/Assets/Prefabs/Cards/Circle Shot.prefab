@@ -211,7 +211,7 @@ MonoBehaviour:
   projectileAmmount: 12
   shootCooldown: 0.65
   damage: 7
-  bulletSize: 0.5
+  bulletSize: 0.7
   speed: 10
 --- !u!95 &4730238429024741817
 Animator:
