@@ -97,26 +97,31 @@ public class StatsUI : MonoBehaviour
     }
     private void UpdateStats()
     {
-        string dmgText = "DMG : " + damage.ToString("F2");
+     
+        string dmgText = "<color=red>DG : " + Mathf.RoundToInt(damage * 100) + "%</color>";
         damageTMP.SetText(dmgText);
+        
 
-        string attackSpeedText = "AS : " + attackSpeed.ToString("F2");
+        string attackSpeedText = "<color=blue>AS : " + Mathf.RoundToInt(attackSpeed * 100) + "%</color>";
         attackSpeedTMP.SetText(attackSpeedText);
+        
 
-        string critMultText = "Crit DMG : " + Mathf.RoundToInt(critDmgMultiplier * 100) + "%";
+        string critMultText = "<color=#F334DA>CD : " + Mathf.RoundToInt(critDmgMultiplier * 100) + "%</color>";
         critDmgMultiplierTMP.SetText(critMultText);
 
-        string critChanceText = "Crit chance : " + Mathf.RoundToInt(critChance * 100) + "%";
+        string critChanceText = "<color=purple>C% : " + Mathf.RoundToInt(critChance * 100) + "%</color>";
         critChanceTMP.SetText(critChanceText);
+        //critChanceTMP.color = Color.
 
-        string moveSpeedText = "MS : " + moveSpeed.ToString("F2");
+        string moveSpeedText = "<color=yellow>MS : " + Mathf.RoundToInt(moveSpeed * 100) + "%</color>";
         moveSpeedTMP.SetText(moveSpeedText);
+        moveSpeedTMP.color = Color.yellow;
 
-        string bulletSpeedText = "Bullet Speed : " + bulletSpeed.ToString("F2");
-        bulletSpeedTMP.SetText(bulletSpeedText);
+        //string bulletSpeedText = "Bullet Speed : " + bulletSpeed.ToString("F2");
+        //bulletSpeedTMP.SetText(bulletSpeedText);
 
-        string bulletSizeText = "Bullet Size : " + bulletSize.ToString("F2");
-        bulletSizeTMP.SetText(bulletSizeText);
+        //string bulletSizeText = "Bullet Size : " + bulletSize.ToString("F2");
+        //bulletSizeTMP.SetText(bulletSizeText);
 
         string healthText = Mathf.RoundToInt(currentHP) + "/" + Mathf.RoundToInt(maxHP);
         healthTMP.SetText(healthText);

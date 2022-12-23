@@ -32,7 +32,7 @@ public class RoomSelectController : MonoBehaviour
             mousePosOnDown = Input.mousePosition;
             totalMovement = 0;
             totalTime = 0;
-            heightOnMouseDown = (transform.position.y) - (minMaxY.y) - Input.mousePosition.y;
+            heightOnMouseDown = (transform.position.y) - (Screen.height/2f) - Input.mousePosition.y;
             builtUpScroll = 0;
         }
         float distanceToScroll = (1 - Mathf.Pow(scrollSmoothness,Time.unscaledDeltaTime))*builtUpScroll;
