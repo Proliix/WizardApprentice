@@ -15,6 +15,7 @@ public class CardHandler : MonoBehaviour
     ICard[] cards;
 
     Animator[] animators;
+    private Inventory inv;
     float timer = 0;
     public int cardIndex;
     bool hasbeenReset = false;
@@ -30,6 +31,7 @@ public class CardHandler : MonoBehaviour
     {
         cards = new ICard[cardObjs.Length];
         animators = new Animator[cardCycle.Length];
+        inv = GetComponent<Inventory>();
 
         rememberedSwapIndex = new List<int>();
         rememberedSwapObject = new List<GameObject>();
@@ -133,13 +135,30 @@ public class CardHandler : MonoBehaviour
 
     }
 
-    public void TrunOffAnims()
+    public void TrunOffAnims(int exeption = -100)
     {
-        for (int i = 0; i < animators.Length; i++)
+        Animator CheckAnim = null;
+        if (exeption >= 0 && exeption < animators.Length)
+            CheckAnim = animators[exeption];
+
+        Animator[] anims = new Animator[inv.cardHolders.Count];
+        for (int i = 0; i < inv.cardHolders.Count; i++)
         {
-            if (animators[cardIndex] != null && cardObjs[cardIndex] != null)
+            if (inv.cardHolders[i].cardObject != null && inv.cardHolders[i].cardObject.GetComponent<Animator>() != null)
+                anims[i] = inv.cardHolders[i].cardObject.GetComponent<Animator>();
+            else
+                anims[i] = null;
+        }
+
+        for (int i = 0; i < anims.Length; i++)
+        {
+            if (anims[i] != null && anims[i] != CheckAnim)
             {
-                animators[cardIndex].SetBool("IsActive", false);
+                anims[i].SetBool("IsActive", false);
+            }
+            else if (anims[i] == CheckAnim)
+            {
+                anims[i].SetBool("IsActive", true);
             }
         }
     }
@@ -182,18 +201,7 @@ public class CardHandler : MonoBehaviour
                 }
 
 
-                for (int i = 0; i < animators.Length; i++)
-                {
-                    if (i == cardIndex && cardObjs[cardIndex] != null)
-                    {
-                        animators[cardIndex].SetBool("IsActive", true);
-                    }
-                    else
-                    {
-                        if (animators[i] != null && cardObjs[cardIndex] != null)
-                            animators[i].SetBool("IsActive", false);
-                    }
-                }
+                TrunOffAnims(cardIndex);
 
             }
         }
@@ -203,12 +211,8 @@ public class CardHandler : MonoBehaviour
             if ((cardObjs[cardIndex] != null) && cards[cardIndex] != null)
             {
                 cards[cardIndex].ResetCard();
-                for (int i = 0; i < animators.Length; i++)
-                {
-                    if (animators[i] != null)
-                        animators[i].SetBool("IsActive", false);
-                }
             }
+            TrunOffAnims();
             cardIndex = -1;
             timer = 0;
 

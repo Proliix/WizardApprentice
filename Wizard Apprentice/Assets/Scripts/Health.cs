@@ -131,12 +131,17 @@ public class Health : MonoBehaviour
                 if (DamageBufferValue == hp)
                     prevHitHp = hp;
 
-                healthbarValue = Mathf.MoveTowards(healthbarValue, hp, healthRemoveSpeed * (1 + (prevHp / hp)));
+                float hpChange = prevHp - hp;
+                float speedMultiplier = 1 + (Mathf.Abs(hpChange) * 0.1f);
+                healthbarValue = Mathf.MoveTowards(healthbarValue, hp, healthRemoveSpeed * speedMultiplier);
                 healthbar.fillAmount = (healthbarValue / maxHP);
 
                 if (timer > damagebufferUpTime)
                 {
-                    DamageBufferValue = Mathf.MoveTowards(DamageBufferValue, hp, damageBufferRemoveSpeed * (1 + (prevHitHp / hp)));
+
+                    hpChange = prevHitHp - hp;
+                    speedMultiplier = 1 + Mathf.Abs(hpChange) * 0.1f;
+                    DamageBufferValue = Mathf.MoveTowards(DamageBufferValue, hp, damageBufferRemoveSpeed * speedMultiplier);
                     damageBufferhbar.fillAmount = (DamageBufferValue / maxHP);
                 }
             }
@@ -196,7 +201,7 @@ public class Health : MonoBehaviour
 
         if (isPlayer)
             statsUI?.UpdateHP();
-       
+
         if (hitNumbers != null)
             hitNumbers.GetHitText(transform.position, -healAmount);
     }
@@ -210,7 +215,7 @@ public class Health : MonoBehaviour
     public void AddMaxHealth(float healAmount, bool usePercent)
     {
         float healthChange = 0;
-        if(usePercent)
+        if (usePercent)
         {
             healthChange = Mathf.Floor(GetMaxHP() * healAmount);
         }

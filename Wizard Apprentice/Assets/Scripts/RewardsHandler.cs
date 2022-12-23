@@ -261,11 +261,9 @@ public class RewardsHandler : MonoBehaviour
 
     public void SkipCards()
     {
+        cardScreenParent.SetActive(false);
         if (statsAfterCard)
-        {
-            cardScreenParent.SetActive(false);
             GetRewardScreenStats();
-        }
         else
             rewardScreen.SetActive(false);
     }

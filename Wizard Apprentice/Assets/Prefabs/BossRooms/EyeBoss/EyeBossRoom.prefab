@@ -293,6 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16238f58b3dd0d4590d248077220fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exitTutorialHeak: {fileID: 0}
 --- !u!1 &2344321322886567704
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,11 +752,11 @@ MonoBehaviour:
   removeSelf: 0
   hasHitCooldown: 0
   usesHealthBar: 1
-  healthRemoveSpeed: 0.5
+  healthRemoveSpeed: 0.05
   healthbar: {fileID: 7931830088294003908}
   damageBufferhbar: {fileID: 6134733224443953899}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 1
+  damageBufferRemoveSpeed: 0.04
   removeHealthbar: 1
   healthbarParent: {fileID: 889790490}
   statsUI: {fileID: 0}
