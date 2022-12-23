@@ -938,7 +938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &119382419
 RectTransform:
   m_ObjectHideFlags: 0
@@ -954,6 +954,7 @@ RectTransform:
   - {fileID: 467912846}
   - {fileID: 628623579}
   - {fileID: 549722245}
+  - {fileID: 1403516589}
   - {fileID: 383864940}
   - {fileID: 1944693146}
   - {fileID: 303228284}
@@ -978,9 +979,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomSelectObject: {fileID: 119382418}
+  roomSelectDescription: {fileID: 1403516588}
+  roomSelectDescriptionPosition: {x: -120, y: 0}
   scrollSmoothness: 5
   scrollSpeed: 100
-  minMaxY: {x: -540, y: 540}
+  minMaxY: {x: -400, y: 720}
+  lastMousePos: {x: 0, y: 0}
 --- !u!114 &160889044 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2948791850020026693, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
@@ -3441,8 +3445,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1403516589}
+  m_Children: []
   m_Father: {fileID: 119382419}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7657,16 +7660,16 @@ RectTransform:
   m_GameObject: {fileID: 1403516588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 628623579}
+  m_Father: {fileID: 119382419}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_AnchoredPosition: {x: -120, y: 0}
+  m_SizeDelta: {x: 1440, y: 810}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1403516590
 MonoBehaviour:
@@ -7682,7 +7685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -9879,8 +9882,8 @@ MonoBehaviour:
   outgoingSpacing: 1
   chancesForOutgoing: 1
   preferStayingInSetPosition: 5
-  randomIconMovement: 10
-  iconDistances: {x: 100, y: 75}
+  randomIconMovement: 20
+  iconDistances: {x: 150, y: 80}
 --- !u!114 &1786813657
 MonoBehaviour:
   m_ObjectHideFlags: 0
