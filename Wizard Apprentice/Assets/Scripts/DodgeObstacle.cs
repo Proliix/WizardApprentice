@@ -18,7 +18,7 @@ public class DodgeObstacle : MonoBehaviour
         playerMovement = playerTarget.GetComponent<PlayerMovement>();
         TimesFailedDodgeroll = 0;
 
-     
+
 
 
     }
@@ -30,10 +30,10 @@ public class DodgeObstacle : MonoBehaviour
 
             if (playerMovement.isDashing == false)
             {
-            StartCoroutine(DeathByLava());
+                StartCoroutine(DeathByLava());
                 UpdateText();
             }
-            
+
         }
     }
 
@@ -43,13 +43,35 @@ public class DodgeObstacle : MonoBehaviour
         {
             if (TimesFailedDodgeroll >= 3)
             {
-            textMeshPro.enabled = true;
+                textMeshPro.enabled = true;
             }
 
         }
 
-        
+
     }
+
+
+    //    IEnumerator DeathByLava()
+    //    {
+    //        Vector2 Pos = playerTarget.transform.position - gameObject.transform.position;
+
+    //        playerTarget.GetComponent<Health>().RemoveHealth(5);
+
+    //        TimesFailedDodgeroll++;
+    //        playerTarget.GetComponent<PlayerMovement>().SetCanMove(false);
+    //        playerTarget.GetComponent<Rigidbody2D>().velocity = Pos.normalized * 5;
+    //        yield return new WaitForSeconds(0.5f);
+    //        playerTarget.GetComponent<PlayerMovement>().SetCanMove(true);
+
+
+    //        yield return null;
+    //    }
+
+
+
+
+    //}
 
 
     IEnumerator DeathByLava()
@@ -60,32 +82,11 @@ public class DodgeObstacle : MonoBehaviour
 
         TimesFailedDodgeroll++;
         playerTarget.GetComponent<PlayerMovement>().SetCanMove(false);
-        playerTarget.GetComponent<Rigidbody2D>().velocity = Pos.normalized * 5;
+        playerTarget.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Sign(Pos.normalized.y) * 5);
         yield return new WaitForSeconds(0.5f);
         playerTarget.GetComponent<PlayerMovement>().SetCanMove(true);
 
 
         yield return null;
     }
-
-
-
-
 }
-
-
-//IEnumerator DeathByLava()
-//{
-//    Vector2 Pos = playerTarget.transform.position - gameObject.transform.position;
-
-//    playerTarget.GetComponent<Health>().RemoveHealth(5);
-
-//    TimesFailedDodgeroll++;
-//    playerTarget.GetComponent<PlayerMovement>().SetCanMove(false);
-//    playerTarget.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Mathf.Sign(Pos.normalized.y) * 5);
-//    yield return new WaitForSeconds(0.5f);
-//    playerTarget.GetComponent<PlayerMovement>().SetCanMove(true);
-
-
-//    yield return null;
-//}
