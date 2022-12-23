@@ -148,14 +148,15 @@ public class EyeBossAI : MonoBehaviour
 
   IEnumerator GigaAttack()
     {
-        if (isAlive == true) 
-        {
+        
 
         yield return new WaitForSeconds(2f);
         //Shoots a bullet from the gameObject towards the target(player)
-        bulletHandler.GetBullet(gameObject.transform.position, target.transform.position - gameObject.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
-        yield return null;
+        if (isAlive == true)
+        {
+            bulletHandler.GetBullet(gameObject.transform.position, target.transform.position - gameObject.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
         }
+        yield return null;
     }
 
     private void BossDead()
