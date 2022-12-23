@@ -200,8 +200,6 @@ public class CardHandler : MonoBehaviour
         else if (!hasbeenReset)
         {
             hasbeenReset = true;
-            cardIndex = -1;
-            timer = 0;
             if ((cardObjs[cardIndex] != null) && cards[cardIndex] != null)
             {
                 cards[cardIndex].ResetCard();
@@ -211,6 +209,8 @@ public class CardHandler : MonoBehaviour
                         animators[i].SetBool("IsActive", false);
                 }
             }
+            cardIndex = -1;
+            timer = 0;
 
         }
 
