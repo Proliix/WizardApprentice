@@ -15,6 +15,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] TextMeshProUGUI cardDescriptionText;
     [SerializeField] Canvas cardCanvas;
 
+    public delegate void CardRemovedDelegate();
+    public event CardRemovedDelegate cardRemovedEvent;
+
     bool trashcanAlwaysOn;
 
     void Start()
@@ -23,6 +26,12 @@ public class Inventory : MonoBehaviour
         {
             cardHolders[i].index = i;
         }
+    }
+
+    public void CardDestroyed()
+    {
+        if (cardRemovedEvent != null)
+            cardRemovedEvent.Invoke();
     }
 
     public void TurnOnTrashcan()

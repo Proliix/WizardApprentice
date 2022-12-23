@@ -156,7 +156,7 @@ public class CardHandler : MonoBehaviour
             {
                 anims[i].SetBool("IsActive", false);
             }
-            else if (anims[i] == CheckAnim)
+            else if (anims[i] == CheckAnim && anims[i] != null)
             {
                 anims[i].SetBool("IsActive", true);
             }

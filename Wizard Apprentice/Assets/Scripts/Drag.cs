@@ -115,6 +115,7 @@ public class Drag : MonoBehaviour
                             ResetThisCard();
                         }
                         lastObjectAttachedTo.GetComponent<CardHolder>().cardObject = null;
+                        inventory.CardDestroyed();
                         Destroy(this.gameObject);
                     }
                     break;

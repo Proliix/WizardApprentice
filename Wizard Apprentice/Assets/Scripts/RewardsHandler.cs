@@ -22,6 +22,7 @@ public class RewardsHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [SerializeField] Image[] potionImage = new Image[3];
     [Header("Card Rewards")]
+    [SerializeField] bool CardDescriptionTitles = false;
     [SerializeField] GameObject cardScreenParent;
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
     [SerializeField] Button[] cardButtons = new Button[3];
@@ -86,6 +87,10 @@ public class RewardsHandler : MonoBehaviour
         pMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         roomManager = gameObject.GetComponent<RoomManager>();
         inventoryFullScreen.SetActive(false);
+        for (int i = 0; i < cardTitleObj.Length; i++)
+        {
+            cardTitleObj[i].gameObject.SetActive(CardDescriptionTitles);
+        }
 
         //card removal screen
         cardHandler = GetComponent<CardHandler>();
@@ -146,9 +151,12 @@ public class RewardsHandler : MonoBehaviour
     void ResetInventoryObj()
     {
         resetAfterMove = false;
-        for (int i = 0; i < cardButtons.Length; i++)
+        if (CanAddCards())
         {
-            cardButtons[i].interactable = true;
+            for (int i = 0; i < cardButtons.Length; i++)
+            {
+                cardButtons[i].interactable = true;
+            }
         }
         inventory.TurnOffTrashcan();
         skipButton.interactable = true;
@@ -168,6 +176,7 @@ public class RewardsHandler : MonoBehaviour
     }
     public void GetCardInventoryScreen()
     {
+        inventory.cardRemovedEvent += DisableInvFullText;
         if (!isMoving)
         {
             wasActive = cardHandler.isActive;
@@ -203,6 +212,7 @@ public class RewardsHandler : MonoBehaviour
 
     public void GetRewardScreenCard(bool withStats = false)
     {
+        cardHandler.isActive = false;
         if (!CanAddCards())
         {
             for (int i = 0; i < cardButtons.Length; i++)
@@ -265,7 +275,16 @@ public class RewardsHandler : MonoBehaviour
         if (statsAfterCard)
             GetRewardScreenStats();
         else
+        {
+            cardHandler.isActive = true;
             rewardScreen.SetActive(false);
+        }
+    }
+
+    void DisableInvFullText()
+    {
+        inventoryFullScreen.SetActive(!CanAddCards());
+        inventory.cardRemovedEvent -= DisableInvFullText;
     }
 
     public void SelectRewardCard(int index)
@@ -284,9 +303,14 @@ public class RewardsHandler : MonoBehaviour
 
 
         if (!statsAfterCard)
+        {
+            cardHandler.isActive = true;
             rewardScreen.SetActive(false);
+        }
         else
             GetRewardScreenStats();
+
+
 
         statsAfterCard = false;
 
@@ -342,6 +366,7 @@ public class RewardsHandler : MonoBehaviour
     public void GetRewardScreenStats()
     {
         bool canGetCritChance = stats.critChance < 1 ? true : false;
+        cardHandler.isActive = false;
         rewardScreen.SetActive(true);
         statScreenParent.SetActive(true);
         int first = -100;
@@ -399,6 +424,7 @@ public class RewardsHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(0.03f);
         UpdatePlayerStats(index);
+        cardHandler.isActive = true;
         isPressed = false;
 
     }
