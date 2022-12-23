@@ -523,9 +523,9 @@ MonoBehaviour:
   SmallDashIndicatorInactive: {fileID: 1019943886}
   dashSound: {fileID: 8300000, guid: f76c75fa4d89e6346843243cdedf2e0c, type: 3}
   moveSpeed: 7
-  dashingSpeed: 10
+  dashingSpeed: 11
   activeSpeed: 0
-  dashingTime: 0.7
+  dashingTime: 0.55
   canDash: 1
   isDashing: 0
   dashingCooldown: 1
@@ -549,11 +549,11 @@ MonoBehaviour:
   removeSelf: 0
   hasHitCooldown: 1
   usesHealthBar: 1
-  healthRemoveSpeed: 0.5
+  healthRemoveSpeed: 0.05
   healthbar: {fileID: 0}
   damageBufferhbar: {fileID: 0}
   damagebufferUpTime: 0.26
-  damageBufferRemoveSpeed: 1
+  damageBufferRemoveSpeed: 0.04
   removeHealthbar: 0
   healthbarParent: {fileID: 0}
   statsUI: {fileID: 0}
