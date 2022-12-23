@@ -60,6 +60,7 @@ public class CrystallBossAI : MonoBehaviour
 
     public Vector3[] spawnPoints;
 
+    bool hasClearedRoom = false;
 
     void Start()
     {
@@ -97,81 +98,76 @@ public class CrystallBossAI : MonoBehaviour
 
     void Update()
     {
-        if( isAlive == true)
+        if (isAlive == true)
         {
 
-        
-        HP = health.GetHP();
-        maxHP = health.GetMaxHP();
 
-        patternTimer += Time.deltaTime;
-        attackTimer += Time.deltaTime;
-        randomAttackTimer += Time.deltaTime;
-        spawnEnemyTimer += Time.deltaTime;
+            HP = health.GetHP();
+            maxHP = health.GetMaxHP();
+
+            patternTimer += Time.deltaTime;
+            attackTimer += Time.deltaTime;
+            randomAttackTimer += Time.deltaTime;
+            spawnEnemyTimer += Time.deltaTime;
 
 
-        if (spawnEnemyTimer >= spawnEnemyDelay)
-        {
-            StartCoroutine(SpawnEnemy());
-            spawnEnemyTimer -= spawnEnemyDelay;
-        }
-
-        if (HP < maxHP * 0.666f && HP > maxHP * 0.333f)
-        {
-            phase2Active = true;
-        }
-
-        if (HP < maxHP * 0.333f)
-        {
-            phase3Active = true;
-        }
-
-        if (attackTimer >= attackDelay)
-        {
-            BasicAttack();
-            attackTimer -= attackDelay;
-        }
-
-        if (randomAttackTimer >= 0.78f)
-        {
-            RandomAttack();
-            randomAttackTimer -= 0.78f;
-        }
-
-        //Attack phases (based on current boss hp)
-        if (patternTimer >= patternDelay)
-        {
-            //Phase 1 from 100% - 66% hp
-            if (phase1Active)
+            if (spawnEnemyTimer >= spawnEnemyDelay)
             {
-                Phase1();
+                StartCoroutine(SpawnEnemy());
+                spawnEnemyTimer -= spawnEnemyDelay;
             }
 
-            //Phase 2 from 66% - 33% hp
-            if (HP < maxHP * 0.666f && phase2Active)
+            if (HP < maxHP * 0.666f && HP > maxHP * 0.333f)
             {
-                Phase2();
+                phase2Active = true;
             }
 
-            //Phase 3 from 33% - 0% hp
-            if (HP < maxHP * 0.333f && phase3Active)
+            if (HP < maxHP * 0.333f)
             {
-                Phase3();
+                phase3Active = true;
             }
-            patternTimer -= patternDelay;
-        }
 
-        if (HP <= 0 && isAlive == true)
-        {
-            BossDead();
-        }
-        
+            if (attackTimer >= attackDelay)
+            {
+                BasicAttack();
+                attackTimer -= attackDelay;
+            }
 
-        }
+            if (randomAttackTimer >= 0.78f)
+            {
+                RandomAttack();
+                randomAttackTimer -= 0.78f;
+            }
 
-        if (isAlive != true)
-        {
-            roomManager.RemoveAllEnemies();
+            //Attack phases (based on current boss hp)
+            if (patternTimer >= patternDelay)
+            {
+                //Phase 1 from 100% - 66% hp
+                if (phase1Active)
+                {
+                    Phase1();
+                }
+
+                //Phase 2 from 66% - 33% hp
+                if (HP < maxHP * 0.666f && phase2Active)
+                {
+                    Phase2();
+                }
+
+                //Phase 3 from 33% - 0% hp
+                if (HP < maxHP * 0.333f && phase3Active)
+                {
+                    Phase3();
+                }
+                patternTimer -= patternDelay;
+            }
+
+            if (HP <= 0 && isAlive == true && !hasClearedRoom)
+            {
+                hasClearedRoom = true;
+                BossDead();
+            }
+
         }
     }
 
@@ -200,7 +196,7 @@ public class CrystallBossAI : MonoBehaviour
 
     void Phase2()
     {
-       spawnAmount = 3;
+        spawnAmount = 3;
         rotationSpeed = 65;
         phase1Active = false;
         phase2Active = true;
@@ -256,9 +252,9 @@ public class CrystallBossAI : MonoBehaviour
         yield return null;
 
     }
-
     private void BossDead()
     {
+        StopAllCoroutines();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
         gameObject.GetComponent<PolygonCollider2D>().enabled = false;
         bossHurtbox.enabled = false;
