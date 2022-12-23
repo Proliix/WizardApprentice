@@ -62,11 +62,8 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
     }
 
-
-
     IEnumerator MoveEnemy()
     {
-
 
 
         canMove = false;
