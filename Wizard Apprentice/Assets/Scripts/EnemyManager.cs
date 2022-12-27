@@ -46,7 +46,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator ActivateEnemies()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.33f);
         Debug.Log("_____\nIs True");
         enemiesActive = true;
     }
