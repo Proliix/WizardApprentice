@@ -1841,7 +1841,55 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
+  rewardsTier2: []
+  rewardsTier3: []
   healReward: {fileID: 0}
+  floor: 0
+  chanceTeir1:
+  - 0
+  - 0
+  - 0
+  chanceTeir2:
+  - 0
+  - 0
+  - 0
+  chanceTeir3:
+  - 0
+  - 0
+  - 0
+  percentageCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   titles:
   - {fileID: 816771111}
   - {fileID: 649940052}
@@ -1854,11 +1902,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  CardDescriptionTitles: 0
   cardScreenParent: {fileID: 1688963745}
   cardTitles:
   - {fileID: 1057746902}
   - {fileID: 81656223}
   - {fileID: 1188637473}
+  cardButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  skipButton: {fileID: 0}
+  invButton: {fileID: 0}
   cardImages:
   - {fileID: 40360621}
   - {fileID: 1732990447}
@@ -1887,6 +1942,20 @@ MonoBehaviour:
   - {fileID: 576414649}
   - {fileID: 2053796697}
   - {fileID: 571019965}
+  inventoryFullScreen: {fileID: 0}
+  fadeOut: {fileID: 0}
+  hotbar: {fileID: 0}
+  invHolder: {fileID: 0}
+  trashCan: {fileID: 0}
+  background: {fileID: 0}
+  backButton: {fileID: 0}
+  cardCanvas: {fileID: 0}
+  moveSpeed: 1
+  newHotbarPos: {x: 0, y: 0, z: 0}
+  newHotbarScale: {x: 1, y: 1, z: 1}
+  newInvHolderPos: {x: 0, y: 0, z: 0}
+  newTrashCanPos: {x: 0, y: 0, z: 0}
+  newBackgroundPos: {x: 0, y: 0, z: 0}
 --- !u!114 &542232912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,6 +1982,7 @@ MonoBehaviour:
   cardDescriptionObject: {fileID: 0}
   cardTitleText: {fileID: 0}
   cardDescriptionText: {fileID: 0}
+  cardCanvas: {fileID: 0}
 --- !u!114 &542232913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,6 +2152,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e43a998221deeb3448388e20d479d59f, type: 2}
   mysteryRoomsPoolAmount: 3
   currentFloor: 0
+  mapOpen: {fileID: 0}
+  mapOpenVolume: 1
+  pauseDuration: 1
+  originalTimescale: 0
+  roomClearSound: {fileID: 0}
+  audioVolume: 1
+  particleSystem: {fileID: 0}
 --- !u!114 &542232918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3647,9 +3724,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomSelectObject: {fileID: 1336016244}
+  roomSelectDescription: {fileID: 0}
+  roomSelectDescriptionPosition: {x: 0, y: 0}
   scrollSmoothness: 5
   scrollSpeed: 100
   minMaxY: {x: -540, y: 540}
+  lastMousePos: {x: 0, y: 0}
 --- !u!1 &1369917360
 GameObject:
   m_ObjectHideFlags: 0
@@ -4267,7 +4347,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5571,6 +5651,7 @@ MonoBehaviour:
   cardDescriptionObject: {fileID: 0}
   cardTitleText: {fileID: 0}
   cardDescriptionText: {fileID: 0}
+  cardCanvas: {fileID: 0}
 --- !u!114 &2082162360
 MonoBehaviour:
   m_ObjectHideFlags: 0
