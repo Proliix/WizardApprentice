@@ -63,6 +63,7 @@ public class RewardsHandler : MonoBehaviour
     int startLayer;
     CardHandler cardHandler;
     RoomManager roomManager;
+    Animator inventoryFullAnim;
 
     private Reward[] activeRewards = new Reward[3];
     private GameObject[] activeCards = new GameObject[3];
@@ -87,6 +88,7 @@ public class RewardsHandler : MonoBehaviour
         pMovement = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         roomManager = gameObject.GetComponent<RoomManager>();
         inventoryFullScreen.SetActive(false);
+        inventoryFullAnim = inventoryFullScreen.GetComponent<Animator>();
         for (int i = 0; i < cardTitleObj.Length; i++)
         {
             cardTitleObj[i].gameObject.SetActive(CardDescriptionTitles);
@@ -217,10 +219,6 @@ public class RewardsHandler : MonoBehaviour
         cardHandler.isActive = false;
         if (!CanAddCards())
         {
-            for (int i = 0; i < cardButtons.Length; i++)
-            {
-                cardButtons[i].interactable = false;
-            }
             inventoryFullScreen.SetActive(true);
         }
         else
@@ -291,11 +289,13 @@ public class RewardsHandler : MonoBehaviour
 
     public void SelectRewardCard(int index)
     {
-        if (!isPressed)
+        if (!isPressed && CanAddCards())
         {
             isPressed = true;
             StartCoroutine(UpdateCardsAfterTime(index));
         }
+        else
+            inventoryFullAnim.SetTrigger("Shake");
     }
 
     private void UpdatePlayerCards(int index)
