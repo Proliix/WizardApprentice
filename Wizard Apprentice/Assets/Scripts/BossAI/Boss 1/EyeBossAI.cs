@@ -10,10 +10,13 @@ public class EyeBossAI : MonoBehaviour
     RoomManager roomManager;
     Rigidbody2D rb2d;
 
-    Vector2 movement; 
+    Vector2 movement;
+
+    [SerializeField] GameObject[] wallEyes;
+    [SerializeField] GameObject[] wallEyesShootPos;
 
     [SerializeField] float timer;
-    [SerializeField] GameObject target;
+    [SerializeField] GameObject player;
 
     [SerializeField] float moveSpeed = 1;
 
@@ -53,9 +56,10 @@ public class EyeBossAI : MonoBehaviour
     {
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();
-        target = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         health = GetComponent<Health>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        
 
         timer = -timeUntilBossStart;
 
@@ -71,13 +75,14 @@ public class EyeBossAI : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.J))
             {
-                MoveEnemy();
+              //  MoveEnemy();
+                WallEyeAttack();
             }
-            
 
-            
 
-        HP = health.GetHP();
+
+
+            HP = health.GetHP();
         maxHP = health.GetMaxHP();
         
             if (HP <= 0)
@@ -126,7 +131,7 @@ public class EyeBossAI : MonoBehaviour
 
     void MoveEnemy()
     {
-        movement = (target.transform.position - gameObject.transform.position).normalized;
+        movement = (player.transform.position - gameObject.transform.position).normalized;
         rb2d.velocity = movement * moveSpeed;
     }
 
@@ -151,10 +156,10 @@ public class EyeBossAI : MonoBehaviour
         
 
         yield return new WaitForSeconds(2f);
-        //Shoots a bullet from the gameObject towards the target(player)
+        //Shoots a bullet from the gameObject towards the player
         if (isAlive == true)
         {
-            bulletHandler.GetBullet(gameObject.transform.position, target.transform.position - gameObject.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
+            bulletHandler.GetBullet(gameObject.transform.position, player.transform.position - gameObject.transform.position, false, gigaBulletDamage, gigaBulletSize, gigaBulletSpeed);
         }
         yield return null;
     }
@@ -167,6 +172,18 @@ public class EyeBossAI : MonoBehaviour
         isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();
+
+    }
+
+    private void WallEyeAttack() 
+    {
+        for (int i = 0; i < wallEyes.Length; i++)
+        {
+            bulletHandler.GetBullet(wallEyesShootPos[i].transform.position, wallEyes[i], false, true,  basicDamage, basicBulletSize, basicBulletSpeed);
+
+        }
+
+
 
     }
 
