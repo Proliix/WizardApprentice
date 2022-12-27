@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: <color=#FF8300>Max Health</color>
   EffectText: "You gain: <color=green>+({0}) Max Health</color> \n\n{10}"
-  Image: {fileID: 21300000, guid: 39182de897f68a5469ae947e9702a472, type: 3}
+  Image: {fileID: 21300000, guid: 99d59548d447c68438b689c719efbecc, type: 3}
   maxHealth: 0.4
   movementSpeed: 0
   damage: 0

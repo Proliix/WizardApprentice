@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
   m_Name: T2CritChance
   m_EditorClassIdentifier: 
-  Title: <color=#FF0080>Crit Change</color>
+  Title: <color=#FF0080>Crit Chance</color>
   EffectText: 'You gain : <color=purple>+({4}) Crit chance </color>
 
 
     {14}'
-  Image: {fileID: 21300000, guid: 573c8a78f00bc6248857ac1387277744, type: 3}
+  Image: {fileID: 21300000, guid: 3422dd073a204c64094f23c5f84e539d, type: 3}
   maxHealth: 0
   movementSpeed: 0
   damage: 0

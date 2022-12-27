@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aecf7ca3ad93d2444a8d70575953752f, type: 3}
   m_Name: CritChance
   m_EditorClassIdentifier: 
-  Title: Crit Change
+  Title: Crit Chance
   EffectText: 'You gain : <color=purple>+({4}) Crit chance </color>
 
 

@@ -36,7 +36,6 @@ public class EnemyManager : MonoBehaviour
     {
         StopAllCoroutines();
         enemiesActive = false;
-        Debug.Log("_____\nIs false");
     }
 
     public void ActivateEnemiesAfterTime()
@@ -46,8 +45,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator ActivateEnemies()
     {
-        yield return new WaitForSeconds(0.33f);
-        Debug.Log("_____\nIs True");
+        yield return new WaitForSeconds(0.4f);
         enemiesActive = true;
     }
 
