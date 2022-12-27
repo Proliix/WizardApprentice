@@ -236,5 +236,5 @@ MonoBehaviour:
   effectCooldown: 0.125
   lifeTime: 4
   force: 5
-  stunDuration: 0.25
+  stunDuration: 0.4
   dealDamagerPerEffect: 2

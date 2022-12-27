@@ -182,16 +182,16 @@ public class RoomManager : MonoBehaviour
             enemyObjects.RemoveAt(i);
         }
         enemyObjects.Clear();
-        if (enemyCount!=0 && currentRoomType != 5)
+        if (enemyCount != 0 && currentRoomType != 5)
         {
 
-        OpenDoor();
+            OpenDoor();
         }
     }
 
     public void RemoveEnemy(GameObject enemyObject)
     {
-        
+
         Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
@@ -207,12 +207,12 @@ public class RoomManager : MonoBehaviour
         SoundManager.Instance.PlayAudio(roomClearSound, audioVolume);
         ActivateParticleSystem();
         if (!currentRoom.roomAlreadyHasDoor)
-            doorObject.GetComponentInChildren<SpriteRenderer>().sprite = openDoorImage;
+            doorObject.GetComponentInChildren<Animator>().SetTrigger("OpenDoor");
     }
 
     public void LoadNewRoom(int roomType)
     {
-        
+
         bulletHandler.ResetAll();
 
         if (roomType != 4)
@@ -252,19 +252,19 @@ public class RoomManager : MonoBehaviour
                 LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
                 break;
         }
-       
+
         roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }
 
     public void ActivateParticleSystem()
     {
-      
-            // Set the number of particles to emit for this burst
-            particleSystem.Emit(10);
-        
+
+        // Set the number of particles to emit for this burst
+        particleSystem.Emit(10);
+
     }
 
-   
+
     IEnumerator PauseEnemies()
     {
         originalTimescale = Time.timeScale;
@@ -274,9 +274,9 @@ public class RoomManager : MonoBehaviour
         yield return new WaitForSeconds(pauseDuration);
 
         Time.timeScale = originalTimescale;
-        
+
     }
 
-   
+
 
 }

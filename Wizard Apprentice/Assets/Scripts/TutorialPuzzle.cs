@@ -9,13 +9,15 @@ public class TutorialPuzzle : MonoBehaviour
 
     [SerializeField] float timer;
     [SerializeField] bool hasEntered = false;
+    [SerializeField] GameObject doorLock;
+    [SerializeField] GameObject door;
 
     NormalCard normalCard;
     TrippleShotCard trippleShotCard;
     CircleShotCard circleShotCard;
     CardHandler cardHandler;
 
-   [SerializeField] AudioClip puzzleSuccess;
+    [SerializeField] AudioClip puzzleSuccess;
     private bool puzzleDone = false;
 
     void Start()
@@ -24,7 +26,7 @@ public class TutorialPuzzle : MonoBehaviour
         normalCard = new NormalCard();
         trippleShotCard = new TrippleShotCard();
         circleShotCard = new CircleShotCard();
-        
+
         cardHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<CardHandler>();
     }
 
@@ -39,24 +41,27 @@ public class TutorialPuzzle : MonoBehaviour
         if (timer >= 30 && timer < 60)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "You can rearrange the spellcards";
-            
+
         }
 
         if (timer >= 60)
         {
             gameObject.GetComponentInChildren<TextMeshPro>().text = "Use Mouse 1 to rearrange the 4 cards as shown on the sign";
-            
+
         }
 
 
 
         if (cardHandler.CheckInSlot(normalCard, 0) && cardHandler.CheckInSlot(trippleShotCard, 1) && cardHandler.CheckInSlot(circleShotCard, 2) && cardHandler.CheckInSlot(normalCard, 3) && !puzzleDone)
         {
-            
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
+            doorLock.SetActive(false);
+            if (!puzzleDone)
+                door.GetComponent<Animator>().SetTrigger("OpenDoor");
+
             SoundManager.Instance.PlayAudio(puzzleSuccess);
             puzzleDone = true;
-            
+
         }
 
     }
