@@ -13,8 +13,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Transform infrontParent;
     [SerializeField] Animator startButtonAnimator;
     [SerializeField] Animator settingsButtonAnimator;
+    [SerializeField] Animator CreditsButtonAnimator;
     [SerializeField] Animator exitButtonAnimator;
     [SerializeField] Animator cameraAnimator;
+    [Header("Credits")]
+    [SerializeField] GameObject CreditsPanel;
     [Header("Settings")]
     [SerializeField] Sprite checkMark;
     [SerializeField] Sprite Cross;
@@ -75,106 +78,106 @@ public class MenuManager : MonoBehaviour
     {
 
 
-            bool activeBool;
-            if (PlayerPrefs.HasKey("StatsInGame"))
-            {
-                activeBool = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
-            }
-            else
-            {
-                activeBool = defaultStatValue;
-                PlayerPrefs.SetInt("StatsInGame", activeBool ? 1 : 0);
-            }
-            statsInGameRenderer.sprite = activeBool ? checkMark : Cross;
+        bool activeBool;
+        if (PlayerPrefs.HasKey("StatsInGame"))
+        {
+            activeBool = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
+        }
+        else
+        {
+            activeBool = defaultStatValue;
+            PlayerPrefs.SetInt("StatsInGame", activeBool ? 1 : 0);
+        }
+        statsInGameRenderer.sprite = activeBool ? checkMark : Cross;
 
-            if (PlayerPrefs.HasKey("DashOverHead"))
-            {
-                activeBool = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
-            }
-            else
-            {
-                activeBool = defaultDashValue;
-                PlayerPrefs.SetInt("DashOverHead", activeBool ? 1 : 0);
-            }
-            dashOverHeadRenderer.sprite = activeBool ? checkMark : Cross;
+        if (PlayerPrefs.HasKey("DashOverHead"))
+        {
+            activeBool = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
+        }
+        else
+        {
+            activeBool = defaultDashValue;
+            PlayerPrefs.SetInt("DashOverHead", activeBool ? 1 : 0);
+        }
+        dashOverHeadRenderer.sprite = activeBool ? checkMark : Cross;
 
-            float newValue = masterVolume.maxValue;
-            masterVolume.maxValue = 0;
-            masterVolume.minValue = -25;
+        float newValue = masterVolume.maxValue;
+        masterVolume.maxValue = 0;
+        masterVolume.minValue = -25;
 
-            if (PlayerPrefs.HasKey("MasterVol"))
-                newValue = PlayerPrefs.GetFloat("MasterVol");
-            else
-            {
-                newValue = masterVolume.maxValue;
-                PlayerPrefs.SetFloat("MasterVol", newValue);
-            }
+        if (PlayerPrefs.HasKey("MasterVol"))
+            newValue = PlayerPrefs.GetFloat("MasterVol");
+        else
+        {
+            newValue = masterVolume.maxValue;
+            PlayerPrefs.SetFloat("MasterVol", newValue);
+        }
 
+        masterVolume.value = newValue;
+        masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
+        if (newValue == -80)
+        {
+            masterVolume.value = masterVolume.minValue;
+            masterImage.fillAmount = 0;
+            masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+        }
+        else
+        {
             masterVolume.value = newValue;
             masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
-            if (newValue == -80)
-            {
-                masterVolume.value = masterVolume.minValue;
-                masterImage.fillAmount = 0;
-                masterVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
-            }
-            else
-            {
-                masterVolume.value = newValue;
-                masterImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
-            }
+        }
 
 
+        newValue = musicVolume.maxValue;
+        musicVolume.maxValue = 0;
+        musicVolume.minValue = -25;
+        if (PlayerPrefs.HasKey("MusicVol"))
+            newValue = PlayerPrefs.GetFloat("MusicVol");
+        else
+        {
             newValue = musicVolume.maxValue;
-            musicVolume.maxValue = 0;
-            musicVolume.minValue = -25;
-            if (PlayerPrefs.HasKey("MusicVol"))
-                newValue = PlayerPrefs.GetFloat("MusicVol");
-            else
-            {
-                newValue = musicVolume.maxValue;
-                PlayerPrefs.SetFloat("MusicVol", newValue);
-            }
+            PlayerPrefs.SetFloat("MusicVol", newValue);
+        }
 
+        musicVolume.value = newValue;
+        musicImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
+        if (newValue == -80)
+        {
+            musicVolume.value = musicVolume.minValue;
+            musicImage.fillAmount = 0;
+            musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+        }
+        else
+        {
             musicVolume.value = newValue;
-            musicImage.fillAmount = 1 - (masterVolume.value / masterVolume.minValue);
-            if (newValue == -80)
-            {
-                musicVolume.value = musicVolume.minValue;
-                musicImage.fillAmount = 0;
-                musicVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
-            }
-            else
-            {
-                musicVolume.value = newValue;
-                musicImage.fillAmount = 1 - (musicVolume.value / musicVolume.minValue);
-            }
+            musicImage.fillAmount = 1 - (musicVolume.value / musicVolume.minValue);
+        }
 
 
+        newValue = effectVolume.maxValue;
+        effectVolume.maxValue = 10;
+        effectVolume.minValue = -15;
+
+        if (PlayerPrefs.HasKey("EffectVol"))
+            newValue = PlayerPrefs.GetFloat("EffectVol");
+        else
+        {
             newValue = effectVolume.maxValue;
-            effectVolume.maxValue = 10;
-            effectVolume.minValue = -15;
+            PlayerPrefs.SetFloat("EffectVol", newValue);
+        }
 
-            if (PlayerPrefs.HasKey("EffectVol"))
-                newValue = PlayerPrefs.GetFloat("EffectVol");
-            else
-            {
-                newValue = effectVolume.maxValue;
-                PlayerPrefs.SetFloat("EffectVol", newValue);
-            }
+        if (newValue == -80)
+        {
+            effectVolume.value = effectVolume.minValue;
+            effectImage.fillAmount = 0;
+            effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
+        }
+        else
+        {
+            effectVolume.value = newValue;
+            effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
+        }
 
-            if (newValue == -80)
-            {
-                effectVolume.value = effectVolume.minValue;
-                effectImage.fillAmount = 0;
-                effectVolume.targetGraphic.gameObject.GetComponent<Image>().sprite = Cross;
-            }
-            else
-            {
-                effectVolume.value = newValue;
-                effectImage.fillAmount = -((effectVolume.value - effectVolume.minValue) / -(effectVolume.maxValue - effectVolume.minValue));
-            }
-        
     }
 
     public void UpdateMixer(int type)
@@ -263,9 +266,11 @@ public class MenuManager : MonoBehaviour
     IEnumerator FadeInObjects()
     {
         startButtonAnimator.SetTrigger("StartFadeIn");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         settingsButtonAnimator.SetTrigger("StartFadeIn");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
+        CreditsButtonAnimator.SetTrigger("StartFadeIn");
+        yield return new WaitForSeconds(0.25f);
         exitButtonAnimator.SetTrigger("StartFadeIn");
     }
 
@@ -318,6 +323,16 @@ public class MenuManager : MonoBehaviour
     public void LoadMainScene()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void CreditsButtonPressed()
+    {
+        CreditsPanel.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        CreditsPanel.SetActive(false);
     }
 
     public void SettingsButtonClicked()

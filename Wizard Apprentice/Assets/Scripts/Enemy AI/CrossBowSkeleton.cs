@@ -48,22 +48,24 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
     void Update()
     {
         timer += Time.deltaTime;
-        anim.SetFloat("DirX", dir.normalized.x);
-        anim.SetFloat("DirY", dir.normalized.y);
-
-
-        switch (state)
+        if (enemyManager.enemiesActive)
         {
-            case AttackState.Idle:
-                Idle();
-                break;
-            case AttackState.Walking:
-                if (!stunned && enemyManager.enemiesActive)
-                    Walking();
-                break;
-            case AttackState.Shooting:
-                Shooting();
-                break;
+            anim.SetFloat("DirX", dir.normalized.x);
+            anim.SetFloat("DirY", dir.normalized.y);
+
+            switch (state)
+            {
+                case AttackState.Idle:
+                    Idle();
+                    break;
+                case AttackState.Walking:
+                    if (!stunned)
+                        Walking();
+                    break;
+                case AttackState.Shooting:
+                    Shooting();
+                    break;
+            }
         }
     }
 

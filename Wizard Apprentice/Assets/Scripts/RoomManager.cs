@@ -54,9 +54,12 @@ public class RoomManager : MonoBehaviour
     [SerializeField] AudioClip roomClearSound;
     [SerializeField] float audioVolume = 1;
     [SerializeField] ParticleSystem particleSystem;
+
+    Inventory inv;
     // Start is called before the first frame update
     void Start()
     {
+        inv = gameObject.GetComponent<Inventory>();
         enemyObjects = new List<GameObject>();
         LoadNewRoom(5);
     }
@@ -99,7 +102,7 @@ public class RoomManager : MonoBehaviour
         {
             for (int i = 0; i < enemyObjects.Count; i++)
             {
-                enemyObjects[i].GetComponent<Health>().AddMaxHealth(currentFloor * 0.75f, true);
+                enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(currentFloor * 0.75f, true);
             }
         }
         enemyManager.enemyObjects = enemyObjects;
@@ -219,6 +222,15 @@ public class RoomManager : MonoBehaviour
         {
             cardHandler.isActive = true;
             enemyManager.ActivateEnemiesAfterTime();
+        }
+
+        if (roomType == 5)
+        {
+            inv.TrashCanIsOff(true);
+        }
+        else if (inv.GetTrashCanIsOff())
+        {
+            inv.TrashCanIsOff(false);
         }
 
         switch (roomType)
