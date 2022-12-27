@@ -112,10 +112,14 @@ public class RewardsHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F12))
         {
             //if (!inventory.IsFull())
+            cardHandler.isActive = true;
             GetRewardScreenCard();
         }
         else if (Input.GetKeyDown(KeyCode.F11))
+        {
+            cardHandler.isActive = true;
             GetRewardScreenStats();
+        }
 
         if (isMoving)
         {
@@ -171,7 +175,6 @@ public class RewardsHandler : MonoBehaviour
         invHolder.transform.localPosition = oldInvHolderPos;
         trashCan.transform.localPosition = oldTrashCanPos;
         inventory.ResetCardsPos();
-        cardHandler.isActive = wasActive;
         cardCanvas.sortingOrder = startLayer;
     }
     public void GetCardInventoryScreen()
@@ -179,8 +182,6 @@ public class RewardsHandler : MonoBehaviour
         inventory.cardRemovedEvent += DisableInvFullText;
         if (!isMoving)
         {
-            wasActive = cardHandler.isActive;
-            cardHandler.isActive = false;
             for (int i = 0; i < cardButtons.Length; i++)
             {
                 cardButtons[i].interactable = false;
@@ -212,6 +213,7 @@ public class RewardsHandler : MonoBehaviour
 
     public void GetRewardScreenCard(bool withStats = false)
     {
+        wasActive = cardHandler.isActive;
         cardHandler.isActive = false;
         if (!CanAddCards())
         {
@@ -366,6 +368,7 @@ public class RewardsHandler : MonoBehaviour
     public void GetRewardScreenStats()
     {
         bool canGetCritChance = stats.critChance < 1 ? true : false;
+        wasActive = cardHandler.isActive;
         cardHandler.isActive = false;
         rewardScreen.SetActive(true);
         statScreenParent.SetActive(true);

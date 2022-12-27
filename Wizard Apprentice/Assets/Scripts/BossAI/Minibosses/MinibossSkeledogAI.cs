@@ -31,6 +31,7 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     GameObject playerTarget;
     BulletHandler bulletHandler;
+    EnemyManager enemyManager;
     Health health;
     Rigidbody2D rb2d;
 
@@ -41,6 +42,7 @@ public class MinibossSkeledogAI : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
+        enemyManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyManager>();
         playerTarget = GameObject.FindGameObjectWithTag("Player");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
 
@@ -64,7 +66,7 @@ public class MinibossSkeledogAI : MonoBehaviour
 
      
 
-        if (hasDashedOnce == false)
+        if (hasDashedOnce == false && enemyManager.enemiesActive)
         {
             hasDashedOnce = true;
             StartCoroutine(DashAttack());
