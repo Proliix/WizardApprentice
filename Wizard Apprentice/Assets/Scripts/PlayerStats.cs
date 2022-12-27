@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    [Range(0.1f,100)]
     public float health = 1f;
+    [Range(0.1f,100)]
     public float movementSpeed = 1f;
+    [Range(0.1f,100)]
     public float damage = 1f;
+    [Range(0.1f,100)]
     public float attackSpeed = 1f;
     public float critChance = 0.05f;
+    [Range(0.1f,100)]
     public float critDamage = 1.5f;
     [Header("Projectiles")]
     public float projectileSize = 0f;
