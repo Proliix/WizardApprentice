@@ -23,7 +23,7 @@ public class SlimeAI : MonoBehaviour, IStunnable
     float jumpTime;
 
     bool stunned = false;
-
+    EnemyManager enemyManager;
 
 
     void Start()
@@ -31,11 +31,12 @@ public class SlimeAI : MonoBehaviour, IStunnable
         rb2d = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
         hurtBox = gameObject.GetComponentInChildren<HurtBox>().gameObject;
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
     }
 
     private void Update()
     {
-        if (!stunned)
+        if (!stunned && enemyManager.enemiesActive)
         {
             timeUntilNextJump -= Time.deltaTime;
             timeInJump += Time.deltaTime;

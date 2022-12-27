@@ -24,6 +24,7 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
     bool hasResetTimer = false;
     BulletHandler bulletHandler;
     GameObject player;
+    EnemyManager enemyManager;
 
     GameObject aimer;
     Vector3 targetPos;
@@ -37,6 +38,7 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
         player = GameObject.FindWithTag("Player");
         roomBoundary = GameObject.FindWithTag("GameController").GetComponent<RoomManager>().currentRoom.roomSize;
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         state = AttackState.Idle;
         aimer = new GameObject();
         aimer.transform.parent = gameObject.transform;
@@ -56,7 +58,7 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
                 Idle();
                 break;
             case AttackState.Walking:
-                if (!stunned)
+                if (!stunned && enemyManager.enemiesActive)
                     Walking();
                 break;
             case AttackState.Shooting:
@@ -88,10 +90,10 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
             hasResetTimer = true;
         }
 
-        if (timer >= 7.5f)
+        if (timer >= 5f)
         {
             timer = 0;
-            GetNewTargetDir();
+            state = AttackState.Shooting;
         }
 
         rb2d.velocity = dir.normalized * walkSpeed;

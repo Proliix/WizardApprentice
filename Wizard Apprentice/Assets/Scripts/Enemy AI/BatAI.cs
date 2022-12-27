@@ -8,15 +8,19 @@ public class BatAI : MonoBehaviour, IStunnable
     [SerializeField] float moveSpeed = 2;
     [SerializeField] float timer;
     [SerializeField] bool stunned = false;
-    
+
+
+    EnemyManager enemyManager;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
     }
 
     void Update()
     {
-        if (!stunned)
+        if (!stunned && enemyManager.enemiesActive)
         {
 
             MoveEnemy();

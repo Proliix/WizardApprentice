@@ -276,7 +276,7 @@ public class RewardsHandler : MonoBehaviour
             GetRewardScreenStats();
         else
         {
-            cardHandler.isActive = true;
+            cardHandler.isActive = wasActive;
             rewardScreen.SetActive(false);
         }
     }
@@ -304,7 +304,7 @@ public class RewardsHandler : MonoBehaviour
 
         if (!statsAfterCard)
         {
-            cardHandler.isActive = true;
+            cardHandler.isActive = wasActive;
             rewardScreen.SetActive(false);
         }
         else
@@ -424,7 +424,7 @@ public class RewardsHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(0.03f);
         UpdatePlayerStats(index);
-        cardHandler.isActive = true;
+        cardHandler.isActive = wasActive;
         isPressed = false;
 
     }

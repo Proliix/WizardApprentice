@@ -121,6 +121,7 @@ public class RoomManager : MonoBehaviour
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
+            enemyManager.ResetEnemyStatus();
             switch (currentRoomType)
             {
                 case 0:
@@ -215,7 +216,10 @@ public class RoomManager : MonoBehaviour
         bulletHandler.ResetAll();
 
         if (roomType != 4)
+        {
             cardHandler.isActive = true;
+            enemyManager.ActivateEnemiesAfterTime();
+        }
 
         switch (roomType)
         {

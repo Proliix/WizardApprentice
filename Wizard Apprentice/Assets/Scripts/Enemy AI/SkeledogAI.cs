@@ -13,13 +13,14 @@ public class SkeledogAI : MonoBehaviour, IStunnable
     [SerializeField] float chargeTimeLeft;
 
     private Transform target;
+    private EnemyManager enemyManager;
     private bool stunned = false;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         enemyFlip = GetComponent<SpriteRenderer>();
-
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         target = GameObject.FindWithTag("Player").transform;
 
         StartCoroutine(DashAttack());
@@ -32,7 +33,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
         rb2d.velocity = Vector2.zero;
         //Randomized time enemy waits inbetween dashes, to avoid them clumping 
         yield return new WaitForSeconds(Random.Range(0.3f, 1.2f));
-        if (!stunned)
+        if (!stunned && enemyManager.enemiesActive)
         {
 
 

@@ -6,6 +6,9 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public List<GameObject> enemyObjects;
+    public bool enemiesActive { get; private set; } = false;
+
+
 
     public GameObject GetClosestEnemy(Vector3 point)
     {
@@ -27,6 +30,25 @@ public class EnemyManager : MonoBehaviour
         {
             return null;
         }
+    }
+
+    public void ResetEnemyStatus()
+    {
+        StopAllCoroutines();
+        enemiesActive = false;
+        Debug.Log("_____\nIs false");
+    }
+
+    public void ActivateEnemiesAfterTime()
+    {
+        StartCoroutine(ActivateEnemies());
+    }
+
+    IEnumerator ActivateEnemies()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("_____\nIs True");
+        enemiesActive = true;
     }
 
     public List<GameObject> GetClosestEnemy(Vector3 point, int amountToGet)

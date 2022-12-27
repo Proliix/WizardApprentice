@@ -30,6 +30,7 @@ public class ShootingSkeleton : MonoBehaviour, IStunnable
 
     Health health;
     BulletHandler bulletHandler;
+    EnemyManager enemyManager;
     bool stunned = false;
 
     void Start()
@@ -38,6 +39,7 @@ public class ShootingSkeleton : MonoBehaviour, IStunnable
         isMoving = false;
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         health = gameObject.GetComponent<Health>();
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         MoveEnemy();
         target = GameObject.FindWithTag("Player");
@@ -57,7 +59,7 @@ public class ShootingSkeleton : MonoBehaviour, IStunnable
             StartCoroutine(AttackPattern());
         }
 
-        if (!stunned)
+        if (!stunned && enemyManager.enemiesActive)
         {
             if (moveTimer >= moveDelay && isMoving == false)
             {
