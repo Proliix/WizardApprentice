@@ -3778,7 +3778,7 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.252}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2126837453}
+  m_Father: {fileID: 1584970676}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8073,7 +8073,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1674481142}
+  - {fileID: 689434564}
   m_Father: {fileID: 402329093}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8102,7 +8102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=purple>Crit %
+  m_text: <color=#F334DA>Crit %
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
   m_sharedMaterial: {fileID: -7217490493216259712, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
@@ -8673,7 +8673,7 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.252}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1584970676}
+  m_Father: {fileID: 2126837453}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -11452,7 +11452,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 689434564}
+  - {fileID: 1674481142}
   m_Father: {fileID: 402329093}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11481,7 +11481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<color=#F334DA>Crit DMG %:'
+  m_text: '<color=purple>Crit DMG %:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
   m_sharedMaterial: {fileID: -7217490493216259712, guid: a700967a7290cbf4b93e10889c8ae0f7, type: 2}
