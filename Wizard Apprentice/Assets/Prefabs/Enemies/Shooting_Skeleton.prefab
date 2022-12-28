@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  cooldown: 0.25
 --- !u!1 &3943338821212487416
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +161,7 @@ GameObject:
   - component: {fileID: 8152395500555433414}
   - component: {fileID: 6583972212536658051}
   - component: {fileID: 688832600378638414}
+  - component: {fileID: 8214295008880135165}
   m_Layer: 6
   m_Name: Shooting_Skeleton
   m_TagString: Enemy
@@ -225,7 +227,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 7f0a4b3ade989d34ebb02a1178c10fb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d65accf6e7a38db4bb8d87d7e410c511, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -289,6 +291,7 @@ MonoBehaviour:
   damageBufferRemoveSpeed: 1
   removeHealthbar: 0
   healthbarParent: {fileID: 0}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -331,3 +334,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0032316446, y: -0.051706553}
   m_Size: {x: 0.59297526, y: 1.21122}
   m_Direction: 0
+--- !u!95 &8214295008880135165
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152395500555433418}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 956dcce0defe467489f058b757ea4428, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
