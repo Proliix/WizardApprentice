@@ -34,6 +34,7 @@ public class MusicManager : MonoBehaviour
     bool isAudioSource1 = true;
     bool currentLoopStarted = false;
     bool hasStoppedLastPlayer = true;
+    bool hasPassedHalfWay = false;
 
     public static MusicManager Instance;
 
@@ -101,21 +102,33 @@ public class MusicManager : MonoBehaviour
         if (!currentLoopStarted)
         {
 
-            if (audioSource1.time >= currentIntro.length - 0.01f && isAudioSource1)
+
+
+            if (audioSource1.time <= currentIntro.length / 2f && hasPassedHalfWay && isAudioSource1)
             {
                 StartCurrentLoop();
             }
-            else if (audioSource2.time >= currentIntro.length - 0.01f && !isAudioSource1)
+            else if (audioSource2.time <= currentIntro.length / 2f && hasPassedHalfWay && !isAudioSource1)
             {
                 StartCurrentLoop();
             }
+
+            if(audioSource1.time > currentIntro.length / 2 && isAudioSource1)
+            {
+                hasPassedHalfWay = true;
+            }
+            else if (audioSource2.time > currentIntro.length / 2 && !isAudioSource1)
+            {
+                hasPassedHalfWay = true;
+            }
+
         }
     }
 
     void StartCurrentLoop()
     {
-
         currentLoopStarted = true;
+        hasPassedHalfWay = false;
         if (isAudioSource1)
         {
             audioSource1.clip = currentLoop;
