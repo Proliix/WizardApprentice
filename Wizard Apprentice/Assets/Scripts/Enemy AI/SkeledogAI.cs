@@ -15,6 +15,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
     private Transform target;
     private EnemyManager enemyManager;
     private bool stunned = false;
+    Animator anim;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
         enemyFlip = GetComponent<SpriteRenderer>();
         enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         target = GameObject.FindWithTag("Player").transform;
+        anim = GetComponent<Animator>();
 
         StartCoroutine(DashAttack());
 
@@ -42,7 +44,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
 
 
             float timeDashed = 0;
-
+            anim.SetTrigger("StartDash");
             //TimeDashed = how long a single dash is in seconds 
             while (timeDashed < 0.7f)
             {
@@ -70,6 +72,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
                 yield return null;
             }
         }
+        anim.SetTrigger("StopDash");
         //Loops the dashes 
         StartCoroutine(DashAttack());
     }

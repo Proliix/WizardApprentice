@@ -34,6 +34,7 @@ public class MinibossSkeledogAI : MonoBehaviour
     EnemyManager enemyManager;
     Health health;
     Rigidbody2D rb2d;
+    Animator anim;
     bool canHitWall;
     Vector2 movement;
 
@@ -45,7 +46,7 @@ public class MinibossSkeledogAI : MonoBehaviour
         enemyManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyManager>();
         playerTarget = GameObject.FindGameObjectWithTag("Player");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
         canMoveIndic = true;
         canDash = true;
         hasDashedOnce = false;
@@ -85,7 +86,7 @@ public class MinibossSkeledogAI : MonoBehaviour
         movement = (playerTarget.transform.position - gameObject.transform.position).normalized;
         DashIndicator();
         yield return new WaitForSeconds(0.5f);
-
+        anim.SetTrigger("StartDash");
         rb2d.velocity = movement * moveSpeed;
 
         canHitWall = true;
@@ -118,6 +119,7 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     private void HasHitWall()
     {
+        anim.SetTrigger("StopDash");
         canHitWall = false;
         timer = 0;
         SoundManager.Instance.PlayAudio(rockFall, audioVolume);
