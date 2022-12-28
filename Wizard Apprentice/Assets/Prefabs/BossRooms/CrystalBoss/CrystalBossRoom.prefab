@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fda32db0a9885941b72a77baf4a31a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patternStartUpDelay: 5
+  patternStartUpDelay: 1
   randomStartUpDelay: 2.5
   HP: 0
   maxHP: 0
