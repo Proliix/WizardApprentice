@@ -15,15 +15,26 @@ public class CardHandler : MonoBehaviour
     ICard[] cards;
 
     Animator[] animators;
+    private Inventory inv;
     float timer = 0;
     public int cardIndex;
     bool hasbeenReset = false;
+
+    private List<GameObject> rememberedSwapObject;
+    private List<int> rememberedSwapIndex;
+
+    public delegate void CardHasSwappedDelegate();
+    public event CardHasSwappedDelegate cardSwapEvent;
 
     // Start is called before the first frame update
     void Start()
     {
         cards = new ICard[cardObjs.Length];
         animators = new Animator[cardCycle.Length];
+        inv = GetComponent<Inventory>();
+
+        rememberedSwapIndex = new List<int>();
+        rememberedSwapObject = new List<GameObject>();
 
         for (int i = 0; i < cardCycle.Length; i++)
         {
@@ -34,17 +45,25 @@ public class CardHandler : MonoBehaviour
 
     }
 
-    public ICard CheckInCycle(ICard card)
+    public T CheckInCycle<T>() where T : ICard
     {
-        ICard returnValue = null;
         for (int i = 0; i < cards.Length; i++)
         {
-            if (cards[i].GetType() == card.GetType())
+            if (cards[i] is T)
             {
-                returnValue = cards[i];
-                break;
+                return (T)cards[i];
             }
         }
+        return default(T);
+    }
+
+    public bool CheckInSlot(ICard card, int index)
+    {
+        bool returnValue = false;
+
+        if (cards[index]?.GetType() == card.GetType())
+            returnValue = true;
+
         return returnValue;
     }
 
@@ -61,7 +80,39 @@ public class CardHandler : MonoBehaviour
         }
     }
 
-    void UpdateInterface()
+    public void AddQueuedCards(GameObject cardToSwap, int indexToSwap)
+    {
+        rememberedSwapObject.Add(cardToSwap);
+        rememberedSwapIndex.Add(indexToSwap);
+    }
+
+    public void ResetQueuedCards()
+    {
+        rememberedSwapObject.Clear();
+        rememberedSwapIndex.Clear();
+    }
+
+    public void SwapQueuedCards()
+    {
+        if (rememberedSwapObject.Count <= 0)
+        {
+            return;
+        }
+        Debug.Log("swapping");
+        for (int i = 0; i < rememberedSwapObject.Count; i++)
+        {
+            Debug.Log("replaceed cards");
+            ReplaceCard(rememberedSwapObject[i], rememberedSwapIndex[i]);
+        }
+        rememberedSwapIndex.Clear();
+        rememberedSwapObject.Clear();
+        if (cardSwapEvent != null)
+        {
+            cardSwapEvent.Invoke();
+        }
+    }
+
+    public void UpdateInterface()
     {
         for (int i = 0; i < cardObjs.Length; i++)
         {
@@ -69,7 +120,13 @@ public class CardHandler : MonoBehaviour
             {
                 cards[i] = cardObjs[i].GetComponent<ICard>();
                 cardCycle[i] = cardObjs[i].GetComponent<Image>();
-                animators[i] = cardCycle[i].gameObject.GetComponent<Animator>();
+                animators[i] = cardObjs[i].GetComponent<Animator>();
+            }
+            else
+            {
+                cards[i] = null;
+                cardCycle[i] = null;
+                animators[i] = null;
             }
 
         }
@@ -84,6 +141,34 @@ public class CardHandler : MonoBehaviour
 
     }
 
+    public void TrunOffAnims(int exeption = -100)
+    {
+        Animator CheckAnim = null;
+        if (exeption >= 0 && exeption < animators.Length)
+            CheckAnim = animators[exeption];
+
+        Animator[] anims = new Animator[inv.cardHolders.Count];
+        for (int i = 0; i < inv.cardHolders.Count; i++)
+        {
+            if (inv.cardHolders[i].cardObject != null && inv.cardHolders[i].cardObject.GetComponent<Animator>() != null)
+                anims[i] = inv.cardHolders[i].cardObject.GetComponent<Animator>();
+            else
+                anims[i] = null;
+        }
+
+        for (int i = 0; i < anims.Length; i++)
+        {
+            if (anims[i] != null && anims[i] != CheckAnim)
+            {
+                anims[i].SetBool("IsActive", false);
+            }
+            else if (anims[i] == CheckAnim && anims[i] != null)
+            {
+                anims[i].SetBool("IsActive", true);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -92,22 +177,27 @@ public class CardHandler : MonoBehaviour
             if (hasbeenReset)
             {
                 cardIndex = 0;
-                animators[cardIndex].SetBool("IsActive", true);
+                if (cards[cardIndex] != null && (cardObjs[cardIndex] != null))
+                    animators[cardIndex].SetBool("IsActive", true);
                 hasbeenReset = false;
             }
             timer += Time.deltaTime;
 
-            if (cards[cardIndex] != null)
+            if (cards[cardIndex] != null && (cardObjs[cardIndex] != null))
                 cards[cardIndex].UpdateCard();
-            else
-                Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
+            //else
+            //    Debug.LogError("CARD WITH INDEX " + cardIndex + " IS NULL");
+
 
             if (timer >= timePerCard + 0.05f)
             {
                 timer = 0;
 
-                if (cards[cardIndex] != null)
+                if (cards[cardIndex] != null && (cardObjs[cardIndex] != null))
                     cards[cardIndex].ResetCard();
+
+
+                SwapQueuedCards();
 
                 if (cardIndex < cardObjs.Length - 1)
                     cardIndex++;
@@ -116,29 +206,21 @@ public class CardHandler : MonoBehaviour
                     cardIndex = 0;
                 }
 
-                for (int i = 0; i < animators.Length; i++)
-                {
-                    if (i == cardIndex)
-                    {
-                        animators[cardIndex].SetBool("IsActive", true);
-                    }
-                    else
-                    {
-                        animators[i].SetBool("IsActive", false);
-                    }
-                }
+
+                TrunOffAnims(cardIndex);
+
             }
         }
         else if (!hasbeenReset)
         {
             hasbeenReset = true;
-            cards[cardIndex].ResetCard();
+            if ((cardObjs[cardIndex] != null) && cards[cardIndex] != null)
+            {
+                cards[cardIndex].ResetCard();
+            }
+            TrunOffAnims();
             cardIndex = -1;
             timer = 0;
-            for (int i = 0; i < animators.Length; i++)
-            {
-                animators[i].SetBool("IsActive", false);
-            }
 
         }
 

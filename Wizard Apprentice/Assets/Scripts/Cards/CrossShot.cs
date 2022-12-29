@@ -44,7 +44,7 @@ public class CrossShot : MonoBehaviour, ICard
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(attackSound);
-        bulletHandler.GetCircleShot(4, player, true, damage  + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetCircleShot(4, player, true, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed);
 
         if (xShot != null)
         {
@@ -87,12 +87,10 @@ public class CrossShot : MonoBehaviour, ICard
         if (!triedToFind)
         {
             triedToFind = true;
-            XShot temp = new XShot();
-
-            xShot = (XShot)cardHandler.CheckInCycle(temp);
+            xShot = cardHandler.CheckInCycle<XShot>();
         }
         timer += Time.deltaTime;
-        if (timer >= attackDelay)
+        if (timer >= stats.GetAttackSpeed(attackDelay))
         {
             Effect();
             timer -= attackDelay;

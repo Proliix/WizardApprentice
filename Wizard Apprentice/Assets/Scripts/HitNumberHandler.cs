@@ -9,11 +9,14 @@ public class HitNumberHandler : MonoBehaviour
     [SerializeField] GameObject worldCanvas;
     [SerializeField] Color damageColor = new Color(1, 0.43f, 0.43f, 1);
     [SerializeField] Color healColor = new Color(0.47f, 1, 0.43f, 1);
+    [SerializeField] Color critColor = new Color(0.63f, 0.12f, 0.95f, 1);
     [SerializeField] int startAmount = 25;
     [SerializeField] float upTime = 1.25f;
     [SerializeField] Vector2 offsetMax = new Vector2(0.25f, 0.25f);
     [SerializeField] Vector2 offsetMin = new Vector2(0, 0);
+    [SerializeField] float critSize = 2.5f;
 
+    float startSize;
     GameObject hitNumberPoolParent;
     List<GameObject> hitNumberPool;
     List<TextMeshProUGUI> hitnumberText;
@@ -34,6 +37,7 @@ public class HitNumberHandler : MonoBehaviour
             hitNumberPool[i].gameObject.SetActive(false);
             hitNumberPool[i].gameObject.name = "Hit number text " + i;
         }
+        startSize = hitNumberHolderPrefab.transform.localScale.x;
     }
     IEnumerator ReturnAfterTime(float time, GameObject obj)
     {
@@ -46,18 +50,29 @@ public class HitNumberHandler : MonoBehaviour
         obj.transform.position = hitNumberPoolParent.transform.position;
     }
 
-    GameObject SetUpText(int index, Vector3 position, float damage)
+    GameObject SetUpText(int index, Vector3 position, float damage, bool isCrit)
     {
 
         GameObject newHitText = hitNumberPool[index].gameObject;
         newHitText.transform.SetParent(null);
         newHitText.transform.localPosition = position + new Vector3(Random.Range(offsetMin.x, offsetMax.x), Random.Range(offsetMin.y, offsetMax.y), 0);
-        hitnumberText[index].color = damage > 0 ? damageColor : healColor;
-        hitnumberText[index].text = "" + (damage > 0 ? damage : -damage);
+
+        if (isCrit == false)
+        {
+            hitnumberText[index].color = damage > 0 ? damageColor : healColor;
+            hitnumberText[index].transform.parent.transform.localScale = Vector3.one * startSize;
+        }
+        else
+        {
+            hitnumberText[index].color = critColor;
+            hitnumberText[index].transform.parent.transform.localScale = Vector3.one * critSize;
+        }
+
+        hitnumberText[index].text = "" + Mathf.RoundToInt(damage > 0 ? damage : -damage);
         return newHitText;
     }
 
-    public GameObject GetHitText(Vector3 position, float damage)
+    public GameObject GetHitText(Vector3 position, float damage, bool isCrit = false)
     {
         GameObject newHitText = hitNumberPool[0].gameObject;
         bool hasSpawned = false;
@@ -66,7 +81,7 @@ public class HitNumberHandler : MonoBehaviour
         {
             if (hitNumberPool[i].gameObject.activeSelf == false)
             {
-                newHitText = SetUpText(i, position, damage);
+                newHitText = SetUpText(i, position, damage, isCrit);
                 hasSpawned = true;
                 break;
             }
@@ -84,7 +99,7 @@ public class HitNumberHandler : MonoBehaviour
                 hitNumberPool[index].gameObject.name = "Hit number text " + index;
                 if (i == 0)
                 {
-                    newHitText = SetUpText(i, position, damage);
+                    newHitText = SetUpText(i, position, damage, isCrit);
                 }
 
             }

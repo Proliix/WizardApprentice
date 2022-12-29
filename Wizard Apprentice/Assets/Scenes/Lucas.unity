@@ -719,7 +719,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 542232911}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 628109704260480555, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+    - {fileID: 3228216035634398762, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
+    - {fileID: 3975035592451256096, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d4ab3a3341a2094989c2b6e55f641c2, type: 3}
 --- !u!1001 &134581392
@@ -730,6 +733,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 571476115768797418, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5924314082677940546, guid: f905c5b9b0c545e49b40cb2d250f4161, type: 3}
       propertyPath: healthbar
       value: 
@@ -1138,7 +1145,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1834,6 +1841,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
+  healReward: {fileID: 0}
   titles:
   - {fileID: 816771111}
   - {fileID: 649940052}
@@ -1842,6 +1850,10 @@ MonoBehaviour:
   - {fileID: 495364100}
   - {fileID: 900929226}
   - {fileID: 47327744}
+  potionImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   cardScreenParent: {fileID: 1688963745}
   cardTitles:
   - {fileID: 1057746902}
@@ -1898,6 +1910,9 @@ MonoBehaviour:
   - {fileID: 1826943768}
   - {fileID: 183019209}
   trashCan: {fileID: 1574135464}
+  cardDescriptionObject: {fileID: 0}
+  cardTitleText: {fileID: 0}
+  cardDescriptionText: {fileID: 0}
 --- !u!114 &542232913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,12 +2049,13 @@ MonoBehaviour:
   roomSize: {x: 0, y: 0}
   exitDoorPrefab: {fileID: 226080780411628952, guid: 0d334158a641f2e4cb770ccb1683f9d0, type: 3}
   openDoorImage: {fileID: 21300000, guid: 44c73ff9fbf724f469a4cf78d45ad672, type: 3}
+  currentRoom: {fileID: 0}
   roomParent: {fileID: 3714845512778590098, guid: cfe613bd22b976f428533e8536cf7c1d, type: 3}
   enemyManager: {fileID: 542232915}
   bulletHandler: {fileID: 542232918}
   cardHandler: {fileID: 542232913}
   rewardsHandler: {fileID: 542232911}
-  tutorialRoom: {fileID: 0}
+  tutorialRoom: {fileID: 11400000, guid: f877f8f100769634e95747caafd4f663, type: 2}
   possibleBossRoomsByFloor: []
   possibleNormalRooms:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
@@ -2098,10 +2114,12 @@ MonoBehaviour:
   worldCanvas: {fileID: 1912086194}
   damageColor: {r: 1, g: 0.42745098, b: 0.42745098, a: 1}
   healColor: {r: 0.4458443, g: 1, b: 0.427451, a: 1}
+  critColor: {r: 0.63, g: 0.12, b: 0.95, a: 1}
   startAmount: 25
   upTime: 1.25
   offsetMax: {x: 0.25, y: 0.25}
   offsetMin: {x: -0.25, y: -0.25}
+  critSize: 2.5
 --- !u!4 &542232920
 Transform:
   m_ObjectHideFlags: 0
@@ -3032,7 +3050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec260b7ee496094582a1236f4ace7f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 887598027}
   effectSource: {fileID: 211932798}
 --- !u!4 &1060323617
 Transform:
@@ -3549,7 +3566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.09137726, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3910,6 +3927,8 @@ MonoBehaviour:
   healAmmount: 1
   healSound: {fileID: 0}
   audioVolume: 0.25
+  shootCooldown: 0.25
+  bulletSprite: {fileID: 0}
 --- !u!1 &1553289751
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,6 +5568,9 @@ MonoBehaviour:
   - {fileID: 1826943768}
   - {fileID: 183019209}
   trashCan: {fileID: 0}
+  cardDescriptionObject: {fileID: 0}
+  cardTitleText: {fileID: 0}
+  cardDescriptionText: {fileID: 0}
 --- !u!114 &2082162360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5699,6 +5721,69 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss1Room
       objectReference: {fileID: 0}
+    - target: {fileID: 4629461180731313550, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 90707af29c007a74ba85bef13e279115, type: 3}
+--- !u!1001 &8842748282011172902
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.763
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.168
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521037, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842748281547521038, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}
+      propertyPath: m_Name
+      value: crossbow skeleton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: a7ea9877b7c73b143874eb46322a6ed1, type: 3}

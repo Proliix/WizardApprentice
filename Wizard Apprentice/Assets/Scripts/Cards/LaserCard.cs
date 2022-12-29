@@ -58,6 +58,7 @@ public class LaserCard : MonoBehaviour, ICard
 
     public void ResetCard()
     {
+        Debug.Log("Reseting laser");
         hasActivated = false;
         Destroy(activeLaser);
     }

@@ -19,9 +19,18 @@ public class Health : MonoBehaviour
     [SerializeField] bool removeSelf = true;
     [SerializeField] bool hasHitCooldown = false;
     [Header("UI")]
-    [SerializeField] float healthRemoveSpeed = 0.005f;
     [SerializeField] bool usesHealthBar = false;
+    [SerializeField] float healthRemoveSpeed = 0.5f;
     [SerializeField] Image healthbar;
+    [SerializeField] Image damageBufferhbar;
+    [SerializeField] float damagebufferUpTime = 0.26f;
+    [SerializeField] float damageBufferRemoveSpeed = 1f;
+    [Tooltip("Removes healthbar when health is <= 0")]
+    [SerializeField] bool removeHealthbar = false;
+    [Header("only needed if remove healthbar is active")]
+    [SerializeField] GameObject healthbarParent;
+    [Header("Player Specific")]
+    [SerializeField] StatsUI statsUI;
     [Header("Juice")]
     [SerializeField] bool hasDeathAnimation = false;
     [SerializeField] float hitEffectTime = 0.5f;
@@ -43,14 +52,40 @@ public class Health : MonoBehaviour
     Color tempColor;
     bool hitEffectActve = false;
 
+    PlayerStats stats;
+    float startHealth;
+    bool isPlayer;
+
     HitNumberHandler hitNumbers;
+
+    float DamageBufferValue;
+
+    float timer = 0;
+    float prevHp;
+    float prevHitHp;
 
     SpriteRenderer spriteRenderer;
     Animator anim;
     float healthbarValue = 100f;
     bool canBeHit = true;
+
     private void Start()
     {
+        prevHp = hp;
+        prevHitHp = hp;
+        if (usesHealthBar && damageBufferhbar == null)
+        {
+            damageBufferhbar = Instantiate(healthbar, healthbar.transform.position, healthbar.transform.rotation, healthbar.transform.parent);
+            healthbar.transform.parent = damageBufferhbar.transform;
+        }
+
+        stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        if (gameObject.CompareTag("Player"))
+        {
+            startHealth = maxHP;
+            isPlayer = true;
+        }
+
         if (hasDeathAnimation)
             anim = gameObject.GetComponent<Animator>();
 
@@ -61,22 +96,63 @@ public class Health : MonoBehaviour
         tempColor = startColor;
         targetRGBA = new Quaternion(hitColor.r, hitColor.g, hitColor.b, hitTransparancy);
 
-
         if (usesHealthBar)
         {
             healthbar.gameObject.SetActive(true);
             healthbarValue = hp;
             healthbar.fillAmount = 1;
+            DamageBufferValue = hp;
+            damageBufferhbar.fillAmount = 1;
         }
     }
 
     private void Update()
     {
+        if (isPlayer)
+        {
+            float newHp = startHealth * stats.health;
+            if (maxHP != newHp)
+            {
+                float healHp = newHp - maxHP;
+                maxHP = newHp;
+                AddHealth(healHp);
+            }
+        }
+
         if (usesHealthBar)
         {
-            healthbarValue = Mathf.SmoothDamp(healthbarValue, hp, ref currentHealthRemoveSpeed, healthRemoveSpeed, 100, Time.deltaTime);
-            healthbar.fillAmount = (healthbarValue / maxHP);
+            timer += Time.deltaTime;
+
+            if (healthbar)
+            {
+                if (healthbarValue == hp)
+                    prevHp = hp;
+
+                if (DamageBufferValue == hp)
+                    prevHitHp = hp;
+
+                float hpChange = prevHp - hp;
+                float speedMultiplier = 1 + (Mathf.Abs(hpChange) * 0.1f);
+                healthbarValue = Mathf.MoveTowards(healthbarValue, hp, healthRemoveSpeed * speedMultiplier);
+                healthbar.fillAmount = (healthbarValue / maxHP);
+
+                if (timer > damagebufferUpTime)
+                {
+
+                    hpChange = prevHitHp - hp;
+                    speedMultiplier = 1 + Mathf.Abs(hpChange) * 0.1f;
+                    DamageBufferValue = Mathf.MoveTowards(DamageBufferValue, hp, damageBufferRemoveSpeed * speedMultiplier);
+                    damageBufferhbar.fillAmount = (DamageBufferValue / maxHP);
+                }
+            }
         }
+
+        if (removeHealthbar)
+            if (healthbarValue <= 0 && DamageBufferValue <= 0)
+            {
+                healthbarParent?.SetActive(false);
+                removeHealthbar = false;
+            }
 
         if (hitEffectActve)
         {
@@ -112,6 +188,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(float healAmount)
     {
+
         if ((hp + healAmount) > maxHP)
         {
             hp = maxHP;
@@ -122,23 +199,95 @@ public class Health : MonoBehaviour
 
         }
 
+        if (isPlayer)
+            statsUI?.UpdateHP();
+
         if (hitNumbers != null)
             hitNumbers.GetHitText(transform.position, -healAmount);
     }
 
     public void AddMaxHealth(float healAmount)
     {
+
         maxHP += healAmount;
         AddHealth(healAmount);
+    }
+    public void AddMaxHealth(float healAmount, bool usePercent)
+    {
+        float healthChange = 0;
+        if (usePercent)
+        {
+            healthChange = Mathf.Floor(GetMaxHP() * healAmount);
+        }
+        maxHP += healthChange;
+        AddHealth(healthChange);
+    }
 
+    public bool HasFullHealth()
+    {
+        bool returnValue = false;
+
+        if (hp >= maxHP)
+        {
+            returnValue = true;
+        }
+
+        if (isPlayer)
+            statsUI?.UpdateHP();
+
+        return returnValue;
+    }
+
+    public void FullHeal()
+    {
+        hp = maxHP;
+
+        if (isPlayer)
+            statsUI?.UpdateHP();
+
+        hitNumbers?.GetHitText(transform.position, -maxHP);
+    }
+
+    /// <summary>
+    /// Heals the target by maxHp / divide
+    /// </summary>
+    public void HealPercentageOf(float divide)
+    {
+        float healAmount = 0;
+        healAmount = maxHP / 3;
+
+        if (hp + healAmount <= maxHP)
+            hp += healAmount;
+        else
+            hp = maxHP;
+
+        if (isPlayer)
+            statsUI?.UpdateHP();
+
+        hitNumbers?.GetHitText(transform.position, -healAmount);
     }
 
     public void RemoveHealth(float value = 10)
     {
         if (canBeHit)
         {
+            bool isCrit = false;
             if (gameObject.CompareTag("Player"))
+            {
                 Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown, playerScreenShakeAmount);
+            }
+            else
+            {
+                float critDamage = stats.GetCrit(value);
+                if (critDamage != value)
+                {
+                    isCrit = true;
+                    value = critDamage;
+                }
+            }
+
+            if (usesHealthBar)
+                timer = 0;
 
             hp -= value;
             if (hp > 0)
@@ -151,14 +300,22 @@ public class Health : MonoBehaviour
             else
                 SetDead();
 
+            if (isPlayer)
+                statsUI?.UpdateHP();
+
             if (hitNumbers != null)
-                hitNumbers.GetHitText(transform.position, value);
+                hitNumbers.GetHitText(transform.position, value, isCrit);
         }
     }
 
     public float GetHP()
     {
         return hp;
+    }
+
+    public float GetStartMaxHp()
+    {
+        return startHealth;
     }
 
     public bool GetCanBeHit()
@@ -196,8 +353,13 @@ public class Health : MonoBehaviour
         }
         else
         {
+            //if (removeHealthbar)
+            //    healthbarParent?.SetActive(false);
+
             if (removeSelf)
                 Destroy(gameObject);
+            else
+                canBeHit = false;
 
             if (usesHealthBar == true)
             {

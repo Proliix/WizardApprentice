@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &2085470275948324648
 Animator:
   serializedVersion: 4
@@ -221,17 +224,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1c68ad22b96b3474daef89026292663a, type: 3}
-  title: Black hole Spell
+  title: Viverra
   particleEffect: {fileID: 2845704094484306700, guid: 22623d731e2c9d84baec34a5ec7996a4, type: 3}
-  description: Drags enemies toward the black hole
-  damage: 3
+  description: Casts a black hole which pulls in and damages all enemies within range
+  damage: 2
   Bulletimage: {fileID: 21300000, guid: 64045465c3ac3f94fbbc2ba78f5f0a20, type: 3}
   attackSound: {fileID: 8300000, guid: 284b949722b4d8342ba13b4c94ce8bb9, type: 3}
   audioVolume: 1
   size: 1.25
   effectRange: 3
-  effectCooldown: 0.15
+  effectCooldown: 0.125
   lifeTime: 4
   force: 5
-  stunDuration: 0.25
-  dealDamagerPerEffect: 3
+  stunDuration: 0.4
+  dealDamagerPerEffect: 2

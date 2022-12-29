@@ -4,50 +4,62 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float health = 0f;
-    public float movementSpeed = 0f;
-    public float damage = 0f;
-    public float attackSpeed = 0f;
+    [Range(0.1f,100)]
+    public float health = 1f;
+    [Range(0.1f,100)]
+    public float movementSpeed = 1f;
+    [Range(0.1f,100)]
+    public float damage = 1f;
+    [Range(0.1f,100)]
+    public float attackSpeed = 1f;
+    public float critChance = 0.05f;
+    [Range(0.1f,100)]
+    public float critDamage = 1.5f;
     [Header("Projectiles")]
     public float projectileSize = 0f;
     public float projectileSpeed = 0f;
     public int projectileAmount = 0;
-    [Header("Dashes")]
-    public int dashCharges = 0;
-    public float dashCooldown = 0f;
-
-    float currentHealth = 0f;
-    float currentMovementSPeed = 0f;
-    float currentDamage = 0F;
-    float currentAttackSpeed = 0f;
-    float currentProjectileSize = 0f;
-    float currentProjectileSpeed = 0f;
-    int currentProjectileAmount = 0;
-    void Start()
+    public float GetCrit(float damageValue)
     {
-        UpdateCurrentStats();
+
+        float returnValue = damageValue;
+        int randomNum = Random.Range(1, 101);
+
+        if (randomNum <= critChance * 100)
+        { 
+            returnValue = damageValue * critDamage;
+            Mathf.RoundToInt(returnValue);
+        }
+
+
+        return returnValue;
     }
 
-    public void UpdateCurrentStats()
+    public int GetDamage(float damageValue)
     {
-        currentHealth = health;
-        currentDamage = damage;
-        currentMovementSPeed = movementSpeed;
-        currentAttackSpeed = attackSpeed;
-        currentProjectileSize = projectileSize;
-        currentProjectileSpeed = projectileSpeed;
-        currentProjectileAmount = projectileAmount;
+        return Mathf.RoundToInt(damageValue * damage);
     }
 
-    public void ResetToCurrentStats()
+    public float GetAttackSpeed(float AttackSpeedValue)
     {
-        health = currentHealth ;
-        damage = currentDamage = damage;
-        movementSpeed = currentMovementSPeed;
-        attackSpeed = currentAttackSpeed;
-        projectileSize = currentProjectileSize;
-        projectileSpeed = currentProjectileSpeed;
-        projectileAmount = currentProjectileAmount;
+        return AttackSpeedValue / attackSpeed;
     }
 
+    public void GiveStats(Reward newStats)
+    {
+        health += newStats.maxHealth;
+        movementSpeed += newStats.movementSpeed;
+        damage += newStats.damage;
+        attackSpeed += newStats.attackSpeed;
+        critChance += newStats.critChance;
+        critDamage += newStats.critDamage;
+        projectileSize += newStats.projectileSize;
+        projectileSpeed += newStats.projectileSpeed;
+        projectileAmount += newStats.projectileAmount;
+
+        if (newStats.addHealh > 0)
+        {
+            gameObject.GetComponent<Health>()?.HealPercentageOf(newStats.addHealh);
+        }
+    }
 }

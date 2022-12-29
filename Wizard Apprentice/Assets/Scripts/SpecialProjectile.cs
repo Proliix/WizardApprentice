@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, HauntedArmorBigArrow, HauntedArmorSplittingArrow }
+public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, Onhit, HauntedArmorBigArrow, HauntedArmorSplittingArrow, WontHitWall }
 
 public class SpecialProjectile : MonoBehaviour
 {
@@ -53,9 +53,23 @@ public class SpecialProjectile : MonoBehaviour
         startLifeTime = bulletLifetime;
     }
 
+    public void UpdateDirection()
+    {
+        if (isMovingAway)
+        {
+            dir = transform.position - Shooter.transform.position;
+        }
+        else
+        {
+            dir = transform.up;
+        }
+
+    }
+
     public void UpdateDirection(Vector3 Direction)
     {
         dir = Direction;
+        transform.right = -Direction;
     }
 
     #region Updates for projectiles
@@ -72,16 +86,21 @@ public class SpecialProjectile : MonoBehaviour
 
     void RotatingShot()
     {
-        if (relativeDistance == Vector3.zero)
+        if (!hasShot)
+        {
+            hasShot = true;
             relativeDistance = transform.position - Shooter.transform.position;
+            timer = 0;
+        }
 
-        transform.position = Shooter.transform.position + relativeDistance;
+        float distance = Mathf.Sin(timer * effectCooldown);
 
-        transform.position = Shooter.transform.position + (transform.position - Shooter.transform.position).normalized * effectSize;
+        transform.position = Shooter.transform.position + relativeDistance.normalized * (effectSize * Mathf.Abs(distance) + 2.5f);
 
         transform.RotateAround(Shooter.transform.position, Vector3.forward, (bulletSpeed * 10) * Time.deltaTime);
 
         relativeDistance = transform.position - Shooter.transform.position;
+
     }
 
     void TimedShot()
@@ -100,6 +119,8 @@ public class SpecialProjectile : MonoBehaviour
 
     void HomingShot()
     {
+        dir = transform.up;
+
         if (!hasShot)
         {
             homingTarget = enemyManager.GetClosestEnemy(gameObject.transform.position);
@@ -108,15 +129,12 @@ public class SpecialProjectile : MonoBehaviour
 
         if (homingTarget != null)
         {
-            dir = (Vector2)homingTarget.transform.position - (Vector2)transform.position;
+            Vector3 direction = homingTarget.transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * (bulletSpeed / 2));
         }
-
-        if (dir == Vector3.zero || dir == null)
-        {
-            dir = transform.up;
-        }
-
-        rb2d.velocity = dir.normalized * bulletSpeed;
+        rb2d.velocity = dir * bulletSpeed;
     }
 
     void StaticShot()
@@ -139,10 +157,10 @@ public class SpecialProjectile : MonoBehaviour
             }
         }
 
-        if ((transform.position.x > cursorPos.x - 0.5f && transform.position.x < cursorPos.x + 0.5f &&
-            transform.position.y > cursorPos.y - 0.5f && transform.position.y < cursorPos.y + 0.5f) || hasHitWall)
+        if ((transform.position.x > cursorPos.x - 0.75f && transform.position.x < cursorPos.x + 0.75f &&
+            transform.position.y > cursorPos.y - 0.75f && transform.position.y < cursorPos.y + 0.75f) || hasHitWall)
         {
-            stoppedMoving =  true;
+            stoppedMoving = true;
 
             if (rb2d.velocity != Vector2.zero)
                 rb2d.velocity = Vector2.zero;
@@ -182,7 +200,7 @@ public class SpecialProjectile : MonoBehaviour
         relativeDistance = Vector3.zero;
         hasHitWall = false;
         stoppedMoving = false;
-        if(data != null)
+        if (data != null)
         {
             data.Clear();
         }
@@ -225,6 +243,7 @@ public class SpecialProjectile : MonoBehaviour
             default:
                 NormalShot();
                 break;
+
         }
 
         if (timer > bulletLifetime)
@@ -242,7 +261,7 @@ public class SpecialProjectile : MonoBehaviour
                 if ((collision.gameObject.CompareTag("Player") && !isPlayerBullet) || (collision.gameObject.CompareTag("Enemy") && isPlayerBullet))
                 {
 
-                    switch(bulletState)
+                    switch (bulletState)
                     {
                         case SpecialBulletState.Timed:
                             effectTimer += effectCooldown;
@@ -254,6 +273,11 @@ public class SpecialProjectile : MonoBehaviour
                             ResetBullet();
                             break;
                         case SpecialBulletState.Homing:
+                            ResetBullet();
+                            break;
+                        case SpecialBulletState.Onhit:
+                            currentIcard.Effect();
+                            //collision.GetComponent<Health>().RemoveHealth(damage);
                             ResetBullet();
                             break;
                         case SpecialBulletState.Bouncy:
@@ -290,6 +314,10 @@ public class SpecialProjectile : MonoBehaviour
             hasHitWall = true;
             switch (bulletState)
             {
+                case SpecialBulletState.WontHitWall:
+
+                    break;
+
                 case SpecialBulletState.Timed:
 
                     break;
@@ -324,7 +352,7 @@ public class SpecialProjectile : MonoBehaviour
                     float theta = Mathf.Atan2(dir.y, dir.x);
                     if (theta < 0.0)
                         theta += Mathf.PI * 2;
-                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * theta - 90) * -1));
+                    transform.right = -dir;
                     NormalShot();
                     break;
                 case SpecialBulletState.HauntedArmorBigArrow:
@@ -353,7 +381,7 @@ public class SpecialProjectile : MonoBehaviour
                     float HauntedArmorBigArrow_angle = Mathf.Atan2(dir.y, dir.x);
                     if (HauntedArmorBigArrow_angle < 0.0)
                         HauntedArmorBigArrow_angle += Mathf.PI * 2;
-                    transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * HauntedArmorBigArrow_angle - 90) * -1));
+                    transform.right = -dir;
                     data[0]--;
                     NormalShot();
                     break;
@@ -381,7 +409,7 @@ public class SpecialProjectile : MonoBehaviour
                     transform.localRotation = Quaternion.Euler(0, 0, ((Mathf.Rad2Deg * HauntedArmorSplittingArrow_angle - 90) * -1));
 
                     Vector2 newDir1 = new Vector2(Mathf.Cos((HauntedArmorSplittingArrow_angle + 15 * Mathf.Deg2Rad)), Mathf.Sin(HauntedArmorSplittingArrow_angle + 15 * Mathf.Deg2Rad));
-                    bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized,newDir1.normalized,false,10,0.5f,8);
+                    bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized, newDir1.normalized, false, 10, 0.5f, 8);
                     Vector2 newDir2 = new Vector2(Mathf.Cos((HauntedArmorSplittingArrow_angle - 15 * Mathf.Deg2Rad)), Mathf.Sin(HauntedArmorSplittingArrow_angle - 15 * Mathf.Deg2Rad));
                     bulletHandler.GetBullet(rb2d.position + (Vector2)dir.normalized, newDir2.normalized, false, 10, 0.5f, 8);
                     ResetBullet();

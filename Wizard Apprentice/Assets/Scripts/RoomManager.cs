@@ -17,7 +17,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] GameObject exitDoorPrefab;
     [SerializeField] Sprite openDoorImage;
     GameObject currentRoomObject;
-    Room currentRoom;
+    [HideInInspector] public Room currentRoom;
     [SerializeField] GameObject roomParent;
     GameObject currentRoomParent;
     [SerializeField] EnemyManager enemyManager;
@@ -42,9 +42,24 @@ public class RoomManager : MonoBehaviour
 
     public int currentFloor;
 
+    [Header("Map Open Sound")]
+    [SerializeField] AudioClip mapOpen;
+    [SerializeField] float mapOpenVolume = 1;
+
+    [Header("Room Pause Variables")]
+    [SerializeField] float pauseDuration = 1;
+    public float originalTimescale;
+
+    [Header("Room Clear Variables")]
+    [SerializeField] AudioClip roomClearSound;
+    [SerializeField] float audioVolume = 1;
+    [SerializeField] ParticleSystem particleSystem;
+
+    Inventory inv;
     // Start is called before the first frame update
     void Start()
     {
+        inv = gameObject.GetComponent<Inventory>();
         enemyObjects = new List<GameObject>();
         LoadNewRoom(5);
     }
@@ -52,7 +67,7 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             canWalkThroughAnyDoor = !canWalkThroughAnyDoor;
         }
@@ -65,10 +80,13 @@ public class RoomManager : MonoBehaviour
             Destroy(currentRoomParent);
         }
         currentRoom = room;
+        MusicManager.Instance.ChangeToMusicType(room.musicType);
+        RoomFadeIn.NewRoom();
+        GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(true);
         currentRoomParent = Instantiate(roomParent);
         currentRoomObject = Instantiate(room.roomPrefab, currentRoomParent.transform);
         currentRoomObject.transform.position += new Vector3((float)room.roomSize.x / 2f, (float)room.roomSize.y / 2f, 0);
-        if(room.generateRandomRoom)
+        if (room.generateRandomRoom)
         {
             LoadRoomFloor(room.roomSize);
         }
@@ -80,8 +98,15 @@ public class RoomManager : MonoBehaviour
                 enemyObjects.Add(transformsInRoom[i].gameObject);
             }
         }
+        if (currentRoomType != 0)
+        {
+            for (int i = 0; i < enemyObjects.Count; i++)
+            {
+                enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(currentFloor * 0.75f, true);
+            }
+        }
         enemyManager.enemyObjects = enemyObjects;
-        if(!room.roomAlreadyHasDoor)
+        if (!room.roomAlreadyHasDoor)
         {
             doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y - 0.5f, 0), Quaternion.identity, currentRoomParent.transform);
         }
@@ -92,11 +117,15 @@ public class RoomManager : MonoBehaviour
     {
         if (enemyObjects.Count <= 0 || canWalkThroughAnyDoor || currentRoomType == 5)
         {
+
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
+            MusicManager.Instance.ChangeToMusicType(MusicType.Map);
+            GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
-            switch(currentRoomType)
+            enemyManager.ResetEnemyStatus();
+            switch (currentRoomType)
             {
                 case 0:
                     roomSelectScreenGenerator.GenerateAnotherFloor();
@@ -111,6 +140,7 @@ public class RoomManager : MonoBehaviour
             }
             roomSelectScreenGenerator.roomSelectObject.SetActive(true);
             roomSelectScreenGenerator.Open();
+            SoundManager.Instance.PlayAudio(mapOpen, mapOpenVolume);
         }
         else
         {
@@ -119,7 +149,7 @@ public class RoomManager : MonoBehaviour
     }
     public void LoadRoomFloor(Vector2Int size)
     {
-        cellManager.GenerateRoom(size, currentRoomParent.transform,true);
+        cellManager.GenerateRoom(size, currentRoomParent.transform, true);
     }
 
     public void LoadRandomRoom()
@@ -148,21 +178,28 @@ public class RoomManager : MonoBehaviour
     }
     public void RemoveAllEnemies()
     {
+        int enemyCount = enemyObjects.Count;
         for (int i = enemyObjects.Count - 1; i >= 0; i--)
         {
             Destroy(enemyObjects[i]);
             enemyObjects.RemoveAt(i);
         }
         enemyObjects.Clear();
-        OpenDoor();
+        if (enemyCount != 0 && currentRoomType != 5)
+        {
+
+            OpenDoor();
+        }
     }
 
     public void RemoveEnemy(GameObject enemyObject)
     {
+
         Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
-        if(enemyObjects.Count <= 0)
+
+        if (enemyObjects.Count <= 0)
         {
             OpenDoor();
         }
@@ -170,14 +207,32 @@ public class RoomManager : MonoBehaviour
 
     public void OpenDoor()
     {
-        if(!currentRoom.roomAlreadyHasDoor)
-            doorObject.GetComponentInChildren<SpriteRenderer>().sprite = openDoorImage;
+        SoundManager.Instance.PlayAudio(roomClearSound, audioVolume);
+        ActivateParticleSystem();
+        if (!currentRoom.roomAlreadyHasDoor)
+            doorObject.GetComponentInChildren<Animator>().SetTrigger("OpenDoor");
     }
 
     public void LoadNewRoom(int roomType)
     {
+
         bulletHandler.ResetAll();
-        cardHandler.isActive = true;
+
+        if (roomType != 4)
+        {
+            cardHandler.isActive = true;
+            enemyManager.ActivateEnemiesAfterTime();
+        }
+
+        if (roomType == 5)
+        {
+            inv.TrashCanIsOff(true);
+        }
+        else if (inv.GetTrashCanIsOff())
+        {
+            inv.TrashCanIsOff(false);
+        }
+
         switch (roomType)
         {
             case 0:
@@ -209,7 +264,31 @@ public class RoomManager : MonoBehaviour
                 LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
                 break;
         }
-        Debug.Log("Turning off room select object");
+
         roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }
+
+    public void ActivateParticleSystem()
+    {
+
+        // Set the number of particles to emit for this burst
+        particleSystem.Emit(10);
+
+    }
+
+
+    IEnumerator PauseEnemies()
+    {
+        originalTimescale = Time.timeScale;
+
+        Time.timeScale = 0;
+
+        yield return new WaitForSeconds(pauseDuration);
+
+        Time.timeScale = originalTimescale;
+
+    }
+
+
+
 }

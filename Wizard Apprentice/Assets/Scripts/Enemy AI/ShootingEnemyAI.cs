@@ -48,7 +48,7 @@ public class ShootingEnemyAI : MonoBehaviour
             switch (Random.Range(0, 4))
             {
                 case 0:
-                    return new Vector2(21f, 0);
+                    return new Vector2(1f, 0);
 
                 case 1:
                     return new Vector2(1f, 0);

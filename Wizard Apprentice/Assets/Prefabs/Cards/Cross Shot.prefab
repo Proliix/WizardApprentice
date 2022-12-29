@@ -188,6 +188,9 @@ MonoBehaviour:
   canvas: {fileID: 0}
   inventory: {fileID: 0}
   lastObjectAttachedTo: {fileID: 0}
+  isInSwapQueue: 0
+  swapPartner: 0
+  queuedUpSwaps: 
 --- !u!95 &29307193165762807
 Animator:
   serializedVersion: 4
@@ -222,13 +225,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: cee28767df6f9764caaa6710d67badeb, type: 3}
   comboImage: {fileID: 21300000, guid: 14639a0b32b0cb7478e9159672d8f870, type: 3}
-  title: + shot
-  description: 'Shoots projectiles in a + formation
-
-    Has special interaction
-    with x shot'
+  title: 'Crux + '
+  description: Casts projectiles in a X shape that damaged enemies
   attackSound: {fileID: 0}
   audioVolume: 1
-  damage: 10
-  size: 0.5
-  speed: 8
+  damage: 8
+  size: 1
+  speed: 10

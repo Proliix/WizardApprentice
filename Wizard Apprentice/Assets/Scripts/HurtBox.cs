@@ -5,8 +5,12 @@ using UnityEngine;
 public class HurtBox : MonoBehaviour
 {
     [SerializeField] float damage = 10f;
+    [SerializeField] float cooldown = 0.25f;
 
     Health playerHealth;
+    float timer;
+    bool playerIsIn = false;
+
 
 
     private void Start()
@@ -14,11 +18,34 @@ public class HurtBox : MonoBehaviour
         playerHealth = GameObject.FindWithTag("Player").GetComponent<Health>();
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (playerIsIn)
+        {
+            if (timer > cooldown)
+            {
+                timer = 0;
+                playerHealth.RemoveHealth(damage);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            playerHealth.RemoveHealth(damage);
+            playerIsIn = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerIsIn = false;
         }
     }
 }
+
+

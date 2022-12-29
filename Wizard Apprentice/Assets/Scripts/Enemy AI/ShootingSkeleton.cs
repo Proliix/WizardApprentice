@@ -29,7 +29,9 @@ public class ShootingSkeleton : MonoBehaviour, IStunnable
     [SerializeField] GameObject target;
 
     Health health;
+    Animator anim;
     BulletHandler bulletHandler;
+    EnemyManager enemyManager;
     bool stunned = false;
 
     void Start()
@@ -38,27 +40,34 @@ public class ShootingSkeleton : MonoBehaviour, IStunnable
         isMoving = false;
         bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         health = gameObject.GetComponent<Health>();
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        MoveEnemy();
+        anim = gameObject.GetComponent<Animator>();
+        //MoveEnemy();
         target = GameObject.FindWithTag("Player");
+        float rNum= Random.Range(0, 1f);
+        timer -= rNum;
+        moveTimer -= rNum;
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        moveTimer += Time.deltaTime;
-
-
-        if (timer >= patternDelay && canShoot)
+        if (!stunned && enemyManager.enemiesActive)
         {
+            timer += Time.deltaTime;
+            moveTimer += Time.deltaTime;
 
-            timer -= patternDelay;
+            anim.SetFloat("DirX", rb2d.velocity.normalized.x);
+            anim.SetFloat("DirY", rb2d.velocity.normalized.y);
 
-            StartCoroutine(AttackPattern());
-        }
+            if (timer >= patternDelay && canShoot)
+            {
 
-        if (!stunned)
-        {
+                timer -= patternDelay;
+
+                StartCoroutine(AttackPattern());
+            }
+
             if (moveTimer >= moveDelay && isMoving == false)
             {
                 moveTimer -= moveDelay;

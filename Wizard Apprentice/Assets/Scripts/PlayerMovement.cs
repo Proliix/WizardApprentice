@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,7 +9,10 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb2d;
     Animator animator;
     Health health;
-    [SerializeField] DashIndicator dashIndicator;
+    [SerializeField] Image dashIndicator;
+    [SerializeField] Image dashIndicatorInacive;
+    [SerializeField] Image SmallDashIndicator;
+    [SerializeField] Image SmallDashIndicatorInactive;
 
     Vector2 movement = new Vector2();
 
@@ -22,71 +26,89 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashingSpeed;
     [SerializeField] float activeSpeed;
     public float dashingTime = 0.2f;
-    [SerializeField] bool canDash = true;
-    [SerializeField] int dashes = 1;
+    [SerializeField] public bool canDash = true;
     public bool isDashing;
     [SerializeField] float dashingCooldown = 1f;
 
-    int maxDashes = 1;
+    bool hasSmallIcon;
+    bool CanMove = true;
     PlayerStats stats;
     Vector2 dashMovement = Vector2.right;
 
     void Start()
     {
         //Find our Rigidbody2D 
-        maxDashes = dashes;
-        dashIndicator = GameObject.Find("DashIndicator").GetComponent<DashIndicator>();
         rb2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         stats = GetComponent<PlayerStats>();
         activeSpeed = moveSpeed;
 
+        hasSmallIcon = PlayerPrefs.GetInt("DashOverHead") > 0 ? true : false;
+        SmallDashIndicator.gameObject.SetActive(hasSmallIcon);
+        SmallDashIndicatorInactive.gameObject.SetActive(hasSmallIcon);
     }
 
     void Update()
     {
-
-        if (maxDashes < stats.dashCharges + 1)
+        if (CanMove)
         {
-            maxDashes++;
-            dashes++;
+
+
+
+            if (!isDashing)
+            {
+                //get input from player
+                float horInput = Input.GetAxisRaw("Horizontal");
+                float verInput = Input.GetAxisRaw("Vertical");
+
+                animator.SetFloat("Horizontal", horInput);
+                animator.SetFloat("Vertical", verInput);
+                movement.x = horInput;
+                movement.y = verInput;
+
+                if ((horInput >= 0.1 || horInput <= -0.1) || (verInput >= 0.1 || verInput <= -0.1))
+                    dashMovement = movement;
+
+                MovePlayer();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && canDash)
+            {
+                SoundManager.Instance.PlayAudio(dashSound);
+                StartCoroutine(Dash());
+
+            }
         }
-
-        if (!isDashing)
+        else
         {
-            //get input from player
-            float horInput = Input.GetAxisRaw("Horizontal");
-            float verInput = Input.GetAxisRaw("Vertical");
-
-            animator.SetFloat("Horizontal", horInput);
-            animator.SetFloat("Vertical", verInput);
-            movement.x = horInput;
-            movement.y = verInput;
-
-            if ((horInput >= 0.1 || horInput <= -0.1) || (verInput >= 0.1 || verInput <= -0.1))
-                dashMovement = movement;
-
-            MovePlayer();
-        }
-
-        dashIndicator.gameObject?.SetActive(canDash);
-
-        if (Input.GetKeyDown(KeyCode.Space) && (canDash || (dashes > 0 && !isDashing)))
-        {
-            SoundManager.Instance.PlayAudio(dashSound);
-            StartCoroutine(Dash());
-
+            animator.SetFloat("Horizontal", rb2d.velocity.normalized.x);
+            animator.SetFloat("Vertical", rb2d.velocity.normalized.y);
         }
 
     }
 
+    public void SetCanMove(bool value)
+    {
+        CanMove = value;
+    }
+
+    IEnumerator FillImage(float fillTime)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < fillTime)
+        {
+            elapsedTime += Time.deltaTime;
+            dashIndicator.fillAmount = elapsedTime / fillTime;
+            SmallDashIndicator.fillAmount = elapsedTime / fillTime;
+            yield return null;
+        }
+    }
 
     private IEnumerator Dash()
     {
 
         //dashIndicator.ChangeDashIndicator();
-        dashes--;
         canDash = false;
         isDashing = true;
 
@@ -99,8 +121,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", dashMovement.y);
 
 
+        StartCoroutine(FillImage(dashingCooldown + dashingTime));
+
         activeSpeed = dashingSpeed;
-        rb2d.velocity = dashMovement.normalized * (activeSpeed + stats.movementSpeed);
+        rb2d.velocity = dashMovement.normalized * (activeSpeed * stats.movementSpeed);
         health.SetInvicible(dashingTime + 0.2f);
         yield return new WaitForSeconds(dashingTime);
 
@@ -109,15 +133,14 @@ public class PlayerMovement : MonoBehaviour
         activeSpeed = moveSpeed;
         animator.SetBool("IsDashing", isDashing);
 
-        yield return new WaitForSeconds(dashingCooldown - stats.dashCooldown);
+        yield return new WaitForSeconds(dashingCooldown);
         //dashIndicator.ChangeDashIndicator();
         canDash = true;
-        dashes++;
     }
 
     private void MovePlayer()
     {
-        rb2d.velocity = movement.normalized * (activeSpeed + stats.movementSpeed);
+        rb2d.velocity = movement.normalized * (activeSpeed * stats.movementSpeed);
     }
 
 }

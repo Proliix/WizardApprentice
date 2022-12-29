@@ -19,11 +19,26 @@ public class GreatswordArmor : MonoBehaviour
     [SerializeField] float pieceSpinTimeBetweenProjectiles;
     [SerializeField] float pieceSpinRotationsPerSecond;
 
+    [SerializeField] float pieceCircleDuration;
+    [SerializeField] float pieceCircleRotationsPerSecond;
+    [SerializeField] float pieceCircleDistance;
+    [SerializeField] float pieceCircleApproachRate;
+    [SerializeField] float pieceCircleDistanceChangeSpeed;
+    [SerializeField] float pieceCircleDistanceChangeAmount;
+
     [SerializeField] GameObject pieceObject;
     [SerializeField] float timeToSplit;
     [SerializeField] int amountOfPieces;
     [SerializeField] float distanceToBeWithin;
     [SerializeField] float pieceMoveSpeed;
+
+    [SerializeField] float recallingTime;
+    [SerializeField] float recallingMovementSpeed;
+    [SerializeField] int pulseProjectileAmount;
+    [SerializeField] float pulseProjectileSpeed;
+    [SerializeField] float timeBetweenPulse;
+    [SerializeField] int timesToPulse;
+    [SerializeField] float pulseDistanceToStop;
 
     [SerializeField] GameObject spinToWinDamageObject;
     [SerializeField] float spinToWinDuration;
@@ -47,13 +62,42 @@ public class GreatswordArmor : MonoBehaviour
     Vector2 currentDestination;
     [SerializeField] float movementSpeed;
 
+    [SerializeField] Vector2 abilityVariety;
+    float smashValueMultiplier = 1f;
+    float spinToWinValueMultiplier = 1f;
+    float slashValueMultiplier = 1f;
+    float splitValueMultiplier = 1f;
+    float recallValueMultiplier = 1f;
+    float pieceSpinValueMultiplier = 1f;
+    float pieceCircleValueMultiplier = 1f;
+    float timeSinceLastSpinToWin;
+    float timeSinceLastSmash;
+    float timeSinceLastSlash;
+    float timeSinceLastSplit;
+    float timeSinceLastRecall;
+    float timeSinceLastPieceSpin;
+    float timeSinceLastPieceCircle;
+    [SerializeField] float valueNeededForSmash;
+    [SerializeField] float valueNeededForSpinToWin;
+    [SerializeField] float valueNeededForSlash;
+    [SerializeField] float valueNeededForSplit;
+    [SerializeField] float valueNeededForRecall;
+    [SerializeField] float valueNeededForPieceSpin;
+    [SerializeField] float valueNeededForPieceCircle;
+    [SerializeField] float abilityTimeDependance;
+    [SerializeField] float randomDistanceFromPlayer;
+    [SerializeField] float playerDetectionRange;
+
+    [SerializeField] float distanceToCheckNewDestination;
+
     enum CurrentState
     {
         idle,
         handleSmash,
         spinning,
         slashing,
-        splitting
+        splitting,
+        recalling
     }
 
     // Start is called before the first frame update
@@ -67,6 +111,14 @@ public class GreatswordArmor : MonoBehaviour
     public void SetRoomSize(Vector2 size)
     {
         roomSize = size;
+    }
+
+    public void Death()
+    {
+        for(int i = 0; i < allPieces.Count; i++)
+        {
+            Destroy(allPieces[i]);
+        }
     }
 
     // Update is called once per frame
@@ -88,8 +140,111 @@ public class GreatswordArmor : MonoBehaviour
         {
             StartCoroutine(SpinPieces());
         }
-        //currentDestination = playerObject.transform.position;
-        //transform.position += ((Vector3)currentDestination - transform.position).normalized * movementSpeed * Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.R) && piecesAreReady && state == CurrentState.idle)
+        {
+            StartCoroutine(PullInPieces());
+        }
+        if (Input.GetKeyDown(KeyCode.E) && piecesAreReady)
+        {
+            StartCoroutine(CircleAroundBoss());
+        }
+        float distanceToPlayer = (playerObject.transform.position - transform.position).magnitude;
+        //Movement
+        if (state == CurrentState.idle || state == CurrentState.spinning)
+        {
+            if (Vector2.Distance(playerObject.transform.position, (Vector2)transform.position) < playerDetectionRange)
+            {
+                currentDestination = playerObject.transform.position;
+            }
+            if (hasDestination)
+            {
+                transform.position += ((Vector3)currentDestination - transform.position).normalized * movementSpeed * Time.deltaTime;
+                if (Vector2.Distance(transform.position, currentDestination) < distanceToCheckNewDestination)
+                {
+                    currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * randomDistanceFromPlayer;
+                }
+            }
+            else
+            {
+                currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * randomDistanceFromPlayer;
+                hasDestination = true;
+            }
+        }
+        //Ability Check
+        if(state == CurrentState.idle)
+        {
+            timeSinceLastSpinToWin += Time.deltaTime;
+            timeSinceLastSmash += Time.deltaTime;
+            timeSinceLastSlash += Time.deltaTime;
+            if(!piecesAreOut)
+            {
+                timeSinceLastSplit += Time.deltaTime;
+            }
+            float smashValue = (1 + (timeSinceLastSmash * abilityTimeDependance)) * smashValueMultiplier * (1 + (1f / distanceToPlayer));
+            float spinToWinValue = (1 + (timeSinceLastSpinToWin * abilityTimeDependance)) * spinToWinValueMultiplier * (1 + (1f / distanceToPlayer));
+            float slashValue = (1 + (timeSinceLastSlash * abilityTimeDependance)) * slashValueMultiplier * (1 + (1f / Mathf.Pow(distanceToPlayer,2)));
+            float splitValue = (1 + (timeSinceLastSplit * abilityTimeDependance)) * splitValueMultiplier;
+            float recallValue = (1 + (timeSinceLastRecall * abilityTimeDependance)) * recallValueMultiplier;
+            if (piecesAreOut && false)
+            {
+                if (smashValue > valueNeededForSmash)
+                {
+                    timeSinceLastSmash = 0;
+                    smashValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                    //StartCoroutine(SmashPolearm());
+                }
+                else if (recallValue > valueNeededForRecall)
+                {
+                    timeSinceLastRecall = 0;
+                    recallValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                    StartCoroutine(PullInPieces());
+                }
+            }
+            else
+            {
+                if (spinToWinValue > valueNeededForSpinToWin)
+                {
+                    timeSinceLastSpinToWin = 0;
+                    spinToWinValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                    StartCoroutine(StartSpinning());
+                }
+                else if (slashValue > valueNeededForSlash)
+                {
+                    timeSinceLastSlash = 0;
+                    slashValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                    StartCoroutine(SlashAttack());
+                }
+                else if (splitValue > valueNeededForSplit)
+                {
+                    timeSinceLastSplit = 0;
+                    splitValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                    StartCoroutine(SplitPieces());
+                }
+                
+            }
+        }
+        //Pieces ability check
+        if(piecesAreReady)
+        {
+            timeSinceLastPieceSpin += Time.deltaTime;
+            timeSinceLastPieceCircle += Time.deltaTime;
+            timeSinceLastRecall += Time.deltaTime;
+            float pieceSpinValue = (1 + (timeSinceLastPieceSpin * abilityTimeDependance)) * pieceSpinValueMultiplier;
+            float pieceCircleValue = (1 + (timeSinceLastPieceCircle * abilityTimeDependance)) * pieceCircleValueMultiplier;
+
+            if (pieceSpinValue > valueNeededForPieceSpin)
+            {
+                timeSinceLastPieceSpin = 0;
+                pieceSpinValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                StartCoroutine(SpinPieces());
+            }
+            else if (pieceCircleValue > valueNeededForPieceCircle)
+            {
+                timeSinceLastPieceCircle = 0;
+                pieceCircleValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                StartCoroutine(CircleAroundBoss());
+            }
+        }
     }
 
     IEnumerator SpinPieces()
@@ -116,10 +271,81 @@ public class GreatswordArmor : MonoBehaviour
         piecesAreReady = true;
     }
 
-    //IEnumerator PullInPieces()
-    //{
-        
-    //}
+    IEnumerator CircleAroundBoss()
+    {
+        piecesAreReady = false;
+        float timeCircling = 0;
+        while(timeCircling < pieceCircleDuration)
+        {
+            yield return null;
+            float distanceUsed = pieceCircleDistance + (Mathf.Sin(timeCircling * pieceCircleDistanceChangeSpeed) * pieceCircleDistanceChangeAmount);
+            timeCircling += Time.deltaTime;
+            for(int i = 0; i < allPieces.Count; i++)
+            {
+                float angle = (((float)i / allPieces.Count) * 360) + ((timeCircling * pieceCircleRotationsPerSecond) * (360f/allPieces.Count));
+                Vector2 targetDestination = (Vector2)transform.position + new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle)) * distanceUsed;
+                float movementThisFrame = pieceCircleApproachRate * pieceCircleRotationsPerSecond * pieceCircleDistance * Mathf.PI * 2* Time.deltaTime / allPieces.Count;
+                Vector2 dir = (targetDestination - (Vector2)allPieces[i].transform.position).normalized;
+                if(movementThisFrame < Vector2.Distance(targetDestination,allPieces[i].transform.position))
+                {
+                    allPieces[i].transform.position += (Vector3)dir * movementThisFrame;
+                }
+                else
+                {
+                    allPieces[i].transform.position = targetDestination;
+                }
+            }
+        }
+        piecesAreReady = true;
+    }
+
+    IEnumerator PullInPieces()
+    {
+        state = CurrentState.recalling;
+        yield return new WaitForSeconds(recallingTime);
+
+        int amountCompleted = 0;
+        bool[] isDoneMoving = new bool[allPieces.Count];
+        while (amountCompleted < isDoneMoving.Length)
+        {
+            yield return null;
+            for (int i = allPieces.Count-1; i >= 0; i--)
+            {
+                if (Vector2.Distance(allPieces[i].transform.position, transform.position) < pulseDistanceToStop && !isDoneMoving[i])
+                {
+                    amountCompleted++;
+                    isDoneMoving[i] = true;
+
+                }
+                else if (!isDoneMoving[i])
+                {
+                    allPieces[i].transform.position += (Vector3)((transform.position - allPieces[i].transform.position).normalized * Time.deltaTime * pieceMoveSpeed);
+                }
+            }
+        }
+        for (int i = allPieces.Count - 1; i >= 0; i--)
+        {
+            Destroy(allPieces[i]);
+            allPieces.RemoveAt(i);
+        }
+        piecesAreOut = false;
+        float timePassed = 0;
+        int timesPulsed = 0;
+        while(timePassed < timeBetweenPulse * timesToPulse)
+        {
+            yield return null;
+            timePassed += Time.deltaTime;
+            int counter = 0;
+            while (Mathf.FloorToInt((timePassed + (counter * timeBetweenPulse)) / timeBetweenPulse) < Mathf.FloorToInt((timePassed + Time.deltaTime) / timeBetweenPulse))
+            {
+                counter++;
+                bulletHandler.GetCircleShot(pulseProjectileAmount, gameObject, false,(timesPulsed % 2) *(180 / pulseProjectileAmount), 10, 0.5f, pulseProjectileSpeed);
+                timesPulsed++;
+            }
+        }
+        state = CurrentState.idle;
+
+    }
     IEnumerator SplitPieces()
     {
         state = CurrentState.splitting;
@@ -131,7 +357,6 @@ public class GreatswordArmor : MonoBehaviour
         for (int i = 0; i < amountOfPieces; i++)
         {
             targetPositions.Add(new Vector2(Random.Range(0, roomSize.x), Random.Range(0, roomSize.y)));
-            Debug.Log(targetPositions[i]);
         }
 
         for (int i = 0; i < amountOfPieces; i++)
@@ -157,11 +382,9 @@ public class GreatswordArmor : MonoBehaviour
                 {
                     amountCompleted++;
                     isDoneMoving[i] = true;
-                    Debug.Log("is close");
                 }
                 else if (!isDoneMoving[i])
                 {
-                    Debug.Log("is moving");
                     allPieces[i].transform.position += (Vector3)((targetPositions[i] - startPos).normalized * Time.deltaTime * pieceMoveSpeed);
                 }
             }

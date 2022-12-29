@@ -14,6 +14,7 @@ public class ZombieAI : MonoBehaviour, IStunnable
     [SerializeField] float moveSpeedOnReset = 4;
 
     bool stunned = false;
+    EnemyManager enemyManager;
 
 
 
@@ -21,11 +22,12 @@ public class ZombieAI : MonoBehaviour, IStunnable
     {
         rb2d = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
-    }
+        enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
+            }
 
     private void Update()
     {
-        if (!stunned)
+        if (!stunned && enemyManager.enemiesActive)
         {
             timerCountsSeconds += Time.deltaTime;
 

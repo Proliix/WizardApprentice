@@ -34,7 +34,7 @@ public class NormalCard : MonoBehaviour, ICard
     public void Effect()
     {
         SoundManager.Instance.PlayAudio(attackSound);
-        bulletHandler.GetBullet(spawnpoint, player, true, false, damage + stats.damage, size + stats.projectileSize, speed + stats.projectileSpeed);
+        bulletHandler.GetBullet(spawnpoint, player, true, false, stats.GetDamage(damage), size + stats.projectileSize, speed + stats.projectileSpeed);
     }
 
     public Sprite GetSprite()
@@ -51,7 +51,7 @@ public class NormalCard : MonoBehaviour, ICard
     {
         timer += Time.deltaTime;
 
-        if (timer >= shootCooldown)
+        if (timer >= stats.GetAttackSpeed(shootCooldown))
         {
             timer = 0;
             Effect();

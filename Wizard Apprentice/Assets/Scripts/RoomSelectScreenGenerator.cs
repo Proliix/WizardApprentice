@@ -27,7 +27,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     [SerializeField] float preferStayingInSetPosition;
     [SerializeField] float randomIconMovement;
     [SerializeField] Vector2 iconDistances;
-    List<RoomSelectRoom> allRooms;
+    List<RoomSelectRoom> visitedRooms;
     List<List<RoomSelectRoom>> roomsByLayer;
     int currentFloor;
 
@@ -93,7 +93,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
     public void GenerateRoomLayout()
     {
-        allRooms = new List<RoomSelectRoom>();
+        visitedRooms = new List<RoomSelectRoom>();
         roomsByLayer = new List<List<RoomSelectRoom>>();
     }
 
@@ -358,11 +358,27 @@ public class RoomSelectScreenGenerator : MonoBehaviour
             if(roomsByLayer[id.x][id.y] == playersCurrentRoom.outgoingRooms[i])
             {
                 Debug.Log("Loading room");
+                visitedRooms.Add(roomsByLayer[id.x][id.y]);
                 roomManager.LoadNewRoom(roomsByLayer[id.x][id.y].roomType);
                 playersCurrentRoom.roomIconObject.SetActive(true);
+                for(int j = 0; j < roomsByLayer[id.x].Count; j++)
+                {
+                    roomsByLayer[id.x][j].roomIconObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+                    for(int k = 0; k < roomsByLayer[id.x][j].outgoingLineObjects.Count; k++)
+                    {
+                        roomsByLayer[id.x][j].outgoingLineObjects[k].GetComponent<Image>().color = new Color(0.25f, 0.25f, 0.25f);
+                    }
+                }
                 for (int j = 0; j < playersCurrentRoom.outgoingLineObjects.Count; j++)
                 {
-                    playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = Color.white;
+                    if(playersCurrentRoom.outgoingRooms[j] == roomsByLayer[id.x][id.y])
+                    {
+                        playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = new Color(0.6f,0.1f,0.1f);
+                    }
+                    else
+                    {
+                        playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = new Color(0.25f,0.25f,0.25f);
+                    }
                 }
                 playersCurrentRoom = roomsByLayer[id.x][id.y];
                 return;

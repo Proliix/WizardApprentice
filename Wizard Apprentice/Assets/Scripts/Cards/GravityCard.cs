@@ -51,7 +51,7 @@ public class GravityCard : MonoBehaviour, ICard
         for (int i = 0; i < enemiesWithingRange.Count; i++)
         {
             if (effectNum % dealDamagerPerEffect == 0)
-                enemiesWithingRange[i].GetComponent<Health>()?.RemoveHealth(damage + stats.damage);
+                enemiesWithingRange[i].GetComponent<Health>()?.RemoveHealth(stats.GetDamage(damage));
 
             if (enemiesWithingRange[i].GetComponent<IStunnable>() != null)
             {
