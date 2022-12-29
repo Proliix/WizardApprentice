@@ -11,6 +11,7 @@ public class CellManager : MonoBehaviour
     [SerializeField] Sprite slicedTileSprite;
     [SerializeField] GameObject tileObject;
     [SerializeField] GameObject colliderObject;
+    [SerializeField] GameObject topWall, rightWall, leftWall, botWall, cornerWallTop, cornerWallBot;
     Vector2Int prevSize;
     List<GameObject> cellHolders;
     List<int>[] allCellsAvailability;
@@ -30,7 +31,7 @@ public class CellManager : MonoBehaviour
     public void GenerateRoom(Vector2Int size, Transform cellParent)
     {
         roomParent = cellParent;
-        if(cellHolders == null)
+        if (cellHolders == null)
         {
             cellHolders = new List<GameObject>();
         }
@@ -38,7 +39,7 @@ public class CellManager : MonoBehaviour
         {
             cellHolders.Clear();
         }
-        if(wallsCreated == null)
+        if (wallsCreated == null)
         {
             wallsCreated = new List<GameObject>();
         }
@@ -72,29 +73,80 @@ public class CellManager : MonoBehaviour
     {
         roomParent = cellParent;
         this.size = size;
-        Generate9SliceFloor(size,cellParent);
-        GenerateColliderWalls(size, cellParent);
+        Generate9SliceFloor(size, cellParent);
+        //GenerateColliderWalls(size, cellParent);
+        GenerateWallSprites(size, cellParent);
+    }
+
+    public void GenerateWallSprites(Vector2Int size, Transform cellParent)
+    {
+        bool yDivideable = false;
+        bool xDivideable = false;
+
+        if (size.y % 2 == 0)
+            yDivideable = true;
+
+        if (size.x % 2 == 0)
+            xDivideable = true;
+
+        float addNumY = yDivideable ? 0.5f : 0;
+        Debug.Log("YDivideable: " + yDivideable);
+        Debug.Log("x: " + size.x + " | y:" + size.y);
+        GameObject newTopWall = Instantiate(topWall, new Vector3(size.x / 2, size.y + (1.5f + addNumY), 0), topWall.transform.rotation, cellParent);
+        newTopWall.GetComponent<SpriteRenderer>().size = new Vector2(size.x, newTopWall.GetComponent<SpriteRenderer>().size.y);
+        newTopWall.GetComponent<BoxCollider2D>().size = newTopWall.GetComponent<SpriteRenderer>().size;
+
+        float addNumXLeft = xDivideable ? 0 : -0.5f;
+        float addNumXRight = xDivideable ? 0.5f : 0;
+        GameObject newLeftCornerTop = Instantiate(cornerWallTop, new Vector3(-0.5f + addNumXLeft, size.y + (3f + addNumY), 0), cornerWallTop.transform.rotation, cellParent);
+        newLeftCornerTop.GetComponent<BoxCollider2D>().size = newLeftCornerTop.GetComponent<SpriteRenderer>().size;
+
+        GameObject newRightCornerTop = Instantiate(cornerWallTop, new Vector3(size.x + addNumXRight, size.y + (3f + addNumY), 0), cornerWallTop.transform.rotation, cellParent);
+        newRightCornerTop.GetComponent<SpriteRenderer>().flipX = true;
+        newRightCornerTop.GetComponent<BoxCollider2D>().size = newRightCornerTop.GetComponent<SpriteRenderer>().size;
+
+        addNumY = yDivideable ? 1.5f : 1f;
+        GameObject newLeftWall = Instantiate(leftWall, new Vector3(-0.5f + addNumXLeft, (size.y / 2f) + addNumY, 0), leftWall.transform.rotation, cellParent);
+        newLeftWall.GetComponent<SpriteRenderer>().size = new Vector2(newLeftWall.GetComponent<SpriteRenderer>().size.x, size.y + 3f);
+        newLeftWall.GetComponent<BoxCollider2D>().size = newLeftWall.GetComponent<SpriteRenderer>().size;
+
+        GameObject newRightWall = Instantiate(rightWall, new Vector3(size.x + addNumXRight, (size.y / 2f) + addNumY, 0), rightWall.transform.rotation, cellParent);
+        newRightWall.GetComponent<SpriteRenderer>().size = new Vector2(newRightWall.GetComponent<SpriteRenderer>().size.x, size.y + 3f);
+        newRightWall.GetComponent<BoxCollider2D>().size = newRightWall.GetComponent<SpriteRenderer>().size;
+
+        addNumY = yDivideable ? 0.5f : 1;
+        GameObject newLeftCornerBot = Instantiate(cornerWallBot, new Vector3(-0.5f + addNumXLeft, -addNumY, 0), cornerWallBot.transform.rotation, cellParent);
+        newLeftCornerBot.GetComponent<BoxCollider2D>().size = newLeftCornerBot.GetComponent<SpriteRenderer>().size;
+
+        GameObject newRightCornerBot = Instantiate(cornerWallBot, new Vector3(size.x + addNumXRight, -addNumY, 0), cornerWallBot.transform.rotation, cellParent);
+        newRightCornerBot.GetComponent<SpriteRenderer>().flipX = true;
+        newRightCornerBot.GetComponent<BoxCollider2D>().size = newRightCornerBot.GetComponent<SpriteRenderer>().size;
+
+        GameObject newBotWall = Instantiate(botWall, new Vector3(size.x / 2, -addNumY, 0), botWall.transform.rotation, cellParent);
+        newBotWall.GetComponent<SpriteRenderer>().size = new Vector2(size.x, newBotWall.GetComponent<SpriteRenderer>().size.y);
+        newBotWall.GetComponent<BoxCollider2D>().size = newBotWall.GetComponent<SpriteRenderer>().size;
+
     }
 
     public void Generate9SliceFloor(Vector2Int size, Transform cellParent)
     {
-        GameObject sliced = Instantiate(tileObject,cellParent);
+        GameObject sliced = Instantiate(tileObject, cellParent);
         sliced.GetComponent<SpriteRenderer>().sprite = slicedTileSprite;
-        sliced.transform.position = Vector2.zero + size/2;
+        sliced.transform.position = Vector2.zero + size / 2;
         sliced.GetComponent<SpriteRenderer>().size = size;
     }
 
     public void GenerateColliderWalls(Vector2Int size, Transform cellParent)
     {
-        GameObject objcet1 = Instantiate(colliderObject,cellParent);
-        objcet1.transform.position = new Vector3(0,0,0);
-        objcet1.GetComponent<BoxCollider2D>().size = size*2;
+        GameObject objcet1 = Instantiate(colliderObject, cellParent);
+        objcet1.transform.position = new Vector3(0, 0, 0);
+        objcet1.GetComponent<BoxCollider2D>().size = size * 2;
         objcet1.GetComponent<BoxCollider2D>().offset = new Vector2(size.x * -1f + 0.25f, 0);
 
         GameObject objcet2 = Instantiate(colliderObject, cellParent);
         objcet2.transform.position = new Vector3(0, 0, 0);
         objcet2.GetComponent<BoxCollider2D>().size = size * 2;
-        objcet2.GetComponent<BoxCollider2D>().offset = new Vector2(size.x * 2f -1.25f, 0);
+        objcet2.GetComponent<BoxCollider2D>().offset = new Vector2(size.x * 2f - 1.25f, 0);
 
         GameObject objcet3 = Instantiate(colliderObject, cellParent);
         objcet3.transform.position = new Vector3(0, 0, 0);
@@ -110,7 +162,7 @@ public class CellManager : MonoBehaviour
     public void GenerateCells()
     {
         allCellsAvailability = new List<int>[size.x * size.y];
-        
+
         for (int i = 0; i < size.y; i++)
         {
             for (int j = 0; j < size.x; j++)
@@ -121,7 +173,7 @@ public class CellManager : MonoBehaviour
                     listOfAllCells.Add(cells[k].cellID);
                 }
                 GameObject cellHolder = Instantiate(cellHolderPrefab, roomParent);
-                cellHolder.GetComponent<CellHolder>().SpawnCellHolder(new Vector2(j, i),i*size.x + j);
+                cellHolder.GetComponent<CellHolder>().SpawnCellHolder(new Vector2(j, i), i * size.x + j);
                 cellHolder.GetComponent<CellHolder>().SpawnCell(new Vector2(j, i), cells[Random.Range(0, cells.Count)]);
                 cellHolders.Add(cellHolder);
                 allCellsAvailability[i * size.x + j] = listOfAllCells;
@@ -187,34 +239,34 @@ public class CellManager : MonoBehaviour
 
     private void GenerateWalls()
     {
-        if(wallsCreated.Count != 0)
+        if (wallsCreated.Count != 0)
         {
-            for (int i = wallsCreated.Count-1; i >= 0; i--)
+            for (int i = wallsCreated.Count - 1; i >= 0; i--)
             {
                 Destroy(wallsCreated[i]);
                 wallsCreated.RemoveAt(i);
             }
         }
         float scale = 5;
-        for(float i = 0; i < size.x; i+= scale)
+        for (float i = 0; i < size.x; i += scale)
         {
             GameObject mainWall = Instantiate(walls[Random.Range(0, walls.Count)], roomParent);
-            mainWall.transform.position = new Vector3((i-0.5f) + (scale / 2),(size.y-0.5f)+ 0.25f*scale);
+            mainWall.transform.position = new Vector3((i - 0.5f) + (scale / 2), (size.y - 0.5f) + 0.25f * scale);
             wallsCreated.Add(mainWall);
             GameObject topOfWall1 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)], roomParent);
-            topOfWall1.transform.position = new Vector3((i-0.5f)+ 0.25f*scale, size.y+0.125f*scale + 2,-0.01f);
+            topOfWall1.transform.position = new Vector3((i - 0.5f) + 0.25f * scale, size.y + 0.125f * scale + 2, -0.01f);
             wallsCreated.Add(topOfWall1);
             GameObject topOfWall2 = Instantiate(topOfWalls[Random.Range(0, topOfWalls.Count)], roomParent);
-            topOfWall2.transform.position = new Vector3((i - 0.5f) + 0.25f * scale + scale/2, size.y+0.125f*scale + 2,-0.01f);
+            topOfWall2.transform.position = new Vector3((i - 0.5f) + 0.25f * scale + scale / 2, size.y + 0.125f * scale + 2, -0.01f);
             wallsCreated.Add(topOfWall2);
         }
-        for (float i = 0; i < size.y + scale/2; i+= scale / 2)
+        for (float i = 0; i < size.y + scale / 2; i += scale / 2)
         {
             GameObject sideWall = Instantiate(sideWalls[Random.Range(0, sideWalls.Count)], roomParent);
-            sideWall.transform.position = new Vector3(-1,i+0.75f,-0.01f);
+            sideWall.transform.position = new Vector3(-1, i + 0.75f, -0.01f);
             wallsCreated.Add(sideWall);
             GameObject sideWall2 = Instantiate(sideWalls[Random.Range(0, sideWalls.Count)], roomParent);
-            sideWall2.transform.position = new Vector3(size.x, i+0.75f, -0.01f);
+            sideWall2.transform.position = new Vector3(size.x, i + 0.75f, -0.01f);
             wallsCreated.Add(sideWall2);
         }
         for (float i = 0; i < size.x; i += scale)
@@ -251,13 +303,13 @@ public class CellManager : MonoBehaviour
         int currentLowest = 9999;
         int lowestIndex = 0;
         List<int> cellsWithLowest = new List<int>();
-        for(int i = 0; i < allCellsAvailability.Length; i++)
+        for (int i = 0; i < allCellsAvailability.Length; i++)
         {
-            if(allCellsAvailability[i].Count == currentLowest && allCellsAvailability[i].Count > 1)
+            if (allCellsAvailability[i].Count == currentLowest && allCellsAvailability[i].Count > 1)
             {
                 cellsWithLowest.Add(i);
             }
-            if(allCellsAvailability[i].Count < currentLowest && allCellsAvailability[i].Count > 1)
+            if (allCellsAvailability[i].Count < currentLowest && allCellsAvailability[i].Count > 1)
             {
                 cellsWithLowest.Clear();
                 cellsWithLowest.Add(i);
@@ -265,9 +317,9 @@ public class CellManager : MonoBehaviour
                 lowestIndex = i;
             }
         }
-        if(lowestIndex == 0)
+        if (lowestIndex == 0)
         {
-            lowestIndex = cellsWithLowest[Random.Range(0,cellsWithLowest.Count)];
+            lowestIndex = cellsWithLowest[Random.Range(0, cellsWithLowest.Count)];
         }
 
         //Collapse Cell to a single state
@@ -278,19 +330,19 @@ public class CellManager : MonoBehaviour
 
         //Find neighbors
         List<int> neighboringCells = new List<int>();
-        if(lowestIndex - size.x >= 0)
+        if (lowestIndex - size.x >= 0)
         {
             neighboringCells.Add(lowestIndex - size.x);
         }
-        if(lowestIndex % size.x != 0)
+        if (lowestIndex % size.x != 0)
         {
             neighboringCells.Add(lowestIndex - 1);
         }
-        if(lowestIndex % size.x < (lowestIndex+1) % size.x)
+        if (lowestIndex % size.x < (lowestIndex + 1) % size.x)
         {
             neighboringCells.Add(lowestIndex + 1);
         }
-        if(lowestIndex + size.x < size.x*size.y)
+        if (lowestIndex + size.x < size.x * size.y)
         {
             neighboringCells.Add(lowestIndex + size.x);
         }
@@ -307,13 +359,13 @@ public class CellManager : MonoBehaviour
     public void UpdateCellBasedOnNeighbor(int cellToBeUpdated, int neighboringCell)
     {
         List<int> cellsAvaliable = new List<int>();
-        for(int i = 0; i < allCellsAvailability[cellToBeUpdated].Count; i++)
+        for (int i = 0; i < allCellsAvailability[cellToBeUpdated].Count; i++)
         {
             bool sharesID = true;
-            for(int j = 0; j < allCellsAvailability[neighboringCell].Count; j++)
+            for (int j = 0; j < allCellsAvailability[neighboringCell].Count; j++)
             {
                 bool hasSimilar = false;
-                for(int k = 0; k < cells[allCellsAvailability[cellToBeUpdated][i]].validCellNeighbors.Count; k++)
+                for (int k = 0; k < cells[allCellsAvailability[cellToBeUpdated][i]].validCellNeighbors.Count; k++)
                 {
                     for (int l = 0; l < cells[allCellsAvailability[neighboringCell][j]].validCellNeighbors.Count; l++)
                     {
@@ -327,21 +379,21 @@ public class CellManager : MonoBehaviour
                         sharesID = false;
                     }
                 }
-                
-                
+
+
             }
-            if(sharesID)
+            if (sharesID)
             {
                 cellsAvaliable.Add(allCellsAvailability[cellToBeUpdated][i]);
             }
         }
 
 
-        if(cellsAvaliable.Count != allCellsAvailability[cellToBeUpdated].Count)
+        if (cellsAvaliable.Count != allCellsAvailability[cellToBeUpdated].Count)
         {
-            
+
             allCellsAvailability[cellToBeUpdated] = cellsAvaliable;
-            
+
             //Find neighbors
             int lowestIndex = cellToBeUpdated;
             List<int> neighboringCells = new List<int>();
@@ -401,20 +453,20 @@ public class CellManager : MonoBehaviour
         }
 
         //Compare cells and remove ones that can't work in the neighbor.
-        for(int i = 0; i < neighboringCells.Count; i++)
+        for (int i = 0; i < neighboringCells.Count; i++)
         {
             int neighborCount = allCellsAvailability[neighboringCells[i]].Count;
             if (allCellsAvailability[neighboringCells[i]].Count > 1)
             {
                 List<int> possibleCells = new List<int>();
-                for(int j = 0; j < allCellsAvailability[targetCell].Count; j++)
+                for (int j = 0; j < allCellsAvailability[targetCell].Count; j++)
                 {
                     for (int k = 0; k < cells[allCellsAvailability[targetCell][j]].validCellNeighbors.Count; k++)
                     {
                         possibleCells.Add(cells[allCellsAvailability[targetCell][j]].validCellNeighbors[k]);
                     }
                 }
-                for(int j = 0; j < allCellsAvailability[neighboringCells[i]].Count; j++)
+                for (int j = 0; j < allCellsAvailability[neighboringCells[i]].Count; j++)
                 {
                     bool sharesAny = false;
                     for (int k = 0; k < possibleCells.Count; k++)
@@ -430,7 +482,7 @@ public class CellManager : MonoBehaviour
                         allCellsAvailability[neighboringCells[i]].Remove(allCellsAvailability[neighboringCells[i]][j]);
                     }
                 }
-                
+
             }
             if (allCellsAvailability[neighboringCells[i]].Count != neighborCount)
             {
@@ -443,11 +495,11 @@ public class CellManager : MonoBehaviour
 
     public void ChangeCellsToMajority()
     {
-        for(int i = 0; i < allCellsAvailability.Length; i++)
+        for (int i = 0; i < allCellsAvailability.Length; i++)
         {
             int amountTotal = 0;
             int[] amountAround = new int[cells.Count];
-            if(i - size.x >= 0 && i % size.x != 0)
+            if (i - size.x >= 0 && i % size.x != 0)
             {
                 amountAround[cells[allCellsAvailability[i - size.x - 1][0]].cellID]++;
                 amountTotal++;
@@ -460,39 +512,39 @@ public class CellManager : MonoBehaviour
             if (i - size.x >= 0 && i % size.x < (i + 1) % size.x)
             {
                 amountAround[cells[allCellsAvailability[i - size.x + 1][0]].cellID]++;
-                                amountTotal++;
+                amountTotal++;
             }
 
             if (i % size.x != 0)
             {
                 amountAround[cells[allCellsAvailability[i - 1][0]].cellID]++;
-                                amountTotal++;
+                amountTotal++;
             }
-            if(i % size.x < (i + 1) % size.x)
+            if (i % size.x < (i + 1) % size.x)
             {
                 amountAround[cells[allCellsAvailability[i + 1][0]].cellID]++;
-                                amountTotal++;
+                amountTotal++;
             }
 
             if (i + size.x < allCellsAvailability.Length && i % size.x != 0)
             {
                 amountAround[cells[allCellsAvailability[i + size.x - 1][0]].cellID]++;
-                                amountTotal++;
+                amountTotal++;
             }
             if (i + size.x < allCellsAvailability.Length)
             {
                 amountAround[cells[allCellsAvailability[i + size.x][0]].cellID]++;
-                                amountTotal++;
+                amountTotal++;
             }
             if (i + size.x + 1 < allCellsAvailability.Length && i % size.x < (i + 1) % size.x)
             {
                 amountAround[cells[allCellsAvailability[i + size.x + 1][0]].cellID]++;
-                                amountTotal++;
+                amountTotal++;
             }
 
             int maxNum = 0;
             int maxIndex = 0;
-            for(int j = 0; j < amountAround.Length; j++)
+            for (int j = 0; j < amountAround.Length; j++)
             {
                 if (amountAround[j] > maxNum)
                 {
@@ -515,7 +567,7 @@ public class CellManager : MonoBehaviour
 
     public void ColorCells()
     {
-        for(int i = 0; i < allCellsAvailability.Length; i++)
+        for (int i = 0; i < allCellsAvailability.Length; i++)
         {
             cellHolders[i].GetComponent<CellHolder>().SpawnCell(new Vector2(i % size.x, Mathf.FloorToInt(i / size.x)), cells[allCellsAvailability[i][0]]);
         }

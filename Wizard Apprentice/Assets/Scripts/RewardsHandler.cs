@@ -17,7 +17,6 @@ public class RewardsHandler : MonoBehaviour
     [Range(0, 100)] public float[] chanceTeir1 = new float[3];
     [Range(0, 100)] public float[] chanceTeir2 = new float[3];
     [Range(0, 100)] public float[] chanceTeir3 = new float[3];
-    [SerializeField] AnimationCurve percentageCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f, 0.5f), new Keyframe(1, 1));
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [SerializeField] Image[] potionImage = new Image[3];
