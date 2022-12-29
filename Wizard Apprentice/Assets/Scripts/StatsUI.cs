@@ -55,7 +55,7 @@ public class StatsUI : MonoBehaviour
         if (activeIngame)
         {
             if (!healthTMP.gameObject.activeSelf)
-                healthTMP.gameObject.SetActive(true);
+                healthTMP.gameObject.SetActive(true);   
 
             timer += Time.deltaTime;
             if (timer >= 0.05f)
