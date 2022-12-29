@@ -57,7 +57,7 @@ public class Drag : MonoBehaviour
             inventory.cardHolders[unitIndex].transform.localScale = new Vector3(cardHoverScale, cardHoverScale, 1);
         }
 
-        if (!inventory.GetTrashCanIsOff())
+        if (!inventory.GetTrashCanIsOff() && inventory.GetInvAmount() > 1)
             inventory.trashCan.gameObject.SetActive(true);
     }
 
@@ -102,7 +102,7 @@ public class Drag : MonoBehaviour
         }
         inventory.trashCan.transform.localScale = new Vector3(1f, 1f, 1f);
         float trashCancover = (UnitsHoveringOther(transform.position, new Vector2(transform.GetComponent<RectTransform>().rect.width * transform.localScale.x, transform.GetComponent<RectTransform>().rect.height * transform.localScale.y), inventory.trashCan.transform.position, new Vector2(inventory.trashCan.GetComponent<RectTransform>().rect.width * transform.localScale.x, inventory.trashCan.GetComponent<RectTransform>().rect.height * transform.localScale.y)));
-        if (trashCancover > largestCover)
+        if (trashCancover > largestCover && inventory.trashCan.gameObject.activeSelf)
         {
             for (int i = 0; i < inventory.cardHolders.Count; i++)
             {

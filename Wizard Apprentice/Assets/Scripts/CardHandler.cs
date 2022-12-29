@@ -61,7 +61,7 @@ public class CardHandler : MonoBehaviour
     {
         bool returnValue = false;
 
-        if (cards[index].GetType() == card.GetType())
+        if (cards[index]?.GetType() == card.GetType())
             returnValue = true;
 
         return returnValue;
@@ -121,6 +121,12 @@ public class CardHandler : MonoBehaviour
                 cards[i] = cardObjs[i].GetComponent<ICard>();
                 cardCycle[i] = cardObjs[i].GetComponent<Image>();
                 animators[i] = cardObjs[i].GetComponent<Animator>();
+            }
+            else
+            {
+                cards[i] = null;
+                cardCycle[i] = null;
+                animators[i] = null;
             }
 
         }

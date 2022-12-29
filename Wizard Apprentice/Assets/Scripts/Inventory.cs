@@ -38,6 +38,21 @@ public class Inventory : MonoBehaviour
     {
         return trashCanOff;
     }
+    
+    public int GetInvAmount()
+    {
+        int returnValue = 0;
+
+        for (int i = 0; i < cardHolders.Count; i++)
+        {
+            if (cardHolders[i].cardObject != null)
+            {
+                returnValue++;
+            }
+        }
+
+        return returnValue;
+    }
 
     public void CardDestroyed()
     {
