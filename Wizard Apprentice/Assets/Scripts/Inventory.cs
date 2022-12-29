@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
     {
         return trashCanOff;
     }
-    
+
     public int GetInvAmount()
     {
         int returnValue = 0;
@@ -62,8 +62,11 @@ public class Inventory : MonoBehaviour
 
     public void TurnOnTrashcan()
     {
-        trashcanAlwaysOn = true;
-        trashCan.gameObject.SetActive(true);
+        if (GetInvAmount() > 1)
+        {
+            trashcanAlwaysOn = true;
+            trashCan.gameObject.SetActive(true);
+        }
     }
     public void TurnOffTrashcan()
     {

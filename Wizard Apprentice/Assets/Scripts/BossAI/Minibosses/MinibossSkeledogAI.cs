@@ -86,7 +86,8 @@ public class MinibossSkeledogAI : MonoBehaviour
         movement = (playerTarget.transform.position - gameObject.transform.position).normalized;
         DashIndicator();
         yield return new WaitForSeconds(0.5f);
-        anim.SetTrigger("StartDash");
+        if (anim != null)
+            anim.SetTrigger("StartDash");
         rb2d.velocity = movement * moveSpeed;
 
         canHitWall = true;
@@ -119,7 +120,8 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     private void HasHitWall()
     {
-        anim.SetTrigger("StopDash");
+        if (anim != null)
+            anim.SetTrigger("StopDash");
         canHitWall = false;
         timer = 0;
         SoundManager.Instance.PlayAudio(rockFall, audioVolume);

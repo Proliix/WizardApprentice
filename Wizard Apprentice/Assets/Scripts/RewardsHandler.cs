@@ -22,6 +22,7 @@ public class RewardsHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [SerializeField] Image[] potionImage = new Image[3];
     [Header("Card Rewards")]
+    [SerializeField] AudioClip invFullSound;
     [SerializeField] bool CardDescriptionTitles = false;
     [SerializeField] GameObject cardScreenParent;
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
@@ -157,12 +158,9 @@ public class RewardsHandler : MonoBehaviour
     void ResetInventoryObj()
     {
         resetAfterMove = false;
-        if (CanAddCards())
+        for (int i = 0; i < cardButtons.Length; i++)
         {
-            for (int i = 0; i < cardButtons.Length; i++)
-            {
-                cardButtons[i].interactable = true;
-            }
+            cardButtons[i].interactable = true;
         }
         inventory.TurnOffTrashcan();
         skipButton.interactable = true;
@@ -295,7 +293,10 @@ public class RewardsHandler : MonoBehaviour
             StartCoroutine(UpdateCardsAfterTime(index));
         }
         else
+        {
+            SoundManager.Instance.PlayAudio(invFullSound);
             inventoryFullAnim.SetTrigger("Shake");
+        }
     }
 
     private void UpdatePlayerCards(int index)
