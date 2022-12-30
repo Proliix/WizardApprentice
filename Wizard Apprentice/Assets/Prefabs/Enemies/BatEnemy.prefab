@@ -174,7 +174,7 @@ Transform:
   m_GameObject: {fileID: 2664954099150742148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.66, y: 0.66, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2664954100238016235}
@@ -301,8 +301,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: a6e2f2c7d43e7a84fb32daf00c24d531, type: 3}
-  maxHP: 10
-  hp: 10
+  maxHP: 12
+  hp: 12
   hitCooldown: 1
   removeSelf: 1
   hasHitCooldown: 0

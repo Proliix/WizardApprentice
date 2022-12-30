@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MiniBoss2Room
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 3748655861711089383, guid: c2d3977f072a1a540b9321aa9a5d6786, type: 3}
-  roomSize: {x: 20, y: 20}
+  roomSize: {x: 30, y: 30}
   roomDifficulty: 0
   generateRandomRoom: 1
   roomAlreadyHasDoor: 0
+  musicType: 0
