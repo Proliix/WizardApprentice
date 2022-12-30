@@ -915,8 +915,8 @@ MonoBehaviour:
   - {fileID: 2054218411210300874}
   - {fileID: 5421242720009971626}
   - {fileID: 5135300080996248865}
-  patternStartUpDelay: 5
-  randomStartUpDelay: 2.5
+  patternStartUpDelay: 1
+  randomStartUpDelay: 0.5
   lightIntensityDelaySpeed: 3
   HP: 0
   maxHP: 0
