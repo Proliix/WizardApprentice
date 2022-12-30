@@ -6,6 +6,10 @@ public class CrossbowArmor : MonoBehaviour
 {
     BulletHandler bulletHandler;
     GameObject playerObject;
+
+    [SerializeField] Animator animator;
+    [SerializeField] Vector2 roomSize;
+
     [SerializeField] Sprite arrowImage;
     [SerializeField] float bigArrowHealth;
     [SerializeField] float bigArrowChargeTime;
@@ -82,6 +86,7 @@ public class CrossbowArmor : MonoBehaviour
 
         if (state == CurrentState.idle)
         {
+            UpdateAnimationBasedOnDirection((Vector2)playerObject.transform.position - (Vector2)this.transform.position);
             timeSinceLastTrippleShot += Time.deltaTime;
             timeSinceLastArrowRain += Time.deltaTime;
             timeSinceLastBigArrow += Time.deltaTime;
@@ -112,6 +117,16 @@ public class CrossbowArmor : MonoBehaviour
             if (Vector2.Distance(playerObject.transform.position, (Vector2)currentDestination) < playerScaredRange || Vector2.Distance(playerObject.transform.position, (Vector2)transform.position) > playerWithinRange)
             {
                 currentDestination = (Vector2)playerObject.transform.position + (Random.insideUnitCircle.normalized * preferredRange);
+                int iter = 0;
+                while (currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                {
+                    currentDestination = (Vector2)playerObject.transform.position + (Random.insideUnitCircle.normalized * (preferredRange));
+                    if (iter > 50)
+                    {
+                        currentDestination = playerObject.transform.position;
+                        break;
+                    }
+                }
             }
             if (hasDestination)
             {
@@ -119,11 +134,32 @@ public class CrossbowArmor : MonoBehaviour
                 if (Vector2.Distance(transform.position, currentDestination) < distanceToCheckNewDestination)
                 {
                     currentDestination = (Vector2)playerObject.transform.position + (Random.insideUnitCircle.normalized * preferredRange);
+                    int iter = 0;
+                    while (currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                    {
+                        currentDestination = (Vector2)playerObject.transform.position + (Random.insideUnitCircle.normalized * (preferredRange));
+                        if (iter > 50)
+                        {
+                            currentDestination = playerObject.transform.position;
+                            break;
+                        }
+                    }
                 }
             }
             else
             {
+
                 currentDestination = (Vector2)playerObject.transform.position + (Random.insideUnitCircle.normalized * preferredRange);
+                int iter = 0;
+                while (currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                {
+                    currentDestination = (Vector2)playerObject.transform.position + (Random.insideUnitCircle.normalized * (preferredRange));
+                    if (iter > 50)
+                    {
+                        currentDestination = playerObject.transform.position;
+                        break;
+                    }
+                }
                 hasDestination = true;
             }
         }
@@ -179,6 +215,8 @@ public class CrossbowArmor : MonoBehaviour
         for(int i = 0; i < arrowRainAmount; i++)
         {
             Vector2 arrowRainPos = (Vector2)playerObject.transform.position + Random.insideUnitCircle * arrowRainDistanceAroundPlayer;
+            arrowRainPos.x = Mathf.Clamp(arrowRainPos.x,0,roomSize.x);
+            arrowRainPos.y = Mathf.Clamp(arrowRainPos.y,0,roomSize.y);
             AttackIndicator.CreateCircle(arrowRainPos, arrowRainRadius, timeToChargeArrowRain, true);
             arrowRainPositions.Add(arrowRainPos);
         }
@@ -219,5 +257,20 @@ public class CrossbowArmor : MonoBehaviour
         }
         hasDestination = false;
         
+    }
+
+    public void UpdateAnimationBasedOnDirection(Vector2 dir)
+    {
+        bool yLargest = Mathf.Abs(dir.y) > Mathf.Abs(dir.x);
+        if (!yLargest)
+        {
+            animator.SetFloat("DirX", Mathf.Sign(dir.x));
+            animator.SetFloat("DirY", 0);
+        }
+        else
+        {
+            animator.SetFloat("DirY", Mathf.Sign(dir.y));
+            animator.SetFloat("DirX", 0);
+        }
     }
 }

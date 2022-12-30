@@ -8,6 +8,8 @@ public class GreatswordArmor : MonoBehaviour
     BulletHandler bulletHandler;
     [SerializeField] Vector2 roomSize;
 
+    [SerializeField] Animator animator;
+
     CurrentState state;
 
     List<GameObject> allPieces;
@@ -124,30 +126,7 @@ public class GreatswordArmor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U) && state == CurrentState.idle)
-        {
-            StartCoroutine(StartSpinning());
-        }
-        if (Input.GetKeyDown(KeyCode.I) && state == CurrentState.idle)
-        {
-            StartCoroutine(SlashAttack());
-        }
-        if (Input.GetKeyDown(KeyCode.Y) && state == CurrentState.idle)
-        {
-            StartCoroutine(SplitPieces());
-        }
-        if (Input.GetKeyDown(KeyCode.T) && piecesAreReady)
-        {
-            StartCoroutine(SpinPieces());
-        }
-        if (Input.GetKeyDown(KeyCode.R) && piecesAreReady && state == CurrentState.idle)
-        {
-            StartCoroutine(PullInPieces());
-        }
-        if (Input.GetKeyDown(KeyCode.E) && piecesAreReady)
-        {
-            StartCoroutine(CircleAroundBoss());
-        }
+        
         float distanceToPlayer = (playerObject.transform.position - transform.position).magnitude;
         //Movement
         if (state == CurrentState.idle || state == CurrentState.spinning)
@@ -162,17 +141,38 @@ public class GreatswordArmor : MonoBehaviour
                 if (Vector2.Distance(transform.position, currentDestination) < distanceToCheckNewDestination)
                 {
                     currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * randomDistanceFromPlayer;
+                    int iter = 0;
+                    while (currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                    {
+                        currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * (randomDistanceFromPlayer + iter);
+                        if (iter > 50)
+                        {
+                            currentDestination = playerObject.transform.position;
+                            break;
+                        }
+                    }
                 }
             }
             else
             {
                 currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * randomDistanceFromPlayer;
+                int iter = 0;
+                while (currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                {
+                    currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * (randomDistanceFromPlayer + iter);
+                    if (iter > 50)
+                    {
+                        currentDestination = playerObject.transform.position;
+                        break;
+                    }
+                }
                 hasDestination = true;
             }
         }
         //Ability Check
         if(state == CurrentState.idle)
         {
+            UpdateAnimationBasedOnDirection((Vector2)playerObject.transform.position - (Vector2)this.transform.position);
             timeSinceLastSpinToWin += Time.deltaTime;
             timeSinceLastSmash += Time.deltaTime;
             timeSinceLastSlash += Time.deltaTime;
@@ -465,6 +465,7 @@ public class GreatswordArmor : MonoBehaviour
             while (Mathf.FloorToInt((currentSpinningTime + (counter * spinToWinTimeBetweenProjectiles)) / spinToWinTimeBetweenProjectiles) < Mathf.FloorToInt((currentSpinningTime + Time.deltaTime) / spinToWinTimeBetweenProjectiles))
             {
                 Vector3 dir = new Vector3(((Mathf.Cos((currentSpinningTime + (counter * spinToWinTimeBetweenProjectiles)) * spinToWinRotationsPerSecond) * 360 + Random.Range(-spinToWinRandomAngle, spinToWinRandomAngle)) * Mathf.Deg2Rad), ((Mathf.Sin((currentSpinningTime + (counter * spinToWinTimeBetweenProjectiles)) * spinToWinRotationsPerSecond) * 360 + Random.Range(-spinToWinRandomAngle, spinToWinRandomAngle)) * Mathf.Deg2Rad), 0);
+                UpdateAnimationBasedOnDirection(dir);
                 counter++;
                 bulletHandler.GetBullet(transform.position, dir, false, 10, 0.5f, 8f);
             }
@@ -473,5 +474,20 @@ public class GreatswordArmor : MonoBehaviour
         hasDestination = false;
         Destroy(circleCollider.gameObject);
         state = CurrentState.idle;
+    }
+
+    public void UpdateAnimationBasedOnDirection(Vector2 dir)
+    {
+        bool yLargest = Mathf.Abs(dir.y) > Mathf.Abs(dir.x);
+        if (!yLargest)
+        {
+            animator.SetFloat("DirX", Mathf.Sign(dir.x));
+            animator.SetFloat("DirY", 0);
+        }
+        else
+        {
+            animator.SetFloat("DirY", Mathf.Sign(dir.y));
+            animator.SetFloat("DirX", 0);
+        }
     }
 }

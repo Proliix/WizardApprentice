@@ -44,6 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: NoLight
+    uniqueID: 3580469761
+    locked: 0
   - name: Bullet
     uniqueID: 1614883497
+    locked: 0
+  - name: UI
+    uniqueID: 1905867239
     locked: 0
