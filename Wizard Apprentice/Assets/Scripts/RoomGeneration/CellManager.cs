@@ -9,6 +9,7 @@ public class CellManager : MonoBehaviour
     [SerializeField] GameObject cellHolderPrefab;
     [SerializeField] List<Cell> cells;
     [SerializeField] Sprite slicedTileSprite;
+    [SerializeField] Sprite spriteMaskSprite;
     [SerializeField] GameObject tileObject;
     [SerializeField] GameObject colliderObject;
     [SerializeField] GameObject topWall, rightWall, leftWall, botWall, cornerWallTop, cornerWallBot;
@@ -134,6 +135,13 @@ public class CellManager : MonoBehaviour
         sliced.GetComponent<SpriteRenderer>().sprite = slicedTileSprite;
         sliced.transform.position = Vector2.zero + size / 2;
         sliced.GetComponent<SpriteRenderer>().size = size;
+        GameObject mask = new GameObject();
+        mask.AddComponent<SpriteMask>();
+        mask.GetComponent<SpriteMask>().sprite = spriteMaskSprite;
+        mask.transform.parent = sliced.transform;
+        mask.name = "Sprite mask";
+        mask.transform.localPosition = Vector3.zero;
+        mask.transform.localScale = new Vector3(size.x, size.y, 0);
     }
 
     public void GenerateColliderWalls(Vector2Int size, Transform cellParent)
