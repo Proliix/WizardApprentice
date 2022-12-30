@@ -1626,7 +1626,11 @@ MonoBehaviour:
   - {x: 0.18809201, y: -0.5137318, z: 0}
   m_ShapePathHash: -425833094
   m_Mesh: {fileID: 0}
+<<<<<<< Updated upstream
   m_InstanceId: 56120
+=======
+  m_InstanceId: 145750
+>>>>>>> Stashed changes
 --- !u!1 &1113643703701408868
 GameObject:
   m_ObjectHideFlags: 0
@@ -3909,6 +3913,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6507380298352962233}
     m_Modifications:
+    - target: {fileID: -870669405672397209, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: torchType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3973,6 +3981,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6507380298352962233}
     m_Modifications:
+    - target: {fileID: -870669405672397209, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: torchType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -4039,7 +4051,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1944385186817018585, guid: 5b147de6818ff524896615e8b7e288c2, type: 3}
       propertyPath: m_InstanceId
+<<<<<<< Updated upstream
       value: -50280
+=======
+      value: -556736
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 1944385186817018585, guid: 5b147de6818ff524896615e8b7e288c2, type: 3}
       propertyPath: m_HasRenderer
@@ -4165,6 +4181,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6507380298352962233}
     m_Modifications:
+    - target: {fileID: -870669405672397209, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: torchType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -4485,6 +4505,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6507380298352962233}
     m_Modifications:
+    - target: {fileID: -870669405672397209, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: torchType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_RootOrder
       value: -1
