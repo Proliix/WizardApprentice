@@ -57,7 +57,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 1279236523590103589}
   - component: {fileID: 1279236523590103611}
   - component: {fileID: 1279236523590103610}
+  - component: {fileID: -4970093093364781704}
   m_Layer: 6
   m_Name: TrapEnemyRotate
   m_TagString: Enemy
@@ -107,7 +108,7 @@ Transform:
   m_Children:
   - {fileID: 1279236523482760078}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1279236523590103591
 MonoBehaviour:
@@ -129,6 +130,7 @@ MonoBehaviour:
   bulletAmount: 1
   angleChange: 6
   timeBetweenShots: 0.1
+  startingAngle: 0
 --- !u!212 &1279236523590103589
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -240,3 +242,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.133677, y: 1.1407115}
   m_EdgeRadius: 0
+--- !u!114 &-4970093093364781704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279236523590103590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000a92a4160
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 181518

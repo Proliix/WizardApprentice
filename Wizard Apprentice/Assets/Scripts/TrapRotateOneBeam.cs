@@ -16,7 +16,7 @@ public class TrapRotateOneBeam : MonoBehaviour
     [SerializeField] float angleChange = 3;
     [SerializeField] float timeBetweenShots = 0.2f;
 
-    float aoeAngle = 0;
+    [SerializeField] float startingAngle = 0;
     bool isShooting;
 
     
@@ -44,8 +44,8 @@ public class TrapRotateOneBeam : MonoBehaviour
 
         for (int i = 0; i < shootingAmount; i++)
         {
-           aoeAngle += angleChange;
-            bulletHandler.GetCircleShot(bulletAmount, gameObject, false, aoeAngle, damage, bulletSize, bulletSpeed);
+           startingAngle += angleChange;
+            bulletHandler.GetCircleShot(bulletAmount, gameObject, false, startingAngle, damage, bulletSize, bulletSpeed);
             yield return new WaitForSeconds(timeBetweenShots);
 
         }

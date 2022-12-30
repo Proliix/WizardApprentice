@@ -99,7 +99,7 @@ public class RoomManager : MonoBehaviour
         {
             for (int i = 0; i < enemyObjects.Count; i++)
             {
-                enemyObjects[i].GetComponent<Health>().AddMaxHealth(currentFloor * 0.75f, true);
+                enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(currentFloor * 0.75f, true);
             }
         }
         enemyManager.enemyObjects = enemyObjects;
