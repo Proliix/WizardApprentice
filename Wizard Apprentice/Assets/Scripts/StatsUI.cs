@@ -45,6 +45,7 @@ public class StatsUI : MonoBehaviour
         activeIngame = PlayerPrefs.GetInt("StatsInGame") > 0 ? true : false;
         holderChild = gameObject.transform.GetChild(0).gameObject;
         holderChild.SetActive(activeIngame);
+        healthTMP.gameObject.SetActive(activeIngame);
         UpdateStats();
     }
 
@@ -53,6 +54,9 @@ public class StatsUI : MonoBehaviour
 
         if (activeIngame)
         {
+            if (!healthTMP.gameObject.activeSelf)
+                healthTMP.gameObject.SetActive(true);   
+
             timer += Time.deltaTime;
             if (timer >= 0.05f)
             {
@@ -64,6 +68,7 @@ public class StatsUI : MonoBehaviour
         else
         {
             holderChild.SetActive(PauseScreen.activeSelf);
+            healthTMP.gameObject.SetActive(PauseScreen.activeSelf);
             if (PauseScreen.activeSelf)
             {
                 CheckStats();
@@ -97,14 +102,14 @@ public class StatsUI : MonoBehaviour
     }
     private void UpdateStats()
     {
-     
+
         string dmgText = "<color=red>DG : " + Mathf.RoundToInt(damage * 100) + "%</color>";
         damageTMP.SetText(dmgText);
-        
+
 
         string attackSpeedText = "<color=blue>AS : " + Mathf.RoundToInt(attackSpeed * 100) + "%</color>";
         attackSpeedTMP.SetText(attackSpeedText);
-        
+
 
         string critMultText = "<color=#F334DA>CD : " + Mathf.RoundToInt(critDmgMultiplier * 100) + "%</color>";
         critDmgMultiplierTMP.SetText(critMultText);

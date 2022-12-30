@@ -54,9 +54,12 @@ public class RoomManager : MonoBehaviour
     [SerializeField] AudioClip roomClearSound;
     [SerializeField] float audioVolume = 1;
     [SerializeField] ParticleSystem particleSystem;
+
+    Inventory inv;
     // Start is called before the first frame update
     void Start()
     {
+        inv = gameObject.GetComponent<Inventory>();
         enemyObjects = new List<GameObject>();
         LoadNewRoom(5);
     }
@@ -105,7 +108,7 @@ public class RoomManager : MonoBehaviour
         enemyManager.enemyObjects = enemyObjects;
         if (!room.roomAlreadyHasDoor)
         {
-            doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y - 0.5f, 0), Quaternion.identity, currentRoomParent.transform);
+            doorObject = Instantiate(exitDoorPrefab, new Vector3(room.roomSize.x / 2, room.roomSize.y + 0.3f, 0), Quaternion.identity, currentRoomParent.transform);
         }
         playerObject.transform.position = new Vector3(room.roomSize.x / 2, 1, 0);
     }
@@ -182,16 +185,16 @@ public class RoomManager : MonoBehaviour
             enemyObjects.RemoveAt(i);
         }
         enemyObjects.Clear();
-        if (enemyCount!=0 && currentRoomType != 5)
+        if (enemyCount != 0 && currentRoomType != 5)
         {
 
-        OpenDoor();
+            OpenDoor();
         }
     }
 
     public void RemoveEnemy(GameObject enemyObject)
     {
-        
+
         Debug.Log("Removing enemy " + enemyObject.name);
         enemyObjects.Remove(enemyObject);
         enemyManager.enemyObjects = enemyObjects;
@@ -207,18 +210,27 @@ public class RoomManager : MonoBehaviour
         SoundManager.Instance.PlayAudio(roomClearSound, audioVolume);
         ActivateParticleSystem();
         if (!currentRoom.roomAlreadyHasDoor)
-            doorObject.GetComponentInChildren<SpriteRenderer>().sprite = openDoorImage;
+            doorObject.GetComponentInChildren<Animator>().SetTrigger("OpenDoor");
     }
 
     public void LoadNewRoom(int roomType)
     {
-        
+
         bulletHandler.ResetAll();
 
         if (roomType != 4)
         {
             cardHandler.isActive = true;
             enemyManager.ActivateEnemiesAfterTime();
+        }
+
+        if (roomType == 5)
+        {
+            inv.TrashCanIsOff(true);
+        }
+        else if (inv.GetTrashCanIsOff())
+        {
+            inv.TrashCanIsOff(false);
         }
 
         switch (roomType)
@@ -252,19 +264,19 @@ public class RoomManager : MonoBehaviour
                 LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
                 break;
         }
-       
+
         roomSelectScreenGenerator.roomSelectObject.SetActive(false);
     }
 
     public void ActivateParticleSystem()
     {
-      
-            // Set the number of particles to emit for this burst
-            particleSystem.Emit(10);
-        
+
+        // Set the number of particles to emit for this burst
+        particleSystem.Emit(10);
+
     }
 
-   
+
     IEnumerator PauseEnemies()
     {
         originalTimescale = Time.timeScale;
@@ -274,9 +286,9 @@ public class RoomManager : MonoBehaviour
         yield return new WaitForSeconds(pauseDuration);
 
         Time.timeScale = originalTimescale;
-        
+
     }
 
-   
+
 
 }

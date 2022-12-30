@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviour
     public event CardRemovedDelegate cardRemovedEvent;
 
     bool trashcanAlwaysOn;
+    bool trashCanOff;
 
     void Start()
     {
@@ -26,6 +27,31 @@ public class Inventory : MonoBehaviour
         {
             cardHolders[i].index = i;
         }
+    }
+
+    public void TrashCanIsOff(bool value)
+    {
+        trashCanOff = value;
+    }
+
+    public bool GetTrashCanIsOff()
+    {
+        return trashCanOff;
+    }
+
+    public int GetInvAmount()
+    {
+        int returnValue = 0;
+
+        for (int i = 0; i < cardHolders.Count; i++)
+        {
+            if (cardHolders[i].cardObject != null)
+            {
+                returnValue++;
+            }
+        }
+
+        return returnValue;
     }
 
     public void CardDestroyed()
@@ -36,8 +62,11 @@ public class Inventory : MonoBehaviour
 
     public void TurnOnTrashcan()
     {
-        trashcanAlwaysOn = true;
-        trashCan.gameObject.SetActive(true);
+        if (GetInvAmount() > 1)
+        {
+            trashcanAlwaysOn = true;
+            trashCan.gameObject.SetActive(true);
+        }
     }
     public void TurnOffTrashcan()
     {
@@ -73,7 +102,7 @@ public class Inventory : MonoBehaviour
                     cardObject.GetComponent<Drag>().inventory = this;
                     cardHolders[i].cardObject = cardObject;
                     cardObject.GetComponent<Drag>().lastObjectAttachedTo = cardHolders[i].gameObject;
-                    if(i < 4)
+                    if (i < 4)
                     {
                         cardHandler.cardObjs[i] = cardObject;
                         cardHandler.UpdateInterface();

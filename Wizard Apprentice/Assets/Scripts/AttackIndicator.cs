@@ -29,6 +29,7 @@ public class AttackIndicator : MonoBehaviour
         Vector2 playerDir = (targetPosition - startPosition).normalized;
         renderer.sprite = squareSprite;
         renderer.color = new Color(1,0,0,0.5f);
+        renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         indicator.transform.position = startPosition + (playerDir * scale.y * 0.5f);
         indicator.transform.localScale = scale;
         float theta = Mathf.Atan2(targetPosition.y - startPosition.y, startPosition.x - targetPosition.x);
@@ -48,6 +49,7 @@ public class AttackIndicator : MonoBehaviour
         SpriteRenderer renderer = indicator.AddComponent<SpriteRenderer>();
         renderer.sprite = circleSprite;
         renderer.color = new Color(1,0,0,0.5f);
+        renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         indicator.transform.position = startPosition;
         indicator.transform.localScale = new Vector2(radius,radius);
         if(createExpandingCircle)
@@ -65,6 +67,7 @@ public class AttackIndicator : MonoBehaviour
         SpriteRenderer renderer = indicator.AddComponent<SpriteRenderer>();
         renderer.sprite = squareSprite;
         renderer.color = new Color(1, 0, 0, 0.7f);
+        renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         indicator.transform.position = startPosition + (playerDir * scale.y * 0.5f);
         float theta = Mathf.Atan2(targetPosition.y - startPosition.y, startPosition.x - targetPosition.x);
         if (theta < 0.0)
@@ -87,6 +90,7 @@ public class AttackIndicator : MonoBehaviour
         SpriteRenderer renderer = indicator.AddComponent<SpriteRenderer>();
         renderer.sprite = circleSprite;
         renderer.color = new Color(1, 0, 0, 0.7f);
+        renderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         indicator.transform.position = startPosition;
         while (currentTime < timeUntilFull)
         {

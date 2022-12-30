@@ -11,7 +11,7 @@ public class MinibossSkeledogAI : MonoBehaviour
     [SerializeField] AudioClip rockFall;
     [SerializeField] AudioClip groundRumble;
     [SerializeField] float audioVolume = 1;
-    
+
 
 
     [Header("AOE Variables")]
@@ -34,7 +34,8 @@ public class MinibossSkeledogAI : MonoBehaviour
     EnemyManager enemyManager;
     Health health;
     Rigidbody2D rb2d;
-
+    Animator anim;
+    bool canHitWall;
     Vector2 movement;
 
     void Start()
@@ -45,7 +46,7 @@ public class MinibossSkeledogAI : MonoBehaviour
         enemyManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemyManager>();
         playerTarget = GameObject.FindGameObjectWithTag("Player");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
         canMoveIndic = true;
         canDash = true;
         hasDashedOnce = false;
@@ -63,8 +64,9 @@ public class MinibossSkeledogAI : MonoBehaviour
         //    timer -= 0.1f;
         //}
 
+        if (timer > 2 && (rb2d.velocity.x < 0.25f && rb2d.velocity.x > -0.25f) && (rb2d.velocity.y < 0.25f && rb2d.velocity.y > -0.25f))
+            HasHitWall();
 
-     
 
         if (hasDashedOnce == false && enemyManager.enemiesActive)
         {
@@ -84,9 +86,12 @@ public class MinibossSkeledogAI : MonoBehaviour
         movement = (playerTarget.transform.position - gameObject.transform.position).normalized;
         DashIndicator();
         yield return new WaitForSeconds(0.5f);
-
+        if (anim != null)
+            anim.SetTrigger("StartDash");
         rb2d.velocity = movement * moveSpeed;
-        
+
+        canHitWall = true;
+
         yield return null;
     }
 
@@ -105,20 +110,28 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Wall"));
+        if (other.gameObject.CompareTag("Wall") && canHitWall && timer > 1.5f)
         {
-
-            SoundManager.Instance.PlayAudio(rockFall, audioVolume);
-         //   SoundManager.Instance.PlayAudio(groundRumble, audioVolume);
-
-            rb2d.velocity = new Vector2(0, 0);
-            StartCoroutine(AOEAttack());
-            StartCoroutine(DashAttack());
-
-            //Camera.main.GetComponent<>
+            HasHitWall();
         }
+    }
+
+    private void HasHitWall()
+    {
+        if (anim != null)
+            anim.SetTrigger("StopDash");
+        canHitWall = false;
+        timer = 0;
+        SoundManager.Instance.PlayAudio(rockFall, audioVolume);
+        //   SoundManager.Instance.PlayAudio(groundRumble, audioVolume);
+
+        rb2d.velocity = new Vector2(0, 0);
+        StartCoroutine(AOEAttack());
+        StartCoroutine(DashAttack());
+
+        //Camera.main.GetComponent<>
     }
 
     private void FlipSpriteTowardsPlayer()
@@ -138,7 +151,7 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     private void DashIndicator()
     {
-        AttackIndicator.CreateSquare(gameObject.transform.position, playerTarget.transform.position, new Vector2(4,30) , 1f, true);
+        AttackIndicator.CreateSquare(gameObject.transform.position, playerTarget.transform.position, new Vector2(4, 30), 1f, true);
     }
 
 }

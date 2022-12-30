@@ -17,11 +17,11 @@ public class RewardsHandler : MonoBehaviour
     [Range(0, 100)] public float[] chanceTeir1 = new float[3];
     [Range(0, 100)] public float[] chanceTeir2 = new float[3];
     [Range(0, 100)] public float[] chanceTeir3 = new float[3];
-    [SerializeField] AnimationCurve percentageCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(0.5f, 0.5f), new Keyframe(1, 1));
     [SerializeField] TextMeshProUGUI[] titles = new TextMeshProUGUI[3];
     [SerializeField] TextMeshProUGUI[] effectText = new TextMeshProUGUI[3];
     [SerializeField] Image[] potionImage = new Image[3];
     [Header("Card Rewards")]
+    [SerializeField] AudioClip invFullSound;
     [SerializeField] bool CardDescriptionTitles = false;
     [SerializeField] GameObject cardScreenParent;
     [SerializeField] TextMeshProUGUI[] cardTitles = new TextMeshProUGUI[3];
@@ -157,12 +157,9 @@ public class RewardsHandler : MonoBehaviour
     void ResetInventoryObj()
     {
         resetAfterMove = false;
-        if (CanAddCards())
+        for (int i = 0; i < cardButtons.Length; i++)
         {
-            for (int i = 0; i < cardButtons.Length; i++)
-            {
-                cardButtons[i].interactable = true;
-            }
+            cardButtons[i].interactable = true;
         }
         inventory.TurnOffTrashcan();
         skipButton.interactable = true;
@@ -295,7 +292,10 @@ public class RewardsHandler : MonoBehaviour
             StartCoroutine(UpdateCardsAfterTime(index));
         }
         else
+        {
+            SoundManager.Instance.PlayAudio(invFullSound);
             inventoryFullAnim.SetTrigger("Shake");
+        }
     }
 
     private void UpdatePlayerCards(int index)
