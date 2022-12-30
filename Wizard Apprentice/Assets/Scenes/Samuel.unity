@@ -160,7 +160,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -520,6 +520,7 @@ MonoBehaviour:
   cardDescriptionObject: {fileID: 0}
   cardTitleText: {fileID: 0}
   cardDescriptionText: {fileID: 0}
+  cardCanvas: {fileID: 0}
 --- !u!114 &59919311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1665,6 +1666,7 @@ MonoBehaviour:
   moveSpeedTMP: {fileID: 247310238}
   bulletSpeedTMP: {fileID: 184177931}
   bulletSizeTMP: {fileID: 542207292}
+  healthTMP: {fileID: 0}
   damage: 10
   attackSpeed: 0.5
   critChance: 10
@@ -1672,6 +1674,8 @@ MonoBehaviour:
   moveSpeed: 5
   bulletSpeed: 7
   bulletSize: 0.2
+  currentHP: 100
+  maxHP: 100
   PauseScreen: {fileID: 1446620601}
 --- !u!222 &342932824
 CanvasRenderer:
@@ -2110,7 +2114,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2587,7 +2591,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2806,7 +2810,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3117,7 +3121,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3451,7 +3455,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4343,7 +4347,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5030,7 +5034,55 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cd76b830c40ba98428ab818665db64b8, type: 2}
   - {fileID: 11400000, guid: 7c55c2e91a33c9a46834f59e3088e6cc, type: 2}
   - {fileID: 11400000, guid: 28f296f841febe1489f37a23b97f3d3a, type: 2}
+  rewardsTier2: []
+  rewardsTier3: []
   healReward: {fileID: 11400000, guid: 628996ed14a69214597006b793de658b, type: 2}
+  floor: 0
+  chanceTeir1:
+  - 0
+  - 0
+  - 0
+  chanceTeir2:
+  - 0
+  - 0
+  - 0
+  chanceTeir3:
+  - 0
+  - 0
+  - 0
+  percentageCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   titles:
   - {fileID: 1321915632}
   - {fileID: 1321915631}
@@ -5043,11 +5095,18 @@ MonoBehaviour:
   - {fileID: 1321915626}
   - {fileID: 1321915625}
   - {fileID: 1321915624}
+  CardDescriptionTitles: 0
   cardScreenParent: {fileID: 1321915634}
   cardTitles:
   - {fileID: 1321915623}
   - {fileID: 1321915622}
   - {fileID: 1321915613}
+  cardButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  skipButton: {fileID: 0}
+  invButton: {fileID: 0}
   cardImages:
   - {fileID: 1321915621}
   - {fileID: 1321915620}
@@ -5077,6 +5136,20 @@ MonoBehaviour:
   - {fileID: 1321915615}
   - {fileID: 1321915614}
   - {fileID: 1321915609}
+  inventoryFullScreen: {fileID: 0}
+  fadeOut: {fileID: 0}
+  hotbar: {fileID: 0}
+  invHolder: {fileID: 0}
+  trashCan: {fileID: 0}
+  background: {fileID: 0}
+  backButton: {fileID: 0}
+  cardCanvas: {fileID: 0}
+  moveSpeed: 1
+  newHotbarPos: {x: 0, y: 0, z: 0}
+  newHotbarScale: {x: 1, y: 1, z: 1}
+  newInvHolderPos: {x: 0, y: 0, z: 0}
+  newTrashCanPos: {x: 0, y: 0, z: 0}
+  newBackgroundPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1116408925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5103,6 +5176,7 @@ MonoBehaviour:
   cardDescriptionObject: {fileID: 1142747271}
   cardTitleText: {fileID: 1438713300}
   cardDescriptionText: {fileID: 787063142}
+  cardCanvas: {fileID: 0}
 --- !u!114 &1116408926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5307,6 +5381,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ea815aadace9d04c800f2dc4d1ed2fa, type: 2}
   mysteryRoomsPoolAmount: 3
   currentFloor: 0
+  mapOpen: {fileID: 0}
+  mapOpenVolume: 1
+  pauseDuration: 1
+  originalTimescale: 0
+  roomClearSound: {fileID: 0}
+  audioVolume: 1
+  particleSystem: {fileID: 0}
 --- !u!114 &1116408933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5716,9 +5797,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomSelectObject: {fileID: 1183115674}
+  roomSelectDescription: {fileID: 0}
+  roomSelectDescriptionPosition: {x: 0, y: 0}
   scrollSmoothness: 5
   scrollSpeed: 100
   minMaxY: {x: -540, y: 540}
+  lastMousePos: {x: 0, y: 0}
 --- !u!1 &1196338630
 GameObject:
   m_ObjectHideFlags: 0
@@ -7826,7 +7910,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8503,6 +8587,7 @@ MonoBehaviour:
   damageBufferRemoveSpeed: 0.0025
   removeHealthbar: 0
   healthbarParent: {fileID: 0}
+  statsUI: {fileID: 0}
   hasDeathAnimation: 0
   hitEffectTime: 0.5
   hitTransparancy: 0.5
@@ -8528,7 +8613,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8689,7 +8774,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Bullet : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed = 8;
     [SerializeField] float bulletLifetime = 20f;
 
+   public  Light2D lightSource;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rb2d;
     float timer = 0;
@@ -26,6 +28,7 @@ public class Bullet : MonoBehaviour
         bulletHandler = GameObject.FindWithTag("GameController").GetComponent<BulletHandler>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
+        lightSource = GetComponent<Light2D>();
     }
 
     public void UpdateDirection()
@@ -56,6 +59,7 @@ public class Bullet : MonoBehaviour
 
         Color newColor = isPlayerBullet ? PlayerColor : EnemyColor;
         spriteRenderer.color = newColor;
+        lightSource.color = newColor;
     }
 
 

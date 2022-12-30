@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CrystallBossAI : MonoBehaviour
 {
 
+  [SerializeField]  Light2D[] lightObjects;
+    RoomManager roomManager;
     Boss2PiecesAI[] boss2PiecesAI;
     Health health;
     BulletHandler bulletHandler;
 
     [SerializeField] float patternStartUpDelay;
     [SerializeField] float randomStartUpDelay;
+    [SerializeField] float lightIntensityDelaySpeed = 1;
+
 
     [Header("HP")]
     [SerializeField] private float HP;
@@ -29,7 +34,7 @@ public class CrystallBossAI : MonoBehaviour
     [SerializeField] int randomBulletAmount = 1;
     [SerializeField] float randomBulletSize = 1.5f;
     [SerializeField] float randomBulletSpeed = 4;
-
+    
     [Header("Timers")]
     [SerializeField] float attackTimer;
     [SerializeField] float patternTimer;
@@ -55,12 +60,12 @@ public class CrystallBossAI : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject[] targets;
     [SerializeField] SpriteRenderer spriteRenderer;
-    RoomManager roomManager;
     [SerializeField] PolygonCollider2D bossHurtbox;
 
     public Vector3[] spawnPoints;
 
     bool hasClearedRoom = false;
+    
 
     void Start()
     {
@@ -68,6 +73,8 @@ public class CrystallBossAI : MonoBehaviour
         health = gameObject.GetComponent<Health>();
         roomManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<RoomManager>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+     
 
         //Vectors used as spawnpoints for ads
         spawnPoints = new Vector3[4];
@@ -169,6 +176,13 @@ public class CrystallBossAI : MonoBehaviour
             }
 
         }
+
+        if (isAlive == false && lightObjects[7].intensity > 0)
+        {
+            ChangeLightIntensity();
+
+        }
+
     }
 
     void BasicAttack()
@@ -263,6 +277,18 @@ public class CrystallBossAI : MonoBehaviour
         roomManager.RemoveAllEnemies();
     }
 
+    private void ChangeLightIntensity()
+    {
+        
 
+            for (int i = 0; i < lightObjects.Length; i++)
+            {
+                lightObjects[i].intensity = Mathf.MoveTowards(lightObjects[i].intensity, 0, lightIntensityDelaySpeed * Time.deltaTime);
+                
+            }
+        
+    
+    }
+   
 }
 
