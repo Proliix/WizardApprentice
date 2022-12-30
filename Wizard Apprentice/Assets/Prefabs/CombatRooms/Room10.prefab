@@ -197,7 +197,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -336282
+      value: -2884
       objectReference: {fileID: 0}
     - target: {fileID: 1279236523590103588, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_RootOrder
@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: angleChange
       value: 16.666
       objectReference: {fileID: 0}
+    - target: {fileID: 1279236523590103591, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
@@ -269,7 +273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -336302
+      value: -2904
       objectReference: {fileID: 0}
     - target: {fileID: 1279236523590103588, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_RootOrder
@@ -323,6 +327,10 @@ PrefabInstance:
       propertyPath: angleChange
       value: 16.666
       objectReference: {fileID: 0}
+    - target: {fileID: 1279236523590103591, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
@@ -341,7 +349,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -336262
+      value: -2852
       objectReference: {fileID: 0}
     - target: {fileID: 1279236523590103588, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_RootOrder
@@ -394,6 +402,10 @@ PrefabInstance:
     - target: {fileID: 1279236523590103591, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: angleChange
       value: 16.666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279236523590103591, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
