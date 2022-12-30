@@ -4787,7 +4787,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.2
+  m_Intensity: 0.15
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 00000000a92a4160
@@ -9672,7 +9672,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0529ac54dc57f7a439ee8128070eb629, type: 2}
   - {fileID: 11400000, guid: 3217c04141539074782d9818ad92065e, type: 2}
   slicedTileSprite: {fileID: 21300000, guid: d05195b9ca8812a49afc5b0eedf96dd0, type: 3}
-  spriteMaskSprite: {fileID: 21300000, guid: af49ebd894695f548840115c9e218e18, type: 3}
+  spriteMaskSprite: {fileID: 0}
   tileObject: {fileID: 4337728806912349567, guid: 0681a8f07a4ab634ea401d076a884bc7, type: 3}
   colliderObject: {fileID: 822333543755316854, guid: b345072c5238aff4a8c57405f5594ede, type: 3}
   topWall: {fileID: 5635839586721775137, guid: c8a78a75d753e174fa1de43d78e04545, type: 3}

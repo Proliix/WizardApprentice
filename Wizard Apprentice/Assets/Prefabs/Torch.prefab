@@ -10,9 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7369780964310344332}
   - component: {fileID: 7369780964310344333}
-  - component: {fileID: -870669405672397209}
   - component: {fileID: 7369780964310344334}
-  - component: {fileID: 3592999843808532463}
   m_Layer: 0
   m_Name: Torch
   m_TagString: Untagged
@@ -75,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.5660378, g: 0.27884683, b: 0.013349946, a: 1}
   m_FlipX: 0
@@ -87,22 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-870669405672397209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7369780964310344335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e483d72121175c4a8e0e4c4d4bda0e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  torchType: 0
-  deviationSpeed: 0.5
-  lightDeviation: 0.5
-  rangeDeviation: 1
 --- !u!114 &7369780964310344334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,11 +101,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.33
-<<<<<<< Updated upstream
   m_Color: {r: 0.990566, g: 0.8636077, b: 0.3317462, a: 1}
-=======
-  m_Color: {r: 1, g: 0.42352942, b: 0, a: 1}
->>>>>>> Stashed changes
   m_Intensity: 2
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -174,11 +152,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-<<<<<<< Updated upstream
   m_PointLightInnerRadius: 2
-=======
-  m_PointLightInnerRadius: 3
->>>>>>> Stashed changes
   m_PointLightOuterRadius: 6
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -190,23 +164,3 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!95 &3592999843808532463
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7369780964310344335}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7458d0d9e7da7ed4381efc64dfa87e34, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
