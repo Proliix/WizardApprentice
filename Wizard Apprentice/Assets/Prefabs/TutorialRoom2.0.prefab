@@ -1626,7 +1626,7 @@ MonoBehaviour:
   - {x: 0.18809201, y: -0.5137318, z: 0}
   m_ShapePathHash: -425833094
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54244
+  m_InstanceId: 56120
 --- !u!1 &1113643703701408868
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,7 +4039,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1944385186817018585, guid: 5b147de6818ff524896615e8b7e288c2, type: 3}
       propertyPath: m_InstanceId
-      value: -28694
+      value: -50280
       objectReference: {fileID: 0}
     - target: {fileID: 1944385186817018585, guid: 5b147de6818ff524896615e8b7e288c2, type: 3}
       propertyPath: m_HasRenderer
@@ -4623,7 +4623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5428542881661176695, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_ShadowIntensity
-      value: 0.15
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5428542881661176695, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_FalloffIntensity

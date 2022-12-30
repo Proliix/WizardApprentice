@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class MinibossTeleportingSkeletonAI : MonoBehaviour
 {
    [SerializeField] ParticleSystem teleportParticleEffect;
+    [SerializeField] Light2D light2D;
 
     BulletHandler bulletHandler;
     Rigidbody2D rb2d;
@@ -104,6 +106,7 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
         TeleportEffect();
         yield return new WaitForSeconds(1f);
+        
 
         //Boss isn't visable
         GoInvisable();
@@ -161,13 +164,16 @@ public class MinibossTeleportingSkeletonAI : MonoBehaviour
 
     private void GoInvisable()
     {
+        light2D.enabled = false;
         gameObject.transform.position = new Vector3(100, 100, 0);
        
     }
 
     private void TeleportEffect()
     {
+        light2D.enabled = true;
         teleportParticleEffect.Play();
+
     }
 
 }
