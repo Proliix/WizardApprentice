@@ -9,6 +9,9 @@ public class PolearmArmor : MonoBehaviour
 {
     GameObject playerObject;
     BulletHandler bulletHandler;
+    [SerializeField] Animator animator;
+    [SerializeField] Vector2 roomSize;
+
     [SerializeField] GameObject polearmArmorObject;
     [SerializeField] float pokeDuration;
     [SerializeField] float pokeDistance;
@@ -70,21 +73,10 @@ public class PolearmArmor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K) && state == CurrentState.idle)
-        {
-            StartCoroutine(SmashPolearm());
-        }
-        if (Input.GetKeyDown(KeyCode.L) && state == CurrentState.idle)
-        {
-            StartCoroutine(PokeTowardsPlayer());
-        }
-        if (Input.GetKeyDown(KeyCode.J) && state == CurrentState.idle)
-        {
-            StartCoroutine(StartSpinning());
-        }
 
-        if(state == CurrentState.idle)
+        if (state == CurrentState.idle)
         {
+            UpdateAnimationBasedOnDirection((Vector2)playerObject.transform.position - (Vector2)this.transform.position);
             timeSinceLastSpin += Time.deltaTime;
             timeSinceLastSmash += Time.deltaTime;
             timeSinceLastPoke += Time.deltaTime;
@@ -122,11 +114,31 @@ public class PolearmArmor : MonoBehaviour
                 if(Vector2.Distance(transform.position,currentDestination) < distanceToCheckNewDestination)
                 {
                     currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * randomDistanceFromPlayer;
+                    int iter = 0;
+                    while(currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                    {
+                        currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * (randomDistanceFromPlayer + iter);
+                        if(iter > 50)
+                        {
+                            currentDestination = playerObject.transform.position;
+                            break;
+                        }
+                    }
                 }
             }
             else
             {
                 currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * randomDistanceFromPlayer;
+                int iter = 0;
+                while (currentDestination.x > roomSize.x || currentDestination.x < 0 || currentDestination.y > roomSize.y || currentDestination.y < 0)
+                {
+                    currentDestination = (Vector2)playerObject.transform.position + Random.insideUnitCircle * (randomDistanceFromPlayer + iter);
+                    if (iter > 50)
+                    {
+                        currentDestination = playerObject.transform.position;
+                        break;
+                    }
+                }
                 hasDestination = true;
             }
         }
@@ -134,7 +146,6 @@ public class PolearmArmor : MonoBehaviour
 
     IEnumerator SmashPolearm()
     {
-        Debug.Log("Smash");
         state = CurrentState.smashing;
         Vector2 playerDir = (playerObject.transform.position - polearmArmorObject.transform.position).normalized;
         Vector2 startPos = (Vector2)transform.position + playerDir * (smashDistanceFromCenter) * 0.5f;
@@ -169,9 +180,7 @@ public class PolearmArmor : MonoBehaviour
 
     IEnumerator PokeTowardsPlayer()
     {
-        Debug.Log("Poke");
         Vector2 playerDir = (playerObject.transform.position - polearmArmorObject.transform.position).normalized;
-
         Vector2 startPos = polearmArmorObject.transform.position;
         Vector2 playerPos = playerObject.transform.position;
         AttackIndicator.CreateSquare(startPos,playerPos, new Vector2(1,pokeDistance), pokeDuration, true);
@@ -192,8 +201,8 @@ public class PolearmArmor : MonoBehaviour
 
     IEnumerator StartSpinning()
     {
-        Debug.Log("Spinning");
         state = CurrentState.spinning;
+        UpdateAnimationBasedOnDirection(new Vector2(0, -1));
         Vector2 startPos = transform.position;
         AttackIndicator.CreateCircle(startPos, spinRadius, startSpinningTime, true);
         yield return new WaitForSeconds(startSpinningTime);
@@ -217,6 +226,7 @@ public class PolearmArmor : MonoBehaviour
             {
                 Vector3 dir = new Vector3(((Mathf.Cos((currentSpinningTime + (counter * timeBetweenProjectiles)) * rotaionsPerSecond) * 360 + Random.Range(-randomAngle, randomAngle)) * Mathf.Deg2Rad), ((Mathf.Sin((currentSpinningTime+(counter * timeBetweenProjectiles)) * rotaionsPerSecond) * 360 + Random.Range(-randomAngle, randomAngle)) * Mathf.Deg2Rad), 0);
                 counter++;
+                UpdateAnimationBasedOnDirection(dir);
                 bulletHandler.GetBullet(startPos, dir, false, 10, 0.5f, 8f);
             }
             currentSpinningTime += Time.deltaTime;
@@ -224,5 +234,20 @@ public class PolearmArmor : MonoBehaviour
         hasDestination = false;
         Destroy(circleCollider.gameObject);
         state = CurrentState.idle;
+    }
+
+    public void UpdateAnimationBasedOnDirection(Vector2 dir)
+    {
+        bool yLargest = Mathf.Abs(dir.y) > Mathf.Abs(dir.x);
+        if(!yLargest)
+        {
+            animator.SetFloat("DirX",Mathf.Sign(dir.x));
+            animator.SetFloat("DirY",0);
+        }
+        else
+        {
+            animator.SetFloat("DirY", Mathf.Sign(dir.y));
+            animator.SetFloat("DirX", 0);
+        }
     }
 }

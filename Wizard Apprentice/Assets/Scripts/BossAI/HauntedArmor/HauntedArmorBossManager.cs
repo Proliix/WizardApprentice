@@ -9,6 +9,8 @@ public class HauntedArmorBossManager : MonoBehaviour
     [SerializeField] GameObject helmetObject;
     [SerializeField] GameObject firstGateObject;
     [SerializeField] GameObject secondGateObject;
+    [SerializeField] GameObject firstGateHiderObject;
+    [SerializeField] GameObject secondGateHiderObject;
 
     [SerializeField] Health polearmArmorHealth;
     [SerializeField] Health crossbowArmorHealth;
@@ -40,12 +42,12 @@ public class HauntedArmorBossManager : MonoBehaviour
         {
             if (!hasPressed)
             {
-                StartCoroutine(OpenGate(firstGateObject));
+                StartCoroutine(OpenGate(firstGateObject, firstGateHiderObject));
                 hasPressed = true;
             }
             else
             {
-                StartCoroutine(OpenGate(secondGateObject));
+                StartCoroutine(OpenGate(secondGateObject, secondGateHiderObject));
             }
         }
     }
@@ -56,7 +58,7 @@ public class HauntedArmorBossManager : MonoBehaviour
         {
             currentPhase = 1;
             polearmObject.GetComponent<PolearmArmor>().enabled = false;
-            StartCoroutine(OpenGate(firstGateObject));
+            StartCoroutine(OpenGate(firstGateObject, firstGateHiderObject));
             Invoke("SpawnCrossbow", 6f);
         }
     }
@@ -67,7 +69,7 @@ public class HauntedArmorBossManager : MonoBehaviour
         {
             currentPhase = 2;
             crossbowObject.GetComponent<CrossbowArmor>().enabled = false;
-            StartCoroutine(OpenGate(secondGateObject));
+            StartCoroutine(OpenGate(secondGateObject, secondGateHiderObject));
             Invoke("SpawnGreatSword", 6f);
         }
     }
@@ -94,7 +96,7 @@ public class HauntedArmorBossManager : MonoBehaviour
         Destroy(crossbowObject);
     }
 
-    public IEnumerator OpenGate(GameObject gateObject)
+    public IEnumerator OpenGate(GameObject gateObject, GameObject gateHider)
     {
         float timeOpened = 0;
         Vector2 startPos = gateObject.transform.position;
@@ -104,6 +106,8 @@ public class HauntedArmorBossManager : MonoBehaviour
         {
             yield return null;
             timeOpened += Time.deltaTime;
+            gateHider.transform.position -= new Vector3(0, (Time.deltaTime / timeToOpenGate) * gateHeight * 0.5f, 0);
+            gateHider.transform.localScale += new Vector3(0, (Time.deltaTime / timeToOpenGate) * gateHeight);
             sprite.gameObject.transform.position -= new Vector3(0,(Time.deltaTime/timeToOpenGate) * gateHeight,0);
         }
         collider.enabled = false;
