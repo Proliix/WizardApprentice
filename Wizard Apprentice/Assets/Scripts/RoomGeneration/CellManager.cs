@@ -12,7 +12,7 @@ public class CellManager : MonoBehaviour
     [SerializeField] Sprite spriteMaskSprite;
     [SerializeField] GameObject tileObject;
     [SerializeField] GameObject colliderObject;
-    [SerializeField] GameObject topWall, rightWall, leftWall, botWall, cornerWallTop, cornerWallBot;
+    [SerializeField] GameObject topWall, rightWall, leftWall, botWall, cornerWall;
     Vector2Int prevSize;
     List<GameObject> cellHolders;
     List<int>[] allCellsAvailability;
@@ -97,13 +97,19 @@ public class CellManager : MonoBehaviour
         newTopWall.GetComponent<SpriteRenderer>().size = new Vector2(size.x, newTopWall.GetComponent<SpriteRenderer>().size.y);
         newTopWall.GetComponent<BoxCollider2D>().size = newTopWall.GetComponent<SpriteRenderer>().size;
 
+        GameObject topWallFix = Instantiate(botWall, new Vector3(size.x / 2, size.y + (3 + addNumY), 0), botWall.transform.rotation, cellParent);
+        topWallFix.GetComponent<SpriteRenderer>().size = new Vector2(size.x, topWallFix.GetComponent<SpriteRenderer>().size.y);
+        topWallFix.GetComponent<BoxCollider2D>().size = topWallFix.GetComponent<SpriteRenderer>().size;
+
         float addNumXLeft = xDivideable ? 0 : -0.5f;
         float addNumXRight = xDivideable ? 0.5f : 0;
-        GameObject newLeftCornerTop = Instantiate(cornerWallTop, new Vector3(-0.5f + addNumXLeft, size.y + (3f + addNumY), 0), cornerWallTop.transform.rotation, cellParent);
+        GameObject newLeftCornerTop = Instantiate(cornerWall, new Vector3(-0.5f + addNumXLeft, size.y + (3f + addNumY), 0), cornerWall.transform.rotation, cellParent);
         newLeftCornerTop.GetComponent<BoxCollider2D>().size = newLeftCornerTop.GetComponent<SpriteRenderer>().size;
+        newLeftCornerTop.GetComponent<SpriteRenderer>().flipY = true;
 
-        GameObject newRightCornerTop = Instantiate(cornerWallTop, new Vector3(size.x + addNumXRight, size.y + (3f + addNumY), 0), cornerWallTop.transform.rotation, cellParent);
+        GameObject newRightCornerTop = Instantiate(cornerWall, new Vector3(size.x + addNumXRight, size.y + (3f + addNumY), 0), cornerWall.transform.rotation, cellParent);
         newRightCornerTop.GetComponent<SpriteRenderer>().flipX = true;
+        newRightCornerTop.GetComponent<SpriteRenderer>().flipY = true;
         newRightCornerTop.GetComponent<BoxCollider2D>().size = newRightCornerTop.GetComponent<SpriteRenderer>().size;
 
         addNumY = yDivideable ? 1.5f : 1f;
@@ -116,10 +122,10 @@ public class CellManager : MonoBehaviour
         newRightWall.GetComponent<BoxCollider2D>().size = newRightWall.GetComponent<SpriteRenderer>().size;
 
         addNumY = yDivideable ? 0.5f : 1;
-        GameObject newLeftCornerBot = Instantiate(cornerWallBot, new Vector3(-0.5f + addNumXLeft, -addNumY, 0), cornerWallBot.transform.rotation, cellParent);
+        GameObject newLeftCornerBot = Instantiate(cornerWall, new Vector3(-0.5f + addNumXLeft, -addNumY, 0), cornerWall.transform.rotation, cellParent);
         newLeftCornerBot.GetComponent<BoxCollider2D>().size = newLeftCornerBot.GetComponent<SpriteRenderer>().size;
 
-        GameObject newRightCornerBot = Instantiate(cornerWallBot, new Vector3(size.x + addNumXRight, -addNumY, 0), cornerWallBot.transform.rotation, cellParent);
+        GameObject newRightCornerBot = Instantiate(cornerWall, new Vector3(size.x + addNumXRight, -addNumY, 0), cornerWall.transform.rotation, cellParent);
         newRightCornerBot.GetComponent<SpriteRenderer>().flipX = true;
         newRightCornerBot.GetComponent<BoxCollider2D>().size = newRightCornerBot.GetComponent<SpriteRenderer>().size;
 
