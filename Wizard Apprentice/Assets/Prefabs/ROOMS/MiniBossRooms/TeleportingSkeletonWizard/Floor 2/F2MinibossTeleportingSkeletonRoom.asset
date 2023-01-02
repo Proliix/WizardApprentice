@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefab: {fileID: 5773732489135663310, guid: 5c92297a27cff0a49bf179250382dd5c, type: 3}
   roomSize: {x: 20, y: 20}
-  roomDifficulty: 0
+  roomDifficulty: 1
   generateRandomRoom: 1
   roomAlreadyHasDoor: 0
   musicType: 0

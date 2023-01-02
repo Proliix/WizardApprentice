@@ -2352,6 +2352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicObj1: {fileID: 113157857}
   musicObj2: {fileID: 1742469925}
+  musicObjPause: {fileID: 0}
   normalIntro: {fileID: 8300000, guid: debdf6659c0323a4e91ed7015cbae9a4, type: 3}
   normalLoop: {fileID: 8300000, guid: a9231a2a2de166d478b0924946954a95, type: 3}
   bossIntro: {fileID: 8300000, guid: dc4931aae186c4e49ba2f65e95deb212, type: 3}
@@ -2362,6 +2363,7 @@ MonoBehaviour:
   treasureLoop: {fileID: 8300000, guid: 3dff81f7ec63d6b4ab9c416d6e55c3e3, type: 3}
   mapIntro: {fileID: 0}
   mapLoop: {fileID: 8300000, guid: b0771ac3780b52d42a690e230766f2f6, type: 3}
+  Loop: {fileID: 0}
 --- !u!4 &398396966
 Transform:
   m_ObjectHideFlags: 0
@@ -9748,6 +9750,7 @@ MonoBehaviour:
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 7441a10cbeb68b742a95838af372a3ce, type: 2}
   - {fileID: 11400000, guid: 1ea4ce3b6062dfd479ee919fdedb3d74, type: 2}
+  - {fileID: 11400000, guid: 1dc5b6d373f08b34fa1c5e44aff1bfbf, type: 2}
   miniBossRoomsPoolAmount: 4
   possibleTreasureRooms:
   - {fileID: 11400000, guid: 326ee1e0bede5d84aa742c7d1ec92b52, type: 2}
