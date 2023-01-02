@@ -148,11 +148,13 @@ public class Health : MonoBehaviour
         }
 
         if (removeHealthbar)
+        {
             if (healthbarValue <= 0 && DamageBufferValue <= 0)
             {
                 healthbarParent?.SetActive(false);
                 removeHealthbar = false;
             }
+        }
 
         if (hitEffectActve)
         {
@@ -353,8 +355,8 @@ public class Health : MonoBehaviour
         }
         else
         {
-            //if (removeHealthbar)
-            //    healthbarParent?.SetActive(false);
+            if (removeHealthbar && removeSelf)
+                healthbarParent?.SetActive(false);
 
             if (removeSelf)
                 Destroy(gameObject);

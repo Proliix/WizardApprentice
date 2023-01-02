@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    float timeToActivate = 0.5f;
+    [SerializeField]float timeToActivate = 0.5f;
     public List<GameObject> enemyObjects;
     public bool enemiesActive { get; private set; } = false;
 
@@ -46,7 +46,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator ActivateEnemies()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(timeToActivate);
         enemiesActive = true;
     }
 
