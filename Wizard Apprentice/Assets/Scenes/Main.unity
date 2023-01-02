@@ -9651,6 +9651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1543c5e77d00849a1e6d1b14798a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToActivate: 0.5
   enemyObjects: []
 --- !u!114 &1786813658
 MonoBehaviour:
@@ -9764,6 +9765,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 566e9f584c0de2b4591275b64bc44dea, type: 2}
   - {fileID: 11400000, guid: c4fbd2f2219f3de42ab7f85bc7ce43e7, type: 2}
   mysteryRoomsPoolAmount: 2
+  difficultyRange: 0
   currentFloor: 0
   mapOpen: {fileID: 8300000, guid: 5bca36377da7f084f88b3011816fc85f, type: 3}
   mapOpenVolume: 1
@@ -9891,6 +9893,7 @@ MonoBehaviour:
   statsUI: {fileID: 205884013}
   dashOverHeadObj: {fileID: 1468516659}
   inactiveDashOverHeadObj: {fileID: 1019943885}
+  DebugPrefab: {fileID: 6895941850713439242, guid: 7c53c7f4ce612ef46a5e0476e2d9a56a, type: 3}
 --- !u!82 &1786813666
 AudioSource:
   m_ObjectHideFlags: 0

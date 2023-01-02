@@ -75,6 +75,7 @@ public class RewardsHandler : MonoBehaviour
     PlayerStats stats;
     bool isPressed = false;
     bool wasActive;
+    bool debugMode;
 
     // Start is called before the first frame update
     void Start()
@@ -106,18 +107,20 @@ public class RewardsHandler : MonoBehaviour
         backButton.gameObject.SetActive(false);
         fadeoutAnim = fadeOut.GetComponent<Animator>();
         startLayer = cardCanvas.sortingOrder;
+
+        debugMode = PlayerPrefs.GetInt("Debug") > 0 ? true : false;
     }
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F12))
+        if (Input.GetKeyDown(KeyCode.F12) && debugMode)
         {
             //if (!inventory.IsFull())
             cardHandler.isActive = true;
             GetRewardScreenCard();
         }
-        else if (Input.GetKeyDown(KeyCode.F11))
+        else if (Input.GetKeyDown(KeyCode.F11) && debugMode)
         {
             cardHandler.isActive = true;
             GetRewardScreenStats();

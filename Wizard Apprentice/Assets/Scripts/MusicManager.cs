@@ -38,6 +38,7 @@ public class MusicManager : MonoBehaviour
 
     public static MusicManager Instance;
 
+    bool debugMode;
 
     //Singleton instance 
     private void Awake()
@@ -66,15 +67,16 @@ public class MusicManager : MonoBehaviour
         //audioSource1.Play();
         //anim1.SetTrigger("FadeIn");
         ChangeToMusicType(MusicType.Normal);
+        debugMode = PlayerPrefs.GetInt("Debug") > 0 ? true : false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5) && musicType != MusicType.Map)
+        if (Input.GetKeyDown(KeyCode.F5) && musicType != MusicType.Map && debugMode)
         {
             ChangeToMusicType(musicType + 1);
         }
-        else if (Input.GetKeyDown(KeyCode.F4) && musicType != MusicType.Normal)
+        else if (Input.GetKeyDown(KeyCode.F4) && musicType != MusicType.Normal && debugMode)
         {
             ChangeToMusicType(musicType - 1);
         }

@@ -41,11 +41,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField] StatsUI statsUI;
     [SerializeField] GameObject dashOverHeadObj;
     [SerializeField] GameObject inactiveDashOverHeadObj;
+    [Header("For Debug")]
+    [SerializeField] GameObject DebugPrefab;
 
     MainMusicScript musicScript;
     bool onSettings;
     bool playSfxSound = false;
     int sfxFix = 0;
+    GameObject debugObj;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +57,15 @@ public class MenuManager : MonoBehaviour
         musicScript = gameObject.GetComponent<MainMusicScript>();
 
         if (inMainMenu)
+        {
             StartCoroutine(FadeInObjects());
+            PlayerPrefs.SetInt("Debug", 0);
+        }
+
+        if (PlayerPrefs.GetInt("Debug") > 0)
+        {
+            Instantiate(DebugPrefab);
+        }
 
         UpdateValues();
         settingsPanel.SetActive(false);
@@ -71,6 +82,30 @@ public class MenuManager : MonoBehaviour
             PlayerPrefs.DeleteAll();
             UpdateValues();
             Debug.Log("DeletedAll");
+        }
+
+        if (inMainMenu && Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.F12))
+            {
+                int debug = PlayerPrefs.GetInt("Debug") > 0 ? 0 : 1;
+                PlayerPrefs.SetInt("Debug", debug);
+                Debug.Log(debug);
+
+                if (debug > 0)
+                {
+                    if (debugObj != null)
+                        debugObj.SetActive(true);
+                    else
+                        debugObj = Instantiate(DebugPrefab);
+                }
+                else
+                {
+                    if (debugObj != null)
+                        debugObj.SetActive(false);
+                }
+
+            }
         }
     }
 

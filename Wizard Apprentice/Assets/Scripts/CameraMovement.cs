@@ -13,6 +13,7 @@ public class CameraMovement : MonoBehaviour
 
     float time;
     bool shakeActive = false;
+    bool debugMode = false;
     //Vector3 lastPos;
     //Vector3 nextPos;
 
@@ -24,12 +25,13 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        debugMode = PlayerPrefs.GetInt("Debug") > 0 ? true : false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && debugMode)
         {
             //shakeActive = true;
             time = shakeDuration;

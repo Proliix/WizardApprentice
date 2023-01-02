@@ -91,8 +91,6 @@ public class CellManager : MonoBehaviour
             xDivideable = true;
 
         float addNumY = yDivideable ? 0.5f : 0;
-        Debug.Log("YDivideable: " + yDivideable);
-        Debug.Log("x: " + size.x + " | y:" + size.y);
         GameObject newTopWall = Instantiate(topWall, new Vector3(size.x / 2, size.y + (1.5f + addNumY), 0), topWall.transform.rotation, cellParent);
         newTopWall.GetComponent<SpriteRenderer>().size = new Vector2(size.x, newTopWall.GetComponent<SpriteRenderer>().size.y);
         newTopWall.GetComponent<BoxCollider2D>().size = newTopWall.GetComponent<SpriteRenderer>().size;
