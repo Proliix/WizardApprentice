@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GravityCard : MonoBehaviour, ICard
 {
@@ -20,6 +21,7 @@ public class GravityCard : MonoBehaviour, ICard
     [SerializeField] float force = 2f;
     [SerializeField] float stunDuration = 0.15f;
     [SerializeField] int dealDamagerPerEffect = 3;
+    [SerializeField] Color lightColor;
 
     bool hasParticles = false;
     GameObject particleInstance;
@@ -85,6 +87,7 @@ public class GravityCard : MonoBehaviour, ICard
             SoundManager.Instance.PlayAudio(attackSound, audioVolume);
             hasFired = true;
             gravityBullet = bulletHandler.GetSpecialBullet(pAim.bulletSpawn.transform, player, Bulletimage, SpecialBulletState.Static, this, true, "Blackhole", Vector3.zero, effectCooldown, lifeTime, false, 0, size + stats.projectileSize);
+            gravityBullet.GetComponent<Light2D>().color = lightColor;
             if (!hasParticles)
             {
                 hasParticles = true;

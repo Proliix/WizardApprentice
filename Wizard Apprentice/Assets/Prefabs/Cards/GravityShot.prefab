@@ -238,3 +238,4 @@ MonoBehaviour:
   force: 5
   stunDuration: 0.4
   dealDamagerPerEffect: 2
+  lightColor: {r: 0.05490196, g: 0.7921569, b: 1, a: 1}

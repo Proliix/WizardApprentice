@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 public enum SpecialBulletState { Normal, Static, Timed, Rotating, Bouncy, Homing, Onhit, HauntedArmorBigArrow, HauntedArmorSplittingArrow, WontHitWall }
 
 public class SpecialProjectile : MonoBehaviour
@@ -31,6 +32,12 @@ public class SpecialProjectile : MonoBehaviour
     EnemyManager enemyManager;
     float startLifeTime = 0;
 
+    float startLightIntencity;
+    [Tooltip("Inner = x,Outer = y")]
+    Vector2 startLightRadius;
+    Color startLightColor;
+    Light2D bulletLight;
+
     Vector3 cursorPos;
     bool hasHitWall = false;
 
@@ -51,6 +58,11 @@ public class SpecialProjectile : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         startLifeTime = bulletLifetime;
+        bulletLight = GetComponent<Light2D>();
+        startLightIntencity = bulletLight.intensity;
+        startLightRadius.x = bulletLight.pointLightInnerRadius;
+        startLightRadius.y = bulletLight.pointLightOuterRadius;
+        startLightColor = bulletLight.color;
     }
 
     public void UpdateDirection()
@@ -200,6 +212,12 @@ public class SpecialProjectile : MonoBehaviour
         relativeDistance = Vector3.zero;
         hasHitWall = false;
         stoppedMoving = false;
+
+        bulletLight.intensity = startLightIntencity;
+        bulletLight.pointLightInnerRadius = startLightRadius.x;
+        bulletLight.pointLightOuterRadius = startLightRadius.y;
+        bulletLight.color = startLightColor;
+
         if (data != null)
         {
             data.Clear();
