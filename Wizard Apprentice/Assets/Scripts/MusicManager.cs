@@ -7,6 +7,7 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] GameObject musicObj1;
     [SerializeField] GameObject musicObj2;
+    [SerializeField] GameObject musicObjPause;
     [Header("Normal")]
     [SerializeField] AudioClip normalIntro;
     [SerializeField] AudioClip normalLoop;
@@ -22,11 +23,15 @@ public class MusicManager : MonoBehaviour
     [Header("Map")]
     [SerializeField] AudioClip mapIntro;
     [SerializeField] AudioClip mapLoop;
+    [Header("Pause")]
+    [SerializeField] AudioClip pauseLoop;
 
     AudioSource audioSource1;
     AudioSource audioSource2;
+    AudioSource audioSourcePause;
     Animator anim1;
     Animator anim2;
+    Animator animPause;
 
     MusicType musicType;
     AudioClip currentIntro;
@@ -35,6 +40,8 @@ public class MusicManager : MonoBehaviour
     bool currentLoopStarted = false;
     bool hasStoppedLastPlayer = true;
     bool hasPassedHalfWay = false;
+    bool onPauseScreen = false;
+    bool hasStoppedPause = false;
 
     public static MusicManager Instance;
 
@@ -55,8 +62,11 @@ public class MusicManager : MonoBehaviour
         musicType = MusicType.Map;
         audioSource1 = musicObj1.GetComponent<AudioSource>();
         audioSource2 = musicObj2.GetComponent<AudioSource>();
+        audioSourcePause = musicObjPause.GetComponent<AudioSource>();
+        audioSourcePause.clip = pauseLoop;
         anim1 = musicObj1.GetComponent<Animator>();
         anim2 = musicObj2.GetComponent<Animator>();
+        animPause = musicObjPause.GetComponent<Animator>();
         //currentIntro = normalIntro;
         //currentLoop = normalLoop;
         //isAudioSource1 = true;
@@ -100,6 +110,37 @@ public class MusicManager : MonoBehaviour
             }
         }
 
+        if (!hasStoppedPause)
+        {
+
+            if (onPauseScreen)
+            {
+                if ((!isAudioSource1 ? audioSource1.volume : audioSource2.volume) <= 0)
+                {
+                    switch (isAudioSource1)
+                    {
+                        case false:
+                            audioSource1.Pause();
+                            //audioSource1.loop = false;
+                            break;
+                        case true:
+                            audioSource2.Pause();
+                            //audioSource2.loop = false;
+                            break;
+                    }
+                    hasStoppedPause = true;
+
+                }
+            }
+            else
+            {
+                if (audioSourcePause.volume <= 0)
+                {
+                    audioSourcePause.Stop();
+                    hasStoppedPause = true;
+                }
+            }
+        }
 
         if (!currentLoopStarted)
         {
@@ -115,7 +156,7 @@ public class MusicManager : MonoBehaviour
                 StartCurrentLoop();
             }
 
-            if(audioSource1.time > currentIntro.length / 2 && isAudioSource1)
+            if (audioSource1.time > currentIntro.length / 2 && isAudioSource1)
             {
                 hasPassedHalfWay = true;
             }
@@ -145,6 +186,41 @@ public class MusicManager : MonoBehaviour
         }
 
 
+    }
+
+    public void AddPauseScreen()
+    {
+        onPauseScreen = true;
+        hasStoppedPause = false;
+        if (isAudioSource1)
+        {
+            anim1.SetTrigger("FadeOut");
+
+        }
+        else
+        {
+            anim2.SetTrigger("FadeOut");
+        }
+
+        audioSourcePause.Play();
+        animPause.SetTrigger("FadeIn");
+    }
+
+    public void RemovePauseScreen()
+    {
+        onPauseScreen = false;
+        hasStoppedPause = false;
+        if (isAudioSource1)
+        {
+            anim1.SetTrigger("FadeIn");
+            audioSource1.UnPause();
+        }
+        else
+        {
+            anim2.SetTrigger("FadeIn");
+            audioSource2.UnPause();
+        }
+        animPause.SetTrigger("FadeOut");
     }
 
     public void ChangeToMusicType(MusicType newType)

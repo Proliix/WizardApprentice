@@ -23,12 +23,14 @@ public class PauseScreenController : MonoBehaviour
             }
         }
     }
+
     public void OpenPause()
     {
         isOpen = true;
         pauseScreenObject.SetActive(true);
         timeScaleBeforePause = Time.timeScale;
         Time.timeScale = 0;
+        MusicManager.Instance.AddPauseScreen();
     }
 
     public void ClosePause()
@@ -36,6 +38,7 @@ public class PauseScreenController : MonoBehaviour
         isOpen = false;
         pauseScreenObject.SetActive(false);
         Time.timeScale = timeScaleBeforePause;
+        MusicManager.Instance.RemovePauseScreen();
     }
     public void MenuButtonClicked()
     {
