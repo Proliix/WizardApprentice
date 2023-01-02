@@ -141,7 +141,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -262472
+      value: -1516416
       objectReference: {fileID: 0}
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_HasRenderer
@@ -289,11 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.0484486
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0277
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalPosition.y
@@ -330,6 +330,18 @@ PrefabInstance:
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885574257252453898, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_Size.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885574257252453899, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_Size.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885574257252453899, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453901, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_Name
@@ -935,6 +947,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 3625121544168154579}
     m_Modifications:
+    - target: {fileID: 3885574257252453901, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -982,10 +998,6 @@ PrefabInstance:
     - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_Name
       value: Torch (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3885574257252453901, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

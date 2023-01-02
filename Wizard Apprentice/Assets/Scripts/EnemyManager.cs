@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    float timeToActivate = 0.5f;
     public List<GameObject> enemyObjects;
     public bool enemiesActive { get; private set; } = false;
 

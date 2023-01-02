@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7431479032799047554
 Transform:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8225236510415808652
 Transform:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -292320
+      value: -1507456
       objectReference: {fileID: 0}
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_HasRenderer
@@ -545,7 +545,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -292270
+      value: -1507426
       objectReference: {fileID: 0}
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_HasRenderer
@@ -689,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3534037
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalPosition.x
@@ -730,6 +730,10 @@ PrefabInstance:
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885574257252453898, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_Size.x
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453901, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_Name
@@ -889,7 +893,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -292230
+      value: -1507526
       objectReference: {fileID: 0}
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_HasRenderer
@@ -965,7 +969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3534037
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1007,6 +1011,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3885574257252453898, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_Size.x
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453901, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_Name
       value: Lava dodge obstacle (1)
@@ -1033,7 +1041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3534037
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453897, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1075,6 +1083,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3885574257252453898, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
+      propertyPath: m_Size.x
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3885574257252453901, guid: b0a5b55d31058bd44bbaec81607a0364, type: 3}
       propertyPath: m_Name
       value: Lava dodge obstacle
@@ -1097,7 +1109,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_InstanceId
-      value: -292340
+      value: -1507476
       objectReference: {fileID: 0}
     - target: {fileID: -4970093093364781704, guid: 74544cb060594b8479bd90c9c3903d6a, type: 3}
       propertyPath: m_HasRenderer
