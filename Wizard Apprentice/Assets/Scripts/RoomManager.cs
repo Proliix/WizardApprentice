@@ -36,6 +36,8 @@ public class RoomManager : MonoBehaviour
     [SerializeField] List<Room> possibleMysteryRooms;
     public int mysteryRoomsPoolAmount;
 
+    [SerializeField] int difficultyRange;
+
     private int currentRoomType;
     private bool canWalkThroughAnyDoor;
     private GameObject doorObject;
@@ -241,11 +243,33 @@ public class RoomManager : MonoBehaviour
                 break;
             case 1:
                 currentRoomType = 1;
-                LoadPremadeRoom(possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)]);
+                Room room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
+                int iter = 0;
+                while(room.roomDifficulty + difficultyRange <= currentFloor && room.roomDifficulty - difficultyRange >= currentFloor)
+                {
+                    room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
+                    iter++;
+                    if(iter > 100)
+                    {
+                        break;
+                    }
+                }
+                LoadPremadeRoom(room);
                 break;
             case 2:
                 currentRoomType = 2;
-                LoadPremadeRoom(possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)]);
+                Room miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
+                int miniBoss_iter = 0;
+                while (miniBoss_room.roomDifficulty + difficultyRange <= currentFloor && miniBoss_room.roomDifficulty - difficultyRange >= currentFloor)
+                {
+                    miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
+                    miniBoss_iter++;
+                    if (miniBoss_iter > 100)
+                    {
+                        break;
+                    }
+                }
+                LoadPremadeRoom(miniBoss_room);
                 break;
             case 3:
                 currentRoomType = 3;
