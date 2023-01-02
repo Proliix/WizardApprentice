@@ -5020,7 +5020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5773732489135663311}
   m_Layer: 0
-  m_Name: MinibossTeleportingSkeletonRoom
+  m_Name: F2MinibossTeleportingSkeletonRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5162,16 +5162,16 @@ MonoBehaviour:
   indicatorRadius: 4.3
   bulletSize: 1
   damage: 10
-  bulletSpeed: 7.5
-  numberOfShotsInPattern: 6
+  bulletSpeed: 10
+  numberOfShotsInPattern: 10
   specialBulletSize: 1
-  specialBulletSpeed: 5
+  specialBulletSpeed: 7.5
   specialDamage: 10
-  specialBulletAmount: 9
+  specialBulletAmount: 18
   timeBetweenShots: 0.2
   canMove: 0
   timer: 0
-  moveDelay: 1
+  moveDelay: 0.75
   target: {fileID: 0}
 --- !u!114 &5773732489686223084
 MonoBehaviour:
@@ -5187,8 +5187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 2a16bf4cd1c712a4aaaaff194efe6fd6, type: 3}
   deathSound: {fileID: 8300000, guid: a6e2f2c7d43e7a84fb32daf00c24d531, type: 3}
-  maxHP: 330
-  hp: 330
+  maxHP: 660
+  hp: 660
   hitCooldown: 1
   removeSelf: 1
   hasHitCooldown: 0
