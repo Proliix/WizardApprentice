@@ -102,12 +102,14 @@ public class RoomManager : MonoBehaviour
                 enemyObjects.Add(transformsInRoom[i].gameObject);
             }
         }
-        if (currentRoomType != 0)
+        
+        for (int i = 0; i < enemyObjects.Count; i++)
         {
-            for (int i = 0; i < enemyObjects.Count; i++)
+            if (currentRoomType != 0)
             {
                 enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(currentFloor * 0.75f, true);
             }
+            enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(AscensionManager.selectedLevel * 0.2f, true);
         }
         enemyManager.enemyObjects = enemyObjects;
         if (!room.roomAlreadyHasDoor)
@@ -270,7 +272,7 @@ public class RoomManager : MonoBehaviour
                 currentRoomType = 2;
                 Room miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
                 int miniBoss_iter = 0;
-                while (miniBoss_room.roomDifficulty + difficultyRange <= currentFloor && miniBoss_room.roomDifficulty - difficultyRange >= currentFloor)
+                while ((miniBoss_room.roomDifficulty + difficultyRange <= currentFloor) == (miniBoss_room.roomDifficulty - difficultyRange >= currentFloor))
                 {
                     miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
                     miniBoss_iter++;
