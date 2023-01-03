@@ -486,7 +486,7 @@ Transform:
   - {fileID: 6250157057109578448}
   - {fileID: 3620108843976181184}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6565921895385548058
 SpriteRenderer:
@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 7a119b9a737b8e24a8160e12ff507500, type: 3}
-  deathSound: {fileID: 8300000, guid: 44129425109b6a44293526231074433b, type: 3}
+  deathSound: {fileID: 8300000, guid: 8cedf86906ffcba479da17911ac72daa, type: 3}
   maxHP: 100
   hp: 100
   hitCooldown: 0.33

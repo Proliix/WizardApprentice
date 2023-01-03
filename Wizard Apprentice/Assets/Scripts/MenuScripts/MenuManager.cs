@@ -77,7 +77,7 @@ public class MenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             settingsPanel.SetActive(false);
 
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F7) && inMainMenu)
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F6) && inMainMenu)
         {
             PlayerPrefs.DeleteAll();
             UpdateValues();
