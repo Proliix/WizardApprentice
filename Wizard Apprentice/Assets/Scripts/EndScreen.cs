@@ -57,10 +57,6 @@ public class EndScreen : MonoBehaviour
     private IEnumerator SpawnObjects()
     {
         yield return new WaitForSeconds(0.5f);
-        menuButton.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.05f);
-        restartButton.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.05f);
         winText.SetActive(true);
         damageTMP.gameObject.SetActive(true);
         timeText.gameObject.SetActive(true);
@@ -88,6 +84,10 @@ public class EndScreen : MonoBehaviour
                 invCards[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(timePerSpawn / 3);
         }
+        yield return new WaitForSeconds(timePerSpawn);
+        menuButton.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        restartButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -133,6 +133,7 @@ public class EndScreen : MonoBehaviour
 
     public void GetEndScreen()
     {
+        MusicManager.Instance.ChangeToMusicType(MusicType.End);
         endScreenActive = true;
         UpdateStats();
         endScreenCanvas.SetActive(true);

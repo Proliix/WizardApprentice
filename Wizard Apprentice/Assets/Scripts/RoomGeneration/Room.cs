@@ -10,5 +10,6 @@ public class Room : ScriptableObject
     public int roomDifficulty;
     public bool generateRandomRoom;
     public bool roomAlreadyHasDoor;
+    public bool isLastRoom = false;
     public MusicType musicType = MusicType.Normal;
 }
