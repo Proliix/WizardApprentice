@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MusicType { Normal, Boss, Event, Treasure, Map }
+public enum MusicType { Normal, Boss, Event, Treasure, Map,End }
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] GameObject musicObj1;
@@ -23,6 +23,9 @@ public class MusicManager : MonoBehaviour
     [Header("Map")]
     [SerializeField] AudioClip mapIntro;
     [SerializeField] AudioClip mapLoop;
+    [Header("Ending")]
+    [SerializeField] AudioClip endIntro;
+    [SerializeField] AudioClip endLoop;
     [Header("Pause")]
     [SerializeField] AudioClip pauseLoop;
 
@@ -251,6 +254,10 @@ public class MusicManager : MonoBehaviour
                 case MusicType.Map:
                     currentIntro = mapIntro;
                     currentLoop = mapLoop;
+                    break;
+                case MusicType.End:
+                    currentIntro = endIntro;
+                    currentLoop = endLoop;
                     break;
             }
 

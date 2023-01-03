@@ -148,7 +148,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -577,10 +577,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 7a119b9a737b8e24a8160e12ff507500, type: 3}
-  deathSound: {fileID: 8300000, guid: 44129425109b6a44293526231074433b, type: 3}
+  deathSound: {fileID: 8300000, guid: 8cedf86906ffcba479da17911ac72daa, type: 3}
   maxHP: 100
   hp: 100
-  hitCooldown: 0.33
+  hitCooldown: 0.7
   removeSelf: 0
   hasHitCooldown: 1
   usesHealthBar: 1

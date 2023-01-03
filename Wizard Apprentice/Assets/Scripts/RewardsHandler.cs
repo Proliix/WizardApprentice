@@ -73,6 +73,7 @@ public class RewardsHandler : MonoBehaviour
     Health health;
     PlayerMovement pMovement;
     PlayerStats stats;
+    EndScreen endScreen;
     bool isPressed = false;
     bool wasActive;
     bool debugMode;
@@ -80,6 +81,7 @@ public class RewardsHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        endScreen = GetComponent<EndScreen>();
         rewardScreen.SetActive(false);
         inventory = gameObject.GetComponent<Inventory>();
         statScreenParent.SetActive(false);
@@ -292,6 +294,7 @@ public class RewardsHandler : MonoBehaviour
         if (!isPressed && CanAddCards())
         {
             isPressed = true;
+            endScreen.AddCard();
             StartCoroutine(UpdateCardsAfterTime(index));
         }
         else
@@ -421,6 +424,9 @@ public class RewardsHandler : MonoBehaviour
     {
         if (!isPressed)
         {
+            if (activeRewards[index] == healReward)
+                endScreen.AddRestores();
+
             isPressed = true;
             StartCoroutine(UpdatePlayerAfterTime(index));
         }

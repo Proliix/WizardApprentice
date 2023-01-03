@@ -58,10 +58,12 @@ public class RoomManager : MonoBehaviour
     [SerializeField] ParticleSystem particleSystem;
 
     Inventory inv;
+    EndScreen endScreen;
     // Start is called before the first frame update
     void Start()
     {
         inv = gameObject.GetComponent<Inventory>();
+        endScreen = gameObject.GetComponent<EndScreen>();
         enemyObjects = new List<GameObject>();
         LoadNewRoom(5);
     }
@@ -100,12 +102,14 @@ public class RoomManager : MonoBehaviour
                 enemyObjects.Add(transformsInRoom[i].gameObject);
             }
         }
-        if (currentRoomType != 0)
+        
+        for (int i = 0; i < enemyObjects.Count; i++)
         {
-            for (int i = 0; i < enemyObjects.Count; i++)
+            if (currentRoomType != 0)
             {
                 enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(currentFloor * 0.75f, true);
             }
+            enemyObjects[i].GetComponent<Health>()?.AddMaxHealth(AscensionManager.selectedLevel * 0.2f, true);
         }
         enemyManager.enemyObjects = enemyObjects;
         if (!room.roomAlreadyHasDoor)
@@ -121,28 +125,36 @@ public class RoomManager : MonoBehaviour
         {
 
             Debug.Log("Player could walk through door becuase there are " + enemyObjects.Count + " enemies left");
-            MusicManager.Instance.ChangeToMusicType(MusicType.Map);
             GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().SetCanMove(false);
             RemoveAllEnemies();
             bulletHandler.ResetAll();
             cardHandler.isActive = false;
-            enemyManager.ResetEnemyStatus();
-            switch (currentRoomType)
+            if (currentRoom.isLastRoom)
             {
-                case 0:
-                    roomSelectScreenGenerator.GenerateAnotherFloor();
-                    rewardsHandler.GetRewardScreenCard(true);
-                    break;
-                case 1:
-                    rewardsHandler.GetRewardScreenStats();
-                    break;
-                case 2:
-                    rewardsHandler.GetRewardScreenCard(true);
-                    break;
+                endScreen.GetEndScreen();
             }
-            roomSelectScreenGenerator.roomSelectObject.SetActive(true);
-            roomSelectScreenGenerator.Open();
-            SoundManager.Instance.PlayAudio(mapOpen, mapOpenVolume);
+            else
+            {
+
+                MusicManager.Instance.ChangeToMusicType(MusicType.Map);
+                enemyManager.ResetEnemyStatus();
+                switch (currentRoomType)
+                {
+                    case 0:
+                        roomSelectScreenGenerator.GenerateAnotherFloor();
+                        rewardsHandler.GetRewardScreenCard(true);
+                        break;
+                    case 1:
+                        rewardsHandler.GetRewardScreenStats();
+                        break;
+                    case 2:
+                        rewardsHandler.GetRewardScreenCard(true);
+                        break;
+                }
+                roomSelectScreenGenerator.roomSelectObject.SetActive(true);
+                roomSelectScreenGenerator.Open();
+                SoundManager.Instance.PlayAudio(mapOpen, mapOpenVolume);
+            }
         }
         else
         {
@@ -245,11 +257,11 @@ public class RoomManager : MonoBehaviour
                 currentRoomType = 1;
                 Room room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
                 int iter = 0;
-                while(room.roomDifficulty + difficultyRange <= currentFloor && room.roomDifficulty - difficultyRange >= currentFloor)
+                while ((room.roomDifficulty + difficultyRange <= currentFloor) == (room.roomDifficulty - difficultyRange >= currentFloor))
                 {
                     room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
                     iter++;
-                    if(iter > 100)
+                    if (iter > 100)
                     {
                         break;
                     }
@@ -260,7 +272,7 @@ public class RoomManager : MonoBehaviour
                 currentRoomType = 2;
                 Room miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
                 int miniBoss_iter = 0;
-                while (miniBoss_room.roomDifficulty + difficultyRange <= currentFloor && miniBoss_room.roomDifficulty - difficultyRange >= currentFloor)
+                while ((miniBoss_room.roomDifficulty + difficultyRange <= currentFloor) == (miniBoss_room.roomDifficulty - difficultyRange >= currentFloor))
                 {
                     miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
                     miniBoss_iter++;

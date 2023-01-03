@@ -52,6 +52,7 @@ public class Health : MonoBehaviour
     Color tempColor;
     bool hitEffectActve = false;
 
+    EndScreen endScreen;
     PlayerStats stats;
     float startHealth;
     bool isPlayer;
@@ -78,7 +79,7 @@ public class Health : MonoBehaviour
             damageBufferhbar = Instantiate(healthbar, healthbar.transform.position, healthbar.transform.rotation, healthbar.transform.parent);
             healthbar.transform.parent = damageBufferhbar.transform;
         }
-
+        endScreen = GameObject.FindWithTag("GameController").GetComponent<EndScreen>();
         stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         if (gameObject.CompareTag("Player"))
         {
@@ -202,7 +203,10 @@ public class Health : MonoBehaviour
         }
 
         if (isPlayer)
+        {
+            endScreen.AddHealthRestored(Mathf.RoundToInt(healAmount));
             statsUI?.UpdateHP();
+        }
 
         if (hitNumbers != null)
             hitNumbers.GetHitText(transform.position, -healAmount);
@@ -242,10 +246,15 @@ public class Health : MonoBehaviour
 
     public void FullHeal()
     {
+        float healAmount = maxHP - hp;
+
         hp = maxHP;
 
         if (isPlayer)
+        {
+            endScreen.AddHealthRestored(Mathf.RoundToInt(healAmount));
             statsUI?.UpdateHP();
+        }
 
         hitNumbers?.GetHitText(transform.position, -maxHP);
     }
@@ -259,12 +268,23 @@ public class Health : MonoBehaviour
         healAmount = maxHP / 3;
 
         if (hp + healAmount <= maxHP)
+        {
+            if (isPlayer)
+                endScreen.AddHealthRestored(Mathf.RoundToInt(healAmount));
+
             hp += healAmount;
+        }
         else
+        {
+            if (isPlayer)
+                endScreen.AddHealthRestored(Mathf.RoundToInt(maxHP - hp));
+
             hp = maxHP;
+        }
 
         if (isPlayer)
             statsUI?.UpdateHP();
+
 
         hitNumbers?.GetHitText(transform.position, -healAmount);
     }
@@ -277,6 +297,7 @@ public class Health : MonoBehaviour
             if (gameObject.CompareTag("Player"))
             {
                 Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown, playerScreenShakeAmount);
+                endScreen.AddDamageTaken(Mathf.RoundToInt(value));
             }
             else
             {
@@ -286,6 +307,7 @@ public class Health : MonoBehaviour
                     isCrit = true;
                     value = critDamage;
                 }
+                endScreen.AddDamage(Mathf.RoundToInt(value));
             }
 
             if (usesHealthBar)
@@ -355,6 +377,8 @@ public class Health : MonoBehaviour
         }
         else
         {
+            endScreen.AddEnemies();
+
             if (removeHealthbar && removeSelf)
                 healthbarParent?.SetActive(false);
 

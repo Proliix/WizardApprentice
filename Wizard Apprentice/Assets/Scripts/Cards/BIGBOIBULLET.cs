@@ -84,6 +84,7 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
         {
 
             timer -= shootCooldown;
+            Camera.main.GetComponent<CameraMovement>().GetScreenShake();
             Effect();
         }
 
@@ -103,14 +104,14 @@ public class BIGBOIBULLET : MonoBehaviour, ICard
                 activeBullet = null;
             }
 
-        }
 
-        if (bulletScript != null)
-        {
-            bulletScript.damage = Mathf.Lerp(startingDamage, maxDamage, (activeBullet.gameObject.transform.localScale.y - bulletSize) / (maxScale - bulletSize));
-            bulletLight.pointLightOuterRadius = activeBullet.transform.localScale.x * 4;
-            Debug.Log(bulletScript.damage);
-            Debug.Log(interpolationAmount);
+            if (bulletScript != null)
+            {
+                bulletScript.damage = Mathf.Lerp(startingDamage, maxDamage, (activeBullet.gameObject.transform.localScale.y - bulletSize) / (maxScale - bulletSize));
+                bulletLight.pointLightOuterRadius = activeBullet.transform.localScale.x * 4;
+                Debug.Log(bulletScript.damage);
+                Debug.Log(interpolationAmount);
+            }
         }
     }
 

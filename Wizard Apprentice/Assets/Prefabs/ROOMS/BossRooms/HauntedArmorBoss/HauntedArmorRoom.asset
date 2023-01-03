@@ -17,4 +17,5 @@ MonoBehaviour:
   roomDifficulty: 0
   generateRandomRoom: 0
   roomAlreadyHasDoor: 0
+  isLastRoom: 1
   musicType: 1

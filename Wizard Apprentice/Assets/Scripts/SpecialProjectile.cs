@@ -135,7 +135,7 @@ public class SpecialProjectile : MonoBehaviour
 
         if (!hasShot)
         {
-            homingTarget = enemyManager.GetClosestEnemy(gameObject.transform.position);
+            homingTarget = enemyManager.GetClosestEnemy(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             hasShot = true;
         }
 
