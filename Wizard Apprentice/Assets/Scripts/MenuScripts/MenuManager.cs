@@ -352,38 +352,56 @@ public class MenuManager : MonoBehaviour
         ascensionButtonsLoaded += amount;
     }
 
-    private void AscensionButtonClicked(int levelNumber)
+    public void AscensionButtonClicked(int levelNumber)
     {
-        ascensionEffectInfoText.text = $"Enemies have <color=green>{levelNumber*20 + 100}% health";
-        float eloGain = 0;
-        float levelDiff = levelNumber-ascensionRank;
-        levelDiff *= levelEloScaling;
-        eloGain = (1 / (1 + (Mathf.Pow(2, 0)))) - (1 / (1 + (Mathf.Pow(2, levelDiff)))) + 0.5f;
-        if(levelDiff == 0)
+        if (levelNumber == 0)
         {
-            eloGain = 0.5f * eloGainMultiplier;
-        }
-        else if (levelDiff > 0)
-        {
-            eloGain = Mathf.Log(levelDiff + 2, 4) * eloGainMultiplier;
+            AscensionManager.selectedLevel = 0;
+            AscensionManager.ascensionRank = ascensionRank;
+            AscensionManager.gainOnWin = 0;
+            AscensionManager.lossOnLose = 0;
+            ascensionEffectInfoText.text = $"Enemies have <color=green>{100}% health";
+            ascensionWinInfoText.text = $"<color=green> +{("0.00")} score";
+            ascensionLoseInfoText.text = $"<color=red> -{("0.00")} score";
         }
         else
         {
-            eloGain = 1f/((Mathf.Log((levelDiff*-1f)+1, 2))*eloGainMultiplier);
+            ascensionEffectInfoText.text = $"Enemies have <color=green>{levelNumber * 20 + 100}% health";
+            float eloGain = 0;
+            float levelDiff = levelNumber - ascensionRank;
+            levelDiff *= levelEloScaling;
+            eloGain = (1 / (1 + (Mathf.Pow(2, 0)))) - (1 / (1 + (Mathf.Pow(2, levelDiff)))) + 0.5f;
+            if (levelDiff == 0)
+            {
+                eloGain = 0.5f * eloGainMultiplier;
+            }
+            else if (levelDiff > 0)
+            {
+                eloGain = Mathf.Log(levelDiff + 2, 4) * eloGainMultiplier;
+            }
+            else
+            {
+                eloGain = 1f / ((Mathf.Log((levelDiff * -1f) + 1, 2)) * eloGainMultiplier);
+            }
+            AscensionManager.selectedLevel = levelNumber;
+            AscensionManager.ascensionRank = ascensionRank;
+            AscensionManager.gainOnWin = eloGain;
+            AscensionManager.lossOnLose = (1f / eloGain) * 0.66f;
+            ascensionWinInfoText.text = $"<color=green> +{eloGain.ToString("0.00")} score";
+            ascensionLoseInfoText.text = $"<color=red> -{((1f / eloGain) * 0.66f).ToString("0.00")} score";
+            selectedLevel = levelNumber;
         }
-        AscensionManager.selectedLevel = levelNumber;
-        AscensionManager.ascensionRank = ascensionRank;
-        AscensionManager.gainOnWin = eloGain;
-        AscensionManager.lossOnLose = (1f / eloGain) * 0.66f;
-        ascensionWinInfoText.text = $"<color=green> +{eloGain.ToString("0.00")} score";
-        ascensionLoseInfoText.text = $"<color=red> {((1f/eloGain) * 0.66f).ToString("0.00")} score";
-        selectedLevel = levelNumber;
     }
 
     public void AscensionStartGameClicked()
     {
         ascensionPanelObject.SetActive(false);
         MoveIntoCave();
+    }
+
+    public void CloseAscensionPanel()
+    {
+        ascensionPanelObject.SetActive(false);
     }
 
     private void MoveIntoCave()

@@ -85,10 +85,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Input.GetKeyDown(KeyCode.I))
-       {
-            GenerateLookOfScreen();
-       }
+       
     }
 
     public void GenerateRoomLayout()
