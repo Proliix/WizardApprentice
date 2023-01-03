@@ -271,7 +271,7 @@ public class CrystallBossAI : MonoBehaviour
     }
     private void BossDead()
     {
-        Camera.main.GetComponent<CameraMovement>().GetScreenShake();
+        Camera.main.GetComponent<CameraMovement>().GetScreenShake(2,1);
         StopAllCoroutines();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
         gameObject.GetComponent<PolygonCollider2D>().enabled = false;
