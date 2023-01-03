@@ -72,6 +72,7 @@ public class GreatswordArmor : MonoBehaviour
     float recallValueMultiplier = 1f;
     float pieceSpinValueMultiplier = 1f;
     float pieceCircleValueMultiplier = 1f;
+    float pieceMoveValueMultiplier = 1f;
     float timeSinceLastSpinToWin;
     float timeSinceLastSmash;
     float timeSinceLastSlash;
@@ -79,6 +80,7 @@ public class GreatswordArmor : MonoBehaviour
     float timeSinceLastRecall;
     float timeSinceLastPieceSpin;
     float timeSinceLastPieceCircle;
+    float timeSinceLastPieceMove;
     [SerializeField] float valueNeededForSmash;
     [SerializeField] float valueNeededForSpinToWin;
     [SerializeField] float valueNeededForSlash;
@@ -86,6 +88,7 @@ public class GreatswordArmor : MonoBehaviour
     [SerializeField] float valueNeededForRecall;
     [SerializeField] float valueNeededForPieceSpin;
     [SerializeField] float valueNeededForPieceCircle;
+    [SerializeField] float valueNeededForPieceMove;
     [SerializeField] float abilityTimeDependance;
     [SerializeField] float randomDistanceFromPlayer;
     [SerializeField] float playerDetectionRange;
@@ -176,7 +179,11 @@ public class GreatswordArmor : MonoBehaviour
             timeSinceLastSpinToWin += Time.deltaTime;
             timeSinceLastSmash += Time.deltaTime;
             timeSinceLastSlash += Time.deltaTime;
-            if(!piecesAreOut)
+            timeSinceLastPieceSpin += Time.deltaTime;
+            timeSinceLastPieceCircle += Time.deltaTime;
+            timeSinceLastPieceMove += Time.deltaTime;
+            timeSinceLastRecall += Time.deltaTime;
+            if (!piecesAreOut)
             {
                 timeSinceLastSplit += Time.deltaTime;
             }
@@ -226,11 +233,9 @@ public class GreatswordArmor : MonoBehaviour
         //Pieces ability check
         if(piecesAreReady)
         {
-            timeSinceLastPieceSpin += Time.deltaTime;
-            timeSinceLastPieceCircle += Time.deltaTime;
-            timeSinceLastRecall += Time.deltaTime;
             float pieceSpinValue = (1 + (timeSinceLastPieceSpin * abilityTimeDependance)) * pieceSpinValueMultiplier;
             float pieceCircleValue = (1 + (timeSinceLastPieceCircle * abilityTimeDependance)) * pieceCircleValueMultiplier;
+            float pieceMoveValue = (1 + (timeSinceLastPieceMove * abilityTimeDependance)) * pieceMoveValueMultiplier;
 
             if (pieceSpinValue > valueNeededForPieceSpin)
             {
@@ -244,7 +249,46 @@ public class GreatswordArmor : MonoBehaviour
                 pieceCircleValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
                 StartCoroutine(CircleAroundBoss());
             }
+            else if(pieceMoveValue > valueNeededForPieceMove)
+            {
+                timeSinceLastPieceMove = 0;
+                pieceMoveValueMultiplier = Random.Range(abilityVariety.x, abilityVariety.y);
+                StartCoroutine(MovePieces());
+            }
         }
+    }
+
+    IEnumerator MovePieces()
+    {
+        piecesAreReady = false;
+        List<Vector2> targetPositions = new List<Vector2>();
+        List<Vector2> startPositions = new List<Vector2>();
+
+        for (int i = 0; i < amountOfPieces; i++)
+        {
+            targetPositions.Add(new Vector2(Random.Range(0, roomSize.x), Random.Range(0, roomSize.y)));
+            startPositions.Add(allPieces[i].transform.position);
+        }
+
+        int amountCompleted = 0;
+        bool[] isDoneMoving = new bool[allPieces.Count];
+        while (amountCompleted < allPieces.Count)
+        {
+            yield return null;
+            for (int i = 0; i < allPieces.Count; i++)
+            {
+                if (Vector2.Distance(allPieces[i].transform.position, targetPositions[i]) < distanceToBeWithin && !isDoneMoving[i])
+                {
+                    amountCompleted++;
+                    isDoneMoving[i] = true;
+                }
+                else if (!isDoneMoving[i])
+                {
+                    allPieces[i].transform.position += (Vector3)((targetPositions[i] - startPositions[i]).normalized * Time.deltaTime * pieceMoveSpeed);
+                }
+            }
+        }
+        piecesAreReady = true;
     }
 
     IEnumerator SpinPieces()
