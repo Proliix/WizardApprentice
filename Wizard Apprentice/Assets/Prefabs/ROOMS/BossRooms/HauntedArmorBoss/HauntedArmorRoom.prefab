@@ -1539,7 +1539,7 @@ MonoBehaviour:
   animator: {fileID: 385275345394586586}
   pieceSpinDuration: 5
   pieceSpinChargeTime: 1
-  pieceSpinTimeBetweenProjectiles: 0.05
+  pieceSpinTimeBetweenProjectiles: 0.1
   pieceSpinRotationsPerSecond: 6
   pieceCircleDuration: 7
   pieceCircleRotationsPerSecond: 2
@@ -1581,9 +1581,10 @@ MonoBehaviour:
   valueNeededForSpinToWin: 20
   valueNeededForSlash: 5
   valueNeededForSplit: 20
-  valueNeededForRecall: 20
-  valueNeededForPieceSpin: 2
-  valueNeededForPieceCircle: 1
+  valueNeededForRecall: 40
+  valueNeededForPieceSpin: 15
+  valueNeededForPieceCircle: 15
+  valueNeededForPieceMove: 1
   abilityTimeDependance: 1
   randomDistanceFromPlayer: 5
   playerDetectionRange: 5
