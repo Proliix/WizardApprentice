@@ -245,7 +245,7 @@ public class RoomManager : MonoBehaviour
                 currentRoomType = 1;
                 Room room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
                 int iter = 0;
-                while(room.roomDifficulty + difficultyRange <= currentFloor && room.roomDifficulty - difficultyRange >= currentFloor)
+                while((room.roomDifficulty + difficultyRange <= currentFloor) == (room.roomDifficulty - difficultyRange >= currentFloor))
                 {
                     room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
                     iter++;
