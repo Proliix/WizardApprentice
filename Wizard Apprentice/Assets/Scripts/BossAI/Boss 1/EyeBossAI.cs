@@ -188,7 +188,7 @@ public class EyeBossAI : MonoBehaviour
 
     private void BossDead()
     {
-
+        Camera.main.GetComponent<CameraMovement>().GetScreenShake(2, 1);
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         isAlive = false;

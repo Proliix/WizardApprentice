@@ -11198,7 +11198,7 @@ GameObject:
   - component: {fileID: 1550023956}
   - component: {fileID: 1550023955}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13510,6 +13510,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 15427db711c04e64d96452991c114724, type: 2}
   - {fileID: 11400000, guid: 434ea1c03590ee94a944917397cbdb3c, type: 2}
   - {fileID: 11400000, guid: 81feece4790981e418a1f20fb15e1948, type: 2}
+  - {fileID: 11400000, guid: 9508923ed27d26a40a5779421ed0f9e3, type: 2}
+  - {fileID: 11400000, guid: 385a4725d4f83094c85266a764c028f7, type: 2}
+  - {fileID: 11400000, guid: 3c76c6bb473d85e4791f72ef50f405fa, type: 2}
+  - {fileID: 11400000, guid: 2d09d29036595bb47a6355f2f4dc9dd9, type: 2}
+  - {fileID: 11400000, guid: c6deb4ef626cfea429bc07ce8db314ce, type: 2}
+  - {fileID: 11400000, guid: c0a1c6d5e3613d4448212e4fdc131391, type: 2}
+  - {fileID: 11400000, guid: f21f6b580915dd249a062faa8c89235f, type: 2}
   normalRoomsPoolAmount: 20
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 7441a10cbeb68b742a95838af372a3ce, type: 2}
@@ -13661,6 +13668,14 @@ MonoBehaviour:
   dashOverHeadObj: {fileID: 1468516659}
   inactiveDashOverHeadObj: {fileID: 1019943885}
   DebugPrefab: {fileID: 6895941850713439242, guid: 7c53c7f4ce612ef46a5e0476e2d9a56a, type: 3}
+  ascensionButtonHolder: {fileID: 0}
+  ascensionButtonPrefab: {fileID: 0}
+  ascensionPanelObject: {fileID: 0}
+  ascensionEffectInfoText: {fileID: 0}
+  ascensionWinInfoText: {fileID: 0}
+  ascensionLoseInfoText: {fileID: 0}
+  eloGainMultiplier: 0
+  levelEloScaling: 0
 --- !u!82 &1786813666
 AudioSource:
   m_ObjectHideFlags: 0

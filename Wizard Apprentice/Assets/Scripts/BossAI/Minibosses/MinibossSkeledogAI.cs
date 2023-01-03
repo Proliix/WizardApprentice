@@ -125,6 +125,7 @@ public class MinibossSkeledogAI : MonoBehaviour
         canHitWall = false;
         timer = 0;
         SoundManager.Instance.PlayAudio(rockFall, audioVolume);
+        Camera.main.GetComponent<CameraMovement>().GetScreenShake();
         //   SoundManager.Instance.PlayAudio(groundRumble, audioVolume);
 
         rb2d.velocity = new Vector2(0, 0);

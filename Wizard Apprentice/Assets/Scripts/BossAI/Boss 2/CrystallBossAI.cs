@@ -202,6 +202,7 @@ public class CrystallBossAI : MonoBehaviour
 
     void Phase1()
     {
+       
         spawnAmount = 2;
         rotationSpeed = 40;
         StartCoroutine(AttackPattern());
@@ -210,6 +211,7 @@ public class CrystallBossAI : MonoBehaviour
 
     void Phase2()
     {
+        
         spawnAmount = 3;
         rotationSpeed = 65;
         phase1Active = false;
@@ -221,6 +223,7 @@ public class CrystallBossAI : MonoBehaviour
 
     void Phase3()
     {
+        
         spawnAmount = 4;
         rotationSpeed = 90;
         StartCoroutine(AttackPattern());
@@ -268,6 +271,7 @@ public class CrystallBossAI : MonoBehaviour
     }
     private void BossDead()
     {
+        Camera.main.GetComponent<CameraMovement>().GetScreenShake();
         StopAllCoroutines();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
         gameObject.GetComponent<PolygonCollider2D>().enabled = false;
@@ -284,11 +288,13 @@ public class CrystallBossAI : MonoBehaviour
             for (int i = 0; i < lightObjects.Length; i++)
             {
                 lightObjects[i].intensity = Mathf.MoveTowards(lightObjects[i].intensity, 0, lightIntensityDelaySpeed * Time.deltaTime);
-                
+            
             }
         
     
     }
    
+ 
+    
 }
 
