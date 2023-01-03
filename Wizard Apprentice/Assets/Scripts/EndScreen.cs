@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -93,9 +94,6 @@ public class EndScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-            GetEndScreen();
-
 
         if (!endScreenActive)
             time += Time.deltaTime;
@@ -143,7 +141,10 @@ public class EndScreen : MonoBehaviour
 
     private void UpdateStats()
     {
-        timeText.text = string.Format("Time: " + "{0:0.00}", time);
+
+        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(time);
+        string timeTextFormated = timeSpan.Hours > 0 ? string.Format("Time: {0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds): string.Format("Time: {0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+        timeText.text = timeTextFormated;
 
         for (int i = 0; i < HotbarCards.Length; i++)
         {
