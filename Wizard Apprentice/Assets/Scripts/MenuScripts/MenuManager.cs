@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -43,6 +44,18 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject inactiveDashOverHeadObj;
     [Header("For Debug")]
     [SerializeField] GameObject DebugPrefab;
+
+    [SerializeField] GameObject ascensionButtonHolder;
+    [SerializeField] GameObject ascensionButtonPrefab;
+    [SerializeField] GameObject ascensionPanelObject;
+    [SerializeField] TextMeshProUGUI ascensionEffectInfoText;
+    [SerializeField] TextMeshProUGUI ascensionWinInfoText;
+    [SerializeField] TextMeshProUGUI ascensionLoseInfoText;
+    [SerializeField] float eloGainMultiplier;
+    [SerializeField] float levelEloScaling;
+    private int ascensionButtonsLoaded;
+    private float ascensionRank;
+    private int selectedLevel;
 
     MainMusicScript musicScript;
     bool onSettings;
@@ -311,13 +324,74 @@ public class MenuManager : MonoBehaviour
 
     public void StartGameButtonClicked()
     {
+        ascensionPanelObject.SetActive(true);
+        ascensionRank = PlayerPrefs.GetFloat("ascensionRank",3.5f);
+        PlayerPrefs.SetInt("Completions", 10);
+        if (PlayerPrefs.GetInt("Completions",0) != 0)
+        {
+            LoadInAscensionButtons(100);
+        }
+        else
+        {
+            MoveIntoCave();
+        }
+    }
+
+    private void LoadInAscensionButtons(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject buttonObject = Instantiate(ascensionButtonPrefab,ascensionButtonHolder.transform);
+            int temp = i + ascensionButtonsLoaded + 1;
+            buttonObject.GetComponent<Button>().onClick.AddListener(delegate { AscensionButtonClicked(temp); });
+            buttonObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Ascension Level {temp}";
+            buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(Mathf.Min((temp-ascensionRank)*0.1f,1),1-((temp - ascensionRank+10) * 0.1f), 1-(Mathf.Abs(temp-ascensionRank)*0.25f));
+            Debug.Log(Mathf.Min(temp * 25, 255));
+        }
+        ascensionButtonHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 80*amount);
+        ascensionButtonsLoaded += amount;
+    }
+
+    private void AscensionButtonClicked(int levelNumber)
+    {
+        ascensionEffectInfoText.text = $"Enemies have <color=green>{levelNumber*20 + 100}% health";
+        float eloGain = 0;
+        float levelDiff = levelNumber-ascensionRank;
+        levelDiff *= levelEloScaling;
+        eloGain = (1 / (1 + (Mathf.Pow(2, 0)))) - (1 / (1 + (Mathf.Pow(2, levelDiff)))) + 0.5f;
+        if(levelDiff == 0)
+        {
+            eloGain = 0.5f * eloGainMultiplier;
+        }
+        else if (levelDiff > 0)
+        {
+            eloGain = Mathf.Log(levelDiff + 2, 4) * eloGainMultiplier;
+        }
+        else
+        {
+            eloGain = 1f/((Mathf.Log((levelDiff*-1f)+1, 2))*eloGainMultiplier);
+        }
+        AscensionManager.selectedLevel = levelNumber;
+        AscensionManager.ascensionRank = ascensionRank;
+        AscensionManager.gainOnWin = eloGain;
+        AscensionManager.lossOnLose = (1f / eloGain) * 0.66f;
+        ascensionWinInfoText.text = $"<color=green> +{eloGain.ToString("0.00")} score";
+        ascensionLoseInfoText.text = $"<color=red> {((1f/eloGain) * 0.66f).ToString("0.00")} score";
+        selectedLevel = levelNumber;
+    }
+
+    public void AscensionStartGameClicked()
+    {
+        ascensionPanelObject.SetActive(false);
+        MoveIntoCave();
+    }
+
+    private void MoveIntoCave()
+    {
         cameraAnimator.SetTrigger("MoveIntoCave");
         musicScript?.FadeOut();
         backgroundObject.transform.parent = infrontParent;
         Invoke("LoadMainScene", 1f);
-        //Zoom in on cave opening
-        //Maybe wait a bit
-        //Switch scene
     }
 
     public void EnableStatsWhenPlaying()
