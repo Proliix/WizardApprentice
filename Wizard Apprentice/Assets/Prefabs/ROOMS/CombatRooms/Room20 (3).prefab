@@ -151,7 +151,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4599544729575528621, guid: 872ef6ca91a11af45b3aa7cf264c9385, type: 3}
       propertyPath: m_InstanceId
-      value: -630692
+      value: -687208
       objectReference: {fileID: 0}
     - target: {fileID: 3146436174237799413, guid: 872ef6ca91a11af45b3aa7cf264c9385, type: 3}
       propertyPath: m_RootOrder
@@ -219,7 +219,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630890
+      value: -687304
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer
@@ -291,7 +291,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5721598716638320049, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_InstanceId
-      value: -630414
+      value: -687180
       objectReference: {fileID: 0}
     - target: {fileID: 7003783273683215008, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_RootOrder
@@ -367,11 +367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.25
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.5
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.25
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -541,6 +541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -567,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.5
+      value: 12.1
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -627,7 +631,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4599544729575528621, guid: 872ef6ca91a11af45b3aa7cf264c9385, type: 3}
       propertyPath: m_InstanceId
-      value: -630748
+      value: -687380
       objectReference: {fileID: 0}
     - target: {fileID: 3146436174237799413, guid: 872ef6ca91a11af45b3aa7cf264c9385, type: 3}
       propertyPath: m_RootOrder
@@ -695,7 +699,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4599544729575528621, guid: 872ef6ca91a11af45b3aa7cf264c9385, type: 3}
       propertyPath: m_InstanceId
-      value: -630710
+      value: -687560
       objectReference: {fileID: 0}
     - target: {fileID: 3146436174237799413, guid: 872ef6ca91a11af45b3aa7cf264c9385, type: 3}
       propertyPath: m_RootOrder
@@ -767,7 +771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -827,7 +831,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630318
+      value: -687236
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer
@@ -949,6 +953,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -975,7 +983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.5
+      value: -12.1
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1017,6 +1025,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -1043,11 +1055,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.5
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1103,7 +1115,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5721598716638320049, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_InstanceId
-      value: -630644
+      value: -687636
       objectReference: {fileID: 0}
     - target: {fileID: 7003783273683215008, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_RootOrder
@@ -1171,7 +1183,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5721598716638320049, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_InstanceId
-      value: -630852
+      value: -687408
       objectReference: {fileID: 0}
     - target: {fileID: 7003783273683215008, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_RootOrder
@@ -1239,7 +1251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630814
+      value: -687588
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer
@@ -1311,7 +1323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5721598716638320049, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_InstanceId
-      value: -630366
+      value: -687446
       objectReference: {fileID: 0}
     - target: {fileID: 7003783273683215008, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_RootOrder
@@ -1379,7 +1391,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630596
+      value: -687532
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer
@@ -1451,7 +1463,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630510
+      value: -687742
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer
@@ -1523,7 +1535,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5721598716638320049, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_InstanceId
-      value: -630462
+      value: -687494
       objectReference: {fileID: 0}
     - target: {fileID: 7003783273683215008, guid: bc55f82b59aa6b24c883d145cf0bf173, type: 3}
       propertyPath: m_RootOrder
@@ -1641,6 +1653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -1659,7 +1675,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630776
+      value: -687342
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer
@@ -1781,6 +1797,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -1799,7 +1819,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_InstanceId
-      value: -630548
+      value: -687684
       objectReference: {fileID: 0}
     - target: {fileID: 22294666094687741, guid: a031aff2d255cc04e865af30189174b4, type: 3}
       propertyPath: m_HasRenderer

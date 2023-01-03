@@ -147,7 +147,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324282
+      value: -463958
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -375,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -413,6 +413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -439,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: -9.6
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -481,6 +485,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -507,7 +515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: -9.6
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -548,6 +556,10 @@ PrefabInstance:
     - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_Name
       value: Torch
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -613,6 +625,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -631,7 +647,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324496
+      value: -464102
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -703,7 +719,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324536
+      value: -464142
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -775,7 +791,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324788
+      value: -463998
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -847,7 +863,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324406
+      value: -464444
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -919,7 +935,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324446
+      value: -464182
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -999,7 +1015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1041,6 +1057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -1059,7 +1079,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324586
+      value: -463898
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
@@ -1143,7 +1163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -9
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1180,6 +1200,10 @@ PrefabInstance:
     - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_Name
       value: Torch (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1245,6 +1269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -1271,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 7369780964310344332, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1313,6 +1341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7369780964310344335, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65654ebd322ade4448c53ec9bd6601f5, type: 3}
@@ -1331,7 +1363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_InstanceId
-      value: -324322
+      value: -464306
       objectReference: {fileID: 0}
     - target: {fileID: 3568733254617530727, guid: 80ee10967f00e3147a26d285401c8323, type: 3}
       propertyPath: m_HasRenderer
