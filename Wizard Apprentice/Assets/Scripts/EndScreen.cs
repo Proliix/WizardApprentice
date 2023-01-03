@@ -94,9 +94,6 @@ public class EndScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-            GetEndScreen();
-
 
         if (!endScreenActive)
             time += Time.deltaTime;
