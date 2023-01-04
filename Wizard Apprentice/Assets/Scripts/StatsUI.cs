@@ -130,9 +130,13 @@ public class StatsUI : MonoBehaviour
 
         string healthText = healthText = Mathf.RoundToInt(currentHP) + "/" + Mathf.RoundToInt(maxHP);
 
-        if (currentHP < 1)
+        if (currentHP < 1 && currentHP > 0)
         {
-            healthText = Mathf.RoundToInt(1) + "/" + Mathf.RoundToInt(maxHP);
+            healthText = 1 + "/" + Mathf.RoundToInt(maxHP);
+        }
+        else if(currentHP < 0)
+        {
+            healthText = 0 + "/" + Mathf.RoundToInt(maxHP);
         }
              
       
