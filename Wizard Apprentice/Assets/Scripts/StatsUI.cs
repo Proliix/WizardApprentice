@@ -55,7 +55,7 @@ public class StatsUI : MonoBehaviour
         if (activeIngame)
         {
             if (!healthTMP.gameObject.activeSelf)
-                healthTMP.gameObject.SetActive(true);   
+                healthTMP.gameObject.SetActive(true);
 
             timer += Time.deltaTime;
             if (timer >= 0.05f)
@@ -128,7 +128,14 @@ public class StatsUI : MonoBehaviour
         //string bulletSizeText = "Bullet Size : " + bulletSize.ToString("F2");
         //bulletSizeTMP.SetText(bulletSizeText);
 
-        string healthText = Mathf.RoundToInt(currentHP) + "/" + Mathf.RoundToInt(maxHP);
+        string healthText = healthText = Mathf.RoundToInt(currentHP) + "/" + Mathf.RoundToInt(maxHP);
+
+        if (currentHP < 1)
+        {
+            healthText = Mathf.RoundToInt(1) + "/" + Mathf.RoundToInt(maxHP);
+        }
+             
+      
         healthTMP.SetText(healthText);
     }
 

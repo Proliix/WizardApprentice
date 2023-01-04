@@ -743,6 +743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   player: {fileID: 0}
+  iris: {fileID: 7738060954570163507}
   moveSpeed: 0.25
   basicsUntilSpecial: 10
   currentBasics: 0

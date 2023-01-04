@@ -18,6 +18,7 @@ public class EyeBossAI : MonoBehaviour
 
     [SerializeField] float timer;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject iris;
 
     [SerializeField] float moveSpeed = 1;
 
@@ -191,6 +192,8 @@ public class EyeBossAI : MonoBehaviour
         Camera.main.GetComponent<CameraMovement>().GetScreenShake(2, 1);
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        iris.SetActive(false);
         isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();

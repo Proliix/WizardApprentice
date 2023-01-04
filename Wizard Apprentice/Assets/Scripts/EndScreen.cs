@@ -44,6 +44,7 @@ public class EndScreen : MonoBehaviour
     float time;
     PlayerStats pStats;
     Inventory inv;
+    bool debugMode = false;
 
     private void Start()
     {
@@ -56,6 +57,7 @@ public class EndScreen : MonoBehaviour
         endScreenCanvas.SetActive(false);
         pStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
         //Invoke("GetEndScreen", 3);
+        debugMode = PlayerPrefs.GetInt("Debug") > 0 ? true : false;
     }
 
     private IEnumerator SpawnObjects()
@@ -104,7 +106,7 @@ public class EndScreen : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.M))
-        //   GetEndScreen();
+        //    GetEndScreen();
 
         if (!endScreenActive)
             time += Time.deltaTime;
@@ -151,10 +153,13 @@ public class EndScreen : MonoBehaviour
         endScreenActive = true;
         UpdateStats();
 
-        PlayerPrefs.SetInt("Completions", PlayerPrefs.GetInt("Completions", 0) + 1);
-        if (AscensionManager.selectedLevel > 0)
+        if (!debugMode)
         {
-            PlayerPrefs.SetInt("ascensionRank", Mathf.Max(PlayerPrefs.GetInt("ascensionRank", 0), AscensionManager.selectedLevel));
+            PlayerPrefs.SetInt("Completions", PlayerPrefs.GetInt("Completions", 0) + 1);
+            if (AscensionManager.selectedLevel > 0)
+            {
+                PlayerPrefs.SetInt("ascensionRank", Mathf.Max(PlayerPrefs.GetInt("ascensionRank", 0), AscensionManager.selectedLevel));
+            }
         }
         endScreenCanvas.SetActive(true);
         FadeOutObj.SetActive(true);
@@ -163,14 +168,21 @@ public class EndScreen : MonoBehaviour
 
     private void UpdateStats()
     {
-
-        if (PlayerPrefs.GetInt("Completions", 0) > 0)
+        if (!debugMode)
         {
-            ascensionText.text = "Ascension level: " + AscensionManager.selectedLevel;
+
+            if (PlayerPrefs.GetInt("Completions", 0) > 0)
+            {
+                ascensionText.text = "Ascension level: " + AscensionManager.selectedLevel;
+            }
+            else
+            {
+                ascensionText.text = "You have unlocked Ascensions!";
+            }
         }
         else
         {
-            ascensionText.text = "You have unlocked Ascensions!";
+            ascensionText.text = "<color=red>NO ASCENSIONS FOR CHEATERS!</color>";
         }
 
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(time);

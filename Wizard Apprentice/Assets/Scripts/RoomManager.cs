@@ -104,7 +104,7 @@ public class RoomManager : MonoBehaviour
                 enemyObjects.Add(transformsInRoom[i].gameObject);
             }
         }
-        
+
         for (int i = 0; i < enemyObjects.Count; i++)
         {
             if (currentRoomType != 0)
@@ -223,10 +223,12 @@ public class RoomManager : MonoBehaviour
 
     public void OpenDoor()
     {
+        if (currentRoom.roomAlreadyHasDoor)
+            doorObject = GameObject.Find("ExitDoor");
+
         SoundManager.Instance.PlayAudio(roomClearSound, audioVolume);
         ActivateParticleSystem();
-        if (!currentRoom.roomAlreadyHasDoor)
-            doorObject.GetComponentInChildren<Animator>().SetTrigger("OpenDoor");
+        doorObject.GetComponentInChildren<Animator>()?.SetTrigger("OpenDoor");
     }
 
     public void LoadNewRoom(int roomType)
