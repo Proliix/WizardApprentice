@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class MenuManager : MonoBehaviour
 {
@@ -52,10 +53,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI ascensionEffectInfoText;
     [SerializeField] TextMeshProUGUI ascensionWinInfoText;
     [SerializeField] TextMeshProUGUI ascensionLoseInfoText;
+    [SerializeField] TextMeshProUGUI totalCompletionsText;
+    [SerializeField] TextMeshProUGUI highestAscensionText;
     [SerializeField] float eloGainMultiplier;
     [SerializeField] float levelEloScaling;
     private int ascensionButtonsLoaded;
-    private float ascensionRank;
+    private int ascensionRank;
     private int selectedLevel;
 
     MainMusicScript musicScript;
@@ -326,18 +329,18 @@ public class MenuManager : MonoBehaviour
     public void StartGameButtonClicked()
     {
         ascensionPanelObject.SetActive(true);
-        ascensionRank = PlayerPrefs.GetFloat("ascensionRank", 3.5f);
-        PlayerPrefs.SetInt("Completions", 10);
+        ascensionRank = PlayerPrefs.GetInt("ascensionRank", 0);
+        totalCompletionsText.text = "Total Completions: " + PlayerPrefs.GetInt("Completions", 0).ToString();
+        highestAscensionText.text = "Highest Ascension Defeated: " + ascensionRank.ToString();
         if (PlayerPrefs.GetInt("Completions", 0) != 0)
         {
-            LoadInAscensionButtons(100);
+            LoadInAscensionButtons(ascensionRank + 10);
         }
         else
         {
             MoveIntoCave();
         }
     }
-
     private void LoadInAscensionButtons(int amount)
     {
         for (int i = 0; i < amount; i++)
@@ -346,8 +349,18 @@ public class MenuManager : MonoBehaviour
             int temp = i + ascensionButtonsLoaded + 1;
             buttonObject.GetComponent<Button>().onClick.AddListener(delegate { AscensionButtonClicked(temp); });
             buttonObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Ascension Level {temp}";
-            buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(Mathf.Min((temp - ascensionRank) * 0.1f, 1), 1 - ((temp - ascensionRank + 10) * 0.1f), 1 - (Mathf.Abs(temp - ascensionRank) * 0.25f));
-            Debug.Log(Mathf.Min(temp * 25, 255));
+            if(temp <= ascensionRank)
+            {
+                buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(0,1,0);
+            }
+            else if (temp <= ascensionRank + 5)
+            {
+                buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1);
+            }
+            else
+            {
+                buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1,0,0);
+            }
         }
         ascensionButtonHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 80 * amount);
         ascensionButtonsLoaded += amount;
@@ -365,7 +378,7 @@ public class MenuManager : MonoBehaviour
             ascensionWinInfoText.text = $"<color=green> +{("0.00")} score";
             ascensionLoseInfoText.text = $"<color=red> -{("0.00")} score";
         }
-        else
+        else if (levelNumber - 5 <= ascensionRank)
         {
             ascensionEffectInfoText.text = $"Enemies have <color=green>{levelNumber * 20 + 100}% health";
             float eloGain = 0;
@@ -392,12 +405,19 @@ public class MenuManager : MonoBehaviour
             ascensionLoseInfoText.text = $"<color=red> -{((1f / eloGain) * 0.66f).ToString("0.00")} score";
             selectedLevel = levelNumber;
         }
+        else
+        {
+            ascensionEffectInfoText.text = $"<color=red>You do not have access to this level yet. Defeat level {levelNumber-5} or higher to gain access";
+        }
     }
 
     public void AscensionStartGameClicked()
     {
-        ascensionPanelObject.SetActive(false);
-        MoveIntoCave();
+        if (selectedLevel - 5 <= ascensionRank)
+        {
+            ascensionPanelObject.SetActive(false);
+            MoveIntoCave();
+        }
     }
 
     public void CloseAscensionPanel()
