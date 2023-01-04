@@ -15,6 +15,7 @@ public class GreatswordArmor : MonoBehaviour
     List<GameObject> allPieces;
     bool piecesAreOut;
     bool piecesAreReady;
+    [SerializeField] Sprite[] pieceSprites;
 
     [SerializeField] float pieceSpinDuration;
     [SerializeField] float pieceSpinChargeTime;
@@ -308,6 +309,7 @@ public class GreatswordArmor : MonoBehaviour
                     Vector3 dir = new Vector3(((Mathf.Cos((timeSpinning + (counter * pieceSpinTimeBetweenProjectiles)) * pieceSpinRotationsPerSecond) * 360) * Mathf.Deg2Rad), ((Mathf.Sin((timeSpinning + (counter * pieceSpinTimeBetweenProjectiles)) * pieceSpinRotationsPerSecond) * 360) * Mathf.Deg2Rad), 0);
                     counter++;
                     bulletHandler.GetBullet(allPieces[i].transform.position, dir, false, 10, 0.5f, 8f);
+                    allPieces[i].transform.up = dir;
                     Debug.Log("helo");
                 }
             }
@@ -406,6 +408,7 @@ public class GreatswordArmor : MonoBehaviour
         for (int i = 0; i < amountOfPieces; i++)
         {
             GameObject piece = Instantiate(pieceObject);
+            piece.GetComponent<SpriteRenderer>().sprite = pieceSprites[i%pieceSprites.Length];
             piece.transform.position = startPos;
             float theta = Mathf.Atan2(targetPositions[i].y - startPos.y, startPos.x - targetPositions[i].x);
             if (theta < 0.0)
@@ -453,7 +456,9 @@ public class GreatswordArmor : MonoBehaviour
             Vector2 newDir = new Vector2(Mathf.Cos((angle + (i * 2 * (slashAttackAngle/amountOfRectanglesForWarning) - slashAttackAngle) * Mathf.Deg2Rad)), Mathf.Sin(angle + (i * 2 * (slashAttackAngle / amountOfRectanglesForWarning) - slashAttackAngle) * Mathf.Deg2Rad));
             AttackIndicator.CreateSquare(startPos, startPos + newDir * slashRange, new Vector2(1,slashRange),slashAttackChargeDuration,true);
         }
+        animator.SetBool("isSlashing", true);
         yield return new WaitForSeconds(slashAttackChargeDuration);
+        animator.SetBool("isSlashing", false);
 
         List<GameObject> damageObjects = new List<GameObject>();
         for(int i = 0; i < amountOfRectanglesForWarning; i++)
