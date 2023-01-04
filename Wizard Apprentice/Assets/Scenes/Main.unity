@@ -13950,7 +13950,7 @@ MonoBehaviour:
   damageTakenText: {fileID: 400399301}
   restoresText: {fileID: 1752980603}
   amountRestoredText: {fileID: 1611129223}
-  timesHitText: {fileID: 0}
+  timesHitText: {fileID: 1425195807}
   damageTMP: {fileID: 680912777}
   attackSpeedTMP: {fileID: 1934052744}
   critChanceTMP: {fileID: 2046253724}
