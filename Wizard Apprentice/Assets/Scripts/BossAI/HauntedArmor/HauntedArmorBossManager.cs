@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class HauntedArmorBossManager : MonoBehaviour
 {
     [SerializeField] Vector2 roomSize;
-    [SerializeField] GameObject helmetObject;
+    BulletHandler bulletHandler;
     [SerializeField] GameObject firstGateObject;
     [SerializeField] GameObject secondGateObject;
     [SerializeField] GameObject firstGateHiderObject;
@@ -30,6 +30,7 @@ public class HauntedArmorBossManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bulletHandler = GameObject.FindGameObjectWithTag("GameController").GetComponent<BulletHandler>();
         polearmArmorHealth.deathEvent += PolearmDeath;
         crossbowArmorHealth.deathEvent += CrossbowDeath;
         crossbowArmorHealth.enabled = false;
@@ -40,18 +41,7 @@ public class HauntedArmorBossManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            if (!hasPressed)
-            {
-                StartCoroutine(OpenGate(firstGateObject, firstGateHiderObject));
-                hasPressed = true;
-            }
-            else
-            {
-                StartCoroutine(OpenGate(secondGateObject, secondGateHiderObject));
-            }
-        }
+
     }
 
     public void PolearmDeath(GameObject polearmObject)
@@ -61,6 +51,7 @@ public class HauntedArmorBossManager : MonoBehaviour
             currentPhase = 1;
             polearmObject.GetComponent<PolearmArmor>().enabled = false;
             StartCoroutine(OpenGate(firstGateObject, firstGateHiderObject));
+            bulletHandler.ResetAll();
             Invoke("SpawnCrossbow", 5f);
             Destroy(polearmObject);
         }
@@ -73,6 +64,7 @@ public class HauntedArmorBossManager : MonoBehaviour
             currentPhase = 2;
             crossbowObject.GetComponent<CrossbowArmor>().enabled = false;
             StartCoroutine(OpenGate(secondGateObject, secondGateHiderObject));
+            bulletHandler.ResetAll();
             Invoke("SpawnGreatSword", 5f);
             Destroy(crossbowObject);
         }
@@ -84,6 +76,7 @@ public class HauntedArmorBossManager : MonoBehaviour
         {
             greatSwordObject.GetComponent<GreatswordArmor>().Death();
             greatSwordObject.GetComponent<GreatswordArmor>().enabled = false;
+            bulletHandler.ResetAll();
             Destroy(greatSwordObject);
         }
     }
