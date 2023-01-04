@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class LaserCard : MonoBehaviour, ICard
 {
@@ -27,13 +28,23 @@ public class LaserCard : MonoBehaviour, ICard
     SpriteRenderer laserSpriteRenderer;
     BoxCollider2D laserCol;
     Transform player;
+    Light2D laserLight;
+    Vector3[] lightPos = new Vector3[4];
+
+    GameObject test;
+    GameObject test2;
+    GameObject test3;
+    GameObject test4;
 
     bool hasActivated = false;
 
     private void Start()
     {
+        test = new GameObject();
+        test2 = new GameObject();
+        test3 = new GameObject();
+        test4 = new GameObject();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
     }
 
     public void Effect()
@@ -72,6 +83,7 @@ public class LaserCard : MonoBehaviour, ICard
             activeLaser = Instantiate(laserSpritePrefab, Vector3.one * 100, laserSpritePrefab.transform.rotation);
             laserSpriteRenderer = activeLaser.GetComponent<SpriteRenderer>();
             laserCol = activeLaser.GetComponent<BoxCollider2D>();
+            laserLight = activeLaser.GetComponent<Light2D>();
         }
     }
 
@@ -94,6 +106,18 @@ public class LaserCard : MonoBehaviour, ICard
         //activeLaser.transform.localScale = new Vector2(laserWith, distanceToTarget);
         laserSpriteRenderer.size = new Vector2(laserWith, distanceToTarget);
         laserCol.size = new Vector2(laserWith, distanceToTarget);
+        Bounds sizeBound = laserCol.bounds;
+        lightPos[0] = new Vector3( laserWith / 2, distanceToTarget / 2, 0);
+        test.transform.position = lightPos[0];
+        lightPos[1] = new Vector3(-laserWith / 2, distanceToTarget / 2, 0);
+        test2.transform.position = lightPos[1];
+        lightPos[2] = new Vector3 (0, -distanceToTarget / 2, 0);
+        test3.transform.position = lightPos[2];
+        lightPos[3] = new Vector3(0, -distanceToTarget / 2, 0);
+        test4.transform.position = lightPos[3];
+
+
+        laserLight.SetShapePath(lightPos);
 
         activeLaser.transform.position = (Vector2)player.transform.position - mouseDirection * 0.5f * laserLength * -1;
         float theta = Mathf.Atan2(mousePos.y - player.transform.position.y, player.transform.position.x - mousePos.x);
