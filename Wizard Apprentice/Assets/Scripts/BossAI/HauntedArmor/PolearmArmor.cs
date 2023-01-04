@@ -157,6 +157,7 @@ public class PolearmArmor : MonoBehaviour
         yield return new WaitForSeconds(smashDuration);
         animator.SetBool("isSmashing", false);
         GameObject smashShockwaveObject = Instantiate(smashShockwaveObjectPrefab);
+        Destroy(smashShockwaveObject, shockwaveLength / shockwaveSpeed);
         GameObject smashShockwaveSpriteObject = smashShockwaveObject.GetComponentInChildren<SpriteRenderer>().gameObject;
         GameObject smashShockwaveColliderObject = smashShockwaveObject.GetComponentInChildren<BoxCollider2D>().gameObject;
         smashShockwaveColliderObject.transform.position = startPos;
@@ -177,7 +178,6 @@ public class PolearmArmor : MonoBehaviour
             smashShockwaveSpriteObject.GetComponent<SpriteRenderer>().size = new Vector2(shockwaveWidth, (shockwaveTimeTraveled / (shockwaveLength / shockwaveSpeed)) * shockwaveLength);
             smashShockwaveColliderObject.transform.position = startPos - (playerDir * 0.5f) + playerDir * shockwaveLength * (shockwaveTimeTraveled / (shockwaveLength / shockwaveSpeed));
         }
-        Destroy(smashShockwaveObject);
     }
 
     IEnumerator PokeTowardsPlayer()

@@ -144,6 +144,12 @@ public class EndScreen : MonoBehaviour
     }
     public void GetEndScreen()
     {
+        PlayerPrefs.SetInt("Completions", PlayerPrefs.GetInt("Completions",0)+1);
+        if(AscensionManager.selectedLevel > 0)
+        {
+            PlayerPrefs.SetInt("ascensionRank",Mathf.Max(PlayerPrefs.GetInt("ascensionRank",0),AscensionManager.selectedLevel));
+        }
+
         MusicManager.Instance.ChangeToMusicType(MusicType.End);
         endScreenActive = true;
         UpdateStats();
