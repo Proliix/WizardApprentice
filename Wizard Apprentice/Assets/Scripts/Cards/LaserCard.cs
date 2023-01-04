@@ -31,19 +31,13 @@ public class LaserCard : MonoBehaviour, ICard
     Light2D laserLight;
     Vector3[] lightPos = new Vector3[4];
 
-    GameObject test;
-    GameObject test2;
-    GameObject test3;
-    GameObject test4;
+
 
     bool hasActivated = false;
 
     private void Start()
     {
-        test = new GameObject();
-        test2 = new GameObject();
-        test3 = new GameObject();
-        test4 = new GameObject();
+
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
@@ -108,13 +102,10 @@ public class LaserCard : MonoBehaviour, ICard
         laserCol.size = new Vector2(laserWith, distanceToTarget);
         Bounds sizeBound = laserCol.bounds;
         lightPos[0] = new Vector3( laserWith / 2, distanceToTarget / 2, 0);
-        test.transform.position = lightPos[0];
         lightPos[1] = new Vector3(-laserWith / 2, distanceToTarget / 2, 0);
-        test2.transform.position = lightPos[1];
         lightPos[2] = new Vector3 (0, -distanceToTarget / 2, 0);
-        test3.transform.position = lightPos[2];
         lightPos[3] = new Vector3(0, -distanceToTarget / 2, 0);
-        test4.transform.position = lightPos[3];
+
 
 
         laserLight.SetShapePath(lightPos);

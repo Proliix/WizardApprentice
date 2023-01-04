@@ -16,7 +16,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
     private EnemyManager enemyManager;
     private bool stunned = false;
     Animator anim;
-
+    float scaleX;
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -24,7 +24,7 @@ public class SkeledogAI : MonoBehaviour, IStunnable
         enemyManager = GameObject.FindWithTag("GameController").GetComponent<EnemyManager>();
         target = GameObject.FindWithTag("Player").transform;
         anim = GetComponent<Animator>();
-
+        scaleX = transform.localScale.x;
         StartCoroutine(DashAttack());
 
     }
@@ -56,11 +56,11 @@ public class SkeledogAI : MonoBehaviour, IStunnable
 
                     if (direction.x >= 0)
                     {
-                        enemyFlip.flipX = false;
+                        transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
                     }
                     else
                     {
-                        enemyFlip.flipX = true;
+                        transform.localScale = new Vector3(-scaleX, transform.localScale.y, transform.localScale.z);
                     }
                 }
 
