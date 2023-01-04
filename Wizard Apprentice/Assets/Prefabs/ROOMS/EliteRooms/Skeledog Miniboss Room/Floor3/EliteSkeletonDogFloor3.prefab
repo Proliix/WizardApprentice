@@ -909,7 +909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3701194111424893550, guid: bfc35bee74486f44d9cb7a7e41fb3382, type: 3}
       propertyPath: numberOfShotsPerAOE
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7238182951633730552, guid: bfc35bee74486f44d9cb7a7e41fb3382, type: 3}
       propertyPath: hp

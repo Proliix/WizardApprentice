@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
-  m_Name: Room20 (3)
+  m_Name: Room21 (3)
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5167930245995627321, guid: 716301151af866b428b9c3d340ce8190, type: 3}
-  roomSize: {x: 25, y: 25}
+  roomPrefab: {fileID: 6441483564585901044, guid: f7fc7894583b73445831f16dcff81ec7, type: 3}
+  roomSize: {x: 40, y: 20}
   canSpawnOnFloor: 02000000
   generateRandomRoom: 1
   roomAlreadyHasDoor: 0

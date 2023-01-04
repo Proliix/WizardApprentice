@@ -228,5 +228,5 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0, z: 0}
   lightningStrike: {fileID: 2445282581275634261, guid: e78522ed6aa6ab94db77e2da55af5e4c, type: 3}
   description: Casts down lightning bolts that damages enemies
-  shootCooldown: 1
+  shootCooldown: 0.25
   StatsAreLocatedOnPrefab: Stats are located on "LightningStrikePrefab

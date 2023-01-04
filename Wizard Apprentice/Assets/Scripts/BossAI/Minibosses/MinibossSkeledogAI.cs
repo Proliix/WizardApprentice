@@ -57,8 +57,6 @@ public class MinibossSkeledogAI : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-
-
         //if (timer >= 0.1f)
         //{
         //    AttackIndicator.CreateCircle(transform.position, 3, 0.5f, true);

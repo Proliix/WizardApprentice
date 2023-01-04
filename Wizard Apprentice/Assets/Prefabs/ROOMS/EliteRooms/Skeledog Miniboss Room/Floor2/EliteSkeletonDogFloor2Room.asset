@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
   m_Name: EliteSkeletonDogFloor2Room
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 0}
-  roomSize: {x: 0, y: 0}
-  roomDifficulty: 0
-  generateRandomRoom: 0
+  roomPrefab: {fileID: 5266313162228588075, guid: 146d01754e8fe67439c650ccaaefe72d, type: 3}
+  roomSize: {x: 30, y: 30}
+  canSpawnOnFloor: 01000000
+  generateRandomRoom: 1
   roomAlreadyHasDoor: 0
   isLastRoom: 0
   musicType: 0
