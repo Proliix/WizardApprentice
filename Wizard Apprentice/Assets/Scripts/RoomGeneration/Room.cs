@@ -7,7 +7,7 @@ public class Room : ScriptableObject
 {
     public GameObject roomPrefab;
     public Vector2Int roomSize;
-    public int roomDifficulty;
+    public List<int> canSpawnOnFloor;
     public bool generateRandomRoom;
     public bool roomAlreadyHasDoor;
     public bool isLastRoom = false;

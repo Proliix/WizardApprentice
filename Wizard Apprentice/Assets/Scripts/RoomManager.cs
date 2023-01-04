@@ -257,7 +257,7 @@ public class RoomManager : MonoBehaviour
                 currentRoomType = 1;
                 Room room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
                 int iter = 0;
-                while ((room.roomDifficulty + difficultyRange <= currentFloor) == (room.roomDifficulty - difficultyRange >= currentFloor))
+                while (!room.canSpawnOnFloor.Contains(currentFloor))
                 {
                     room = possibleNormalRooms[Random.Range(0, possibleNormalRooms.Count)];
                     iter++;
@@ -272,7 +272,7 @@ public class RoomManager : MonoBehaviour
                 currentRoomType = 2;
                 Room miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
                 int miniBoss_iter = 0;
-                while ((miniBoss_room.roomDifficulty + difficultyRange <= currentFloor) == (miniBoss_room.roomDifficulty - difficultyRange >= currentFloor))
+                while (!miniBoss_room.canSpawnOnFloor.Contains(currentFloor))
                 {
                     miniBoss_room = possibleMinibossRooms[Random.Range(0, possibleMinibossRooms.Count)];
                     miniBoss_iter++;
