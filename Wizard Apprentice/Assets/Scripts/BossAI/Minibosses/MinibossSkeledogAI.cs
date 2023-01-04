@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MinibossSkeledogAI : MonoBehaviour
 {
-
+    [SerializeField] GameObject firePrefab;
+    [SerializeField] bool floor3Attacks = false;
     [SerializeField] float timer;
     [SerializeField] float moveSpeed = 7.5f;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -97,14 +98,27 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     IEnumerator AOEAttack()
     {
-
-        aoeAngle = Random.Range(1, 33);
+       
+        if (floor3Attacks == true)
+        {
+            aoeSize = 2;
+        }
 
         for (int i = 0; i < numberOfShotsPerAOE; i++)
         {
+            if (floor3Attacks == true)
+            {
+
+
+                aoeSize -= 0.3f;
+
+            }
             bulletHandler.GetCircleShot(aoeAmount, gameObject, false, aoeAngle, aoeDamage, aoeSize, aoeSpeed);
             yield return new WaitForSeconds(0.1f);
+            
         }
+
+        
 
         yield return null;
 

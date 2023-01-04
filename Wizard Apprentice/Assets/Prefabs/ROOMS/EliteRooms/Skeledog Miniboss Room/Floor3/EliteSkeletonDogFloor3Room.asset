@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
-  m_Name: MiniBoss2Room
+  m_Name: EliteSkeletonDogFloor3Room
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 3748655861711089383, guid: c2d3977f072a1a540b9321aa9a5d6786, type: 3}
-  roomSize: {x: 30, y: 30}
+  roomPrefab: {fileID: 0}
+  roomSize: {x: 0, y: 0}
   roomDifficulty: 0
-  generateRandomRoom: 1
+  generateRandomRoom: 0
   roomAlreadyHasDoor: 0
   isLastRoom: 0
   musicType: 0
