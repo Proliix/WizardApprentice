@@ -57,6 +57,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] float audioVolume = 1;
     [SerializeField] ParticleSystem particleSystem;
 
+    bool debugMode;
     Inventory inv;
     EndScreen endScreen;
     // Start is called before the first frame update
@@ -66,12 +67,13 @@ public class RoomManager : MonoBehaviour
         endScreen = gameObject.GetComponent<EndScreen>();
         enemyObjects = new List<GameObject>();
         LoadNewRoom(5);
+        debugMode = PlayerPrefs.GetInt("Debug") > 0 ? true : false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && debugMode)
         {
             canWalkThroughAnyDoor = !canWalkThroughAnyDoor;
         }
