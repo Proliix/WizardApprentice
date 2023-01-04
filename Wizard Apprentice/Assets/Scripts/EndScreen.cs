@@ -203,7 +203,7 @@ public class EndScreen : MonoBehaviour
         string moveSpeedText = "<color=yellow>MS : " + Mathf.RoundToInt(pStats.movementSpeed * 100) + "%</color>";
         moveSpeedTMP.SetText(moveSpeedText);
 
-        string maxHealthText = "<color=green>Max Health : " + Mathf.RoundToInt(pStats.health * 100) + "</color>";
+        string maxHealthText = "<color=green>HP: " + Mathf.RoundToInt(pStats.health * 100) + "</color>";
         maxHpTMP.SetText(maxHealthText);
 
     }

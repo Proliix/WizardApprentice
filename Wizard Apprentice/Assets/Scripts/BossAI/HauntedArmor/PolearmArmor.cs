@@ -170,7 +170,7 @@ public class PolearmArmor : MonoBehaviour
         state = CurrentState.idle;
         float shockwaveTimeTraveled = 0;
 
-        while(shockwaveTimeTraveled < shockwaveLength / shockwaveSpeed)
+        while(shockwaveTimeTraveled < shockwaveLength / shockwaveSpeed && smashShockwaveObject != null)
         {
             yield return null;
             shockwaveTimeTraveled += Time.deltaTime;

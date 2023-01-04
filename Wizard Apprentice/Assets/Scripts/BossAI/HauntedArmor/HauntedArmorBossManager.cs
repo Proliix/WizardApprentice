@@ -12,6 +12,10 @@ public class HauntedArmorBossManager : MonoBehaviour
     [SerializeField] GameObject firstGateHiderObject;
     [SerializeField] GameObject secondGateHiderObject;
 
+    [SerializeField] GameObject polearmHealthbar;
+    [SerializeField] GameObject crossBowHealthbar;
+    [SerializeField] GameObject greatswordHealthbar;
+
     [SerializeField] Health polearmArmorHealth;
     [SerializeField] Health crossbowArmorHealth;
     [SerializeField] Health greatSwordArmorHealth;
@@ -53,6 +57,7 @@ public class HauntedArmorBossManager : MonoBehaviour
             StartCoroutine(OpenGate(firstGateObject, firstGateHiderObject));
             bulletHandler.ResetAll();
             Invoke("SpawnCrossbow", 5f);
+            Destroy(polearmHealthbar);
             Destroy(polearmObject);
         }
     }
@@ -66,6 +71,7 @@ public class HauntedArmorBossManager : MonoBehaviour
             StartCoroutine(OpenGate(secondGateObject, secondGateHiderObject));
             bulletHandler.ResetAll();
             Invoke("SpawnGreatSword", 5f);
+            Destroy(crossBowHealthbar);
             Destroy(crossbowObject);
         }
     }
@@ -77,6 +83,7 @@ public class HauntedArmorBossManager : MonoBehaviour
             greatSwordObject.GetComponent<GreatswordArmor>().Death();
             greatSwordObject.GetComponent<GreatswordArmor>().enabled = false;
             bulletHandler.ResetAll();
+            Destroy(greatswordHealthbar);
             Destroy(greatSwordObject);
         }
     }

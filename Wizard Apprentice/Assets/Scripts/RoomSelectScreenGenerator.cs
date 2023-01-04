@@ -52,7 +52,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         currentFloor = 0;
         objectsCreated = new List<GameObject>();
         GenerateRoomLayout();
-        for(int i = 0; i < numberOfLayers; i++)
+        for (int i = 0; i < numberOfLayers; i++)
         {
             GenerateLayer();
         }
@@ -63,7 +63,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     public void GenerateAnotherFloor()
     {
         currentFloor++;
-        for(int i = objectsCreated.Count-1; i >= 0; i--)
+        for (int i = objectsCreated.Count - 1; i >= 0; i--)
         {
             Destroy(objectsCreated[i]);
         }
@@ -85,7 +85,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
     public void GenerateRoomLayout()
@@ -100,13 +100,13 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
         //Select Number of rooms in layer
         int amountRoomsInThisLayer = 1;
-        if(roomsByLayer.Count > 0)
+        if (roomsByLayer.Count > 0)
         {
             amountRoomsInThisLayer = Mathf.Clamp(Random.Range(roomsByLayer[roomsByLayer.Count - 1].Count - allowedChangePerLayer, roomsByLayer[roomsByLayer.Count - 1].Count + allowedChangePerLayer + 1), minRoomsPerLayers, maxRoomsPerLayers);
         }
 
         //Initialize rooms
-        for(int i = 0; i < amountRoomsInThisLayer; i++)
+        for (int i = 0; i < amountRoomsInThisLayer; i++)
         {
             RoomSelectRoom room = new RoomSelectRoom();
             roomsInThisLayer.Add(room);
@@ -121,14 +121,14 @@ public class RoomSelectScreenGenerator : MonoBehaviour
             int largestChosen = 0;
             for (int i = 0; i < amountRoomsInThisLayer; i++)
             {
-                for(int j = 0; j < chancesForOutgoing; j++)
+                for (int j = 0; j < chancesForOutgoing; j++)
                 {
                     int chosenRoom = Random.Range(largestChosen, Mathf.Min(roomsByLayer[roomsByLayer.Count - 1].Count, largestChosen + outgoingSpacing + 1));
                     if (!roomsInThisLayer[i].outgoingRooms.Contains(roomsByLayer[roomsByLayer.Count - 1][chosenRoom]))
                     {
                         roomsInThisLayer[i].outgoingRooms.Add(roomsByLayer[roomsByLayer.Count - 1][chosenRoom]);
                         roomsByLayer[roomsByLayer.Count - 1][chosenRoom].incommingRooms.Add(roomsInThisLayer[i]);
-                        if(chosenRoom > largestChosen)
+                        if (chosenRoom > largestChosen)
                         {
                             largestChosen = chosenRoom;
                         }
@@ -202,7 +202,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         room.incommingRooms = new List<RoomSelectRoom>();
         room.outgoingRooms = new List<RoomSelectRoom>();
         room.outgoingLineObjects = new List<GameObject>();
-        for(int i = 0; i < roomsByLayer[roomsByLayer.Count-1].Count; i++)
+        for (int i = 0; i < roomsByLayer[roomsByLayer.Count - 1].Count; i++)
         {
             room.outgoingRooms.Add(roomsByLayer[roomsByLayer.Count - 1][i]);
             roomsByLayer[roomsByLayer.Count - 1][i].incommingRooms.Add(room);
@@ -214,9 +214,9 @@ public class RoomSelectScreenGenerator : MonoBehaviour
     public void Open()
     {
         roomSelectController.SetPosition(playersCurrentRoom.position.y);
-        playerPositionObject.transform.localPosition = playersCurrentRoom.position + new Vector2(0,15);
+        playerPositionObject.transform.localPosition = playersCurrentRoom.position + new Vector2(0, 15);
         playersCurrentRoom.roomIconObject.SetActive(false);
-        for(int i = 0; i < playersCurrentRoom.outgoingLineObjects.Count; i++)
+        for (int i = 0; i < playersCurrentRoom.outgoingLineObjects.Count; i++)
         {
             playersCurrentRoom.outgoingLineObjects[i].GetComponent<Image>().color = Color.yellow;
         }
@@ -233,35 +233,35 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         minibossPool = roomManager.miniBossRoomsPoolAmount;
         treasurePool = roomManager.treasureRoomsPoolAmount;
         mysteryPool = roomManager.mysteryRoomsPoolAmount;
-        totalPool = normalPool+minibossPool+treasurePool+mysteryPool;
+        totalPool = normalPool + minibossPool + treasurePool + mysteryPool;
     }
 
     public int ChooseRoomTypeFromPool()
     {
-        if(totalPool <= 0)
+        if (totalPool <= 0)
         {
             GeneratePoolAmounts();
         }
         int randValue = Random.Range(0, totalPool);
-        if(randValue < normalPool)
+        if (randValue < normalPool)
         {
             totalPool--;
             normalPool--;
             return 1;
         }
-        else if (randValue < minibossPool+normalPool)
+        else if (randValue < minibossPool + normalPool)
         {
             totalPool--;
             minibossPool--;
             return 2;
         }
-        else if (randValue < treasurePool+minibossPool+normalPool)
+        else if (randValue < treasurePool + minibossPool + normalPool)
         {
             totalPool--;
             treasurePool--;
             return 3;
         }
-        else if (randValue < mysteryPool+ treasurePool + minibossPool + normalPool)
+        else if (randValue < mysteryPool + treasurePool + minibossPool + normalPool)
         {
             totalPool--;
             mysteryPool--;
@@ -275,9 +275,9 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
     public void GenerateLookOfScreen()
     {
-        for(int i = 0; i < roomsByLayer.Count; i++)
+        for (int i = 0; i < roomsByLayer.Count; i++)
         {
-            for(int j = 0; j < roomsByLayer[i].Count; j++)
+            for (int j = 0; j < roomsByLayer[i].Count; j++)
             {
                 GameObject roomIcon;
                 if (roomsByLayer[i][j].incommingRooms.Count == 0)
@@ -290,7 +290,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                 else if (roomsByLayer[i][j].outgoingRooms.Count > 0)
                 {
                     int roomType = ChooseRoomTypeFromPool();
-                    roomIcon = Instantiate(roomIconPrefabs[roomType-1], roomParent);
+                    roomIcon = Instantiate(roomIconPrefabs[roomType - 1], roomParent);
                     roomsByLayer[i][j].roomIconObject = roomIcon;
                     roomsByLayer[i][j].roomType = roomType;
                 }
@@ -299,10 +299,10 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                     roomIcon = Instantiate(bossRoomIconPrefab, roomParent);
                     roomsByLayer[i][j].roomType = 0;
                 }
-                Vector2Int temp = new Vector2Int(i,j);
+                Vector2Int temp = new Vector2Int(i, j);
                 roomIcon.GetComponent<Button>().onClick.AddListener(delegate { OnClickedRoomIcon(temp); });
                 objectsCreated.Add(roomIcon);
-                Vector2 averagePosOfOutgoing = new Vector2(j * iconDistances.x - ((roomsByLayer[i].Count-1) * iconDistances.x*0.5f), i * -iconDistances.y + 400) * preferStayingInSetPosition;
+                Vector2 averagePosOfOutgoing = new Vector2(j * iconDistances.x - ((roomsByLayer[i].Count - 1) * iconDistances.x * 0.5f), i * -iconDistances.y + 400) * preferStayingInSetPosition;
                 if (roomsByLayer[i][j].outgoingRooms.Count > 0)
                 {
                     for (int k = 0; k < roomsByLayer[i][j].outgoingRooms.Count; k++)
@@ -310,7 +310,7 @@ public class RoomSelectScreenGenerator : MonoBehaviour
                         averagePosOfOutgoing += roomsByLayer[i][j].outgoingRooms[k].position;
                     }
                 }
-                averagePosOfOutgoing /= (roomsByLayer[i][j].outgoingRooms.Count+ preferStayingInSetPosition);
+                averagePosOfOutgoing /= (roomsByLayer[i][j].outgoingRooms.Count + preferStayingInSetPosition);
                 Vector3 position = new Vector3(averagePosOfOutgoing.x, i * -iconDistances.y + 400 + Random.Range(-randomIconMovement, randomIconMovement), -0.1f);
                 roomIcon.transform.localPosition = position;
                 roomsByLayer[i][j].position = position;
@@ -329,19 +329,19 @@ public class RoomSelectScreenGenerator : MonoBehaviour
         Vector2 pos = (startPos + endPos) / 2;
         line.transform.localPosition = pos;
         //Vector2 dir = (pos - startPos).normalized;
-        float theta = Mathf.Atan2(endPos.y-startPos.y, startPos.x - endPos.x);
+        float theta = Mathf.Atan2(endPos.y - startPos.y, startPos.x - endPos.x);
         if (theta < 0.0)
             theta += Mathf.PI * 2;
         line.transform.localRotation = Quaternion.Euler(0, 0, (Mathf.Rad2Deg * theta - 90) * -1);
-        line.GetComponent<RectTransform>().sizeDelta = new Vector2(100,(startPos-endPos).magnitude / line.transform.localScale.y);
+        line.GetComponent<RectTransform>().sizeDelta = new Vector2(100, (startPos - endPos).magnitude / line.transform.localScale.y);
         objectsCreated.Add(line);
         return line;
-        
+
     }
 
     public void DestroyAllCreatedObjects()
     {
-        for(int i = objectsCreated.Count-1; i >= 0; i--)
+        for (int i = objectsCreated.Count - 1; i >= 0; i--)
         {
             Destroy(objectsCreated[i]);
             objectsCreated.RemoveAt(i);
@@ -350,31 +350,36 @@ public class RoomSelectScreenGenerator : MonoBehaviour
 
     public void OnClickedRoomIcon(Vector2Int id)
     {
-        for(int i = 0; i < playersCurrentRoom.outgoingRooms.Count; i++)
+        for (int i = 0; i < playersCurrentRoom.outgoingRooms.Count; i++)
         {
-            if(roomsByLayer[id.x][id.y] == playersCurrentRoom.outgoingRooms[i])
+            if (roomsByLayer[id.x][id.y] == playersCurrentRoom.outgoingRooms[i])
             {
                 Debug.Log("Loading room");
                 visitedRooms.Add(roomsByLayer[id.x][id.y]);
                 roomManager.LoadNewRoom(roomsByLayer[id.x][id.y].roomType);
                 playersCurrentRoom.roomIconObject.SetActive(true);
-                for(int j = 0; j < roomsByLayer[id.x].Count; j++)
+                for (int j = 0; j < roomsByLayer[id.x].Count; j++)
                 {
-                    roomsByLayer[id.x][j].roomIconObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
-                    for(int k = 0; k < roomsByLayer[id.x][j].outgoingLineObjects.Count; k++)
+                    if (roomsByLayer[id.x][j].roomIconObject != null)
+                        roomsByLayer[id.x][j].roomIconObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.8f);
+
+                    if (roomsByLayer[id.x][j].outgoingLineObjects.Count > 0)
                     {
-                        roomsByLayer[id.x][j].outgoingLineObjects[k].GetComponent<Image>().color = new Color(0.25f, 0.25f, 0.25f);
+                        for (int k = 0; k < roomsByLayer[id.x][j].outgoingLineObjects.Count; k++)
+                        {
+                            roomsByLayer[id.x][j].outgoingLineObjects[k].GetComponent<Image>().color = new Color(0.25f, 0.25f, 0.25f);
+                        }
                     }
                 }
                 for (int j = 0; j < playersCurrentRoom.outgoingLineObjects.Count; j++)
                 {
-                    if(playersCurrentRoom.outgoingRooms[j] == roomsByLayer[id.x][id.y])
+                    if (playersCurrentRoom.outgoingRooms[j] == roomsByLayer[id.x][id.y])
                     {
-                        playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = new Color(0.6f,0.1f,0.1f);
+                        playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = new Color(0.6f, 0.1f, 0.1f);
                     }
                     else
                     {
-                        playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = new Color(0.25f,0.25f,0.25f);
+                        playersCurrentRoom.outgoingLineObjects[j].GetComponent<Image>().color = new Color(0.25f, 0.25f, 0.25f);
                     }
                 }
                 playersCurrentRoom = roomsByLayer[id.x][id.y];

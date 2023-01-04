@@ -1471,7 +1471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3200850555545371976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3037,7 +3037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6397922790753548193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.11, z: 0}
+  m_LocalPosition: {x: 0, y: -1.7, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3267,6 +3267,9 @@ MonoBehaviour:
   secondGateObject: {fileID: 2343549516171952912}
   firstGateHiderObject: {fileID: 611144614192737230}
   secondGateHiderObject: {fileID: 2716664725605013923}
+  polearmHealthbar: {fileID: 2510294145188657511}
+  crossBowHealthbar: {fileID: 6171021854940486415}
+  greatswordHealthbar: {fileID: 6201065108368429786}
   polearmArmorHealth: {fileID: 2565915412033692500}
   crossbowArmorHealth: {fileID: 5295790184375122093}
   greatSwordArmorHealth: {fileID: 281977213698839569}
@@ -3300,7 +3303,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252954215063834915}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.099, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5197,6 +5200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6201065108368429786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8575809827172088515, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}
+  m_PrefabInstance: {fileID: 2381839352079312921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6201065108368429787 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8575809827172088514, guid: c763fb68c1dbcb6418ed44a2afcdafbd, type: 3}
