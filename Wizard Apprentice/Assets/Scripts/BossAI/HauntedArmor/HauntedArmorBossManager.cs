@@ -32,7 +32,9 @@ public class HauntedArmorBossManager : MonoBehaviour
     {
         polearmArmorHealth.deathEvent += PolearmDeath;
         crossbowArmorHealth.deathEvent += CrossbowDeath;
+        crossbowArmorHealth.enabled = false;
         greatSwordArmorHealth.deathEvent += GreatSwordDeath;
+        greatSwordArmorHealth.enabled = false;
     }
 
     // Update is called once per frame
@@ -59,7 +61,8 @@ public class HauntedArmorBossManager : MonoBehaviour
             currentPhase = 1;
             polearmObject.GetComponent<PolearmArmor>().enabled = false;
             StartCoroutine(OpenGate(firstGateObject, firstGateHiderObject));
-            Invoke("SpawnCrossbow", 6f);
+            Invoke("SpawnCrossbow", 5f);
+            Destroy(polearmObject);
         }
     }
 
@@ -70,7 +73,8 @@ public class HauntedArmorBossManager : MonoBehaviour
             currentPhase = 2;
             crossbowObject.GetComponent<CrossbowArmor>().enabled = false;
             StartCoroutine(OpenGate(secondGateObject, secondGateHiderObject));
-            Invoke("SpawnGreatSword", 6f);
+            Invoke("SpawnGreatSword", 5f);
+            Destroy(crossbowObject);
         }
     }
 
@@ -87,13 +91,13 @@ public class HauntedArmorBossManager : MonoBehaviour
     public void SpawnCrossbow()
     {
         crossbowObject.GetComponent<CrossbowArmor>().enabled = true;
-        Destroy(polearmObject);
+        crossbowArmorHealth.enabled = true;
     }
 
     public void SpawnGreatSword()
     {
         greatSwordObject.GetComponent<GreatswordArmor>().enabled = true;
-        Destroy(crossbowObject);
+        greatSwordArmorHealth.enabled = true;
     }
 
     public IEnumerator OpenGate(GameObject gateObject, GameObject gateHider)
