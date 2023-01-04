@@ -19,6 +19,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Animator cameraAnimator;
     [Header("Credits")]
     [SerializeField] GameObject CreditsPanel;
+    [SerializeField] GameObject licensePanel;
     [Header("Settings")]
     [SerializeField] Sprite checkMark;
     [SerializeField] Sprite Cross;
@@ -325,9 +326,9 @@ public class MenuManager : MonoBehaviour
     public void StartGameButtonClicked()
     {
         ascensionPanelObject.SetActive(true);
-        ascensionRank = PlayerPrefs.GetFloat("ascensionRank",3.5f);
+        ascensionRank = PlayerPrefs.GetFloat("ascensionRank", 3.5f);
         PlayerPrefs.SetInt("Completions", 10);
-        if (PlayerPrefs.GetInt("Completions",0) != 0)
+        if (PlayerPrefs.GetInt("Completions", 0) != 0)
         {
             LoadInAscensionButtons(100);
         }
@@ -341,14 +342,14 @@ public class MenuManager : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject buttonObject = Instantiate(ascensionButtonPrefab,ascensionButtonHolder.transform);
+            GameObject buttonObject = Instantiate(ascensionButtonPrefab, ascensionButtonHolder.transform);
             int temp = i + ascensionButtonsLoaded + 1;
             buttonObject.GetComponent<Button>().onClick.AddListener(delegate { AscensionButtonClicked(temp); });
             buttonObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Ascension Level {temp}";
-            buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(Mathf.Min((temp-ascensionRank)*0.1f,1),1-((temp - ascensionRank+10) * 0.1f), 1-(Mathf.Abs(temp-ascensionRank)*0.25f));
+            buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(Mathf.Min((temp - ascensionRank) * 0.1f, 1), 1 - ((temp - ascensionRank + 10) * 0.1f), 1 - (Mathf.Abs(temp - ascensionRank) * 0.25f));
             Debug.Log(Mathf.Min(temp * 25, 255));
         }
-        ascensionButtonHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 80*amount);
+        ascensionButtonHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 80 * amount);
         ascensionButtonsLoaded += amount;
     }
 
@@ -447,6 +448,17 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void OpenLicenses()
+    {
+        licensePanel.SetActive(true);
+        CreditsPanel.SetActive(false);
+    }
+
+    public void CloseLicenses()
+    {
+        licensePanel.SetActive(false);
+        CreditsPanel.SetActive(true);
+    }
     public void LoadMainScene()
     {
         SceneManager.LoadScene("Main");
