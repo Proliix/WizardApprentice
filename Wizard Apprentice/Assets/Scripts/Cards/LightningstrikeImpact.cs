@@ -6,10 +6,9 @@ public class LightningstrikeImpact : MonoBehaviour
 {
 
     [SerializeField] AudioClip attackSound;
-
+    [SerializeField] float audioVolume;
     PlayerStats playerStats;
 
-    List<Health> enemyHealth;
 
     [SerializeField] float timer;
     [SerializeField] float damage = 50;
@@ -17,9 +16,8 @@ public class LightningstrikeImpact : MonoBehaviour
     void Start()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        enemyHealth = new List<Health>();
-        Camera.main.GetComponent<CameraMovement>().GetScreenShake(0.25f, 1);
-
+        Camera.main.GetComponent<CameraMovement>().GetScreenShake(0.25f, 0.33f, true);
+        SoundManager.Instance.PlayAudio(attackSound, audioVolume);
         Destroy(gameObject, lifeTime);
     }
 

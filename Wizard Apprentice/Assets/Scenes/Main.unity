@@ -13838,6 +13838,7 @@ MonoBehaviour:
   - {fileID: 6595212247910812035, guid: 12092e75bebac0747b91c392349847f6, type: 3}
   - {fileID: 7699239943680715583, guid: 6766e7fc3fa73734a95bc56091781548, type: 3}
   - {fileID: 6975772864624791361, guid: 7a1bb412b46e1584d9b15d42691a7983, type: 3}
+  - {fileID: 8479776691095616196, guid: 90c2a15fa94013242ae1c99701398cfc, type: 3}
   descriptionObj:
   - {fileID: 1087225622}
   - {fileID: 1736745387}
@@ -14067,12 +14068,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6deb4ef626cfea429bc07ce8db314ce, type: 2}
   - {fileID: 11400000, guid: c0a1c6d5e3613d4448212e4fdc131391, type: 2}
   - {fileID: 11400000, guid: f21f6b580915dd249a062faa8c89235f, type: 2}
+  - {fileID: 11400000, guid: 79be950a07e015847bd7547d8ca4630c, type: 2}
+  - {fileID: 11400000, guid: ce56d38ae07e832429e3551be31864e3, type: 2}
+  - {fileID: 11400000, guid: c9d1e2fcc4ae97e448fa9f8d6df4d675, type: 2}
   normalRoomsPoolAmount: 20
   possibleMinibossRooms:
   - {fileID: 11400000, guid: 7441a10cbeb68b742a95838af372a3ce, type: 2}
   - {fileID: 11400000, guid: 1ea4ce3b6062dfd479ee919fdedb3d74, type: 2}
   - {fileID: 11400000, guid: 1dc5b6d373f08b34fa1c5e44aff1bfbf, type: 2}
   - {fileID: 11400000, guid: cfa62b06bdb2d6941b829cdc3d6d8de0, type: 2}
+  - {fileID: 11400000, guid: feebc4bbf51962e4aac413c2e32454dd, type: 2}
+  - {fileID: 11400000, guid: 1d5a41030ba4e794ebc4ba8fcef4462b, type: 2}
   miniBossRoomsPoolAmount: 4
   possibleTreasureRooms:
   - {fileID: 11400000, guid: 326ee1e0bede5d84aa742c7d1ec92b52, type: 2}
