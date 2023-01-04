@@ -46,7 +46,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject inactiveDashOverHeadObj;
     [Header("For Debug")]
     [SerializeField] GameObject DebugPrefab;
-
+    [Header("Ascension")]
     [SerializeField] GameObject ascensionButtonHolder;
     [SerializeField] GameObject ascensionButtonPrefab;
     [SerializeField] GameObject ascensionPanelObject;
@@ -55,6 +55,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI ascensionLoseInfoText;
     [SerializeField] TextMeshProUGUI totalCompletionsText;
     [SerializeField] TextMeshProUGUI highestAscensionText;
+    [SerializeField] TextMeshProUGUI currentAscensionNumText;
     [SerializeField] float eloGainMultiplier;
     [SerializeField] float levelEloScaling;
     private int ascensionButtonsLoaded;
@@ -66,6 +67,7 @@ public class MenuManager : MonoBehaviour
     bool playSfxSound = false;
     int sfxFix = 0;
     GameObject debugObj;
+    bool hasLoadedAscension = false;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +89,7 @@ public class MenuManager : MonoBehaviour
         UpdateValues();
         settingsPanel.SetActive(false);
         onSettings = false;
+        hasLoadedAscension = false;
     }
 
     private void Update()
@@ -335,6 +338,7 @@ public class MenuManager : MonoBehaviour
             totalCompletionsText.text = "Total Completions: " + PlayerPrefs.GetInt("Completions", 0).ToString();
             highestAscensionText.text = "Highest Ascension Defeated: " + ascensionRank.ToString();
             LoadInAscensionButtons(ascensionRank + 10);
+            AscensionButtonClicked(0);
         }
         else
         {
@@ -343,31 +347,36 @@ public class MenuManager : MonoBehaviour
     }
     private void LoadInAscensionButtons(int amount)
     {
-        for (int i = 0; i < amount; i++)
+        if (!hasLoadedAscension)
         {
-            GameObject buttonObject = Instantiate(ascensionButtonPrefab, ascensionButtonHolder.transform);
-            int temp = i + ascensionButtonsLoaded + 1;
-            buttonObject.GetComponent<Button>().onClick.AddListener(delegate { AscensionButtonClicked(temp); });
-            buttonObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Ascension Level {temp}";
-            if(temp <= ascensionRank)
+            hasLoadedAscension = true;
+            for (int i = 0; i < amount; i++)
             {
-                buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(0,1,0);
+                GameObject buttonObject = Instantiate(ascensionButtonPrefab, ascensionButtonHolder.transform);
+                int temp = i + ascensionButtonsLoaded + 1;
+                buttonObject.GetComponent<Button>().onClick.AddListener(delegate { AscensionButtonClicked(temp); });
+                buttonObject.GetComponentInChildren<TextMeshProUGUI>().text = $"Ascension Level {temp}";
+                if (temp <= ascensionRank)
+                {
+                    buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(0, 1, 0);
+                }
+                else if (temp <= ascensionRank + 5)
+                {
+                    buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1);
+                }
+                else
+                {
+                    buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 0, 0);
+                }
             }
-            else if (temp <= ascensionRank + 5)
-            {
-                buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1, 1, 1);
-            }
-            else
-            {
-                buttonObject.GetComponentInChildren<TextMeshProUGUI>().color = new Color(1,0,0);
-            }
+            ascensionButtonHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 80 * amount);
+            ascensionButtonsLoaded += amount;
         }
-        ascensionButtonHolder.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 80 * amount);
-        ascensionButtonsLoaded += amount;
     }
 
     public void AscensionButtonClicked(int levelNumber)
     {
+        currentAscensionNumText.text = levelNumber.ToString();
         if (levelNumber == 0)
         {
             AscensionManager.selectedLevel = 0;
@@ -407,7 +416,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
-            ascensionEffectInfoText.text = $"<color=red>You do not have access to this level yet. Defeat level {levelNumber-5} or higher to gain access";
+            ascensionEffectInfoText.text = $"<color=red>You do not have access to this level yet. Defeat level {levelNumber - 5} or higher to gain access";
         }
     }
 
