@@ -92,7 +92,7 @@ public class CrossBowSkeleton : MonoBehaviour, IStunnable
             hasResetTimer = true;
         }
 
-        if (timer >= 5f)
+        if (timer >= 3f)
         {
             timer = 0;
             state = AttackState.Shooting;

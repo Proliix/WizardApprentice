@@ -12,6 +12,7 @@ public class EndScreen : MonoBehaviour
     [SerializeField] GameObject endScreenCanvas;
     [SerializeField] GameObject FadeOutObj;
     [SerializeField] GameObject winText;
+    [SerializeField] TextMeshProUGUI ascensionText;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI enemiesText;
     [SerializeField] TextMeshProUGUI damageDealtText;
@@ -61,6 +62,7 @@ public class EndScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         winText.SetActive(true);
+        ascensionText.gameObject.SetActive(true);
         damageTMP.gameObject.SetActive(true);
         timeText.gameObject.SetActive(true);
         yield return new WaitForSeconds(timePerSpawn);
@@ -102,7 +104,7 @@ public class EndScreen : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.M))
-        //    GetEndScreen();
+        //   GetEndScreen();
 
         if (!endScreenActive)
             time += Time.deltaTime;
@@ -144,15 +146,16 @@ public class EndScreen : MonoBehaviour
     }
     public void GetEndScreen()
     {
-        PlayerPrefs.SetInt("Completions", PlayerPrefs.GetInt("Completions",0)+1);
-        if(AscensionManager.selectedLevel > 0)
-        {
-            PlayerPrefs.SetInt("ascensionRank",Mathf.Max(PlayerPrefs.GetInt("ascensionRank",0),AscensionManager.selectedLevel));
-        }
 
         MusicManager.Instance.ChangeToMusicType(MusicType.End);
         endScreenActive = true;
         UpdateStats();
+
+        PlayerPrefs.SetInt("Completions", PlayerPrefs.GetInt("Completions", 0) + 1);
+        if (AscensionManager.selectedLevel > 0)
+        {
+            PlayerPrefs.SetInt("ascensionRank", Mathf.Max(PlayerPrefs.GetInt("ascensionRank", 0), AscensionManager.selectedLevel));
+        }
         endScreenCanvas.SetActive(true);
         FadeOutObj.SetActive(true);
         StartCoroutine(SpawnObjects());
@@ -160,6 +163,15 @@ public class EndScreen : MonoBehaviour
 
     private void UpdateStats()
     {
+
+        if (PlayerPrefs.GetInt("Completions", 0) > 0)
+        {
+            ascensionText.text = "Ascension level: " + AscensionManager.selectedLevel;
+        }
+        else
+        {
+            ascensionText.text = "You have unlocked Ascensions!";
+        }
 
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(time);
         string timeTextFormated = timeSpan.Hours > 0 ? string.Format("Time: {0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds) : string.Format("Time: {0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
