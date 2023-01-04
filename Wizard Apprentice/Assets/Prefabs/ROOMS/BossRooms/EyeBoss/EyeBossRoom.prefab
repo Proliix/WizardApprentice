@@ -768,7 +768,7 @@ MonoBehaviour:
   aoeAngle: 0
   aoeAngleChange: 12
   shotsInCycle: 50
-  aoeAmount: 1
+  aoeAmount: 4
   aoeSpeed: 8
   aoeSize: 1
   timeBetweenShots: 0.1
@@ -911,7 +911,7 @@ Transform:
   - {fileID: 8720826313302526563}
   - {fileID: 7634180583312534417}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6164930781447964727
 GameObject:
