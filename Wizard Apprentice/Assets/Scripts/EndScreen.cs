@@ -18,6 +18,7 @@ public class EndScreen : MonoBehaviour
     [SerializeField] TextMeshProUGUI damageTakenText;
     [SerializeField] TextMeshProUGUI restoresText;
     [SerializeField] TextMeshProUGUI amountRestoredText;
+    [SerializeField] TextMeshProUGUI timesHitText;
     [SerializeField] TextMeshProUGUI damageTMP;
     [SerializeField] TextMeshProUGUI attackSpeedTMP;
     [SerializeField] TextMeshProUGUI critChanceTMP;
@@ -36,6 +37,7 @@ public class EndScreen : MonoBehaviour
     int restoresUsed = 0;
     int healthRestored = 0;
     int cardAmount = 0;
+    int timesHit = 0;
 
     bool endScreenActive = false;
     float time;
@@ -77,15 +79,20 @@ public class EndScreen : MonoBehaviour
         maxHpTMP.gameObject.SetActive(true);
         amountRestoredText.gameObject.SetActive(true);
         yield return new WaitForSeconds(timePerSpawn);
+        cardText.gameObject.SetActive(true);
         for (int i = 0; i < HotbarCards.Length; i++)
         {
             HotbarCards[i].gameObject.SetActive(true);
-            yield return new WaitForSeconds(timePerSpawn / 3);
-            if (i < invCards.Length)
-                invCards[i].gameObject.SetActive(true);
-            yield return new WaitForSeconds(timePerSpawn / 3);
+            yield return new WaitForSeconds(timePerSpawn / HotbarCards.Length);
         }
         yield return new WaitForSeconds(timePerSpawn);
+        timesHitText.gameObject.SetActive(true);
+        for (int i = 0; i < invCards.Length; i++)
+        {
+            invCards[i].SetActive(true);
+            yield return new WaitForSeconds(timePerSpawn / HotbarCards.Length);
+        }
+        yield return new WaitForSeconds(timePerSpawn / HotbarCards.Length);
         menuButton.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.05f);
         restartButton.gameObject.SetActive(true);
@@ -94,6 +101,8 @@ public class EndScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+            GetEndScreen();
 
         if (!endScreenActive)
             time += Time.deltaTime;
@@ -129,6 +138,10 @@ public class EndScreen : MonoBehaviour
         cardAmount++;
     }
 
+    public void AddHit()
+    {
+        timesHit++;
+    }
     public void GetEndScreen()
     {
         MusicManager.Instance.ChangeToMusicType(MusicType.End);
@@ -143,7 +156,7 @@ public class EndScreen : MonoBehaviour
     {
 
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(time);
-        string timeTextFormated = timeSpan.Hours > 0 ? string.Format("Time: {0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds): string.Format("Time: {0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+        string timeTextFormated = timeSpan.Hours > 0 ? string.Format("Time: {0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds) : string.Format("Time: {0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         timeText.text = timeTextFormated;
 
         for (int i = 0; i < HotbarCards.Length; i++)
@@ -162,9 +175,9 @@ public class EndScreen : MonoBehaviour
         damageDealtText.text = "Damage Dealt: " + damageDealt;
         damageTakenText.text = "Damage Taken: " + damageTaken;
         restoresText.text = "Restores Used: " + restoresUsed;
-        amountRestoredText.text = "Health Restored:" + healthRestored;
+        amountRestoredText.text = "Health Restored: " + healthRestored;
         cardText.text = "Cards Aquired: " + cardAmount;
-
+        timesHitText.text = "Times Hit: " + timesHit;
 
 
         string dmgText = "<color=red>DG : " + Mathf.RoundToInt(pStats.damage * 100) + "%</color>";

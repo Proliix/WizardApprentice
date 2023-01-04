@@ -298,6 +298,7 @@ public class Health : MonoBehaviour
             {
                 Camera.main.GetComponent<CameraMovement>()?.GetScreenShake(hitCooldown, playerScreenShakeAmount);
                 endScreen.AddDamageTaken(Mathf.RoundToInt(value));
+                endScreen.AddHit();
             }
             else
             {
