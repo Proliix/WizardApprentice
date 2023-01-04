@@ -50,7 +50,6 @@ public class MusicManager : MonoBehaviour
 
     bool debugMode;
 
-    //Singleton instance 
     private void Awake()
     {
         if (Instance == null)

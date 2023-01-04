@@ -21,7 +21,7 @@ public class EventRoomsManager : MonoBehaviour
 
      public void TaskOnClickAccept()
     {
-        Debug.Log("Accepted");
+        //Debug.Log("Accepted");
        // playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         playerStats.GiveStats(reward);
         ExitEvent();
@@ -29,7 +29,7 @@ public class EventRoomsManager : MonoBehaviour
 
     public void TaskOnClickDecline()
     {
-        Debug.Log("Declined");
+        //Debug.Log("Declined");
         ExitEvent();
     }
     
