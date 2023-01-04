@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LaserHurtBox : MonoBehaviour
 {
-    [SerializeField] float damage = 10f;
-    [SerializeField] float attackDelay;
+    public float damage = 10f;
+    public float attackDelay;
     [SerializeField] float timer;
 
     PlayerStats stats;
