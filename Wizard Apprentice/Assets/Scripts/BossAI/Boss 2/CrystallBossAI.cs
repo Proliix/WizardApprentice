@@ -78,10 +78,10 @@ public class CrystallBossAI : MonoBehaviour
 
         //Vectors used as spawnpoints for ads
         spawnPoints = new Vector3[4];
-        spawnPoints[0] = new Vector3(0, 0, 0);
-        spawnPoints[1] = new Vector3(0, 25, 0);
-        spawnPoints[2] = new Vector3(25, 0, 0);
-        spawnPoints[3] = new Vector3(25, 25, 0);
+        spawnPoints[0] = new Vector3(-3, 0, 0);
+        spawnPoints[1] = new Vector3(-3, 22, 0);
+        spawnPoints[2] = new Vector3(28, 0, 0);
+        spawnPoints[3] = new Vector3(28, 22, 0);
 
 
         phase1Active = true;
