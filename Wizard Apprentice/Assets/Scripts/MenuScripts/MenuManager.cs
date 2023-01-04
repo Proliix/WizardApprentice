@@ -328,12 +328,12 @@ public class MenuManager : MonoBehaviour
 
     public void StartGameButtonClicked()
     {
-        ascensionPanelObject.SetActive(true);
-        ascensionRank = PlayerPrefs.GetInt("ascensionRank", 0);
-        totalCompletionsText.text = "Total Completions: " + PlayerPrefs.GetInt("Completions", 0).ToString();
-        highestAscensionText.text = "Highest Ascension Defeated: " + ascensionRank.ToString();
         if (PlayerPrefs.GetInt("Completions", 0) != 0)
         {
+            ascensionPanelObject.SetActive(true);
+            ascensionRank = PlayerPrefs.GetInt("ascensionRank", 0);
+            totalCompletionsText.text = "Total Completions: " + PlayerPrefs.GetInt("Completions", 0).ToString();
+            highestAscensionText.text = "Highest Ascension Defeated: " + ascensionRank.ToString();
             LoadInAscensionButtons(ascensionRank + 10);
         }
         else
