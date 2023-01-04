@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (effectSources == null)
+        if (effectSources.Length < 1)
             effectSources = gameObject.transform.GetComponentsInChildren<AudioSource>();
     }
 

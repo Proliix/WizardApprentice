@@ -7,13 +7,20 @@ using UnityEngine.SceneManagement;
 public class PauseScreenController : MonoBehaviour
 {
     [SerializeField] GameObject pauseScreenObject;
+    Health playerHP;
     float timeScaleBeforePause = 1;
     bool isOpen;
+
+    private void Start()
+    {
+        playerHP = GameObject.FindWithTag("Player").GetComponent<Health>();
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !playerHP.GetIsDead())
         {
-            if(isOpen)
+            if (isOpen)
             {
                 ClosePause();
             }
