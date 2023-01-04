@@ -7,7 +7,10 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    [SerializeField]  AudioSource  effectSource;
+    [SerializeField] AudioSource[] effectSources;
+
+
+    int index = 0;
 
     //Singleton instance 
     private void Awake()
@@ -21,33 +24,39 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (effectSources == null)
+            effectSources = gameObject.transform.GetComponentsInChildren<AudioSource>();
     }
 
     public void PlayAudio(AudioClip clip)
     {
-
-        effectSource.PlayOneShot(clip);
+        index = index + 1 < effectSources.Length ? index += 1 : index = 0;
+        effectSources[index].PlayOneShot(clip);
     }
 
     public void PlayAudio(AudioClip clip, float volume)
     {
-        
-        effectSource.PlayOneShot(clip,volume);
+
+        index = index + 1 < effectSources.Length ? index += 1 : index = 0;
+        effectSources[index].PlayOneShot(clip, volume);
     }
     public void PlayAudio(AudioClip clip, float volume, float pitch)
     {
-        effectSource.pitch = pitch;
+        effectSources[index].pitch = pitch;
 
-        effectSource.PlayOneShot(clip, volume);
-        effectSource.pitch = 1;
+        index = index + 1 < effectSources.Length ? index += 1 : index = 0;
+        effectSources[index].PlayOneShot(clip, volume);
+        effectSources[index].pitch = 1;
     }
 
     public void PlayAudio(AudioClip clip, float volume, float maxPitch = 0.8f, float minPitch = 1.2f)
     {
-        effectSource.pitch = Random.Range(maxPitch, minPitch);
+        effectSources[index].pitch = Random.Range(maxPitch, minPitch);
 
-        effectSource.PlayOneShot(clip, volume);
-        effectSource.pitch = 1;
+        index = index + 1 < effectSources.Length ? index += 1 : index = 0;
+        effectSources[index].PlayOneShot(clip, volume);
+        effectSources[index].pitch = 1;
     }
 }
 

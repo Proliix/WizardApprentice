@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48bceec308103d643bf7f057e67fe0a7, type: 3}
-  m_Name: F1MinibossTeleportingSkeletonRoom
+  m_Name: F3MinibossTeleportingSkeletonRoom
   m_EditorClassIdentifier: 
-  roomPrefab: {fileID: 5773732489135663310, guid: 03b93d23143aada48947598bd02bd8ef, type: 3}
+  roomPrefab: {fileID: 5773732489135663310, guid: 31f32ca1dfa6b8b4288fcf95bcf6fd97, type: 3}
   roomSize: {x: 20, y: 20}
-  canSpawnOnFloor: 00000000
+  canSpawnOnFloor: 03000000
   generateRandomRoom: 1
   roomAlreadyHasDoor: 0
   isLastRoom: 0
