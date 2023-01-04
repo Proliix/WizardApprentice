@@ -44,7 +44,6 @@ public class Reward : ScriptableObject
             restoreAmount -= (currentHP + restoreAmount) - maxHp;
         string newAddHealthstr = "" + Mathf.RoundToInt(restoreAmount);
 
-
         string newMaxHPStrChange = "" + Mathf.RoundToInt(maxHp) + " -> <color=green>" + Mathf.RoundToInt((maxHp + (startHP * maxHealth))) + "</color>";
         string movementStrChange = "" + Mathf.RoundToInt(stats.movementSpeed * 100) + "%" + " -> <color=green>" + Mathf.RoundToInt((stats.movementSpeed + movementSpeed) * 100) + "%" + "</color>";
         string damageStrChange = "" + Mathf.RoundToInt(stats.damage * 100) + "%" + " -> <color=red>" + Mathf.RoundToInt((stats.damage + damage) * 100) + "%" + "</color>";

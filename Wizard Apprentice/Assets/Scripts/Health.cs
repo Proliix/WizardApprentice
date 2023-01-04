@@ -265,8 +265,7 @@ public class Health : MonoBehaviour
     public void HealPercentageOf(float divide)
     {
         float healAmount = 0;
-        healAmount = maxHP / 3;
-
+        healAmount = maxHP / divide;
         if (hp + healAmount <= maxHP)
         {
             if (isPlayer)

@@ -62,5 +62,18 @@ public class PlayerStats : MonoBehaviour
         {
             gameObject.GetComponent<Health>()?.HealPercentageOf(newStats.addHealh);
         }
+        else if (newStats.addHealh < 0)
+        {
+            Health hp = gameObject.GetComponent<Health>();
+
+            if ((hp.GetHP() - Mathf.Abs((hp.GetHP() * (0.1f * newStats.addHealh)))) <= 1)
+            {
+                hp?.RemoveHealth(Mathf.Abs(hp.GetHP() - 1));
+            }
+            else
+            {
+                hp?.RemoveHealth(Mathf.Abs(hp.GetHP() * (0.1f * newStats.addHealh)));
+            }
+        }
     }
 }
