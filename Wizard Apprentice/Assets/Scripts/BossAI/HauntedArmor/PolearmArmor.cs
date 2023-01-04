@@ -153,7 +153,9 @@ public class PolearmArmor : MonoBehaviour
         Vector2 playerPos = playerObject.transform.position;
         AttackIndicator.CreateCircle(startPos, smashZoneRadius,smashDuration, true);
         AttackIndicator.CreateSquare(startPos, startPos + playerDir*shockwaveLength, new Vector2(shockwaveWidth, shockwaveLength), smashDuration, true);
+        animator.SetBool("isSmashing", true);
         yield return new WaitForSeconds(smashDuration);
+        animator.SetBool("isSmashing", false);
         GameObject smashShockwaveObject = Instantiate(smashShockwaveObjectPrefab);
         GameObject smashShockwaveSpriteObject = smashShockwaveObject.GetComponentInChildren<SpriteRenderer>().gameObject;
         GameObject smashShockwaveColliderObject = smashShockwaveObject.GetComponentInChildren<BoxCollider2D>().gameObject;
@@ -185,6 +187,8 @@ public class PolearmArmor : MonoBehaviour
         Vector2 playerPos = playerObject.transform.position;
         AttackIndicator.CreateSquare(startPos,playerPos, new Vector2(1,pokeDistance), pokeDuration, true);
         state = CurrentState.poking;
+        UpdateAnimationBasedOnDirection(playerDir);
+        animator.SetBool("isPoking", true);
         yield return new WaitForSeconds(pokeDuration);
         GameObject pokeObject = Instantiate(pokeObjectPrefab);
         pokeObject.transform.position = startPos + playerDir * pokeDistance * 0.5f;
@@ -195,6 +199,7 @@ public class PolearmArmor : MonoBehaviour
 
         bulletHandler.GetBullet(startPos + playerDir*pokeDistance,playerDir,false,10,0.5f, pokeProjectileSpeed);
         hasDestination = false;
+        animator.SetBool("isPoking", false);
         state = CurrentState.idle;
         Destroy(pokeObject, 1f);
     }
@@ -205,7 +210,9 @@ public class PolearmArmor : MonoBehaviour
         UpdateAnimationBasedOnDirection(new Vector2(0, -1));
         Vector2 startPos = transform.position;
         AttackIndicator.CreateCircle(startPos, spinRadius, startSpinningTime, true);
+        UpdateAnimationBasedOnDirection((Vector2)playerObject.transform.position - startPos);
         yield return new WaitForSeconds(startSpinningTime);
+        animator.SetBool("isSpinning", true);
         float currentSpinningTime = 0;
         CircleCollider2D circleCollider = Instantiate(spinDamageObject).GetComponent<CircleCollider2D>();
         circleCollider.transform.position = startPos;
@@ -226,13 +233,13 @@ public class PolearmArmor : MonoBehaviour
             {
                 Vector3 dir = new Vector3(((Mathf.Cos((currentSpinningTime + (counter * timeBetweenProjectiles)) * rotaionsPerSecond) * 360 + Random.Range(-randomAngle, randomAngle)) * Mathf.Deg2Rad), ((Mathf.Sin((currentSpinningTime+(counter * timeBetweenProjectiles)) * rotaionsPerSecond) * 360 + Random.Range(-randomAngle, randomAngle)) * Mathf.Deg2Rad), 0);
                 counter++;
-                UpdateAnimationBasedOnDirection(dir);
                 bulletHandler.GetBullet(startPos, dir, false, 10, 0.5f, 8f);
             }
             currentSpinningTime += Time.deltaTime;
         }
         hasDestination = false;
         Destroy(circleCollider.gameObject);
+        animator.SetBool("isSpinning", false);
         state = CurrentState.idle;
     }
 
