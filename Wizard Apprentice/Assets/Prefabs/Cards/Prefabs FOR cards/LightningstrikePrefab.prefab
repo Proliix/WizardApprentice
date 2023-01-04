@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSound: {fileID: 8300000, guid: e653ce4e18036b64db2ad6c23c4fbd89, type: 3}
-  audioVolume: 0.25
+  audioVolume: 0.15
   timer: 0
-  damage: 17
+  damage: 13
   lifeTime: 0.3
 --- !u!58 &5556649906085439600
 CircleCollider2D:

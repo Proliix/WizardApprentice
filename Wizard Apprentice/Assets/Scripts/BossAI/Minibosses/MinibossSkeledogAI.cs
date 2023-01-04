@@ -164,7 +164,7 @@ public class MinibossSkeledogAI : MonoBehaviour
 
     private void DashIndicator()
     {
-        AttackIndicator.CreateSquare(gameObject.transform.position, playerTarget.transform.position, new Vector2(1.5f, 30), 1f, true);
+        AttackIndicator.CreateSquare(gameObject.transform.position, playerTarget.transform.position, new Vector2(1.5f, 50), 0.5f, true);
     }
 
 }
