@@ -217,6 +217,7 @@ public class PolearmArmor : MonoBehaviour
         CircleCollider2D circleCollider = Instantiate(spinDamageObject).GetComponent<CircleCollider2D>();
         circleCollider.transform.position = startPos;
         circleCollider.radius = spinRadius / 2;
+        Destroy(circleCollider.gameObject, spinDuration);
         while(currentSpinningTime < spinDuration)
         {
             yield return null;
@@ -238,7 +239,6 @@ public class PolearmArmor : MonoBehaviour
             currentSpinningTime += Time.deltaTime;
         }
         hasDestination = false;
-        Destroy(circleCollider.gameObject);
         animator.SetBool("isSpinning", false);
         state = CurrentState.idle;
     }
