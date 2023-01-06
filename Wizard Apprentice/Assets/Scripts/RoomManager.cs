@@ -228,7 +228,8 @@ public class RoomManager : MonoBehaviour
 
         SoundManager.Instance.PlayAudio(roomClearSound, audioVolume);
         ActivateParticleSystem();
-        doorObject.GetComponentInChildren<Animator>()?.SetTrigger("OpenDoor");
+        if (doorObject != null)
+            doorObject.GetComponentInChildren<Animator>()?.SetTrigger("OpenDoor");
     }
 
     public void LoadNewRoom(int roomType)

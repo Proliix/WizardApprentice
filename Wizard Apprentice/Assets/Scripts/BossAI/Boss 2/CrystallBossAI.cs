@@ -271,12 +271,12 @@ public class CrystallBossAI : MonoBehaviour
     }
     private void BossDead()
     {
+        isAlive = false;
         Camera.main.GetComponent<CameraMovement>().GetScreenShake(2,1);
         StopAllCoroutines();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Health>().FullHeal();
         gameObject.GetComponent<PolygonCollider2D>().enabled = false;
         bossHurtbox.enabled = false;
-        isAlive = false;
         bulletHandler.ResetAll();
         roomManager.RemoveAllEnemies();
     }

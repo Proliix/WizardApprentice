@@ -14390,6 +14390,7 @@ MonoBehaviour:
   ascensionLoseInfoText: {fileID: 0}
   totalCompletionsText: {fileID: 0}
   highestAscensionText: {fileID: 0}
+  currentAscensionNumText: {fileID: 0}
   eloGainMultiplier: 0
   levelEloScaling: 0
 --- !u!82 &1786813666
