@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Animator CreditsButtonAnimator;
     [SerializeField] Animator exitButtonAnimator;
     [SerializeField] Animator cameraAnimator;
+    [SerializeField] TextMeshProUGUI versionNum;
     [Header("Credits")]
     [SerializeField] GameObject CreditsPanel;
     [SerializeField] GameObject licensePanel;
@@ -87,9 +88,13 @@ public class MenuManager : MonoBehaviour
         }
 
         UpdateValues();
+
         settingsPanel.SetActive(false);
         onSettings = false;
         hasLoadedAscension = false;
+
+        if (inMainMenu)
+            versionNum.text = "Version: " + Application.version;
     }
 
     private void Update()

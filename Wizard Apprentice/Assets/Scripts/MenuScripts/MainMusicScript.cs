@@ -8,6 +8,7 @@ public class MainMusicScript : MonoBehaviour
     public AudioClip loop;
 
     bool loopStarted = false;
+    bool hasPassesHalf = false;
     AudioSource audioSource;
     Animator anim;
 
@@ -27,11 +28,29 @@ public class MainMusicScript : MonoBehaviour
 
     private void Update()
     {
-        if (audioSource.time >= intro.length && !loopStarted)
+        //if (audioSource.time >= intro.length && !loopStarted)
+        //{
+        //    loopStarted = true;
+        //    StartLoop();
+        //}
+
+
+        if (!loopStarted)
         {
-            loopStarted = true;
-            StartLoop();
+            if (!hasPassesHalf)
+            {
+                if (audioSource.time > intro.length / 2)
+                {
+                    hasPassesHalf = true;
+                }
+            }
+            else if (audioSource.time < intro.length / 2)
+            {
+                loopStarted = true;
+                StartLoop();
+            }
         }
+
     }
 
     void StartLoop()
