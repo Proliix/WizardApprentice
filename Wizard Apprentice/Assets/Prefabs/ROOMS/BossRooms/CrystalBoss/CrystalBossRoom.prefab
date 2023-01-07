@@ -2168,7 +2168,7 @@ GameObject:
   - component: {fileID: 2180549999853740857}
   - component: {fileID: 2180549999853740858}
   - component: {fileID: 3580691139591704739}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Crystal boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
