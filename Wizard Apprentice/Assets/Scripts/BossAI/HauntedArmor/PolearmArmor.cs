@@ -222,10 +222,10 @@ public class PolearmArmor : MonoBehaviour
         circleCollider.transform.position = startPos;
         circleCollider.radius = spinRadius / 2;
         Destroy(circleCollider.gameObject, spinDuration);
-        while(currentSpinningTime < spinDuration && circleCollider.gameObject != null)
+        while(currentSpinningTime < spinDuration && circleCollider != null)
         {
             yield return null;
-            if(circleCollider.gameObject == null)
+            if(circleCollider == null)
             {
                 break;
             }
