@@ -173,6 +173,10 @@ public class PolearmArmor : MonoBehaviour
         while(shockwaveTimeTraveled < shockwaveLength / shockwaveSpeed && smashShockwaveObject != null)
         {
             yield return null;
+            if(smashShockwaveObject == null)
+            {
+                break;
+            }
             shockwaveTimeTraveled += Time.deltaTime;
             smashShockwaveSpriteObject.transform.position = startPos + (0.5f * (playerDir * (shockwaveTimeTraveled / (shockwaveLength/shockwaveSpeed))) * shockwaveLength);
             smashShockwaveSpriteObject.GetComponent<SpriteRenderer>().size = new Vector2(shockwaveWidth, (shockwaveTimeTraveled / (shockwaveLength / shockwaveSpeed)) * shockwaveLength);
@@ -218,7 +222,7 @@ public class PolearmArmor : MonoBehaviour
         circleCollider.transform.position = startPos;
         circleCollider.radius = spinRadius / 2;
         Destroy(circleCollider.gameObject, spinDuration);
-        while(currentSpinningTime < spinDuration)
+        while(currentSpinningTime < spinDuration && circleCollider.gameObject != null)
         {
             yield return null;
             if(Mathf.FloorToInt(currentSpinningTime / timeBetweenDamage) < Mathf.FloorToInt((currentSpinningTime + Time.deltaTime) / timeBetweenDamage))
