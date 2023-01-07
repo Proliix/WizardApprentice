@@ -225,6 +225,10 @@ public class PolearmArmor : MonoBehaviour
         while(currentSpinningTime < spinDuration && circleCollider.gameObject != null)
         {
             yield return null;
+            if(circleCollider.gameObject == null)
+            {
+                break;
+            }
             if(Mathf.FloorToInt(currentSpinningTime / timeBetweenDamage) < Mathf.FloorToInt((currentSpinningTime + Time.deltaTime) / timeBetweenDamage))
             {
                 circleCollider.enabled = true;
